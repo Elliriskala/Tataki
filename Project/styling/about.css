@@ -1,0 +1,151 @@
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #d4d4d4;
+}
+
+nav {
+    background-color: #1a1a1a;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0 50px;
+}
+
+nav ul li a {
+    color: #f05454;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #f05454;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+.about-sections {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+}
+
+/* Section styles */
+section {
+    margin-bottom: 2.5rem;
+}
+
+section h1 {
+    font-size: 2rem;
+    border-bottom: 2px solid #f05454;
+    padding-bottom: 10px;
+    color: #f05454;
+}
+
+section p, section ul {
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+section ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Contact section */
+.contact-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-section a {
+    color: #f05454;
+    text-decoration: none;
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+}
+
+/* Map section */
+.map {
+    height: 300px;
+    background-color: #2b2b2b;
+    border-radius: 12px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map h2 {
+    color: #d4d4d4;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .about-sections {
+        padding: 1.5rem;
+    }
+
+    section h1 {
+        font-size: 1.7rem;
+    }
+
+    section p, section ul {
+        font-size: 0.9rem;
+    }
+
+    .map {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 0.5rem;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    section h1 {
+        font-size: 1.5rem;
+    }
+
+    section p, section ul {
+        font-size: 0.8rem;
+    }
+
+    .map {
+        height: 180px;
+    }
+}

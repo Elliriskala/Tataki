@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register Form</title>
+    <link rel="stylesheet" href="styling/login.css">
+    <script src="src/login.js" defer></script>
+    <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="login-background">
+    <div class="login-container">
+        <div class="form-toggle">
+            <div id="toggle-slider" class="toggle-slider"></div>
+            <button id="login-btn" class="toggle-btn active">Login</button>
+            <button id="register-btn" class="toggle-btn">Register</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form class="login-form form-content active" id="login-form">
+            <h2>Login</h2>
+            <div class="input-container">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="login-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
+            </div>
+            <div class="input-container">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
+                <span class="toggle-password" data-target="login-password"><i class="fa-regular fa-eye-slash"></i></span>
+            </div>
+            <div class="form-buttons">
+                <button id="submit-button-login" class="submit-button" type="submit">Submit</button>
+                <button id="reset-button-login" class="reset-button" type="reset">Reset</button>
+            </div>
+        </form>
+
+        <!-- Register Form -->
+        <form class="register-form form-content" id="register-form">
+            <h2>Register</h2>
+            <div class="input-container">
+                <label for="register-username">Username</label>
+                <input type="text" id="register-username" name="register-username" autocomplete="off" minlength="5" required>
+            </div>
+            <div class="input-container">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" name="register-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
+            </div>
+            <div class="input-container">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="register-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
+                <span class="toggle-password" data-target="register-password"><i class="fa-regular fa-eye-slash"></i></span>
+            </div>
+            <div class="form-buttons">
+                <button id="submit-button-register" class="submit-button" type="submit">Submit</button>
+                <button id="reset-button-register" class="reset-button" type="reset">Reset</button>
+            </div>
+        </form>
+        <div class="form-message">
+            <span id="message-target">This is a message box</span>
+        </div>
+    </div>
+    </div>
+
+</body>
+</html>

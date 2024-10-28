@@ -1,0 +1,184 @@
+ html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: darkslategray;
+    
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 6rem;
+    width: 400px; /* Set a fixed width for the container */
+    padding: 20px; /* Padding for inner space */
+    background-color: #fff; /* Background for the container */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for the container */
+}
+
+.form-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: #f0f0f0;
+    border-radius: 50px;
+    padding: 5px;
+    position: relative;
+    height: 45px;
+    width: 100%; /* Ensure the toggle uses full width */
+}
+
+.toggle-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0;
+    color: #333;
+    position: relative; /* Ensures the active class is properly positioned */
+    z-index: 2; /* Ensure button is above the slider */
+}
+
+.toggle-btn.active {
+    color: #fff;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 50%;
+    height: 85%;
+    background: #007bff;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    z-index: 1; /* Slider should be below buttons */
+}
+
+.form-content {
+    display: none; /* Hide all forms by default */
+    width: 100%; /* Set a fixed width for forms to match container */
+}
+
+.form-content.active {
+    display: block; /* Show active form */
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.input-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 70%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: gray;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submit-button, .reset-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.reset-button {
+    background-color: #6c757d;
+}
+
+
+
+@keyframes validAnimation {
+    0% {
+        transform: scale(1);
+        background-color: #fff;
+    }
+    50% {
+        transform: scale(1.05);
+        background-color: #e8f5e9;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #fff;
+    }
+}
+
+@keyframes invalidAnimation {
+    0% {
+        transform: scale(1);
+        background-color: #fff;
+    }
+    25% {
+        transform: scale(1.05);
+        background-color: #ffebee;
+    }
+    50% {
+        transform: scale(0.95);
+        background-color: #ffcdd2;
+    }
+    75% {
+        transform: scale(1.05);
+        background-color: #ef9a9a;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #fff;
+    }
+}
+
+.login-form input:valid {
+    border-color: green;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    outline-color: green;
+    animation: validAnimation 0.5s ease-in;
+  }
+  
+  .login-form input:invalid {
+    box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+    animation: invalidAnimation 0.5s ease-out;
+}
+
+.form-message {
+    text-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 10px 20px;
+    background-color:#e8f5e9;
+    border-radius: 10px;
+    width: 15rem;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    
+    
+}
+  
+#message-target {
+    font-weight: bold;
+    text-align:start;
+}
