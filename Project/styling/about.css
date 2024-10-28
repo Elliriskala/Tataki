@@ -7,6 +7,19 @@ body {
     color: #d4d4d4;
 }
 
+:root {
+    --sushi-black: #0B090A;
+    --sushi-graphite: #161A1D;
+    --sushi-red1: #660708;
+    --sushi-red2: #A4161A;
+    --sushi-red3: #BA181B;
+    --sushi-red4: #E5383B;
+    --sushi-grey1: #B1A7A6;
+    --sushi-grey2: #D3D3D3;
+    --sushi-grey3: #F5F3F4;
+    --sushi-white: #FFFFFF;
+}
+
 nav {
     background-color: #1a1a1a;
     padding: 1rem 2rem;
