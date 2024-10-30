@@ -1,9 +1,8 @@
- html {
+html {
     height: 100%;
     width: 100%;
     font-family: 'Roboto', sans-serif;
-    background-color: darkslategray;
-    
+    background-color: var(--sushi-graphite);
 }
 
 :root {
@@ -26,23 +25,23 @@
     flex-direction: column;
     margin: auto;
     margin-top: 6rem;
-    width: 400px; /* Set a fixed width for the container */
-    padding: 20px; /* Padding for inner space */
-    background-color: #fff; /* Background for the container */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for the container */
+    width: 400px;
+    padding: 20px;
+    background-color: var(--sushi-white);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-toggle {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    background: #f0f0f0;
+    background: var(--sushi-grey2);
     border-radius: 50px;
     padding: 5px;
     position: relative;
     height: 45px;
-    width: 100%; /* Ensure the toggle uses full width */
+    width: 100%;
 }
 
 .toggle-btn {
@@ -52,13 +51,13 @@
     font-size: 16px;
     cursor: pointer;
     padding: 10px 0;
-    color: #333;
-    position: relative; /* Ensures the active class is properly positioned */
-    z-index: 2; /* Ensure button is above the slider */
+    color: var(--sushi-graphite);
+    position: relative;
+    z-index: 2;
 }
 
 .toggle-btn.active {
-    color: #fff;
+    color: var(--sushi-white);
 }
 
 .toggle-slider {
@@ -67,19 +66,19 @@
     left: 3px;
     width: 50%;
     height: 85%;
-    background: #007bff;
+    background: var(--sushi-red4);
     border-radius: 50px;
     transition: all 0.4s ease;
-    z-index: 1; /* Slider should be below buttons */
+    z-index: 1;
 }
 
 .form-content {
-    display: none; /* Hide all forms by default */
-    width: 100%; /* Set a fixed width for forms to match container */
+    display: none;
+    width: 100%;
 }
 
 .form-content.active {
-    display: block; /* Show active form */
+    display: block;
 }
 
 .input-container {
@@ -91,7 +90,7 @@
 
 .input-container input {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--sushi-grey1);
     border-radius: 5px;
     margin-top: 5px;
 }
@@ -103,7 +102,7 @@
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
-    color: gray;
+    color: var(--sushi-grey1);
 }
 
 .form-buttons {
@@ -115,22 +114,20 @@
 .submit-button, .reset-button {
     padding: 10px 20px;
     border: none;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--sushi-red3);
+    color: var(--sushi-white);
     cursor: pointer;
     border-radius: 5px;
 }
 
 .reset-button {
-    background-color: #6c757d;
+    background-color: var(--sushi-grey1);
 }
-
-
 
 @keyframes validAnimation {
     0% {
         transform: scale(1);
-        background-color: #fff;
+        background-color: var(--sushi-white);
     }
     50% {
         transform: scale(1.05);
@@ -138,14 +135,14 @@
     }
     100% {
         transform: scale(1);
-        background-color: #fff;
+        background-color: var(--sushi-white);
     }
 }
 
 @keyframes invalidAnimation {
     0% {
         transform: scale(1);
-        background-color: #fff;
+        background-color: var(--sushi-white);
     }
     25% {
         transform: scale(1.05);
@@ -161,7 +158,7 @@
     }
     100% {
         transform: scale(1);
-        background-color: #fff;
+        background-color: var(--sushi-white);
     }
 }
 
@@ -170,9 +167,9 @@
     box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
     outline-color: green;
     animation: validAnimation 0.5s ease-in;
-  }
-  
-  .login-form input:invalid {
+}
+
+.login-form input:invalid {
     box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
     animation: invalidAnimation 0.5s ease-out;
 }
@@ -183,15 +180,13 @@
     justify-content: center;
     margin-top: 2rem;
     padding: 10px 20px;
-    background-color:#e8f5e9;
+    background-color: #e8f5e9;
     border-radius: 10px;
     width: 15rem;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-    
-    
 }
-  
+
 #message-target {
     font-weight: bold;
-    text-align:start;
+    text-align: start;
 }

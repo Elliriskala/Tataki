@@ -9,16 +9,24 @@
     <script src="src/reservation.js" defer></script>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Menus</a></li>
-            <li><a href="#!">Reservations</a></li>
-            <li><a href="about.html">About Us</a></li>
+    <nav class="navigation">
+        <div class="logo">
+          <p>Tataki</p>
+        </div>
+        <ul class="nav-list">
+          <li><a href="menu.html">Menus</a></li>
+          <li><a href="order.html">Order</a></li>
+          <li><a href="reserve.html">Reserve a table</a></li>
         </ul>
-    </nav>
+        <button class="language">Language</button>
+        <button class="login">Login</button>
+      </nav>
 
     <main>
+        <video autoplay muted loop playsinline class="background-video">
+            <source src="./img/frying.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <div class="reservation-form">
             <h1>Table Reservation</h1>
             <form id="reservationForm">
