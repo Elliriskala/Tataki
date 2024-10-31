@@ -6,8 +6,8 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
-    margin: 0;
     padding: 0;
+    margin: 0;
     background-color: var(--sushi-graphite);
 }
 
@@ -309,12 +309,6 @@ body {
 }
 
 
-
-
-
-
-
-
 @keyframes fade-in {
     from {
         opacity: 0;
@@ -335,6 +329,50 @@ body {
     }
 }
 
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
+    color: var(--sushi-grey3);
+    padding: 1em;
+  }
+  
+  .footer-logo {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding-left: 2em;
+  }
+  
+  .footer-nav li {
+    list-style-type: none;
+    display: inline;
+    padding: 1em;
+  }
+  
+  .footer-nav li a {
+    text-decoration: none;
+    color: var(--sushi-grey3);
+  }
+  
+  .footer-nav li a:hover {
+    color: var(--sushi-grey1);
+    transition: all 0.5s;
+  }
+  
+  .social-medias li {
+    display: inline;
+    list-style-type: none;
+    padding: 1em;
+  }
+  
+  .social-medias li a {
+    text-decoration: none;
+    color: var(--sushi-grey3);
+  }
 
 
 @media (max-width: 768px) {
