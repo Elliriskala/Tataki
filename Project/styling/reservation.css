@@ -1,24 +1,23 @@
 :root {
-    --sushi-black: #0B090A;
-    --sushi-graphite: #161A1D;
-    --sushi-red1: #660708;
-    --sushi-red2: #A4161A;
-    --sushi-red3: #BA181B;
-    --sushi-red4: #E5383B;
-    --sushi-grey1: #B1A7A6;
-    --sushi-grey2: #D3D3D3;
-    --sushi-grey3: #F5F3F4;
+    --sushi-black: #1E1E1E; /* Darker for modern contrast */
+    --sushi-graphite: #2B2B2B; /* Softer graphite */
+    --sushi-red1: #BF3B3B; /* Warmer red tones */
+    --sushi-red2: #C72C2C; 
+    --sushi-red3: #D63B3B; 
+    --sushi-red4: #E53D3D; 
+    --sushi-grey1: #C0B0B0; /* Lightened grey */
+    --sushi-grey2: #E0E0E0; 
+    --sushi-grey3: #F7F7F7; 
     --sushi-white: #FFFFFF;
-    --dust-pink: rgb(105, 88, 88);
-    --grey: #181416;
-    --soy-sauce: #140f12;
-    --brown-grey: rgba(44, 33, 33, 0.911);
-    --intense-red: rgb(191, 77, 77);
-    --wine-red: rgb(22, 2, 2);
-    --forest-green: rgba(1, 12, 1, 0.815);
-    --grey-green: rgba(54, 71, 63, 0.908);
-    --lotus-flower: rgba(222, 222, 222, 0.959);
-
+    --dust-pink: #C8A9A9; /* Softer pink */
+    --grey: #252525; 
+    --soy-sauce: #191919; 
+    --brown-grey: rgba(44, 33, 33, 0.9); 
+    --intense-red: #BF4D4D; 
+    --wine-red: #390d0d; 
+    --forest-green: rgba(3, 32, 3, 0.8); 
+    --grey-green: rgba(54, 71, 63, 0.9); 
+    --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
 body {
@@ -27,7 +26,6 @@ body {
     padding: 0;
     background-color: var(--sushi-black);
     color: var(--sushi-grey2);
-    
 }
 
 .background-video {
@@ -47,16 +45,16 @@ body {
     margin: auto;
 }
 
-
-
 .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px; /* Reduced padding to control height */
-    background-color: var(--grey);
+    padding: 15px 20px; /* Reduced padding for a sleeker look */
+    background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
     color: var(--lotus-flower);
     z-index: 50;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
+    border-radius: 8px; /* Rounded corners for modern feel */
 }
 
 .logo {
@@ -64,7 +62,7 @@ body {
     align-items: center;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em; /* Slightly reduced spacing */
 }
 
 .logo p {
@@ -73,44 +71,45 @@ body {
 }
 
 .nav-list {
-    display: flex; /* Display flex for desktop */
-    flex-direction: row; /* Keep items in a row for desktop */
-    gap: 3em; /* Space between items */
-    margin: 0; /* Remove margin */
-    padding: 0; /* Remove padding */
+    display: flex; /* Keep flex for desktop */
+    flex-direction: row;
+    gap: 2em; /* Space between items */
+    margin: 0;
+    padding: 0;
 }
 
 .nav-list li {
     list-style-type: none;
-    position: relative; /* Positioning context for the ::after pseudo-element */
+    position: relative; 
 }
 
 .nav-list li a {
     text-decoration: none;
     color: var(--lotus-flower);
-    padding: 10px 0; /* Optional padding for each item */
-    transition: color 0.5s;
-    position: relative; /* Positioning context for the ::after pseudo-element */
+    padding: 10px 0;
+    transition: color 0.3s, transform 0.3s; /* Added transform for modern hover */
+    position: relative;
 }
 
 .nav-list li a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 0; /* Position at the bottom of the link */
-    width: 100%; /* Full width of the element */
-    height: 2px; /* Height of the border */
-    background-color: var(--dust-pink); /* Color of the border */
-    transform: scaleX(0); /* Start with no width */
-    transition: transform 0.3s ease; /* Transition for smooth animation */
+    bottom: -3px; /* Adjusted for better positioning */
+    width: 100%; 
+    height: 2px; 
+    background-color: var(--dust-pink); 
+    transform: scaleX(0); 
+    transition: transform 0.3s ease; 
 }
 
 .nav-list li a:hover::after {
-    transform: scaleX(1); /* Scale the border to full width on hover */
+    transform: scaleX(1); 
 }
 
 .nav-list li a:hover {
-    color: var(--dust-pink); /* Optional: Change color on hover */
+    color: var(--dust-pink); 
+    transform: translateY(-2px); /* Subtle lift effect on hover */
 }
 
 /* Language and Login buttons */
@@ -120,13 +119,14 @@ body {
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 1em;
+    padding: 0.8em 1.5em; /* Slightly smaller padding */
     transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
 }
 
-.control-buttons {
-    display: flex;
-    gap: 1em;
+.language:hover, .login:hover {
+    background-color: var(--sushi-red4); /* Change on hover */
+    transform: scale(1.05); /* Slight scale effect */
 }
 
 /* Hamburger menu for mobile */
@@ -147,12 +147,10 @@ body {
     background-color: var(--sushi-graphite);
     border-radius: 12px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
-    
 }
 
-
 .reservation-legend {
-    background-image: url(../img/resaervation-legend2.png);
+    background-image: url(../img/reservation-legend2.png);
     width: 100%;
     height: 600px;
     background-size: cover;
@@ -174,10 +172,9 @@ body {
 }
 
 .reservation-form select {
-    color: var(--su);
+    color: var(--sushi-black);
     background-color: var(--sushi-graphite);
 }
-
 
 .reservation-form input, .reservation-form select {
     width: 95%;
@@ -193,19 +190,16 @@ body {
 
 .reservation-form option {
     color: var(--sushi-graphite);
-    
 }
-
-
 
 .reservation-form input:focus, .reservation-form select:focus {
     outline: none;
+    border: 2px solid var(--sushi-red4); /* Outline on focus */
 }
 
 .reservation-form input::placeholder, .reservation-form select::placeholder {
     color: var(--sushi-grey3);
 }
-
 
 .reservation-form button {
     width: 100%;
@@ -217,11 +211,12 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s; /* Added transform for button */
 }
 
 .reservation-form button:hover {
     background-color: var(--sushi-red3);
+    transform: translateY(-2px); /* Subtle lift effect */
 }
 
 details {
@@ -302,39 +297,35 @@ details[open] .content {
         position: relative;
     }
 
-  
     .logo {
         width: 20%; 
         display: flex;
         justify-content: space-between; 
     }
 
-   
     .hamburger {
         display: inline-block;
     }
 
-   
     .control-buttons {
         position: absolute;
         top: 10px;
         right: 10px;
     }
 
-   
     .nav-list {
-        display: flex; /* Keep it flex for column layout */
+        display: flex; 
         flex-direction: column;
-        height: 0; /* Set initial height to 0 */
-        overflow: hidden; /* Hide overflow to maintain visual appearance */
+        height: 0; 
+        overflow: hidden; 
         width: 100%;
         gap: 1em;
         background-color: var(--grey);
-        transition: height 0.3s ease; /* Transition effect for height */
-        position: absolute; /* Use absolute positioning */
-        top: 100%; /* Position it below the navigation */
-        left: 0; /* Align it to the left */
-        z-index: 10; /* Ensure it appears above other elements */
+        transition: height 0.3s ease; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        z-index: 10; 
     }
   
     .nav-list.active {

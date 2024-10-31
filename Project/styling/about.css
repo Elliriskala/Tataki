@@ -7,7 +7,7 @@ body {
     color: var(--sushi-grey2);
 }
 
-:root { /* Higher number, lighter shade */
+:root {
     --sushi-black: #0B090A;
     --sushi-graphite: #161A1D;
     --sushi-red1: #660708;
@@ -18,40 +18,116 @@ body {
     --sushi-grey2: #D3D3D3;
     --sushi-grey3: #F5F3F4;
     --sushi-white: #FFFFFF;
+    --dust-pink: rgb(105, 88, 88);
+    --grey: #181416;
+    --soy-sauce: #140f12;
+    --brown-grey: rgba(44, 33, 33, 0.911);
+    --intense-red: rgb(191, 77, 77);
+    --wine-red: rgb(22, 2, 2);
+    --forest-green: rgba(1, 12, 1, 0.815);
+    --grey-green: rgba(54, 71, 63, 0.908);
+    --lotus-flower: rgba(222, 222, 222, 0.959);
+
 }
 
-nav {
-    background-color: var(--sushi-graphite);
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+
+.nav-content {
+    margin: auto;
 }
 
-nav ul {
-    list-style-type: none;
+.navigation {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px; /* Reduced padding for a sleeker look */
+    background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
+    color: var(--lotus-flower);
+    z-index: 50;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
+    border-radius: 8px; /* Rounded corners for modern feel */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em; /* Slightly reduced spacing */
+}
+
+.logo p {
+    margin: 0;
+    padding-left: 0.5em;
+}
+
+.nav-list {
+    display: flex; /* Keep flex for desktop */
+    flex-direction: row;
+    gap: 2em; /* Space between items */
     margin: 0;
     padding: 0;
-    flex-wrap: wrap;
 }
 
-nav ul li {
-    margin: 0 50px;
+.nav-list li {
+    list-style-type: none;
+    position: relative; 
 }
 
-nav ul li a {
-    color: var(--sushi-red4);
+.nav-list li a {
     text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s, color 0.3s;
+    color: var(--lotus-flower);
+    padding: 10px 0;
+    transition: color 0.3s, transform 0.3s; /* Added transform for modern hover */
+    position: relative;
 }
 
-nav ul li a:hover {
-    background-color: var(--sushi-red4);
-    color: var(--sushi-white);
-    border-radius: 5px;
+.nav-list li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjusted for better positioning */
+    width: 100%; 
+    height: 2px; 
+    background-color: var(--dust-pink); 
+    transform: scaleX(0); 
+    transition: transform 0.3s ease; 
+}
+
+.nav-list li a:hover::after {
+    transform: scaleX(1); 
+}
+
+.nav-list li a:hover {
+    color: var(--dust-pink); 
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+}
+
+/* Language and Login buttons */
+.language, .login {
+    margin-right: 1em;
+    background-color: var(--soy-sauce);
+    color: var(--lotus-flower);
+    border: none;
+    border-radius: 1em;
+    padding: 0.8em 1.5em; /* Slightly smaller padding */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
+}
+
+.language:hover, .login:hover {
+    background-color: var(--sushi-red4); /* Change on hover */
+    transform: scale(1.05); /* Slight scale effect */
+}
+
+/* Hamburger menu for mobile */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--lotus-flower);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 1em;
 }
 
 .about-sections {
@@ -125,3 +201,105 @@ section ul li {
     }
 
 }
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .reservation-form {
+        padding: 1.5rem;
+    }
+
+    .reservation-form h1 {
+        font-size: 1.6rem;
+    }
+
+    .reservation-form input, .reservation-form select {
+        font-size: 0.9rem;
+    }
+
+    .reservation-form button {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .reservation-form {
+        padding: 1rem;
+    }
+
+    .reservation-form h1 {
+        font-size: 1.4rem;
+    }
+
+    .reservation-form input, .reservation-form select {
+        font-size: 0.8rem;
+    }
+
+    .reservation-form button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column; 
+        align-items: flex-start; 
+        padding: 20px 20px; 
+        position: relative;
+    }
+
+    .logo {
+        width: 20%; 
+        display: flex;
+        justify-content: space-between; 
+    }
+
+    .hamburger {
+        display: inline-block;
+    }
+
+    .control-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .nav-list {
+        display: flex; 
+        flex-direction: column;
+        height: 0; 
+        overflow: hidden; 
+        width: 100%;
+        gap: 1em;
+        background-color: var(--grey);
+        transition: height 0.3s ease; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        z-index: 10; 
+    }
+  
+    .nav-list.active {
+        height: auto; 
+        padding: 10px 0; 
+    }
+
+    .nav-list li {
+        padding: 10px 20px; 
+        width: 100%;
+        gap: 1em;
+        margin-left: 1em;
+    }
+
+    .nav-list li a {
+        color: var(--lotus-flower);
+    }
+}
+
