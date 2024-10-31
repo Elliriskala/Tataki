@@ -8,32 +8,30 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--sushi-black);
-    color: var(--sushi-grey2);
-    
+    background-color: var(--sushi-graphite);
 }
 
 :root {
-    --sushi-black: #0B090A;
-    --sushi-graphite: #161A1D;
-    --sushi-red1: #660708;
-    --sushi-red2: #A4161A;
-    --sushi-red3: #BA181B;
-    --sushi-red4: #E5383B;
-    --sushi-grey1: #B1A7A6;
-    --sushi-grey2: #D3D3D3;
-    --sushi-grey3: #F5F3F4;
-    --sushi-white: #FFFFFF;
-    --dust-pink: rgb(105, 88, 88);
-    --grey: #181416;
-    --soy-sauce: #140f12;
-    --brown-grey: rgba(44, 33, 33, 0.911);
-    --intense-red: rgb(191, 77, 77);
-    --wine-red: rgb(22, 2, 2);
-    --forest-green: rgba(1, 12, 1, 0.815);
-    --grey-green: rgba(54, 71, 63, 0.908);
-    --lotus-flower: rgba(222, 222, 222, 0.959);
-
+    --sushi-black: #0b090a;
+    --sushi-graphite: #161a1d;
+    --wine-red: rgb(38, 2, 2);
+    --sushi-red1: #420506;
+    --sushi-red2: #a4161a;
+    --sushi-red3: #ba181b;
+    --sushi-red4: #e5383b;
+    --sushi-grey1: #b1a7a6;
+    --sushi-grey2: #d3d3d3;
+    --sushi-grey3: #f5f3f4;
+    --sushi-white: #ffffff;
+    --dust-pink: #C8A9A9; /* Softer pink */
+    --grey: #252525; 
+    --soy-sauce: #191919; 
+    --brown-grey: rgba(44, 33, 33, 0.9); 
+    --intense-red: #BF4D4D; 
+    --wine-red: #390d0d; 
+    --forest-green: rgba(3, 32, 3, 0.8); 
+    --grey-green: rgba(54, 71, 63, 0.9); 
+    --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
 .login-container {
@@ -209,20 +207,22 @@ body {
     text-align: start;
 }
 
+
 .nav-content {
     margin: auto;
 }
-
-
 
 .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px; /* Reduced padding to control height */
+    padding: 15px 20px; 
     background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
     color: var(--lotus-flower);
     z-index: 50;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
+    border-bottom-left-radius: 8px; 
+    border-bottom-right-radius: 8px;
 }
 
 .logo {
@@ -230,7 +230,7 @@ body {
     align-items: center;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 1.3em; 
 }
 
 .logo p {
@@ -239,44 +239,45 @@ body {
 }
 
 .nav-list {
-    display: flex; /* Display flex for desktop */
-    flex-direction: row; /* Keep items in a row for desktop */
-    gap: 3em; /* Space between items */
-    margin: 0; /* Remove margin */
-    padding: 0; /* Remove padding */
+    display: flex; 
+    flex-direction: row;
+    gap: 2em; 
+    margin: 0;
+    padding: 0;
 }
 
 .nav-list li {
     list-style-type: none;
-    position: relative; /* Positioning context for the ::after pseudo-element */
+    position: relative; 
 }
 
 .nav-list li a {
     text-decoration: none;
     color: var(--lotus-flower);
-    padding: 10px 0; /* Optional padding for each item */
-    transition: color 0.5s;
-    position: relative; /* Positioning context for the ::after pseudo-element */
+    padding: 10px 0;
+    transition: color 0.3s, transform 0.3s; /* Added transform for modern hover */
+    position: relative;
 }
 
 .nav-list li a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 0; /* Position at the bottom of the link */
-    width: 100%; /* Full width of the element */
-    height: 2px; /* Height of the border */
-    background-color: var(--dust-pink); /* Color of the border */
-    transform: scaleX(0); /* Start with no width */
-    transition: transform 0.3s ease; /* Transition for smooth animation */
+    bottom: -3px; /* Adjusted for better positioning */
+    width: 100%; 
+    height: 2px; 
+    background-color: var(--dust-pink); 
+    transform: scaleX(0); 
+    transition: transform 0.3s ease; 
 }
 
 .nav-list li a:hover::after {
-    transform: scaleX(1); /* Scale the border to full width on hover */
+    transform: scaleX(1); 
 }
 
 .nav-list li a:hover {
-    color: var(--dust-pink); /* Optional: Change color on hover */
+    color: var(--dust-pink); 
+    transform: translateY(-2px); /* Subtle lift effect on hover */
 }
 
 /* Language and Login buttons */
@@ -286,13 +287,14 @@ body {
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 1em;
+    padding: 0.8em 1.5em; /* Slightly smaller padding */
     transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
 }
 
-.control-buttons {
-    display: flex;
-    gap: 1em;
+.language:hover, .login:hover {
+    background-color: var(--sushi-red4); /* Change on hover */
+    transform: scale(1.05); /* Slight scale effect */
 }
 
 /* Hamburger menu for mobile */
@@ -306,105 +308,12 @@ body {
     padding: 0 1em;
 }
 
-.reservation-form {
-    max-width: 500px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background-color: var(--sushi-graphite);
-    border-radius: 12px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
-    
-}
-
-
-.reservation-legend {
-    background-image: url(../img/resaervation-legend2.png);
-    width: 100%;
-    height: 600px;
-    background-size: cover;
-    background-position: center;
-    margin: auto;
-}
-
-.reservation-form h1 {
-    font-size: 1.8rem;
-    color: var(--sushi-red4);
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.reservation-form label {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: var(--sushi-red4);
-}
-
-.reservation-form select {
-    color: var(--su);
-    background-color: var(--sushi-graphite);
-}
-
-
-.reservation-form input, .reservation-form select {
-    width: 95%;
-    padding: 12px;
-    margin-bottom: 1.5rem;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--sushi-grey1);
-    font-size: 1rem;
-    transition: border-color 0.3s, background-color 0.3s;
-    margin-top: 6px;
-}
-
-.reservation-form option {
-    color: var(--sushi-graphite);
-    
-}
 
 
 
-.reservation-form input:focus, .reservation-form select:focus {
-    outline: none;
-}
-
-.reservation-form input::placeholder, .reservation-form select::placeholder {
-    color: var(--sushi-grey3);
-}
 
 
-.reservation-form button {
-    width: 100%;
-    padding: 14px;
-    background-color: var(--sushi-red4);
-    color: var(--sushi-white);
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
 
-.reservation-form button:hover {
-    background-color: var(--sushi-red3);
-}
-
-details {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    overflow: hidden;
-    color: var(--sushi-grey2);
-}
-
-details:hover {
-    cursor: pointer;
-}
-
-details[open] .content {
-    animation: fade-in 0.4s ease-in-out;
-}
 
 @keyframes fade-in {
     from {
@@ -424,41 +333,9 @@ details[open] .content {
     nav ul li {
         margin: 10px 0;
     }
-
-    .reservation-form {
-        padding: 1.5rem;
-    }
-
-    .reservation-form h1 {
-        font-size: 1.6rem;
-    }
-
-    .reservation-form input, .reservation-form select {
-        font-size: 0.9rem;
-    }
-
-    .reservation-form button {
-        font-size: 1rem;
-    }
 }
 
-@media (max-width: 480px) {
-    .reservation-form {
-        padding: 1rem;
-    }
 
-    .reservation-form h1 {
-        font-size: 1.4rem;
-    }
-
-    .reservation-form input, .reservation-form select {
-        font-size: 0.8rem;
-    }
-
-    .reservation-form button {
-        font-size: 0.9rem;
-    }
-}
 
 @media (max-width: 768px) {
     .navigation {
@@ -466,6 +343,7 @@ details[open] .content {
         align-items: flex-start; 
         padding: 20px 20px; 
         position: relative;
+        border-radius: 0;
     }
 
   
@@ -483,8 +361,8 @@ details[open] .content {
    
     .control-buttons {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 1em;
+        right: 1em;
     }
 
    

@@ -1,15 +1,16 @@
 :root {
-    --sushi-black: #1E1E1E; /* Darker for modern contrast */
-    --sushi-graphite: #2B2B2B; /* Softer graphite */
-    --sushi-red1: #BF3B3B; /* Warmer red tones */
-    --sushi-red2: #C72C2C; 
-    --sushi-red3: #D63B3B; 
-    --sushi-red4: #E53D3D; 
-    --sushi-grey1: #C0B0B0; /* Lightened grey */
-    --sushi-grey2: #E0E0E0; 
-    --sushi-grey3: #F7F7F7; 
-    --sushi-white: #FFFFFF;
-    --dust-pink: #C8A9A9; /* Softer pink */
+    --sushi-black: #0b090a;
+    --sushi-graphite: #161a1d;
+    --wine-red: rgb(38, 2, 2);
+    --sushi-red1: #420506;
+    --sushi-red2: #a4161a;
+    --sushi-red3: #ba181b;
+    --sushi-red4: #e5383b;
+    --sushi-grey1: #b1a7a6;
+    --sushi-grey2: #d3d3d3;
+    --sushi-grey3: #f5f3f4;
+    --sushi-white: #ffffff;
+    --dust-pink: #C8A9A9; 
     --grey: #252525; 
     --soy-sauce: #191919; 
     --brown-grey: rgba(44, 33, 33, 0.9); 
@@ -49,21 +50,24 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 20px; /* Reduced padding for a sleeker look */
+    padding: 15px 20px; 
     background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
     color: var(--lotus-flower);
     z-index: 50;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
-    border-radius: 8px; /* Rounded corners for modern feel */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px; 
 }
 
 .logo {
-    display: flex;
+    display: block;
     align-items: center;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em; /* Slightly reduced spacing */
+    letter-spacing: 1.3em; 
 }
+
+
 
 .logo p {
     margin: 0;
@@ -71,9 +75,9 @@ body {
 }
 
 .nav-list {
-    display: flex; /* Keep flex for desktop */
+    display: flex; 
     flex-direction: row;
-    gap: 2em; /* Space between items */
+    gap: 2em; 
     margin: 0;
     padding: 0;
 }
@@ -87,7 +91,7 @@ body {
     text-decoration: none;
     color: var(--lotus-flower);
     padding: 10px 0;
-    transition: color 0.3s, transform 0.3s; /* Added transform for modern hover */
+    transition: color 0.3s, transform 0.3s;
     position: relative;
 }
 
@@ -95,7 +99,7 @@ body {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -3px; /* Adjusted for better positioning */
+    bottom: -3px; 
     width: 100%; 
     height: 2px; 
     background-color: var(--dust-pink); 
@@ -109,27 +113,27 @@ body {
 
 .nav-list li a:hover {
     color: var(--dust-pink); 
-    transform: translateY(-2px); /* Subtle lift effect on hover */
+    transform: translateY(-2px); 
 }
 
-/* Language and Login buttons */
+
 .language, .login {
     margin-right: 1em;
     background-color: var(--soy-sauce);
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 0.8em 1.5em; /* Slightly smaller padding */
+    padding: 0.8em 1.5em; 
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
 }
 
 .language:hover, .login:hover {
-    background-color: var(--sushi-red4); /* Change on hover */
-    transform: scale(1.05); /* Slight scale effect */
+    background-color: var(--sushi-red4); 
+    transform: scale(1.05); 
 }
 
-/* Hamburger menu for mobile */
+
 .hamburger {
     display: none;
     font-size: 1.5rem;
@@ -194,7 +198,7 @@ body {
 
 .reservation-form input:focus, .reservation-form select:focus {
     outline: none;
-    border: 2px solid var(--sushi-red4); /* Outline on focus */
+    border: 2px solid var(--sushi-grey3);
 }
 
 .reservation-form input::placeholder, .reservation-form select::placeholder {
@@ -211,12 +215,12 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Added transform for button */
+    transition: background-color 0.3s, transform 0.3s; 
 }
 
 .reservation-form button:hover {
     background-color: var(--sushi-red3);
-    transform: translateY(-2px); /* Subtle lift effect */
+    transform: translateY(-2px); 
 }
 
 details {
@@ -295,6 +299,8 @@ details[open] .content {
         align-items: flex-start; 
         padding: 20px 20px; 
         position: relative;
+        border-radius: 0;
+    
     }
 
     .logo {
@@ -309,7 +315,7 @@ details[open] .content {
 
     .control-buttons {
         position: absolute;
-        top: 10px;
+        top: 17px;
         right: 10px;
     }
 

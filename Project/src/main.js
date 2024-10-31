@@ -71,8 +71,10 @@ document.querySelector(".hamburger").addEventListener("click", () => {
 
     if (navList.classList.contains("active")) {
         navList.style.height = navList.scrollHeight + "px"; 
+        navList.style.borderBottom = "2px solid var(--dust-pink)";
     } else {
         navList.style.height = "0"; 
+        navList.style.borderBottom = "none";
     }
 });
 

@@ -7,28 +7,30 @@ body {
     color: var(--sushi-grey2);
 }
 
-:root {
-    --sushi-black: #0B090A;
-    --sushi-graphite: #161A1D;
-    --sushi-red1: #660708;
-    --sushi-red2: #A4161A;
-    --sushi-red3: #BA181B;
-    --sushi-red4: #E5383B;
-    --sushi-grey1: #B1A7A6;
-    --sushi-grey2: #D3D3D3;
-    --sushi-grey3: #F5F3F4;
-    --sushi-white: #FFFFFF;
-    --dust-pink: rgb(105, 88, 88);
-    --grey: #181416;
-    --soy-sauce: #140f12;
-    --brown-grey: rgba(44, 33, 33, 0.911);
-    --intense-red: rgb(191, 77, 77);
-    --wine-red: rgb(22, 2, 2);
-    --forest-green: rgba(1, 12, 1, 0.815);
-    --grey-green: rgba(54, 71, 63, 0.908);
-    --lotus-flower: rgba(222, 222, 222, 0.959);
 
+:root {
+    --sushi-black: #0b090a;
+    --sushi-graphite: #161a1d;
+    --wine-red: rgb(38, 2, 2);
+    --sushi-red1: #420506;
+    --sushi-red2: #a4161a;
+    --sushi-red3: #ba181b;
+    --sushi-red4: #e5383b;
+    --sushi-grey1: #b1a7a6;
+    --sushi-grey2: #d3d3d3;
+    --sushi-grey3: #f5f3f4;
+    --sushi-white: #ffffff;
+    --dust-pink: #C8A9A9; /* Softer pink */
+    --grey: #252525; 
+    --soy-sauce: #191919; 
+    --brown-grey: rgba(44, 33, 33, 0.9); 
+    --intense-red: #BF4D4D; 
+    --wine-red: #390d0d; 
+    --forest-green: rgba(3, 32, 3, 0.8); 
+    --grey-green: rgba(54, 71, 63, 0.9); 
+    --lotus-flower: rgba(245, 245, 245, 0.9);
 }
+
 
 
 .nav-content {
@@ -39,12 +41,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 20px; /* Reduced padding for a sleeker look */
+    padding: 15px 20px; 
     background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
     color: var(--lotus-flower);
     z-index: 50;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
-    border-radius: 8px; /* Rounded corners for modern feel */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .logo {
@@ -52,7 +55,7 @@ body {
     align-items: center;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em; /* Slightly reduced spacing */
+    letter-spacing: 1.3em; 
 }
 
 .logo p {
@@ -61,9 +64,9 @@ body {
 }
 
 .nav-list {
-    display: flex; /* Keep flex for desktop */
+    display: flex;
     flex-direction: row;
-    gap: 2em; /* Space between items */
+    gap: 2em; 
     margin: 0;
     padding: 0;
 }
@@ -77,7 +80,7 @@ body {
     text-decoration: none;
     color: var(--lotus-flower);
     padding: 10px 0;
-    transition: color 0.3s, transform 0.3s; /* Added transform for modern hover */
+    transition: color 0.3s, transform 0.3s; 
     position: relative;
 }
 
@@ -85,7 +88,7 @@ body {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -3px; /* Adjusted for better positioning */
+    bottom: -3px; 
     width: 100%; 
     height: 2px; 
     background-color: var(--dust-pink); 
@@ -99,27 +102,27 @@ body {
 
 .nav-list li a:hover {
     color: var(--dust-pink); 
-    transform: translateY(-2px); /* Subtle lift effect on hover */
+    transform: translateY(-2px); 
 }
 
-/* Language and Login buttons */
+
 .language, .login {
     margin-right: 1em;
     background-color: var(--soy-sauce);
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 0.8em 1.5em; /* Slightly smaller padding */
+    padding: 0.8em 1.5em; 
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
 }
 
 .language:hover, .login:hover {
-    background-color: var(--sushi-red4); /* Change on hover */
-    transform: scale(1.05); /* Slight scale effect */
+    background-color: var(--sushi-red4);
+    transform: scale(1.05); 
 }
 
-/* Hamburger menu for mobile */
+
 .hamburger {
     display: none;
     font-size: 1.5rem;
@@ -139,7 +142,7 @@ body {
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
 }
 
-/* Section styles */
+
 section {
     margin-bottom: 2.5rem;
 }
@@ -160,7 +163,7 @@ section ul li {
     margin-bottom: 0.5rem;
 }
 
-/* Contact section */
+
 .contact-section ul {
     list-style-type: none;
     padding: 0;
@@ -175,7 +178,7 @@ section ul li {
     text-decoration: underline;
 }
 
-/* Map section */
+
 .map {
     height: 300px;
     background-color: var(--sushi-graphite);
@@ -190,7 +193,7 @@ section ul li {
     color: var(--sushi-grey2);
 }
 
-/* Responsive Styles */
+
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
