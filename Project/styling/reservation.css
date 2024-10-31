@@ -43,53 +43,101 @@ body {
     overflow: hidden;
 }
 
+.nav-content {
+    margin: auto;
+}
+
+
+
 .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 20px 20px; /* Reduced padding to control height */
     background-color: var(--grey);
     color: var(--lotus-flower);
     z-index: 50;
-  }
-  
-  .logo {
+}
+
+.logo {
+    display: flex;
+    align-items: center;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    padding-left: 2em;
-  }
-  
-  .nav-list {
-    margin: auto;
-    padding-right: 1em;
-  }
-  
-  .nav-list li {
+}
+
+.logo p {
+    margin: 0;
+    padding-left: 0.5em;
+}
+
+.nav-list {
+    display: flex; /* Display flex for desktop */
+    flex-direction: row; /* Keep items in a row for desktop */
+    gap: 3em; /* Space between items */
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+}
+
+.nav-list li {
     list-style-type: none;
-    display: inline;
-  }
-  
-  .nav-list li a {
+    position: relative; /* Positioning context for the ::after pseudo-element */
+}
+
+.nav-list li a {
     text-decoration: none;
     color: var(--lotus-flower);
-    padding: 10px;
-    transition: all 0.5s;
-  }
-  
-  .nav-list li a:hover {
-    color: var(--dust-pink);
-    transition: all 0.5s;
-  }
-  
-  .login,
-  .language {
+    padding: 10px 0; /* Optional padding for each item */
+    transition: color 0.5s;
+    position: relative; /* Positioning context for the ::after pseudo-element */
+}
+
+.nav-list li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0; /* Position at the bottom of the link */
+    width: 100%; /* Full width of the element */
+    height: 2px; /* Height of the border */
+    background-color: var(--dust-pink); /* Color of the border */
+    transform: scaleX(0); /* Start with no width */
+    transition: transform 0.3s ease; /* Transition for smooth animation */
+}
+
+.nav-list li a:hover::after {
+    transform: scaleX(1); /* Scale the border to full width on hover */
+}
+
+.nav-list li a:hover {
+    color: var(--dust-pink); /* Optional: Change color on hover */
+}
+
+/* Language and Login buttons */
+.language, .login {
     margin-right: 1em;
     background-color: var(--soy-sauce);
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
     padding: 1em;
+    transition: all 0.3s ease;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 1em;
+}
+
+/* Hamburger menu for mobile */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--lotus-flower);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 1em;
 }
 
 .reservation-form {
@@ -243,5 +291,65 @@ details[open] .content {
 
     .reservation-form button {
         font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column; 
+        align-items: flex-start; 
+        padding: 20px 20px; 
+        position: relative;
+    }
+
+  
+    .logo {
+        width: 20%; 
+        display: flex;
+        justify-content: space-between; 
+    }
+
+   
+    .hamburger {
+        display: inline-block;
+    }
+
+   
+    .control-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+   
+    .nav-list {
+        display: flex; /* Keep it flex for column layout */
+        flex-direction: column;
+        height: 0; /* Set initial height to 0 */
+        overflow: hidden; /* Hide overflow to maintain visual appearance */
+        width: 100%;
+        gap: 1em;
+        background-color: var(--grey);
+        transition: height 0.3s ease; /* Transition effect for height */
+        position: absolute; /* Use absolute positioning */
+        top: 100%; /* Position it below the navigation */
+        left: 0; /* Align it to the left */
+        z-index: 10; /* Ensure it appears above other elements */
+    }
+  
+    .nav-list.active {
+        height: auto; 
+        padding: 10px 0; 
+    }
+
+    .nav-list li {
+        padding: 10px 20px; 
+        width: 100%;
+        gap: 1em;
+        margin-left: 1em;
+    }
+
+    .nav-list li a {
+        color: var(--lotus-flower);
     }
 }

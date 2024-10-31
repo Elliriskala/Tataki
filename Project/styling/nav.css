@@ -1,0 +1,177 @@
+:root {
+    --sushi-black: #0B090A;
+    --sushi-graphite: #161A1D;
+    --sushi-red1: #660708;
+    --sushi-red2: #A4161A;
+    --sushi-red3: #BA181B;
+    --sushi-red4: #E5383B;
+    --sushi-grey1: #B1A7A6;
+    --sushi-grey2: #D3D3D3;
+    --sushi-grey3: #F5F3F4;
+    --sushi-white: #FFFFFF;
+    --dust-pink: rgb(105, 88, 88);
+    --grey: #181416;
+    --soy-sauce: #140f12;
+    --brown-grey: rgba(44, 33, 33, 0.911);
+    --intense-red: rgb(191, 77, 77);
+    --wine-red: rgb(22, 2, 2);
+    --forest-green: rgba(1, 12, 1, 0.815);
+    --grey-green: rgba(54, 71, 63, 0.908);
+    --lotus-flower: rgba(222, 222, 222, 0.959);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--sushi-grey3);
+    color: var(--sushi-grey2);
+}
+
+/* Navigation styling */
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px; /* Reduced padding to control height */
+    background-color: var(--grey);
+    color: var(--lotus-flower);
+    z-index: 50;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.logo p {
+    margin: 0;
+    padding-left: 0.5em;
+}
+
+.nav-list {
+    display: flex; /* Display flex for desktop */
+    flex-direction: row; /* Keep items in a row for desktop */
+    gap: 3em; /* Space between items */
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+}
+
+.nav-list li {
+    list-style-type: none;
+    position: relative; /* Positioning context for the ::after pseudo-element */
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: var(--lotus-flower);
+    padding: 10px 0; /* Optional padding for each item */
+    transition: color 0.5s;
+    position: relative; /* Positioning context for the ::after pseudo-element */
+}
+
+.nav-list li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0; /* Position at the bottom of the link */
+    width: 100%; /* Full width of the element */
+    height: 2px; /* Height of the border */
+    background-color: var(--dust-pink); /* Color of the border */
+    transform: scaleX(0); /* Start with no width */
+    transition: transform 0.3s ease; /* Transition for smooth animation */
+}
+
+.nav-list li a:hover::after {
+    transform: scaleX(1); /* Scale the border to full width on hover */
+}
+
+.nav-list li a:hover {
+    color: var(--dust-pink); /* Optional: Change color on hover */
+}
+
+/* Language and Login buttons */
+.language, .login {
+    margin-right: 1em;
+    background-color: var(--soy-sauce);
+    color: var(--lotus-flower);
+    border: none;
+    border-radius: 1em;
+    padding: 1em;
+    transition: all 0.3s ease;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 1em;
+}
+
+/* Hamburger menu for mobile */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--lotus-flower);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 1em;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column; 
+        align-items: flex-start; 
+        padding: 10px; 
+    }
+
+  
+    .logo {
+        width: 20%; 
+        display: flex;
+        justify-content: space-between; 
+    }
+
+   
+    .hamburger {
+        display: inline-block;
+    }
+
+   
+    .control-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+   
+    .nav-list {
+        display: flex; 
+        flex-direction: column;
+        height: 0; 
+        gap: 1em;
+        overflow: hidden; 
+        width: 100%;
+        background-color: var(--grey);
+        transition: height 0.3s ease;
+        margin-top: 10px; 
+    }
+
+  
+    .nav-list.active {
+        height: auto; 
+        padding: 10px 0; 
+    }
+
+    .nav-list li {
+        padding: 10px 20px; 
+        width: 100%;
+    }
+
+    .nav-list li a {
+        color: var(--lotus-flower);
+    }
+}
