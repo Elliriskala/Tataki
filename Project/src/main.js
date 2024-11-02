@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
     const togglePassword = document.querySelectorAll('.toggle-password');
+    const loginBackground = document.querySelector('.login-background');
+    const loginImage = document.querySelector('.form-image-container');
 
     // Set the initial active form to login
     loginForm.classList.add('active');
@@ -19,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.classList.remove('active');
         loginButton.classList.add('active');
         registerButton.classList.remove('active');
+        loginBackground.classList.remove('toggle-view')
+        loginImage.classList.remove('register-image');
+
 
         resetForm(registerForm); // Reset the register form
         resetForm(loginForm); // Reset the login
@@ -32,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.classList.add('active');
         loginButton.classList.remove('active');
         registerButton.classList.add('active');
+        loginBackground.classList.add('toggle-view');
+        loginImage.classList.add('register-image');
+
 
         resetForm(loginForm); // Reset the login form
         resetForm(registerForm); // Reset the register form
@@ -44,10 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputType = input.getAttribute('type');
             if (inputType === 'password') {
                 input.setAttribute('type', 'text');
-                icon.innerHTML = '<i class="fa-regular fa-eye"></i>'; 
+                icon.innerHTML = '<i class="fa-regular fa-eye"></i>';
             } else {
                 input.setAttribute('type', 'password');
-                icon.innerHTML = '<i class="fa-regular fa-eye-slash"></i>'; 
+                icon.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
             }
         });
     });
@@ -57,23 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetForm = (form) => {
         const inputs = form.querySelectorAll('input');
     inputs.forEach(input => {
-        // Clear the input value
-        input.value = ''; 
-        // Remove custom validity me
-    }); 
+        input.value = '';
+
+    });
     }
 });
 
 document.querySelector(".hamburger").addEventListener("click", () => {
     const navList = document.querySelector(".nav-list");
-    
+
     navList.classList.toggle("active");
 
     if (navList.classList.contains("active")) {
-        navList.style.height = navList.scrollHeight + "px"; 
+        navList.style.height = navList.scrollHeight + "px";
         navList.style.borderBottom = "2px solid var(--dust-pink)";
     } else {
-        navList.style.height = "0"; 
+        navList.style.height = "0";
         navList.style.borderBottom = "none";
     }
 });
@@ -88,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     detailsElements.forEach(details => {
         const content = details.querySelector('.content');
-        
+
         details.addEventListener('toggle', () => {
             if (details.open) {
                 const contentHeight = content.scrollHeight + 'px';
@@ -99,3 +106,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+

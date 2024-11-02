@@ -24,28 +24,71 @@ body {
     --sushi-grey3: #f5f3f4;
     --sushi-white: #ffffff;
     --dust-pink: #C8A9A9; /* Softer pink */
-    --grey: #252525; 
-    --soy-sauce: #191919; 
-    --brown-grey: rgba(44, 33, 33, 0.9); 
-    --intense-red: #BF4D4D; 
-    --wine-red: #390d0d; 
-    --forest-green: rgba(3, 32, 3, 0.8); 
-    --grey-green: rgba(54, 71, 63, 0.9); 
+    --grey: #252525;
+    --soy-sauce: #191919;
+    --brown-grey: rgba(44, 33, 33, 0.9);
+    --intense-red: #BF4D4D;
+    --wine-red: #390d0d;
+    --forest-green: rgba(3, 32, 3, 0.8);
+    --grey-green: rgba(54, 71, 63, 0.9);
     --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
-.login-container {
+.login-background {
+  display: flex;
+  height: 70vh;
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.form-image-container, .login-container {
+    width: 45vw;
+    transition: transform 0.6s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 6rem;
-    width: 400px;
-    padding: 20px;
-    background-color: var(--sushi-white);
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    box-sizing: border-box;
+
+}
+
+.login-background, .form-content {
+  overflow: hidden;
+  max-width: 100%;
+
+}
+
+.login-background.toggle-view .form-image-container {
+  transform: translateX(100%);
+}
+
+.login-background.toggle-view .login-container {
+  transform: translateX(-100%);
+}
+
+.form-image-container {
+
+  background-image: url(../img/table-legend.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.form-image-container.register-image {
+  background-image: url(../img/reservation-legend2.png);
+}
+
+.login-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--sushi-grey3);
+  max-width: 100%;
 }
 
 .form-toggle {
@@ -69,6 +112,7 @@ body {
     padding: 10px 0;
     color: var(--sushi-graphite);
     position: relative;
+    width: 50%;
     z-index: 2;
 }
 
@@ -78,11 +122,11 @@ body {
 
 .toggle-slider {
     position: absolute;
-    top: 3px;
+    top: 4px;
     left: 3px;
-    width: 50%;
+    width: calc(50% - 4px);
     height: 85%;
-    background: var(--sushi-red4);
+    background: linear-gradient(-45deg, var(--sushi-red3), var(--sushi-red4));
     border-radius: 50px;
     transition: all 0.4s ease;
     z-index: 1;
@@ -91,6 +135,7 @@ body {
 .form-content {
     display: none;
     width: 100%;
+    max-width: 400px;
 }
 
 .form-content.active {
@@ -128,16 +173,26 @@ body {
 }
 
 .submit-button, .reset-button {
-    padding: 10px 20px;
+    padding: 10px 35px;
     border: none;
     background-color: var(--sushi-red3);
     color: var(--sushi-white);
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .reset-button {
     background-color: var(--sushi-grey1);
+}
+
+.submit-button:hover {
+    background-color: var(--sushi-red4);
+    transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+    background-color: var(--sushi-grey2);
+    transition: background-color 0.3s ease;
 }
 
 @keyframes validAnimation {
@@ -216,12 +271,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 20px; 
+    padding: 15px 20px;
     background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
     color: var(--lotus-flower);
     z-index: 50;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
-    border-bottom-left-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
 
@@ -230,7 +285,7 @@ body {
     align-items: center;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.3em; 
+    letter-spacing: 1.3em;
 }
 
 .logo p {
@@ -239,16 +294,16 @@ body {
 }
 
 .nav-list {
-    display: flex; 
+    display: flex;
     flex-direction: row;
-    gap: 2em; 
+    gap: 2em;
     margin: 0;
     padding: 0;
 }
 
 .nav-list li {
     list-style-type: none;
-    position: relative; 
+    position: relative;
 }
 
 .nav-list li a {
@@ -264,19 +319,19 @@ body {
     position: absolute;
     left: 0;
     bottom: -3px; /* Adjusted for better positioning */
-    width: 100%; 
-    height: 2px; 
-    background-color: var(--dust-pink); 
-    transform: scaleX(0); 
-    transition: transform 0.3s ease; 
+    width: 100%;
+    height: 2px;
+    background-color: var(--dust-pink);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
 .nav-list li a:hover::after {
-    transform: scaleX(1); 
+    transform: scaleX(1);
 }
 
 .nav-list li a:hover {
-    color: var(--dust-pink); 
+    color: var(--dust-pink);
     transform: translateY(-2px); /* Subtle lift effect on hover */
 }
 
@@ -339,36 +394,36 @@ body {
     color: var(--sushi-grey3);
     padding: 1em;
   }
-  
+
   .footer-logo {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     padding-left: 2em;
   }
-  
+
   .footer-nav li {
     list-style-type: none;
     display: inline;
     padding: 1em;
   }
-  
+
   .footer-nav li a {
     text-decoration: none;
     color: var(--sushi-grey3);
   }
-  
+
   .footer-nav li a:hover {
     color: var(--sushi-grey1);
     transition: all 0.5s;
   }
-  
+
   .social-medias li {
     display: inline;
     list-style-type: none;
     padding: 1em;
   }
-  
+
   .social-medias li a {
     text-decoration: none;
     color: var(--sushi-grey3);
@@ -377,33 +432,45 @@ body {
 
 @media (max-width: 768px) {
     .navigation {
-        flex-direction: column; 
-        align-items: flex-start; 
-        padding: 20px 20px; 
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 20px;
         position: relative;
         border-radius: 0;
     }
 
-  
-    .logo {
-        width: 20%; 
-        display: flex;
-        justify-content: space-between; 
+    .form-image-container {
+        display: none;
     }
 
-   
+    .login-container {
+        width: 80%;
+    }
+
+    .login-background {
+      justify-content: center;
+    }
+
+
+    .logo {
+        width: 20%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+
     .hamburger {
         display: inline-block;
     }
 
-   
+
     .control-buttons {
         position: absolute;
         top: 1em;
         right: 1em;
     }
 
-   
+
     .nav-list {
         display: flex; /* Keep it flex for column layout */
         flex-direction: column;
@@ -418,14 +485,14 @@ body {
         left: 0; /* Align it to the left */
         z-index: 10; /* Ensure it appears above other elements */
     }
-  
+
     .nav-list.active {
-        height: auto; 
-        padding: 10px 0; 
+        height: auto;
+        padding: 10px 0;
     }
 
     .nav-list li {
-        padding: 10px 20px; 
+        padding: 10px 20px;
         width: 100%;
         gap: 1em;
         margin-left: 1em;
