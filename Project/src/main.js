@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         resetForm(registerForm); // Reset the register form
-        resetForm(loginForm); // Reset the login
     });
 
     // Register button event listener
@@ -42,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         resetForm(loginForm); // Reset the login form
-        resetForm(registerForm); // Reset the register form
     });
 
     // Toggle password visibility
@@ -88,8 +86,11 @@ document.querySelector(".hamburger").addEventListener("click", () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  const dateInput = document.getElementById("date");
+  if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById('date').setAttribute('min', today);
+    dateInput.setAttribute('min', today);
+  }
 
     const detailsElements = document.querySelectorAll('details');
 
@@ -106,5 +107,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
-
