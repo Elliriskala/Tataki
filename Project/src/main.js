@@ -14,7 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateInput = document.getElementById("date");
 
     // Set the initial active form to login
-    loginForm.classList.add('active');
+    if (loginForm) {
+        loginForm.classList.add('active');
+    } else {
+      console.log("loginForm not found");
+    }
 
     // Toggle between login and register forms
     const toggleForm = (isLogin) => {
@@ -28,18 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
         resetForm(isLogin ? registerForm : loginForm);
     };
 
-    loginButton.addEventListener('click', (event) => {
+    loginButton?.addEventListener('click', (event) => {
         event.preventDefault();
         toggleForm(true);
     });
 
-    registerButton.addEventListener('click', (event) => {
+    registerButton?.addEventListener('click', (event) => {
         event.preventDefault();
         toggleForm(false);
     });
 
     // Toggle password visibility
-    togglePassword.forEach((icon) => {
+    togglePassword?.forEach((icon) => {
         icon.addEventListener('click', () => {
             const input = document.getElementById(icon.getAttribute('data-target'));
             const isPasswordType = input.getAttribute('type') === 'password';
@@ -65,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburgerMenu.addEventListener("click", () => {
       console.log("click");
       navList.classList.toggle("active");
-      
+
     });
 
     // Toggle details open/close with animation
