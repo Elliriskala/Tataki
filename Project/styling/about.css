@@ -130,8 +130,8 @@ html {
 
 .language:hover,
 .login:hover {
-  background-color: var(--sushi-red4); /* Change on hover */
-  transform: scale(1.05); /* Slight scale effect */
+  background-color: var(--sushi-red4);
+  transform: scale(1.05);
 }
 
 /* Hamburger menu for mobile */
