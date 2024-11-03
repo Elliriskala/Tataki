@@ -66,11 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle navigation toggle for mobile
-    hamburgerMenu.addEventListener("click", () => {
+    hamburgerMenu.addEventListener("click", (event) => {
       console.log("click");
+      event.stopPropagation();
       navList.classList.toggle("active");
 
     });
+
+    document.addEventListener("click", (event) => {
+      const isInsideNav = navList.contains(event.target) || hamburgerMenu.contains(event.target);
+      if (!isInsideNav) {
+        navList.classList.remove("active");
+      }
+    })
 
     // Toggle details open/close with animation
     const detailsElements = document.querySelectorAll('details');
