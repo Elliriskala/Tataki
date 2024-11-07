@@ -240,6 +240,37 @@ body {
   transform: translateY(-2px);
 }
 
+
+.guest-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+
+.guest-btn {
+  padding: 10px;
+  border: 1px solid var(--sushi-grey1);
+  background-color: var(--sushi-grey3);
+  color: var(--sushi-black);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.guest-btn.active {
+  background-color: var(--sushi-red2); /* Highlight color */
+  color: var(--sushi-white);
+  border-color: var(--sushi-grey3);
+  border: 1px solid;
+}
+
+
+
 details {
   margin-top: 10px;
   margin-bottom: 20px;

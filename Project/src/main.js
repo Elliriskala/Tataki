@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navList = document.querySelector(".nav-list");
     const hamburgerMenu = document.querySelector(".hamburger");
     const dateInput = document.getElementById("date");
+    const guestButtons = document.querySelectorAll('.guest-btn');
+    const guestInput = document.getElementById('guests-input');
 
     // Set the initial active form to login
     if (loginForm) {
@@ -88,4 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
             content.style.maxHeight = details.open ? content.scrollHeight + 'px' : '0';
         });
     });
+
+    // Handle guest selection
+    guestButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        guestButtons.forEach(btn => btn.classList.remove('active'));
+
+        button.classList.add('active');
+
+        guestInput.value = button.getAttribute('guests-input') || '';
+      });
+    })
 });

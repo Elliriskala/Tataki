@@ -22,7 +22,7 @@
     </ul>
     <div class="control-buttons">
         <button class="language">Language</button>
-        <button class="login">Login</button>
+        <button class="login"><a href="./user.html">Login</a></button>
     </div>
   </nav>
 
@@ -62,16 +62,18 @@
                     <option value="20:00">8:00 PM</option>
                     <option value="21:00">9:00 PM</option>
                 </select>
-
+                <div class="guest-selection">
                 <label for="guests">Number of Guests</label>
-                <select id="guests" name="guests" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6+</option>
-                </select>
+                  <div class="guest-buttons" id="guests">
+                    <button type="button" class="guest-btn" data-value="1">1</button>
+                    <button type="button" class="guest-btn" data-value="2">2</button>
+                    <button type="button" class="guest-btn" data-value="3">3</button>
+                    <button type="button" class="guest-btn" data-value="4">4</button>
+                    <button type="button" class="guest-btn" data-value="5">5</button>
+                    <button type="button" class="guest-btn" data-value="6+">6+</button>
+                  </div>
+                  <input type="hidden" name="guests" id="guests-input" required>
+                </div>
                 <details>
                     <summary>Terms & Conditions</summary>
                     <div class="content">
@@ -92,15 +94,15 @@
           <div class="footer-nav">
               <ul>
                   <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="aboutus.html">About us</a></li>
+                  <li><a href="about.html">About us</a></li>
                   <li><a href="liability.html">Liability</a></li>
                   <li><a href="review.html">Review us</a></li>
               </ul>
           </div>
           <div class="social-medias">
               <ul>
-                  <li><a href="">Facebook</a></li>
-                  <li><a href="">Instagram</a></li>
+                  <li><a href="#!">Facebook</a></li>
+                  <li><a href="#!">Instagram</a></li>
               </ul>
           </div>
         </div>

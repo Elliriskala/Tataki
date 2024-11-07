@@ -243,7 +243,15 @@ body {
   background-color: var(--sushi-red4);
 }
 
+.main-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
+}
 
 .footer-container {
   display: flex;
@@ -253,6 +261,7 @@ body {
   background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
   color: var(--sushi-grey3);
   padding: 1em;
+  max-width: 100%;
 }
 
 .footer-logo {
