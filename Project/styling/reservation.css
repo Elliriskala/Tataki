@@ -197,7 +197,8 @@ body {
   margin-bottom: 1.5rem;
   border: none;
   border-radius: 8px;
-  background-color: var(--sushi-grey1);
+  background-color: var(--grey);
+  color: var(--sushi-grey3);
   font-size: 1rem;
   transition:
     border-color 0.3s,
@@ -206,7 +207,11 @@ body {
 }
 
 .reservation-form option {
-  color: var(--sushi-graphite);
+  color: var(--sushi-grey3);
+}
+
+.reservation-form select {
+  color: var(--sushi-grey3);
 }
 
 .reservation-form input:focus,
@@ -236,7 +241,8 @@ body {
 }
 
 .reservation-form button:hover {
-  background-color: var(--sushi-red3);
+  background-color: var(--sushi-grey3);
+  color: var(--sushi-red3);
   transform: translateY(-2px);
 }
 
