@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Review page</title>
   <link rel="stylesheet" href="styling/review.css">
+  <link rel="stylesheet" href="styling/nav.css">
   <script src="src/main.js" defer></script>
   <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
 </head>
@@ -43,7 +44,7 @@
         </div>
 
         <label for="comments">Comments</label>
-        <textarea id="comments" name="comments" rows="4" placeholder="Write your review here..."></textarea>
+        <textarea id="comments" name="comments" maxlength="200" rows="4" placeholder="Write your review here. Maximum of 200 characters."></textarea>
 
         <button type="submit">Submit Review</button>
     </form>

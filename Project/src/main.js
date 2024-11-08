@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         button.classList.add('active');
 
-        guestInput.value = button.getAttribute('guests-input') || '';
+        guestInput.value = button.getAttribute('guests-input');
       });
     })
 });
