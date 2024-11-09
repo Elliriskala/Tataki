@@ -1,34 +1,37 @@
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
-const apiKey = '#######################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+const apiKey = '############################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
 
-  getLocationButton.addEventListener('click', () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        // Get user's location (latitude and longitude)
-        const userLat = position.coords.latitude;
-        const userLon = position.coords.longitude;
+getLocationButton.addEventListener('click', () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async function (position) {
+      // Get user's location (latitude and longitude)
+      const userLat = position.coords.latitude;
+      const userLon = position.coords.longitude;
 
-        // Set the user's location as the "From" location
-        document.getElementById('toLat').value = userLat;
-        document.getElementById('toLon').value = userLon;
+      // Use user's location in the query
+      document.getElementById('fromLat').value = userLat;
+      document.getElementById('fromLon').value = userLon;
 
-        // Show the form and hide the "Use my location" button
-        getLocationButton.style.display = 'none';
-        itineraryForm.style.display = 'block';
-      });
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  });
+      // Show the form and hide the "Use my location" button
+      getLocationButton.style.display = 'none';
+      itineraryForm.style.display = 'block';
+
+      // Add form submission handling here if needed to run the query
+    });
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+});
+
 
   // Handle the itinerary form
   itineraryForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const fromLat = document.getElementById('toLat').value;
-    const fromLon = document.getElementById('toLon').value;
+    const fromLat = document.getElementById('fromLat').value;
+    const fromLon = document.getElementById('fromLon').value;
     const toLat = 60.1699; // Fixed latitude of Tataki
     const toLon = 24.9384; // Fixed longitude of Tataki
     const numOfItineraries = document.getElementById('numOfItineraries').value;
@@ -46,22 +49,45 @@ const apiKey = '#######################'; // unfortunately, I will not provide t
         },
         body: JSON.stringify({
           query: `
-            query {
-              plan(from: {lat: ${fromLat}, lon: ${fromLon}}, to: {lat: ${toLat}, lon: ${toLon}}, numItineraries: ${numOfItineraries}, walkSpeed: ${walkSpeed}) {
-                itineraries {
-                  duration
-                  legs {
-                    mode
-                    startTime
-                    endTime
-                    distance
+          query {
+            plan(fromPlace: "Your location::${fromLat},${fromLon}", toPlace: "Tataki, Helsinki::${toLat},${toLon}", numItineraries: ${numOfItineraries}, walkSpeed: ${walkSpeed}, walkReluctance: 2.1) {
+              itineraries{
+                walkDistance,
+                duration,
+                legs {
+                  mode
+                  startTime
+                  endTime
+                  from {
+                    lat
+                    lon
+                    name
+                    stop {
+                      code
+                      name
+                    }
+                  },
+                  to {
+                    lat
+                    lon
+                    name
+                  },
+                  agency {
+                    gtfsId
+              name
+                  },
+                  distance
+                  legGeometry {
+                    length
+                    points
                   }
                 }
               }
             }
-          `
-        }),
-      });
+          }
+        `
+      }),
+    });
 
       const data = await response.json();
 
@@ -88,19 +114,27 @@ const apiKey = '#######################'; // unfortunately, I will not provide t
       const formattedDuration = `${Math.floor(itinerary.duration / 60)} hours ${itinerary.duration % 60} minutes`; // Format the duration
 
       itineraryItem.innerHTML = `
-        <h3>Itinerary ${index + 1}</h3>
-        <p>Duration: ${formattedDuration}</p>
-        <ul>
-          ${itinerary.legs.map(leg => `
-            <li>
-              <strong>Mode:</strong> ${leg.mode} <br>
-              <strong>Start Time:</strong> ${formatDate(leg.startTime)} <br>
-              <strong>End Time:</strong> ${formatDate(leg.endTime)} <br>
-              <strong>Distance:</strong> ${leg.distance.toFixed(0)} meters
-            </li>
-          `).join('')}
-        </ul>
-      `;
+      <h3>Itinerary ${index + 1}</h3>
+      <p>Duration: ${formattedDuration}</p>
+      <ul>
+        ${itinerary.legs.map(leg => `
+          <li>
+            ${leg.mode ? `<strong>Mode:</strong> ${leg.mode} ${leg.trip?.tripHeadSign ? `(Line: ${leg.trip.tripHeadSign} ${leg.trip.routeShortName || ''})` : ''} <br>` : ''}
+            ${leg.from?.name ? `<strong>From:</strong> ${leg.from.name} (${leg.from.lat}, ${leg.from.lon})<br>` : ''}
+            ${leg.from?.stop?.name ? `<strong>Stop Name:</strong> ${leg.from.stop.name} <br>` : ''}
+            ${leg.from?.stop?.code ? `<strong>Stop Code:</strong> ${leg.from.stop.code} <br>` : ''}
+            ${leg.to?.name ? `<strong>To:</strong> ${leg.to.name} (${leg.to.lat}, ${leg.to.lon})<br>` : ''}
+            ${leg.startTime ? `<strong>Start Time:</strong> ${formatDate(leg.startTime)} <br>` : ''}
+            ${leg.endTime ? `<strong>End Time:</strong> ${formatDate(leg.endTime)} <br>` : ''}
+            ${typeof leg.distance === 'number' ? `<strong>Distance:</strong> ${leg.distance.toFixed(0)} meters <br>` : ''}
+            ${leg.agency?.name ? `<strong>Agency:</strong> ${leg.agency.name} <br>` : ''}
+
+
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
       resultList.appendChild(itineraryItem);
     });
   }
