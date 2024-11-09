@@ -163,6 +163,11 @@ body {
   font-size: 16px;
 }
 
+.no-animate .input-container input {
+  animation: none !important;
+}
+
+
 .input-container input:focus {
   border-color: var(--sushi-primary);
   box-shadow: 0 0 8px rgba(0, 128, 255, 0.3);
@@ -242,13 +247,25 @@ body {
   }
 }
 
-.login-form input:valid {
+.login-form input.interacted:valid {
   border-color: #4caf50;
   box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
   animation: validAnimation 0.4s ease-in-out;
 }
 
-.login-form input:invalid {
+.login-form input.interacted:invalid {
+  border-color: #f44336;
+  box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
+  animation: invalidAnimation 0.4s ease-in-out;
+}
+
+.register-form input.interacted:valid {
+  border-color: #4caf50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  animation: validAnimation 0.4s ease-in-out;
+}
+
+.register-form input.interacted:invalid {
   border-color: #f44336;
   box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
   animation: invalidAnimation 0.4s ease-in-out;

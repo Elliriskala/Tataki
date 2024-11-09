@@ -36,13 +36,13 @@
             <h1>Table Reservation</h1>
             <form id="reservationForm">
                 <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <input type="text" id="name" name="name" autocomplete="name" placeholder="Enter your name" required>
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="Enter your email" required>
 
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Enter your phone number" required>
 
                 <label for="date">Reservation Date</label>
                 <input type="date" id="date" name="date" required>
@@ -64,14 +64,14 @@
                     <option value="21:00">9:00 PM</option>
                 </select>
                 <div class="guest-selection">
-                <label for="guests">Number of Guests</label>
+                <label for="guest-btn">Number of Guests</label>
                   <div class="guest-buttons" id="guests">
-                    <button type="button" class="guest-btn" data-value="1">1</button>
-                    <button type="button" class="guest-btn" data-value="2">2</button>
-                    <button type="button" class="guest-btn" data-value="3">3</button>
-                    <button type="button" class="guest-btn" data-value="4">4</button>
-                    <button type="button" class="guest-btn" data-value="5">5</button>
-                    <button type="button" class="guest-btn" data-value="6+">6+</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="1">1</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="2">2</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="3">3</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="4">4</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="5">5</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="6+">6+</button>
                   </div>
                   <input type="hidden" name="guests" id="guests-input" required>
                 </div>

@@ -100,6 +100,119 @@ section ul li {
     color: var(--sushi-grey2);
 }
 
+.itinerary-section {
+  background-color: var(--sushi-graphite);
+  color: var(--sushi-grey2);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 2rem auto;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+}
+
+.itinerary-section h1 {
+  font-size: 2rem;
+  color: var(--sushi-red4);
+  border-bottom: 2px solid var(--sushi-red4);
+  padding-bottom: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.itinerary-section button {
+  background-color: var(--sushi-red4);
+  color: var(--sushi-white);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.itinerary-section button:hover {
+  background-color: var(--wine-red);
+}
+
+#itineraryForm {
+  display: none;
+  margin-top: 2rem;
+}
+
+#itineraryForm label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+#itineraryForm input[type="text"],
+#itineraryForm input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--sushi-grey1);
+  background-color: var(--sushi-grey3);
+  color: var(--sushi-graphite);
+}
+
+#itineraryForm button {
+  background-color: var(--sushi-red4);
+  color: var(--sushi-white);
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+#itineraryForm button:hover {
+  background-color: var(--wine-red);
+}
+
+/* Itinerary Results Section */
+#itineraryResults {
+  margin-top: 2rem;
+  display: none;
+}
+
+#itineraryResults ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+#itineraryResults ul li {
+  background-color: var(--sushi-graphite);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#itineraryResults ul li h3 {
+  color: var(--sushi-red4);
+  margin-bottom: 1rem;
+}
+
+#itineraryResults ul li p {
+  color: var(--sushi-grey2);
+}
+
+#itineraryResults ul li ul {
+  padding-left: 20px;
+  margin-top: 1rem;
+}
+
+#itineraryResults ul li ul li {
+  font-size: 0.9rem;
+  color: var(--sushi-grey2);
+  margin-bottom: 0.5rem;
+}
+
+#itineraryResults ul li ul li strong {
+  color: var(--sushi-red4);
+}
+
 
 
 
@@ -122,6 +235,35 @@ section ul li {
         font-size: 1rem;
     }
 
+    .itinerary-section {
+      padding: 1.5rem;
+  }
+
+  .itinerary-section h1 {
+      font-size: 1.8rem;
+  }
+
+  .itinerary-section button {
+      font-size: 1rem;
+  }
+
+  #itineraryForm input[type="text"],
+  #itineraryForm input[type="number"] {
+      font-size: 1rem;
+  }
+
+  #itineraryForm button {
+      font-size: 1rem;
+  }
+
+  #itineraryResults ul li {
+      padding: 0.8rem;
+  }
+
+  #itineraryResults ul li h3 {
+      font-size: 1.4rem;
+  }
+
 }
 
 @media (max-width: 500px) {
@@ -140,6 +282,35 @@ section ul li {
     .reservation-form button {
         font-size: 0.9rem;
     }
+
+    .itinerary-section {
+      padding: 1rem;
+  }
+
+  .itinerary-section h1 {
+      font-size: 1.6rem;
+  }
+
+  .itinerary-section button {
+      font-size: 0.9rem;
+  }
+
+  #itineraryForm input[type="text"],
+  #itineraryForm input[type="number"] {
+      font-size: 0.9rem;
+  }
+
+  #itineraryForm button {
+      font-size: 0.9rem;
+  }
+
+  #itineraryResults ul li {
+      padding: 0.6rem;
+  }
+
+  #itineraryResults ul li h3 {
+      font-size: 1.3rem;
+  }
 
 }
 
