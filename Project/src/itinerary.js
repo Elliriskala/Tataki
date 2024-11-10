@@ -50,10 +50,18 @@ getLocationButton.addEventListener('click', () => {
         body: JSON.stringify({
           query: `
           query {
-            plan(fromPlace: "Your location::${fromLat},${fromLon}", toPlace: "Tataki, Helsinki::${toLat},${toLon}", numItineraries: ${numOfItineraries}, walkSpeed: ${walkSpeed}, walkReluctance: 2.1) {
-              itineraries{
-                walkDistance,
-                duration,
+            plan(
+              fromPlace: "User Location::${fromLat},${fromLon}",
+              toPlace: "Tataki, Helsinki::${toLat},${toLon}",
+              numItineraries: ${numOfItineraries},
+              transportModes: [{mode: BUS}, {mode: RAIL}, {mode: TRAM}, {mode: FERRY}, {mode: WALK}],
+              walkReluctance: 2.1,
+              minTransferTime: 600,
+              walkSpeed: ${walkSpeed}
+            ) {
+              itineraries {
+                walkDistance
+                duration
                 legs {
                   mode
                   startTime
@@ -66,16 +74,20 @@ getLocationButton.addEventListener('click', () => {
                       code
                       name
                     }
-                  },
+                  }
                   to {
                     lat
                     lon
                     name
-                  },
-                  agency {
-                    gtfsId
-              name
-                  },
+                    stop {
+                      code
+                      name
+                    }
+                  }
+                  trip {
+                    tripHeadsign
+                    routeShortName
+                  }
                   distance
                   legGeometry {
                     length
@@ -111,7 +123,7 @@ getLocationButton.addEventListener('click', () => {
 
     itineraries.forEach((itinerary, index) => {
       const itineraryItem = document.createElement('li');
-      const formattedDuration = `${Math.floor(itinerary.duration / 60)} hours ${itinerary.duration % 60} minutes`; // Format the duration
+      const formattedDuration = formatDuration(itinerary.duration);
 
       itineraryItem.innerHTML = `
       <h3>Itinerary ${index + 1}</h3>
@@ -119,17 +131,14 @@ getLocationButton.addEventListener('click', () => {
       <ul>
         ${itinerary.legs.map(leg => `
           <li>
-            ${leg.mode ? `<strong>Mode:</strong> ${leg.mode} ${leg.trip?.tripHeadSign ? `(Line: ${leg.trip.tripHeadSign} ${leg.trip.routeShortName || ''})` : ''} <br>` : ''}
+            ${leg.mode ? `<strong>Mode:</strong> ${leg.mode} ${leg.trip?.tripHeadsign ? `(Line: ${leg.trip.tripHeadsign} ${leg.trip.routeShortName || ''})` : ''} <br>` : ''}
             ${leg.from?.name ? `<strong>From:</strong> ${leg.from.name} (${leg.from.lat}, ${leg.from.lon})<br>` : ''}
             ${leg.from?.stop?.name ? `<strong>Stop Name:</strong> ${leg.from.stop.name} <br>` : ''}
-            ${leg.from?.stop?.code ? `<strong>Stop Code:</strong> ${leg.from.stop.code} <br>` : ''}
+            ${leg.from?.stop?.code ? `<strong>Stop Code:</strong> ${leg.from.stop.code} <br>` : ''}<br>
             ${leg.to?.name ? `<strong>To:</strong> ${leg.to.name} (${leg.to.lat}, ${leg.to.lon})<br>` : ''}
             ${leg.startTime ? `<strong>Start Time:</strong> ${formatDate(leg.startTime)} <br>` : ''}
             ${leg.endTime ? `<strong>End Time:</strong> ${formatDate(leg.endTime)} <br>` : ''}
             ${typeof leg.distance === 'number' ? `<strong>Distance:</strong> ${leg.distance.toFixed(0)} meters <br>` : ''}
-            ${leg.agency?.name ? `<strong>Agency:</strong> ${leg.agency.name} <br>` : ''}
-
-
           </li>
         `).join('')}
       </ul>
@@ -138,6 +147,19 @@ getLocationButton.addEventListener('click', () => {
       resultList.appendChild(itineraryItem);
     });
   }
+
+  function formatDuration(durationInSeconds) {
+    const hours = Math.floor(durationInSeconds / 3600);
+    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+    const seconds = durationInSeconds % 60;
+
+    const hoursPart = hours > 0 ? `${hours} hours ` : "";
+    const minutesPart = minutes > 0 ? `${minutes} minutes ` : "";
+    const secondsPart = seconds > 0 ? `${seconds} seconds` : "";
+
+    return `${hoursPart}${minutesPart}${secondsPart}`.trim();
+  }
+
 
   // format Unix timestamps to readable dates
   function formatDate(timestamp) {
