@@ -32,6 +32,9 @@ body {
   flex-direction: column;
 }
 
+main {
+  flex-grow: 1;
+}
 /*#region Navigation bar */
 
 .nav-content {
