@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Sushi Restaurant</title>
+    <link rel="stylesheet" href="styling/about.css">
+    <link rel="stylesheet" href="styling/nav.css">
+    <script src="src/main.js" defer></script>
+    <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+
+    <script src="src/itinerary.js" defer></script>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="logo">
+            <button class="hamburger">☰</button>
+            <p>Tataki</p>
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html">Home Page</a></li>
+            <li><a href="menu.html">Menus</a></li>
+            <li><a href="order.html">Order</a></li>
+            <li><a href="reservation.html">Reserve a table</a></li>
+        </ul>
+        <div class="control-buttons">
+            <button type="button" class="language" aria-label="English" id="flag-en">🇬🇧</button>
+            <button type="button" class="language" aria-label="Finnish" id="flag-fi">🇫🇮</button>
+            <button type="button" title="login/register" aria-label="Login/Register" class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
+        </div>
+    </nav>
+    <main>
+        <div class="about-sections">
+            <section class="contact-section">
+                <h1>Contact Us</h1>
+                <ul>
+                    <li>Phone: 123456789</li>
+                    <li>Email: <a href="mailto:email@gmail.com">email@gmail.com</a></li>
+                </ul>
+            </section>
+            <section class="map-section">
+                <h1>Find Us</h1>
+                <div class="map"><h2>Map comes here</h2></div>
+            </section>
+            <section class="itinerary-section">
+              <h1>Your itinerary to Tataki</h2>
+              <button id="getLocation">Use my location</button>
+              <form id="itineraryForm" style="display: none;">
+
+                <input type="hidden" id="toLat" placeholder="Tataki Latitude" value="60.1699"><br>
+                <input type="hidden" id="toLon" placeholder="Tataki Longitude" value="24.9384"><br>
+                <input type="hidden" id="fromLat" placeholder="Your Latitude" value=""><br>
+                <input type="hidden" id="fromLon" placeholder="Your Longitude" value=""><br>
+
+                <label for="numOfItineraries">Number of Itineraries:</label>
+                <input type="number" id="numOfItineraries" value="3"><br>
+
+                <input type="hidden" id="walkSpeed" value="1.7" step="0.1"><br>
+
+                <button type="submit">Plan Your Itinerary</button>
+              </form>
+              <div id="itineraryResults">
+                <h2>Itinerary Results</h2>
+                <ul id="itineraryList"></ul>
+              </div>
+
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-logo">
+            <p>Tataki</p>
+          </div>
+          <div class="footer-nav">
+              <ul>
+                  <li><a href="contact.html">Contact us</a></li>
+                  <li><a href="about.html">About us</a></li>
+                  <li><a href="liability.html">Liability</a></li>
+                  <li><a href="review.html">Review us</a></li>
+              </ul>
+          </div>
+          <div class="social-medias">
+              <ul>
+                  <li><a href="">Facebook</a></li>
+                  <li><a href="">Instagram</a></li>
+              </ul>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

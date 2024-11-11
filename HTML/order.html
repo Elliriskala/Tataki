@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>front page</title>
+    <script src="build/main.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/ce58f4085c.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="menu-page-body">
+    <header>
+      <nav class="navigation">
+        <div class="logo">
+          <button class="hamburger">☰</button>
+          <p>Tataki</p>
+        </div>
+        <ul class="nav-list">
+          <li><a href="index.html">Main page</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="order.html">Order</a></li>
+          <li><a href="reserve.html">Reserve a table</a></li>
+        </ul>
+        <div class="control-buttons">
+          <button class="language" id="flag-en">🇬🇧</button>
+          <button class="language" id="flag-fi">🇫🇮</button>
+          <button class="login"><a href="user.html">Login</a></button>
+        </div>
+      </nav>
+    </header>
+    <main class="menu-page">
+      <div class="menus-header">
+        <h1>Order</h1>
+      </div>
+      <div class="menu-list">
+        <ul>
+          <li><a href="">Lunch</a></li>
+          <li><a href="">Dinner</a></li>
+          <li><a href="">Sides</a></li>
+          <li><a href="">Drinks</a></li>
+          <li><a href="">Dessert</a></li>
+        </ul>
+      </div>
+      <div class="order-page-placeholder">
+        <div class="order-menu-placeholder" id="menu-one">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>Sakura set</h3>
+            <p>
+              Sushi set with miso soup and green tea<br />
+              <br />
+              12,90€
+            </p>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-one-checkbox" />
+            <label for="menu-one-checkbox">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-two">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 2</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-one-checkbox" />
+            <label for="menu-two-checkbox">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-three">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 3</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-one-checkbox" />
+            <label for="menu-three-checkbox">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-four">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 4</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-one-checkbox" />
+            <label for="menu-three-checkbox">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-five">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 5</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-five-checkbox" />
+            <label for="menu-three-checkbox">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-six">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 6</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-one-checkbox" />
+            <label for="menu-three-checkbox">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            </label>
+          </div>
+        </div>
+      </div>
+      <h1 class="your-order-header">Your order:</h1>
+      <div class="order-info">
+        <div class="your-order">
+          <div class="order-content">
+            <table class="order-table">
+              <tr>
+                <th>Menu</th>
+                <th></th>
+                <th>Price</th>
+              </tr>
+              <tr>
+                <td>Sakura set:</td>
+                <td>Sushi set with miso soup and green tea</td>
+                <td>12,90€</td>
+              </tr>
+              <tr>
+                <td>Flower set:</td>
+                <td>Large sushi set with miso soup and green tea</td>
+                <td>14,90€</td>
+            </table>
+            <div class="order-total">
+              <h4>Total: 27,80€</h4>
+            </div>
+            <div class="additional-comment">
+              <textarea
+                name="comment"
+                id="leave-comment"
+                cols="30"
+                rows="4"
+                placeholder="Leave additional comments here"
+              ></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="order-user-info">
+              <h3>Your information:</h3>
+              <input type="text" placeholder="Name" />
+              <input type="text" placeholder="Phone number" />
+              <input type="text" placeholder="Email" />
+              <input type="text" placeholder="Address" />
+              <input type="text" placeholder="Postal code" />
+            </div>
+            <div class="use-existing-info">
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="existing-info-checkbox" />
+                <label for="existing-info-checkbox">Use existing delivery information</label>
+              </checkbox>
+            </div>
+          </div>
+          <div class="right-column">
+            <div class="delivery-method">
+              <div>
+                <h4>Select delivery method:</h4>
+              </div>
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="delivery-checkbox" />
+                <label for="delivery-checkbox">Delivery</label>
+              </checkbox>
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="pickup-checkbox" />
+                <label for="pickup-checkbox">Pickup</label>
+            </div>
+            <div class="add-instructions">
+              <textarea
+                name="instructions"
+                id="instructions"
+                cols="25"
+                rows="4"
+                placeholder="Add instructions for courier here"
+              ></textarea>
+            </div>
+            <div class="terms-and-conditions">
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="terms-checkbox" />
+                <label for="terms-checkbox">
+                  I agree to the terms and conditions
+                </label>
+            </div>
+            <div class="order-button">
+              <button>ORDER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <p>Tataki</p>
+        </div>
+        <div class="footer-nav">
+          <ul>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="aboutus.html">About us</a></li>
+            <li><a href="liability.html">Liability</a></li>
+            <li><a href="review.html">Review us</a></li>
+          </ul>
+        </div>
+        <div class="social-medias">
+          <ul>
+            <li id="facebook"><a href=""></a></li>
+            <label for="facebook">
+              <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+            <li id="instagram"><a href=""></a></li>
+            <label for="instagram">
+              <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+            </label>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
