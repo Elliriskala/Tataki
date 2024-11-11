@@ -319,6 +319,10 @@ details[open] .content {
   padding-left: 2em;
 }
 
+.footer-nav ul {
+  padding: 0;
+}
+
 .footer-nav li {
   list-style-type: none;
   display: inline;

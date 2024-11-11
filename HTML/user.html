@@ -6,7 +6,7 @@
     <title>Login/Register Form</title>
     <link rel="stylesheet" href="../styling/login.css">
     <link rel="stylesheet" href="../styling/nav.css">
-    <script src="src/main.js" defer></script>
+    <script src="../src/main.js" defer></script>
     <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -23,7 +23,7 @@
         </ul>
         <div class="control-buttons">
             <button class="language">Language</button>
-            <button class="login"><a href="./user.html">Login</a></button>
+            <button class="login"><a href="./user.html"><i class="fa-regular fa-user"></i></a></button>
         </div>
     </nav>
     <main>
@@ -95,10 +95,15 @@
               </ul>
           </div>
           <div class="social-medias">
-              <ul>
-                  <li><a href="#!">Facebook</a></li>
-                  <li><a href="#!">Instagram</a></li>
-              </ul>
+            <ul>
+              <li id="facebook"><a href=""></a></li>
+              <label for="facebook">
+                <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+              <li id="instagram"><a href=""></a></li>
+              <label for="instagram">
+                <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+              </label>
+            </ul>
           </div>
         </div>
       </footer>
