@@ -21,14 +21,21 @@
   --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
+@font-face {
+  font-family: "roboto";
+  src: url("../fonts/RobotoMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   height: 100%;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'roboto', sans-serif;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'roboto', sans-serif;
   padding: 0;
   margin: 0;
   background-color: var(--sushi-graphite);
@@ -49,110 +56,6 @@ body {
   overflow: hidden;
 }
 
-.nav-content {
-  margin: auto;
-}
-
-.navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 20px;
-  background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
-  color: var(--lotus-flower);
-  z-index: 50;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  max-width: 100%;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.3em;
-}
-
-.logo p {
-  margin: 0;
-  padding-left: 0.5em;
-}
-
-.nav-list {
-  display: flex;
-  flex-direction: row;
-  gap: 2em;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-list li {
-  list-style-type: none;
-  position: relative;
-}
-
-.nav-list li a {
-  text-decoration: none;
-  color: var(--lotus-flower);
-  padding: 10px 0;
-  transition:
-    color 0.3s,
-    transform 0.3s; /* Added transform for modern hover */
-  position: relative;
-}
-
-.nav-list li a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -3px; /* Adjusted for better positioning */
-  width: 100%;
-  height: 2px;
-  background-color: var(--dust-pink);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.nav-list li a:hover::after {
-  transform: scaleX(1);
-}
-
-.nav-list li a:hover {
-  color: var(--dust-pink);
-  transform: translateY(-2px); /* Subtle lift effect on hover */
-}
-
-/* Language and Login buttons */
-.language,
-.login {
-  margin-right: 1em;
-  background-color: var(--soy-sauce);
-  color: var(--lotus-flower);
-  border: none;
-  border-radius: 1em;
-  padding: 0.8em 1.5em; /* Slightly smaller padding */
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
-}
-
-.language:hover,
-.login:hover {
-  background-color: var(--sushi-red4); /* Change on hover */
-  transform: scale(1.05); /* Slight scale effect */
-}
-
-/* Hamburger menu for mobile */
-.hamburger {
-  display: none;
-  font-size: 1.5rem;
-  color: var(--lotus-flower);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0 1em;
-}
 
 .reservation-form {
   max-width: 500px;
@@ -302,94 +205,8 @@ details[open] .content {
   }
 }
 
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
-  color: var(--sushi-grey3);
-  padding: 1em;
-}
 
-.footer-logo {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  padding-left: 2em;
-}
 
-.footer-nav ul {
-  padding: 0;
-}
-
-.footer-nav li {
-  list-style-type: none;
-  display: inline;
-  padding: 1em;
-}
-
-.footer-nav li a {
-  text-decoration: none;
-  color: var(--lotus-flower);
-  padding: 10px 0;
-  transition:
-    color 0.3s,
-    transform 0.3s; /* Added transform for modern hover */
-  position: relative;
-}
-
-.footer-nav li a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -3px; /* Adjusted for better positioning */
-  width: 100%;
-  height: 2px;
-  background-color: var(--dust-pink);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.footer-nav li a:hover::after {
-  transform: scaleX(1);
-}
-
-.footer-nav li a:hover {
-  color: var(--sushi-grey1);
-  transition: all 0.5s;
-}
-
-.social-medias li {
-  display: inline;
-  list-style-type: none;
-  padding: 1em;
-}
-
-.social-medias li a {
-  color: var(--lotus-flower);
-  padding: 10px 0;
-  transition:
-    color 0.3s,
-    transform 0.3s;
-  text-decoration: none;
-}
-
-.social-medias li a:hover {
-  color: var(--sushi-grey1);
-  transition: all 0.5s;
-}
-
-@media screen and (max-width: 820px) {
-  .control-buttons {
-    display: flex;
-    margin-right: 0.3em;
-  }
-
-  .nav-list {
-    gap: 1em;
-  }
-}
 
 @media screen and (max-width: 768px) {
   .reservation-form {
@@ -409,81 +226,6 @@ details[open] .content {
     font-size: 1rem;
   }
 
-  .footer-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .navigation {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px 20px;
-    position: relative;
-    border-radius: 0;
-  }
-
-  .logo {
-    width: 20%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .hamburger {
-    display: inline-block;
-  }
-
-  .control-buttons {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-  }
-
-  .nav-list {
-    display: flex;
-    flex-direction: column;
-    height: 0;
-    overflow: hidden;
-    width: 100%;
-    gap: 1em;
-    background-color: var(--grey);
-    transition: height 0.3s ease;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 30;
-  }
-
-  .nav-list.active {
-    height: 300px;
-    padding: 10px 0;
-    background: linear-gradient(
-      135deg,
-      var(--grey) 0%,
-      var(--sushi-black) 100%
-    );
-    border-bottom: 2px solid var(--lotus-flower);
-  }
-
-  .nav-list li {
-    padding: 10px 20px;
-    width: 100%;
-    gap: 1em;
-    margin-left: 1em;
-  }
-
-  .nav-list li a {
-    color: var(--lotus-flower);
-  }
-
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav ul li {
-    margin: 10px 0;
-  }
 }
 
 @media screen and (max-width: 500px) {
@@ -508,30 +250,4 @@ details[open] .content {
     font-size: 0.9rem;
   }
 
-  .logo p {
-    display: none;
-  }
-
-  .footer-nav ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4em;
-    justify-content: center;
-    padding: 0;
-  }
-
-  .social-medias ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4em;
-    justify-content: center;
-    padding: 0;
-  }
-
-  .footer-logo {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    padding: 0;
-  }
 }
