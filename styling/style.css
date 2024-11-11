@@ -339,60 +339,6 @@ body {
   } 
 }
 
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  background-color: var(--sushi-black);
-  color: var(--sushi-grey3);
-  padding: 1em;
-}
-
-.footer-logo {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  padding-left: 2em;
-}
-
-.footer-nav li {
-  list-style-type: none;
-  display: inline;
-  padding: 1em;
-}
-
-.footer-nav li a {
-  text-decoration: none;
-  color: var(--sushi-grey3);
-  padding: 10px 0;
-  transition:
-    color 0.3s,
-    transform 0.3s;
-  position: relative;
-}
-
-.footer-nav li a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 100%;
-  height: 2px;
-  background-color: var(--sushi-black);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.footer-nav li a:hover::after {
-  transform: scaleX(1);
-}
-
-.footer-nav li a:hover {
-  color: var(--sushi-grey1);
-  transition: all 0.5s;
-}
-
 .social-medias {
   display: flex;
   justify-content: space-between;
