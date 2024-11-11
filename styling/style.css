@@ -1,13 +1,13 @@
 @font-face {
   font-family: "roboto";
-  src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url("../fonts/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "roboto bold";
-  src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+  src: url("../fonts/RobotoMono-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -166,7 +166,7 @@ body {
 .hero-image {
   width: 100%;
   height: 100%;
-  background-image: url(./img/sushi_background.jpg);
+  background-image: url(../img/sushi_background.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -337,60 +337,6 @@ body {
     flex-direction: column;
     font-size: 0.9em;
   } 
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  background-color: var(--sushi-black);
-  color: var(--sushi-grey3);
-  padding: 1em;
-}
-
-.footer-logo {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  padding-left: 2em;
-}
-
-.footer-nav li {
-  list-style-type: none;
-  display: inline;
-  padding: 1em;
-}
-
-.footer-nav li a {
-  text-decoration: none;
-  color: var(--sushi-grey3);
-  padding: 10px 0;
-  transition:
-    color 0.3s,
-    transform 0.3s;
-  position: relative;
-}
-
-.footer-nav li a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 100%;
-  height: 2px;
-  background-color: var(--sushi-black);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.footer-nav li a:hover::after {
-  transform: scaleX(1);
-}
-
-.footer-nav li a:hover {
-  color: var(--sushi-grey1);
-  transition: all 0.5s;
 }
 
 .social-medias {
@@ -593,7 +539,7 @@ body {
 }
 
 .menu-image {
-  background-image: url(./img/sushi.jpg);
+  background-image: url(../img/sushi.jpg);
   background-size: cover;
   background-position: center;
   height: 6em;
@@ -695,7 +641,7 @@ body {
 }
 
 .order-menu-image {
-  background-image: url(./img/sushi.jpg);
+  background-image: url(../img/sushi.jpg);
   background-size: cover;
   background-position: center;
   height: 9em;

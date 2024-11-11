@@ -42,13 +42,11 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 20px;
+  padding: 1em;
   background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
   color: var(--lotus-flower);
   z-index: 50;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
   max-width: 100%;
 }
 
@@ -182,8 +180,8 @@ button.login:hover {
 .footer-logo {
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  padding-left: 2em;
+  letter-spacing: 1.3em;
+  padding-left: 0.5em;
 }
 
 .footer-nav li {
@@ -223,10 +221,16 @@ button.login:hover {
   transition: all 0.5s;
 }
 
+.social-medias {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1em;
+}
+
 .social-medias li {
   display: inline;
   list-style-type: none;
-  padding: 1em;
 }
 
 .social-medias li a {
@@ -243,10 +247,98 @@ button.login:hover {
   transition: all 0.5s;
 }
 
+.fa-square-instagram, .fa-square-facebook {
+  color: var(--sushi-red2);
+  font-size: 1.8em;
+}
+
+.fa-square-instagram:hover, .fa-square-facebook:hover {
+  color: var(--sushi-red4);
+}
+
 /*#endregion footer*/
 
 
 /*#region Responsive design */
+
+@media (max-width:950px) {
+  nav ul {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  nav ul li {
+      margin: 10px 0;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .navigation {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 20px;
+    position: relative;
+    border-radius: 0;
+  }
+
+  .logo {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+
+  .control-buttons {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    gap: 1em;
+    background-color: var(--grey);
+    transition: height 0.3s ease;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 30;
+  }
+
+  .nav-list.active {
+    height: 300px;
+    padding: 10px 0;
+    background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
+    border-bottom: 2px solid var(--lotus-flower);
+    max-width: 100%;
+  }
+
+  .nav-list li {
+    padding: 10px 20px;
+    width: 100%;
+    gap: 1em;
+    margin-left: 1em;
+  }
+
+  .nav-list li a {
+    color: var(--lotus-flower);
+  }
+
+  .social-medias {
+    padding: 0;
+  }
+}
 
 @media screen and (max-width: 840px) {
   .control-buttons {
