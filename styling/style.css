@@ -1,13 +1,13 @@
 @font-face {
   font-family: "roboto";
-  src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url("../fonts/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "roboto bold";
-  src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+  src: url("../fonts/RobotoMono-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -166,7 +166,7 @@ body {
 .hero-image {
   width: 100%;
   height: 100%;
-  background-image: url(./img/sushi_background.jpg);
+  background-image: url(../img/sushi_background.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -593,7 +593,7 @@ body {
 }
 
 .menu-image {
-  background-image: url(./img/sushi.jpg);
+  background-image: url(../img/sushi.jpg);
   background-size: cover;
   background-position: center;
   height: 6em;
@@ -695,7 +695,7 @@ body {
 }
 
 .order-menu-image {
-  background-image: url(./img/sushi.jpg);
+  background-image: url(../img/sushi.jpg);
   background-size: cover;
   background-position: center;
   height: 9em;
