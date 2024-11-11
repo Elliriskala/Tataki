@@ -21,7 +21,13 @@
 body {
   margin: 0;
   overflow-x: hidden;
+  height: 100%;
+  width: 100%;
   background-color: var(--wine-red);
+}
+
+.menu-page {
+  flex-grow: 1;
 }
 
 :root {
