@@ -1,7 +1,13 @@
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
-const apiKey = '############################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+const apiKey = '8b8ee0e6809a405e81615d51d3e6e738'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
 
 getLocationButton.addEventListener('click', () => {
   if (navigator.geolocation) {
@@ -17,13 +23,16 @@ getLocationButton.addEventListener('click', () => {
       // Show the form and hide the "Use my location" button
       getLocationButton.style.display = 'none';
       itineraryForm.style.display = 'block';
-
-      // Add form submission handling here if needed to run the query
-    });
+    },
+    (error) => {
+      alert("Error retrieving location: " + error.message);
+    },
+    options);
   } else {
     alert("Geolocation is not supported by this browser.");
   }
 });
+
 
 
   // Handle the itinerary form
@@ -34,7 +43,7 @@ getLocationButton.addEventListener('click', () => {
     const fromLon = document.getElementById('fromLon').value;
     const toLat = 60.1699; // Fixed latitude of Tataki
     const toLon = 24.9384; // Fixed longitude of Tataki
-    const numOfItineraries = document.getElementById('numOfItineraries').value;
+    const numOfItineraries =  1;// document.getElementById('numOfItineraries').value;
     const walkSpeed = document.getElementById('walkSpeed').value;
 
     // API request to get the itineraries
