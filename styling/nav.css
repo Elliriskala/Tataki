@@ -1,3 +1,6 @@
+
+
+
 :root {
   --sushi-black: #0b090a;
   --sushi-graphite: #161a1d;
@@ -178,7 +181,7 @@ button.login:hover {
   flex-direction: row;
   background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
   color: var(--sushi-grey3);
-  padding: 1em;
+  padding: 0.5em;
   max-width: 100%;
 }
 
@@ -191,7 +194,7 @@ button.login:hover {
 
 .footer-nav ul {
   padding: 0;
-  padding-right: 4em;
+  padding-right: 7em;
 }
 
 .footer-nav li {
@@ -203,7 +206,7 @@ button.login:hover {
 .footer-nav li a {
   text-decoration: none;
   color: var(--lotus-flower);
-  padding: 10px 0;
+  padding: 1em 0;
   transition:
     color 0.3s,
     transform 0.3s;
