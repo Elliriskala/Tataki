@@ -107,6 +107,11 @@ main {
   transform: translateY(-2px);
 }
 
+/* Language and Login buttons */
+
+.login a {
+  text-decoration: none;
+}
 
 .language,
 .login {
@@ -121,7 +126,7 @@ main {
 }
 
 button.login {
-  background-color: var(--sushi-red4);
+  background-color: var(--sushi-red1);
   color: var(--lotus-flower);
 }
 
@@ -136,7 +141,7 @@ button.login:hover {
 
 .language:hover,
 .login:hover {
-  background-color: var(--sushi-red4);
+  background-color: var(--sushi-red3);
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -184,6 +189,11 @@ button.login:hover {
   padding-left: 0.5em;
 }
 
+.footer-nav ul {
+  padding: 0;
+  padding-right: 4em;
+}
+
 .footer-nav li {
   list-style-type: none;
   display: inline;
@@ -228,12 +238,17 @@ button.login:hover {
   padding-right: 1em;
 }
 
+.social-medias ul {
+  padding: 0;
+}
+
 .social-medias li {
   display: inline;
   list-style-type: none;
 }
 
 .social-medias li a {
+  cursor: pointer;
   color: var(--lotus-flower);
   padding: 10px 0;
   transition:
@@ -275,6 +290,10 @@ button.login:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  .footer-nav ul {
+    padding: 0;
   }
 
   .navigation {
