@@ -1,7 +1,7 @@
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
-const apiKey = '8b8ee0e6809a405e81615d51d3e6e738'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+const apiKey = '###########################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
 
 const options = {
   enableHighAccuracy: true,
