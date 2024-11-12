@@ -4,3 +4,7 @@ Git-harjoituksia
 Feedback.pdf
 img/*.mp4
 .env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
