@@ -1,6 +1,3 @@
-
-
-
 :root {
   --sushi-black: #0b090a;
   --sushi-graphite: #161a1d;
@@ -33,6 +30,10 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
 }
 
 /*#region Navigation bar */
@@ -260,11 +261,6 @@ button.login:hover {
   text-decoration: none;
 }
 
-.social-medias li a:hover {
-  color: var(--sushi-grey1);
-  transition: all 0.5s;
-}
-
 .fa-square-instagram, .fa-square-facebook {
   color: var(--sushi-red2);
   font-size: 1.8em;
@@ -272,6 +268,9 @@ button.login:hover {
 
 .fa-square-instagram:hover, .fa-square-facebook:hover {
   color: var(--sushi-red4);
+  transition: all 0.5s;
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
 /*#endregion footer*/
