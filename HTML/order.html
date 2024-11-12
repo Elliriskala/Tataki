@@ -39,13 +39,11 @@
         <h1>Order</h1>
       </div>
       <div class="menu-list">
-        <ul>
-          <li><a href="">Lunch</a></li>
-          <li><a href="">Dinner</a></li>
-          <li><a href="">Sides</a></li>
-          <li><a href="">Drinks</a></li>
-          <li><a href="">Dessert</a></li>
-        </ul>
+        <button class="select-category-button">Lunch</button>
+        <button class="select-category-button">Dinner</button>
+        <button class="select-category-button">Sides</button>
+        <button class="select-category-button">Drinks</button>
+        <button class="select-category-button">Dessert</button>
       </div>
       <div class="order-page-placeholder">
         <div class="order-menu-placeholder" id="menu-one">
@@ -242,7 +240,16 @@
                 placeholder="Add instructions for courier here"
               ></textarea>
             </div>
-            <div class="terms-and-conditions">
+            <div class="terms-and-conditions-placeholder">
+              <details>
+                <summary>Terms & Conditions</summary>
+                <div class="content" style="max-height: 200px;">
+                <p>To order you need to agree to our Terms & Conditions.</p>
+                <p>
+                  Our delivery times are between 30-60 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We will do our best to resolve the issue. We appreciate your understanding and cooperation, thank you!
+                </p>
+                </div>
+            </details>
               <checkbox>
                 <input type="checkbox" class="checkbox" id="terms-checkbox" />
                 <label for="terms-checkbox">
@@ -250,7 +257,7 @@
                 </label>
             </div>
             <div class="order-button">
-              <button>ORDER</button>
+              <button type="submit">ORDER</button>
             </div>
           </div>
         </div>
