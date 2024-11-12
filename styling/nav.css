@@ -181,7 +181,7 @@ button.login:hover {
   flex-direction: row;
   background: linear-gradient(135deg, var(--grey) 0%, var(--sushi-black) 100%);
   color: var(--sushi-grey3);
-  padding: 1em;
+  padding: 0.5em;
   max-width: 100%;
 }
 
@@ -194,7 +194,7 @@ button.login:hover {
 
 .footer-nav ul {
   padding: 0;
-  padding-right: 4em;
+  padding-right: 7em;
 }
 
 .footer-nav li {
@@ -206,7 +206,7 @@ button.login:hover {
 .footer-nav li a {
   text-decoration: none;
   color: var(--lotus-flower);
-  padding: 10px 0;
+  padding: 1em 0;
   transition:
     color 0.3s,
     transform 0.3s;
@@ -260,11 +260,6 @@ button.login:hover {
   text-decoration: none;
 }
 
-.social-medias li a:hover {
-  color: var(--sushi-grey1);
-  transition: all 0.5s;
-}
-
 .fa-square-instagram, .fa-square-facebook {
   color: var(--sushi-red2);
   font-size: 1.8em;
@@ -272,6 +267,9 @@ button.login:hover {
 
 .fa-square-instagram:hover, .fa-square-facebook:hover {
   color: var(--sushi-red4);
+  transition: all 0.5s;
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
 /*#endregion footer*/

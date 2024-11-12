@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>front page</title>
     <script src="build/main.js" defer></script>
-    <link rel="stylesheet" href="../styling/style.css" />
+    <link rel="stylesheet" href="../styling/order.css" />
     <link rel="stylesheet" href="../styling/nav.css" />
     <script src="../src/main.js" defer></script>
     <script
@@ -22,7 +22,7 @@
           <p>Tataki</p>
         </div>
         <ul class="nav-list">
-          <li><a href="index.html">Main page</a></li>
+          <li><a href="index.html">Home page</a></li>
           <li><a href="menu.html">Menu</a></li>
           <li><a href="order.html">Order</a></li>
           <li><a href="reservation.html">Reserve a table</a></li>
@@ -159,16 +159,37 @@
                 <th>Menu</th>
                 <th></th>
                 <th>Price</th>
+                <th>Qty</th>
               </tr>
               <tr>
+      
                 <td>Sakura set:</td>
                 <td>Sushi set with miso soup and green tea</td>
                 <td>12,90€</td>
+                <td>
+                  <div class="qty-checkbox">
+                    <input type="checkbox" class="remove-checkbox" id="remove-checkbox" />
+                    <label for="remove-checkbox"><i class="fa-solid fa-minus"></i></label>
+                    <p>1</p>
+                    <input type="checkbox" class="add-checkbox" id="add-checkbox" />
+                    <label for="add-checkbox"><i class="fa-solid fa-plus"></i></label>
+                  </div>
+                </td>
               </tr>
               <tr>
                 <td>Flower set:</td>
                 <td>Large sushi set with miso soup and green tea</td>
                 <td>14,90€</td>
+                <td>
+                  <div class="qty-checkbox">
+                    <input type="checkbox" class="remove-checkbox" id="remove-checkbox" />
+                    <label for="remove-checkbox"><i class="fa-solid fa-minus"></i></label>
+                    <p>1</p>
+                    <input type="checkbox" class="add-checkbox" id="add-checkbox" />
+                    <label for="add-checkbox"><i class="fa-solid fa-plus"></i></label>
+                  </div>
+                </td>
+              </tr>
             </table>
             <div class="order-total">
               <h4>Total: 27,80€</h4>

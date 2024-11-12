@@ -1,6 +1,13 @@
 /* General styles */
+@font-face {
+  font-family: "roboto";
+  src: url("../fonts/RobotoMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--sushi-black);
@@ -12,7 +19,7 @@ body {
 html {
   height: 100%;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'roboto', sans-serif;
 }
 
 

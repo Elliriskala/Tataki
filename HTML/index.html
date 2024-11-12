@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>front page</title>
     <script src="build/main.js" defer></script>
-    <link rel="stylesheet" href="../styling/style.css" />
+    <link rel="stylesheet" href="../styling/homepage.css" />
     <link rel="stylesheet" href="../styling/nav.css" />
     <script src="../src/main.js" defer></script>
     <script
@@ -22,7 +22,7 @@
           <p>Tataki</p>
         </div>
         <ul class="nav-list">
-          <li><a href="index.html">Main page</a></li>
+          <li><a href="index.html">Home page</a></li>
           <li><a href="menu.html">Menu</a></li>
           <li><a href="order.html">Order</a></li>
           <li><a href="reservation.html">Reserve a table</a></li>
@@ -34,10 +34,10 @@
         </div>
       </nav>
     </header>
-    <section class="hero-container">
-      <div class="hero-image"></div>
-    </section>
     <main>
+      <section class="hero-container">
+        <div class="hero-image"></div>
+      </section>
       <div class="menus">
         <div class="menu-header">
           <h3>Our menus</h3>
@@ -66,8 +66,8 @@
               Sashimi set with miso soup and green tea<br />
               14,90€
             </p>
-            <ul class="more-button">
-              <li><a href="">Other combos</a></li>
+            <ul class="more-button more-menus">
+              <li><a href="menu.html">Other combos</a></li>
             </ul>
           </div>
           <div class="menu" id="menu-two">
@@ -83,8 +83,8 @@
               Large sashimi set with miso soup and a drink of your choice<br />
               18,90€
             </p>
-            <ul class="more-button">
-              <li><a href="">Other combos</a></li>
+            <ul class="more-button more-menus">
+              <li><a href="menu.html">Other combos</a></li>
             </ul>
           </div>
           <div class="menu" id="menu-three">
@@ -100,8 +100,8 @@
               Large sashimi set with miso soup and a drink of your choice<br />
               18,90€
             </p>
-            <ul class="more-button">
-              <li><a href="">Other combos</a></li>
+            <ul class="more-button more-menus">
+              <li><a href="menu.html">Other combos</a></li>
             </ul>
           </div>
         </div>
@@ -120,9 +120,6 @@
               dishes. Our team of experienced chefs will make sure you have an
               unforgettable dining experience.
             </p>
-            <ul class="more-button">
-              <li><a href="">Read more</a></li>
-            </ul>
           </div>
           <div class="aboutus-info">
             <h3>Team</h3>
@@ -132,10 +129,12 @@
               to create delicious and authentic Japanese dishes. Come and meet
               our team today!
             </p>
-            <ul class="more-button">
-              <li><a href="">Read more</a></li>
-            </ul>
           </div>
+        </div>
+        <div>
+          <ul class="more-button" id="read-more-button">
+            <li><a href="about.html">Read more</a></li>
+          </ul>
         </div>
       </div>
     </main>
