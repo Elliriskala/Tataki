@@ -1,7 +1,12 @@
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
-const apiKey = '###########################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+ // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+
+// require('dotenv').config();
+
+// 
+const apiKey = '';
 
 const options = {
   enableHighAccuracy: true,
@@ -38,6 +43,7 @@ getLocationButton.addEventListener('click', () => {
   // Handle the itinerary form
   itineraryForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    console.log(apiKey);
 
     const fromLat = document.getElementById('fromLat').value;
     const fromLon = document.getElementById('fromLon').value;
