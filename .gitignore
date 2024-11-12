@@ -3,3 +3,4 @@ node_modules
 Git-harjoituksia
 Feedback.pdf
 img/*.mp4
+.env
