@@ -29,7 +29,7 @@ getLocationButton.addEventListener('click', () => {
     },
     options);
   } else {
-    alert("Geolocation is not supported by this browser.");
+    alert("Geolocation failed. Try switching your broweser or refresh the page.");
   }
 });
 
