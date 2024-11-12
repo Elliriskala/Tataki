@@ -1,10 +1,17 @@
-// const getLocationButton = document.getElementById('getLocation') as HTMLButtonElement;
-// const itineraryForm = document.getElementById('itineraryForm') as HTMLFormElement;
-// const itineraryResults = document.getElementById('itineraryResults') as HTMLDivElement;
-// const apiKey = '############################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+import { Itinerary, Leg } from './types';
 
-if (getLocationButton) {
-  getLocationButton.addEventListener('click', () => {
+const getLocationButton = document.getElementById('getLocation');
+const itineraryForm = document.getElementById('itineraryForm');
+const itineraryResults = document.getElementById('itineraryResults');
+const apiKey = '###########################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+getLocationButton?.addEventListener('click', () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(async function (position) {
       // Get user's location (latitude and longitude)
@@ -20,30 +27,34 @@ if (getLocationButton) {
       }
 
       // Show the form and hide the "Use my location" button
-      if (itineraryForm && getLocationButton) {
       getLocationButton.style.display = 'none';
+      if (itineraryForm) {
       itineraryForm.style.display = 'block';
       }
-      });
-    }
-  });
-} else {
-  alert("Geolocation is not supported by this browser.");
-}
+    },
+    (error) => {
+      alert("Error retrieving location: " + error.message);
+    },
+    options);
+  } else {
+    alert("Geolocation failed. Try switching your broweser or refresh the page.");
+  }
+});
 
-// Handle the itinerary form
-itineraryForm?.addEventListener('submit', async (event) => {
+
+
+  // Handle the itinerary form
+  itineraryForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const fromLatElement = document.getElementById('fromLat') as HTMLInputElement | null;
-    const fromLonElement = document.getElementById('fromLon') as HTMLInputElement | null;
+    const fromLatElement = document.getElementById('fromLat') as HTMLInputElement;
     const fromLat = fromLatElement ? fromLatElement.value : '';
+    const fromLonElement = document.getElementById('fromLon') as HTMLInputElement;
     const fromLon = fromLonElement ? fromLonElement.value : '';
     const toLat = 60.1699; // Fixed latitude of Tataki
     const toLon = 24.9384; // Fixed longitude of Tataki
-    const numOfItinerariesElement = document.getElementById('numOfItineraries') as HTMLInputElement | null;
-    const numOfItineraries = numOfItinerariesElement ? numOfItinerariesElement.value : '';
-    const walkSpeedElement = document.getElementById('walkSpeed') as HTMLInputElement | null;
+    const numOfItineraries =  1;// document.getElementById('numOfItineraries').value;
+    const walkSpeedElement = document.getElementById('walkSpeed') as HTMLInputElement;
     const walkSpeed = walkSpeedElement ? walkSpeedElement.value : '';
 
     // API request to get the itineraries
@@ -59,10 +70,18 @@ itineraryForm?.addEventListener('submit', async (event) => {
         body: JSON.stringify({
           query: `
           query {
-            plan(fromPlace: "Your location::${fromLat},${fromLon}", toPlace: "Tataki, Helsinki::${toLat},${toLon}", numItineraries: ${numOfItineraries}, walkSpeed: ${walkSpeed}, walkReluctance: 2.1) {
-              itineraries{
-                walkDistance,
-                duration,
+            plan(
+              fromPlace: "User Location::${fromLat},${fromLon}",
+              toPlace: "Tataki, Helsinki::${toLat},${toLon}",
+              numItineraries: ${numOfItineraries},
+              transportModes: [{mode: BUS}, {mode: RAIL}, {mode: TRAM}, {mode: FERRY}, {mode: WALK}],
+              walkReluctance: 2.1,
+              minTransferTime: 600,
+              walkSpeed: ${walkSpeed}
+            ) {
+              itineraries {
+                walkDistance
+                duration
                 legs {
                   mode
                   startTime
@@ -75,16 +94,20 @@ itineraryForm?.addEventListener('submit', async (event) => {
                       code
                       name
                     }
-                  },
+                  }
                   to {
                     lat
                     lon
                     name
-                  },
-                  agency {
-                    gtfsId
-              name
-                  },
+                    stop {
+                      code
+                      name
+                    }
+                  }
+                  trip {
+                    tripHeadsign
+                    routeShortName
+                  }
                   distance
                   legGeometry {
                     length
@@ -104,7 +127,7 @@ itineraryForm?.addEventListener('submit', async (event) => {
       if (data.data && data.data.plan && data.data.plan.itineraries) {
         displayItineraryResults(data.data.plan.itineraries);
         if (itineraryResults) {
-          itineraryResults.style.display = 'block';
+        itineraryResults.style.display = 'block';
         }
       } else {
         alert("No itineraries found. Please try again.");
@@ -115,4 +138,54 @@ itineraryForm?.addEventListener('submit', async (event) => {
     }
   });
 
+  // Function to display the itinerary results
+  function displayItineraryResults(itineraries: Itinerary[]) {
+    const resultList = document.getElementById('itineraryList');
+    if (resultList) {
+    resultList.innerHTML = ''; // Clear previous results
+    }
+    itineraries.forEach((itinerary: Itinerary, index: number) => {
+      const itineraryItem = document.createElement('li');
+      const formattedDuration = formatDuration(itinerary.duration);
 
+      itineraryItem.innerHTML = `
+      <h3>Itinerary ${index + 1}</h3>
+      <p>Duration: ${formattedDuration}</p>
+      <ul>
+        ${itinerary.legs.map((leg: Leg) => `
+          <li>
+            ${leg.mode ? `<strong>Mode:</strong> ${leg.mode} ${leg.trip?.tripHeadsign ? `(Line: ${leg.trip.tripHeadsign} ${leg.trip.routeShortName || ''})` : ''} <br>` : ''}
+            ${leg.from?.name ? `<strong>From:</strong> ${leg.from.name} (${leg.from.lat}, ${leg.from.lon})<br>` : ''}
+            ${leg.from?.stop?.name ? `<strong>Stop Name:</strong> ${leg.from.stop.name} <br>` : ''}
+            ${leg.from?.stop?.code ? `<strong>Stop Code:</strong> ${leg.from.stop.code} <br>` : ''}<br>
+            ${leg.to?.name ? `<strong>To:</strong> ${leg.to.name} (${leg.to.lat}, ${leg.to.lon})<br>` : ''}
+            ${leg.startTime ? `<strong>Start Time:</strong> ${formatDate(leg.startTime)} <br>` : ''}
+            ${leg.endTime ? `<strong>End Time:</strong> ${formatDate(leg.endTime)} <br>` : ''}
+            ${typeof leg.distance === 'number' ? `<strong>Distance:</strong> ${leg.distance.toFixed(0)} meters <br>` : ''}
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+      resultList?.appendChild(itineraryItem);
+    });
+  }
+
+  function formatDuration(durationInSeconds: number) {
+    const hours = Math.floor(durationInSeconds / 3600);
+    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+    const seconds = durationInSeconds % 60;
+
+    const hoursPart = hours > 0 ? `${hours} hours ` : "";
+    const minutesPart = minutes > 0 ? `${minutes} minutes ` : "";
+    const secondsPart = seconds > 0 ? `${seconds} seconds` : "";
+
+    return `${hoursPart}${minutesPart}${secondsPart}`.trim();
+  }
+
+
+  // format Unix timestamps to readable dates
+  function formatDate(timestamp: number) {
+    const date = new Date(timestamp);
+    return date.toLocaleString(); // Converts the timestamp to a human-readable date and time
+  }

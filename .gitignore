@@ -1,3 +1,8 @@
 node_modules
 .history
 img/*.mp4
+.env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
