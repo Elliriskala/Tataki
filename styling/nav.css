@@ -349,8 +349,9 @@ button.login:hover {
     width: 100%;
     gap: 1em;
     margin-left: 1em;
+    padding-left: 3em;
   }
-
+  
   .nav-list li a {
     color: var(--lotus-flower);
   }
@@ -445,6 +446,7 @@ button.login:hover {
     width: 100%;
     gap: 1em;
     margin-left: 1em;
+    padding-left: 3em;
   }
 
   .nav-list li a {
