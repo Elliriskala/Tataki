@@ -46,6 +46,9 @@ body {
   --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
+main {
+  padding: 1em;
+}
 
 .review-container {
   background-color: var(--lotus-flower);

@@ -80,8 +80,7 @@ body {
   align-items: center;
   flex-direction: column;
   background-color: var(--wine-red);
-  padding: 1.5em 0 2em 0;
-  margin-bottom: 1em;
+  padding: 1.5em 0 1em 0;
 }
 
 .menu-header h3 {
@@ -97,36 +96,23 @@ body {
 .menu-list {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 1em 0 1em 0;
-  margin: 1.5em;
-  margin-top: 0.5em;
-}
-
-.menu-list ul {
-  padding: 0;
-  margin: 0;
-}
-
-.menu-list li {
-  list-style-type: none;
-  display: inline;
-  border-radius: 1em;
-}
-
-.menu-list li a {
-  text-decoration: none;
-  color: var(--sushi-grey3);
   padding: 1em;
-  border-radius: 1em;
-  background-color: var(--sushi-graphite);
-  border: solid 0.1em var(--sushi-black);
-  transition: all 0.5s;
 }
 
-.menu-list li a:hover {
-  background-color: var(--sushi-red3);
-  transition: all 0.5s;
+.select-category-button {
+  padding: 1em;
+  margin: 0.5em;
+  border: 0.1em solid var(--sushi-black);
+  background-color: var(--sushi-graphite);
+  color: var(--sushi-grey3);
+  border-radius: 0.5em;
+  transition: 0.3s;
+}
+
+.select-category-button:hover {
+  background-color: var(--soy-sauce);
+  transform: scale(1.15);
+  color: var(--sushi-red4); 
 }
 
 .menu-placeholder {
@@ -184,13 +170,7 @@ body {
   width: 90%;
 }
 
-#read-more-button li a:hover {
-  background-color: var(--sushi-red3);
-  transition: all 0.5s;
-  cursor: pointer;
-}
-
-.more-button {
+.more-button, .more-menus {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -199,24 +179,27 @@ body {
   margin-top: 2em;
 }
 
-.more-button li {
-  list-style-type: none;
-  padding: 0.5em;
+.more-button {
   font-size: 0.8em;
 }
 
-.more-button li a {
+.more-button li, .more-menus li {
+  list-style-type: none;
+  padding: 0.5em;
+}
+
+.more-button li a, .more-menus li a {
   text-decoration: none;
   padding: 0.8em;
   border-radius: 1em;
-  border: solid 0.1em var(--sushi-black);
+  border: solid 0.08em var(--sushi-black);
   background-color: var(--sushi-red1);
-  color: var(--sushi-grey3);
+  color: var(--lotus-flower);
   transition: all 0.5s;
 }
 
-.more-menus li a:hover {
-  background-color: var(--sushi-black);
+#read-more-button li a:hover, .more-menus li a:hover {
+  background-color: var(--sushi-red3);
   transition: all 0.5s;
   cursor: pointer;
 }
@@ -263,67 +246,27 @@ body {
   .menu-page-placeholder {
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   }
-
-  .menu-list {
-    padding: 0 0 1em 0;
-    margin: 0 0 1em 0;
-  }
-
-  .menu-list ul {
-    padding: 0;
-    margin: 0;
-  }
-
-  .menu-list li a {
-    font-size: 0.8em;
-  }
-
-  .menu-list li {
-    margin: 0;
-    padding: 0;
-  }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 550px) {
   .menu-header {
     font-size: 0.8em;
   }
 
   .menu-list {
-    padding: 0 0 1em 0;
-    margin: 0 0 1em 0;
-  }
-
-  .menu-list ul {
-    padding: 0;
+    padding: 0.5em;
     margin: 0;
   }
 
-  .menu-list li a {
+  .select-category-button {
+    padding: 0.5em;
+    margin: 0.5em;
     font-size: 0.8em;
+    transition: 0.2s;
   }
 
-  .menu-list li {
-    margin: 0;
-    padding: 0;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .menu-list {
-    padding: 0.2em 0 1em 0;
-    margin: 0.2em 0 1em 0;
-  }
-  .menu-list ul {
-    padding: 0;
-    margin: 0;
-  }
-  .menu-list li {
-    margin: 0;
-    padding: 0;
-  }
-
-  .menu-list li a {
-    font-size: 0.7em;
+  .select-category-button:hover {
+    transition: all 0.3s ease;
+    transform: scale(1.1);
   }
 }
