@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styling/homepage.css" />
     <link rel="stylesheet" href="../styling/nav.css" />
     <script src="../src/main.js" defer></script>
+    <script src="../build/index.js" defer></script>
     <script
       src="https://kit.fontawesome.com/ce58f4085c.js"
       crossorigin="anonymous"
@@ -40,7 +41,7 @@
       </section>
       <div class="menus">
         <div class="menu-header">
-          <h3>Our menus</h3>
+          <h1>Our menus</h1>
           <p>Explore our delicious menus and find your favorite!</p>
         </div>
         <div class="menu-list">
@@ -50,50 +51,103 @@
           <button class="select-category-button">Drinks</button>
           <button class="select-category-button">Dessert</button>
         </div>
-        <div class="menu-placeholder">
-          <div class="menu" id="menu-one">
-            <section class="image-placeholder">
-              <div class="menu-image"></div>
-            </section>
-            <h3>MENU 1</h3>
-            <p>
-              Sushi set with miso soup and green tea<br />
-              12,90€
-            </p>
-            <p>
-              Sashimi set with miso soup and green tea<br />
-              14,90€
-            </p>
+        <div class="menu-carousel">
+          <div>
+            <button id="carousel-left" class="carousel-button">❮</button>
           </div>
-          <div class="menu" id="menu-two">
-            <section class="image-placeholder">
-              <div class="menu-image"></div>
-            </section>
-            <h3>MENU 2</h3>
-            <p>
-              Large sushi set with miso soup and green tea<br />
-              14,90€
-            </p>
-            <p>
-              Large sashimi set with miso soup and a drink of your choice<br />
-              18,90€
-            </p>
+          <div class="menu-track-container">
+            <div class= "menu-track">
+              <div class="menu" id="menu-one">
+                <section class="image-placeholder">
+                  <div class="menu-image"></div>
+                </section>
+                <h3>MENU 1</h3>
+                <p>
+                  Sushi set with miso soup and green tea<br />
+                  12,90€
+                </p>
+                <p>
+                  Sashimi set with miso soup and green tea<br />
+                  14,90€
+                </p>
+              </div>
+              <div class="menu" id="menu-two">
+                <section class="image-placeholder">
+                  <div class="menu-image"></div>
+                </section>
+                <h3>MENU 2</h3>
+                <p>
+                  Large sushi set with miso soup and green tea<br />
+                  14,90€
+                </p>
+                <p>
+                  Large sashimi set with miso soup and a drink of your choice<br />
+                  18,90€
+                </p>
+              </div>
+              <div class="menu" id="menu-three">
+                <section class="image-placeholder">
+                  <div class="menu-image"></div>
+                </section>
+                <h3>MENU 3</h3>
+                <p>
+                  Large sushi set with miso soup and green tea<br />
+                  14,90€
+                </p>
+                <p>
+                  Large sashimi set with miso soup and a drink of your choice<br />
+                  18,90€
+                </p>
+              </div>
+              <div class="menu" id="menu-four">
+                <section class="image-placeholder">
+                  <div class="menu-image"></div>
+                </section>
+                <h3>MENU 4</h3>
+                <p>
+                  Large sushi set with miso soup and green tea<br />
+                  14,90€
+                </p>
+                <p>
+                  Large sashimi set with miso soup and a drink of your choice<br />
+                  18,90€
+                </p>
+              </div>
+              <div class="menu" id="menu-five">
+                <section class="image-placeholder">
+                  <div class="menu-image"></div>
+                </section>
+                <h3>MENU 5</h3>
+                <p>
+                  Large sushi set with miso soup and green tea<br />
+                  14,90€
+                </p>
+                <p>
+                  Large sashimi set with miso soup and a drink of your choice<br />
+                  18,90€
+                </p>
+              </div>
+              <div class="menu" id="menu-six">
+                <section class="image-placeholder">
+                  <div class="menu-image"></div>
+                </section>
+                <h3>MENU 6</h3>
+                <p>
+                  Large sushi set with miso soup and green tea<br />
+                  14,90€
+                </p>
+                <p>
+                  Large sashimi set with miso soup and a drink of your choice<br />
+                  18,90€
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="menu" id="menu-three">
-            <section class="image-placeholder">
-              <div class="menu-image"></div>
-            </section>
-            <h3>MENU 3</h3>
-            <p>
-              Large sushi set with miso soup and green tea<br />
-              14,90€
-            </p>
-            <p>
-              Large sashimi set with miso soup and a drink of your choice<br />
-              18,90€
-            </p>
+          <div>
+            <button id="carousel-right" class="carousel-button">❯</button>
           </div>
-        </div>
+        </div> 
+      </div>
         <div>
           <ul class="more-menus">
             <li><a href="menu.html">View more options</a></li>

@@ -50,6 +50,35 @@ main {
   padding: 1em;
 }
 
+.hero-container {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 90%;
+}
+
+.about-restauraunt {
+  width: 50%;
+
+}
+
+.hero-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 1em;
+  margin: 1em;
+  flex-grow: 1;
+}
+
+#hero1 {
+  background-image: url(../img/some_more_drinks.jpg);
+}
+
+#hero2 {
+  background-image: url(../img/some_sushi.jpg);
+}
+
 .about-sections {
     max-width: 800px;
     margin: 2rem auto;
@@ -58,7 +87,6 @@ main {
     border-radius: 12px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
 }
-
 
 section {
     margin-bottom: 2.5rem;

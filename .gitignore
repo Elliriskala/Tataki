@@ -6,3 +6,4 @@ img/*.mp4
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.vscode

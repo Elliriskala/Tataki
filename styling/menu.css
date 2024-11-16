@@ -82,6 +82,7 @@ body {
   color: var(--sushi-grey3);
   border-radius: 0.5em;
   transition: 0.3s;
+  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
 }
 
 .select-category-button:hover {
@@ -94,7 +95,7 @@ body {
   margin-bottom: 3em;
 }
 
-.menu-page-placeholder {
+.menu-page-container {
   display: grid;
   width: 80%;
   margin: auto;
@@ -102,11 +103,17 @@ body {
   gap: 1em;
 }
 
-.menu-page-placeholder div {
+.menu-page-placeholder {
   background-color: var(--sushi-graphite);
   border-radius: 1em;
   border: solid 0.1em var(--sushi-black);
   padding: 1em;
+  transition: 0.3s;
+  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+}
+
+.menu-page-placeholder:hover {
+  transform: scale(1.03);
 }
 
 .image-placeholder {
@@ -120,6 +127,7 @@ body {
   background-size: cover;
   background-position: center;
   height: 6em;
+  border-radius: 1em;
   width: 90%;
 }
 
