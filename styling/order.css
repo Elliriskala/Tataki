@@ -458,6 +458,10 @@ input[type="checkbox"]:checked {
   .menu-page-placeholder {
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   }
+
+  .fa-cart-plus {
+    padding: 0.4em;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -478,7 +482,34 @@ input[type="checkbox"]:checked {
     transition: all 0.3s ease;
     transform: scale(1.1);
   }
+  .fa-cart-plus {
+    padding: 0.5em;
+  }
   .order-content {
     font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .menus-header {
+    font-size: 1em;
+  }
+
+  .menu-list button {
+    margin: 0.2em;
+    font-size: 0.75em;
+  }
+
+  .order-page-placeholder {
+    font-size: 0.8em;
+  }
+
+  .fa-cart-plus {
+    padding: 0.6em;
+  }
+
+  .order-info {
+    font-size: 0.85em;
+    width: 90%;
   }
 }

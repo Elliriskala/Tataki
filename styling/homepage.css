@@ -312,6 +312,11 @@ body {
     font-size: 0.8em;
   }
 
+  .menu-header p {
+    width: 80%;
+    text-align: center;
+  }
+
   .menu-list {
     margin: 0;
   }
@@ -326,5 +331,47 @@ body {
   .select-category-button:hover {
     transition: all 0.3s ease;
     transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .menu-header h3 {
+    font-size: 1em;
+  }
+  .menu-header p {
+    font-size: 0.9em;
+  }
+  .menu {
+    flex: 0 0 26%;
+    margin: 0.5em;
+  }
+
+  .menu-carousel {
+    width: 100%;
+  }
+
+  .menu-track-container {
+    width: 100%;
+  }
+
+  .menu-image {
+    height: 5em;
+  }
+
+  .carousel-button {
+    font-size: 1.5em;
+    margin-top: 7em;
+  }
+
+  .more-button {
+    font-size: 0.7em;
+  }
+
+  .aboutus h3 {
+    font-size: 1.2em;
+  }
+
+  .aboutus-placeholder {
+    font-size: 0.8em;
   }
 }

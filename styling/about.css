@@ -7,43 +7,43 @@
 }
 
 body {
-    font-family: 'roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--sushi-black);
-    color: var(--sushi-grey2);
-    width: 100%;
-    height: 100%;
+  font-family: "roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--sushi-black);
+  color: var(--sushi-grey2);
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 html {
   height: 100%;
   width: 100%;
-  font-family: 'roboto', sans-serif;
+  font-family: "roboto", sans-serif;
 }
 
-
 :root {
-    --sushi-black: #0b090a;
-    --sushi-graphite: #161a1d;
-    --wine-red: rgb(38, 2, 2);
-    --sushi-red1: #420506;
-    --sushi-red2: #a4161a;
-    --sushi-red3: #ba181b;
-    --sushi-red4: #e5383b;
-    --sushi-grey1: #b1a7a6;
-    --sushi-grey2: #d3d3d3;
-    --sushi-grey3: #f5f3f4;
-    --sushi-white: #ffffff;
-    --dust-pink: #C8A9A9; /* Softer pink */
-    --grey: #252525;
-    --soy-sauce: #191919;
-    --brown-grey: rgba(44, 33, 33, 0.9);
-    --intense-red: #BF4D4D;
-    --wine-red: #390d0d;
-    --forest-green: rgba(3, 32, 3, 0.8);
-    --grey-green: rgba(54, 71, 63, 0.9);
-    --lotus-flower: rgba(245, 245, 245, 0.9);
+  --sushi-black: #0b090a;
+  --sushi-graphite: #161a1d;
+  --wine-red: rgb(38, 2, 2);
+  --sushi-red1: #420506;
+  --sushi-red2: #a4161a;
+  --sushi-red3: #ba181b;
+  --sushi-red4: #e5383b;
+  --sushi-grey1: #b1a7a6;
+  --sushi-grey2: #d3d3d3;
+  --sushi-grey3: #f5f3f4;
+  --sushi-white: #ffffff;
+  --dust-pink: #c8a9a9; /* Softer pink */
+  --grey: #252525;
+  --soy-sauce: #191919;
+  --brown-grey: rgba(44, 33, 33, 0.9);
+  --intense-red: #bf4d4d;
+  --wine-red: #390d0d;
+  --forest-green: rgba(3, 32, 3, 0.8);
+  --grey-green: rgba(54, 71, 63, 0.9);
+  --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
 main {
@@ -51,304 +51,140 @@ main {
 }
 
 .hero-container {
-  display: flex;
-  justify-content: center;
   margin: auto;
-  width: 90%;
+  width: 80%;
+  display: flex;
+  background-color: var(--soy-sauce);
+  border-radius: 1em;
+  border: 0.06em dashed var(--sushi-red1);
 }
 
-.about-restauraunt {
+.about-restaurant {
   width: 50%;
+  color: var(--sushi-grey2);
+  padding: 1em;
+}
 
+.about-restaurant h1 {
+  font-size: 2em;
 }
 
 .hero-image {
+  margin: 1em;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 1em;
-  margin: 1em;
   flex-grow: 1;
-}
-
-#hero1 {
   background-image: url(../img/some_more_drinks.jpg);
 }
 
-#hero2 {
-  background-image: url(../img/some_sushi.jpg);
-}
-
 .about-sections {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2em;
-    background-color: var(--sushi-graphite);
-    border-radius: 12px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+  display: flex;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2em;
+  margin-top: 1em;
+  background-color: var(--soy-sauce);
+  border-radius: 1em;
+  border: 0.06em dashed var(--sushi-red1);
 }
 
-section {
-    margin-bottom: 2.5rem;
+.image-container {
+  width: 50%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1em;
 }
 
-section h1 {
-    font-size: 2rem;
-    border-bottom: 2px solid var(--sushi-red4);
-    padding-bottom: 10px;
-    color: var(--sushi-red4);
-}
-
-section p, section ul {
-    font-size: 1rem;
-    line-height: 1.8;
-}
-
-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-
-.contact-section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.contact-section a {
-    color: var(--sushi-red4);
-    text-decoration: none;
-}
-
-.contact-section a:hover {
-    text-decoration: underline;
-}
-
-
-.map {
-    height: 300px;
-    background-color: var(--sushi-graphite);
-    border-radius: 12px;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.map h2 {
-    color: var(--sushi-grey2);
-}
-
-.itinerary-section {
-  background-color: var(--sushi-graphite);
-  color: var(--sushi-grey2);
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 800px;
-  margin: 2rem auto;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
-}
-
-.itinerary-section h1 {
-  font-size: 2rem;
-  color: var(--sushi-red4);
-  border-bottom: 2px solid var(--sushi-red4);
-  padding-bottom: 10px;
-  margin-bottom: 1.5rem;
-}
-
-.itinerary-section button {
-  background-color: var(--sushi-red4);
-  color: var(--sushi-white);
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.itinerary-section button:hover {
-  background-color: var(--wine-red);
-}
-
-#itineraryForm {
-  display: none;
-  margin-top: 2rem;
-}
-
-#itineraryForm label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-#itineraryForm input[type="text"],
-#itineraryForm input[type="number"] {
+.image {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--sushi-grey1);
-  background-color: var(--sushi-grey3);
-  color: var(--sushi-graphite);
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 1em;
 }
 
-#itineraryForm button {
-  background-color: var(--sushi-red4);
-  color: var(--sushi-white);
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+#img2 {
+  background-image: url(../img/some_sushi.jpg);
+  margin-bottom: 1em;
 }
 
-#itineraryForm button:hover {
-  background-color: var(--wine-red);
+#img3 {
+  background-image: url(../img/sashimi.jpg);
 }
 
-/* Itinerary Results Section */
-#itineraryResults {
-  margin-top: 2rem;
-  display: none;
+.story-section {
+  padding: 1em;
+  width: 40%;
 }
 
-#itineraryResults ul {
-  padding-left: 0;
-  list-style-type: none;
-}
-
-#itineraryResults ul li {
-  background-color: var(--sushi-graphite);
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-#itineraryResults ul li h3 {
-  color: var(--sushi-red4);
-  margin-bottom: 1rem;
-}
-
-#itineraryResults ul li p {
-  color: var(--sushi-grey2);
-}
-
-#itineraryResults ul li ul {
-  padding-left: 20px;
-  margin-top: 1rem;
-}
-
-#itineraryResults ul li ul li {
-  font-size: 0.9rem;
-  color: var(--sushi-grey2);
-  margin-bottom: 0.5rem;
-}
-
-#itineraryResults ul li ul li strong {
-  color: var(--sushi-red4);
+.story-section h1 {
+  font-size: 2em;
 }
 
 
-
-
-@media (max-width: 768px) {
-
-
-    .reservation-form {
-        padding: 1.5rem;
-    }
-
-    .reservation-form h1 {
-        font-size: 1.6rem;
-    }
-
-    .reservation-form input, .reservation-form select {
-        font-size: 0.9rem;
-    }
-
-    .reservation-form button {
-        font-size: 1rem;
-    }
-
-    .itinerary-section {
-      padding: 1.5rem;
+@media screen and (max-width: 950px) {
+  .hero-container {
+    flex-direction: column;
+    height: 800px;
+    width: 90%;
   }
 
-  .itinerary-section h1 {
-      font-size: 1.8rem;
+  .about-restaurant {
+    width: 90%;
+    margin: 0 auto;
   }
 
-  .itinerary-section button {
-      font-size: 1rem;
+  .hero-image {
+    width: 90%;
+    margin: auto;   
+    margin-bottom: 1em;
   }
 
-  #itineraryForm input[type="text"],
-  #itineraryForm input[type="number"] {
-      font-size: 1rem;
+  .about-sections {
+    flex-direction: column-reverse;
+    width: 90%;
   }
 
-  #itineraryForm button {
-      font-size: 1rem;
+  .story-section {
+    width: 90%;
+    margin-left: 0;
+    margin: auto;
   }
 
-  #itineraryResults ul li {
-      padding: 0.8rem;
+  .image-container {
+    margin: auto;
+    width: 90%;
+    height: 70vh;
+    margin-bottom: 1em;
   }
-
-  #itineraryResults ul li h3 {
-      font-size: 1.4rem;
-  }
-
 }
 
-@media (max-width: 500px) {
-    .reservation-form {
-        padding: 1rem;
-    }
-
-    .reservation-form h1 {
-        font-size: 1.4rem;
-    }
-
-    .reservation-form input, .reservation-form select {
-        font-size: 0.8rem;
-    }
-
-    .reservation-form button {
-        font-size: 0.9rem;
-    }
-
-    .itinerary-section {
-      padding: 1rem;
+@media screen and (max-width: 600px) {
+  .hero-container {
+    font-size: 0.9em;
   }
 
-  .itinerary-section h1 {
-      font-size: 1.6rem;
+  .about-sections {
+    font-size: 0.9em;
   }
-
-  .itinerary-section button {
-      font-size: 0.9rem;
-  }
-
-  #itineraryForm input[type="text"],
-  #itineraryForm input[type="number"] {
-      font-size: 0.9rem;
-  }
-
-  #itineraryForm button {
-      font-size: 0.9rem;
-  }
-
-  #itineraryResults ul li {
-      padding: 0.6rem;
-  }
-
-  #itineraryResults ul li h3 {
-      font-size: 1.3rem;
-  }
-
 }
 
+@media screen and (max-width: 450px) {
+  .hero-container {
+    font-size: 0.8em;
+  }
+
+  .about-sections {
+    font-size: 0.8em;
+  }
+  
+  .image-container {
+    height: 50vh;
+  }
+}
