@@ -7,6 +7,7 @@ const fetchData = async <T>(url: string, options: RequestInit = {}): Promise<T> 
     return json
 }
 
+
 const getUserLocation = async(): Promise<[number, number]> => {
     try {
         const position = await new Promise<GeolocationPosition>((resolve, reject) => {
@@ -22,6 +23,7 @@ const getUserLocation = async(): Promise<[number, number]> => {
         throw new Error('Unable to retrieve your location');
     }
 }
+
 
 const calculateDistance = ( // Calculate distance between two coordinates on a sphere/globe
     lat1: number,
@@ -52,10 +54,12 @@ const showPassword = () => { // Show password
     }
 };
 
+
 const isLoggedIn = () => {
     const token = localStorage.getItem('token');
     return token ? true : false;
 }
+
 
 // Replace HTML content of an element (most likely body for single page applications)
 const replaceHTML = (element: HTMLElement, content: string) => {
@@ -63,10 +67,12 @@ const replaceHTML = (element: HTMLElement, content: string) => {
   element.insertAdjacentHTML('beforeend', content);
 }
 
+
 // Add content to the end of an element
 const addBeforeEnd = (element: HTMLElement, content: string) => {
   element.insertAdjacentHTML('beforeend', content);
 }
+
 
 // format a date string to a more readable format
 function formatDate(date: Date): string {
@@ -79,4 +85,20 @@ function formatDate(date: Date): string {
   return date.toLocaleDateString('fi-FI', options);
 }
 
-export { fetchData, getUserLocation, calculateDistance, showPassword, isLoggedIn, replaceHTML, addBeforeEnd, formatDate };
+
+const updateLoginButton = (isLoggedIn: boolean) => {
+  const loginButton = document.querySelector('.login') as HTMLButtonElement;
+  if (loginButton) {
+    loginButton.innerText = isLoggedIn ? 'Logout' : 'Login';
+  }
+}
+
+
+const showAdminContent = (isAdmin: boolean) => {
+  const adminContent = document.querySelector('.admin-content') as HTMLDivElement;
+  adminContent.style.display = isAdmin ? 'block' : 'none';
+}
+
+
+
+export { fetchData, getUserLocation, calculateDistance, showPassword, isLoggedIn, replaceHTML, addBeforeEnd, formatDate, updateLoginButton, showAdminContent };
