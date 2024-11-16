@@ -104,6 +104,6 @@ interface RestaurantReview {
   created_at: Date;
 }
 
-export { Itinerary, Leg, Trip, Location, Stop };
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview };
 
 
