@@ -1,9 +1,10 @@
 import { Itinerary, Leg } from '../src/utils/interfaces';
+import 'dotenv/config';
 
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
-const apiKey = '###########################'; // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
+// unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
 
 const options = {
   enableHighAccuracy: true,
@@ -65,7 +66,7 @@ getLocationButton?.addEventListener('click', () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'digitransit-subscription-key': apiKey
+          'digitransit-subscription-key': process.env.dtKey || '',
         },
         body: JSON.stringify({
           query: `

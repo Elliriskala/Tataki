@@ -1,19 +1,19 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const loginButton = document.getElementById('login-btn') as HTMLButtonElement;
-  const registerButton = document.getElementById('register-btn') as HTMLButtonElement;
-  const toggleSlider = document.getElementById('toggle-slider') as HTMLDivElement;
-  const loginForm = document.getElementById('login-form') as HTMLFormElement;
-  const registerForm = document.getElementById('register-form') as HTMLFormElement;
-  const togglePassword = document.querySelectorAll('.toggle-password') as NodeListOf<HTMLSpanElement>;
-  const loginBackground = document.querySelector('.login-background') as HTMLDivElement;
-  const loginImage = document.querySelector('.form-image-container') as HTMLDivElement;
-  const navList = document.querySelector('.nav-list') as HTMLUListElement;
-  const hamburgerMenu = document.querySelector('.hamburger') as HTMLDivElement;
-  const dateInput = document.getElementById('date') as HTMLInputElement;
-  const guestButtons = document.querySelectorAll('.guest-btn') as NodeListOf<HTMLButtonElement>; 
-  const guestInput = document.getElementById('guests-input') as HTMLInputElement;
+  const loginButton = document.getElementById('login-btn');
+  const registerButton = document.getElementById('register-btn');
+  const toggleSlider = document.getElementById('toggle-slider');
+  const loginForm = document.getElementById('login-form');
+  const registerForm = document.getElementById('register-form');
+  const togglePassword = document.querySelectorAll('.toggle-password');
+  const loginBackground = document.querySelector('.login-background');
+  const loginImage = document.querySelector('.form-image-container');
+  const navList = document.querySelector('.nav-list');
+  const hamburgerMenu = document.querySelector('.hamburger');
+  const dateInput = document.getElementById('date');
+  const guestButtons = document.querySelectorAll('.guest-btn');
+  const guestInput = document.getElementById('guests-input');
 
   // Set the initial active form to login
   if (loginForm) {
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Toggle between login and register forms with animation control
-  const toggleForm = (isLogin: boolean) => {
+  const toggleForm = (isLogin) => {
     // Temporarily disable animations by adding 'no-animate' class
     loginForm.classList.add('no-animate');
     registerForm.classList.add('no-animate');
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Function to add `interacted` class on input focus or change
-  const addInteractionListeners = (form: HTMLFormElement) => {
+  const addInteractionListeners = (form) => {
     const inputs = form.querySelectorAll('input');
-    inputs.forEach((input: HTMLInputElement) => {
+    inputs.forEach((input) => {
       input.addEventListener('input', () => input.classList.add('interacted'));
       input.addEventListener('focus', () => input.classList.add('interacted'));
     });
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     iconContainer.addEventListener('click', () => {
       // Retrieve the associated password input field
       const input = document.getElementById(
-        iconContainer.getAttribute('data-target') || ''
+        iconContainer.getAttribute('data-target')
       );
       const icon = iconContainer.querySelector('i'); // Select the <i> icon inside the span
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Reset form function to clear inputs and validation state
-  const resetForm = (form: HTMLFormElement) => {
+  const resetForm = (form) => {
     const inputs = form.querySelectorAll('input');
     inputs.forEach((input) => {
       input.value = '';
@@ -120,23 +120,30 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement;
     const isInsideNav =
-      navList.contains(target) || hamburgerMenu.contains(target);
+      navList.contains(event.target) || hamburgerMenu.contains(event.target);
     if (!isInsideNav) {
       navList.classList.remove('active');
     }
   });
 
+  // Toggle details open/close with animation
+  const detailsElements = document.querySelectorAll('details');
+  detailsElements.forEach((details) => {
+    const content = details.querySelector('.content');
+    details.addEventListener('toggle', () => {
+      content.style.maxHeight = details.open
+        ? content.scrollHeight + 'px'
+        : '0';
+    });
+  });
 
   // Handle guest selection
   guestButtons.forEach((button) => {
     button.addEventListener('click', () => {
       guestButtons.forEach((btn) => btn.classList.remove('active'));
-      button?.classList.add('active');
-      if (guestInput) {
-      guestInput.value = button.getAttribute('guests-input') || '';
-      }
+      button.classList.add('active');
+      guestInput.value = button.getAttribute('guests-input');
     });
   });
 });
