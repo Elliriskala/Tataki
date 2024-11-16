@@ -1,4 +1,4 @@
-import { Itinerary, Leg } from './types';
+import { Itinerary, Leg } from '../src/utils/interfaces';
 
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
