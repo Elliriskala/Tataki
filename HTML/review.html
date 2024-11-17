@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Review page</title>
+  <title data-translate="title">Review page</title>
   <link rel="stylesheet" href="../styling/review.css">
   <link rel="stylesheet" href="../styling/nav.css">
   <script src="../src/main.js" defer></script>
@@ -13,13 +13,13 @@
   <nav class="navigation">
     <div class="logo">
         <button class="hamburger">☰</button>
-        <p>Tataki</p>
+        <p data-translate="restaurant-name">Tataki</p>
     </div>
     <ul class="nav-list">
-        <li><a href="index.html">Home Page</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="order.html">Order</a></li>
-        <li><a href="reservation.html">Reserve a table</a></li>
+        <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+        <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+        <li><a href="order.html" data-translate="order-link">Order</a></li>
+        <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
     </ul>
     <div class="control-buttons">
       <button class="language" id="flag-en">EN</button>
@@ -28,52 +28,118 @@
   </div>
   </nav>
   <main>
-  <div class="review-container">
-    <h1>Leave a Review</h1>
-    <form class="review-form">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" autocomplete="name" placeholder="Enter your name or use a nickname" required>
+    <div class="review-container">
+        <h1 data-translate="leave-review">Leave a Review</h1>
+        <form class="review-form">
+            <label for="name" data-translate="your-name">Your Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Enter your name or use a nickname" required>
 
-        <label>Rate Us</label>
-        <div class="star-rating">
-            <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-            <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-            <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-            <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-            <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+            <label data-translate="rate-us">Rate Us</label>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+            </div>
+
+            <label for="comments" data-translate="comments">Comments</label>
+            <textarea id="comments" name="comments" maxlength="200" rows="4" placeholder="Write your review here. Maximum of 200 characters."></textarea>
+
+            <button type="submit" data-translate="submit-review">Submit Review</button>
+        </form>
+    </div>
+  </main>
+  <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <p data-translate="restaurant-name">Tataki</p>
         </div>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+                <li><a href="about.html" data-translate="about-link">About us</a></li>
+                <li><a href="review.html" data-translate="review-link">Review us</a></li>
+            </ul>
+        </div>
+        <div class="social-medias">
+            <ul>
+                <li id="facebook"><a href=""></a></li>
+                <label for="facebook">
+                    <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                </label>
+                <li id="instagram"><a href=""></a></li>
+                <label for="instagram">
+                    <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                </label>
+            </ul>
+        </div>
+    </div>
+  </footer>
+  <script>
+    // Translations for review page
+    const translations = {
+        "en": {
+            "title": "Review page",
+            "restaurant-name": "Tataki",
+            "home-link": "Home Page",
+            "menu-link": "Menu",
+            "order-link": "Order",
+            "reservation-link": "Reserve a table",
+            "leave-review": "Leave a Review",
+            "your-name": "Your Name",
+            "rate-us": "Rate Us",
+            "comments": "Comments",
+            "submit-review": "Submit Review",
+            "contact-link": "Contact us",
+            "about-link": "About us",
+            "review-link": "Review us"
+        },
+        "fi": {
+            "title": "Arvostelusivu",
+            "restaurant-name": "Tataki",
+            "home-link": "Etusivu",
+            "menu-link": "Ruokalista",
+            "order-link": "Tilaukset",
+            "reservation-link": "Varaa pöytä",
+            "leave-review": "Jätä arvostelu",
+            "your-name": "Nimesi",
+            "rate-us": "Arvostele meidät",
+            "comments": "Kommentit",
+            "submit-review": "Lähetä arvostelu",
+            "contact-link": "Ota yhteyttä",
+            "about-link": "Tietoja meistä",
+            "review-link": "Jätä arvostelu"
+        }
+    };
 
-        <label for="comments">Comments</label>
-        <textarea id="comments" name="comments" maxlength="200" rows="4" placeholder="Write your review here. Maximum of 200 characters."></textarea>
+    // Function to change the language and store it in localStorage
+    function changeLanguage(lang) {
+        // Store the selected language in localStorage
+        localStorage.setItem('language', lang);
 
-        <button type="submit">Submit Review</button>
-    </form>
-</div>
-</main>
-<footer class="main-footer">
-  <div class="footer-container">
-    <div class="footer-logo">
-      <p>Tataki</p>
-    </div>
-    <div class="footer-nav">
-        <ul>
-            <li><a href="contact.html">Contact us</a></li>
-            <li><a href="about.html">About us</a></li>
-            <li><a href="review.html">Review us</a></li>
-        </ul>
-    </div>
-    <div class="social-medias">
-      <ul>
-        <li id="facebook"><a href=""></a></li>
-        <label for="facebook">
-          <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-        <li id="instagram"><a href=""></a></li>
-        <label for="instagram">
-          <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
-        </label>
-      </ul>
-    </div>
-  </div>
-</footer>
+        // Update the text content based on the selected language
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const translationKey = element.getAttribute('data-translate');
+            if (translations[lang] && translations[lang][translationKey]) {
+                element.textContent = translations[lang][translationKey];
+            }
+        });
+    }
+
+    // Check if there's a language stored in localStorage
+    const storedLang = localStorage.getItem('language');
+    if (storedLang) {
+        changeLanguage(storedLang);
+    } else {
+        // Default language (English) if none is stored
+        changeLanguage('en');
+    }
+
+    // Language buttons event listeners
+    document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
+    document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
+</script>
 </body>
 </html>
