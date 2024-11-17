@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Register Form</title>
+    <title data-translate="title">Login/Register Form</title>
     <link rel="stylesheet" href="../styling/login.css">
     <link rel="stylesheet" href="../styling/nav.css">
     <script src="../src/main.js" defer></script>
@@ -12,101 +12,171 @@
 <body>
     <nav class="navigation">
         <div class="logo">
-            <button class="hamburger">☰</button>
-            <p>Tataki</p>
+            <button class="hamburger" data-translate="hamburger">☰</button>
+            <p data-translate="restaurant-name">Tataki</p>
         </div>
         <ul class="nav-list">
-            <li><a href="index.html">Home Page</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="order.html">Order</a></li>
-            <li><a href="reservation.html">Reserve a table</a></li>
+            <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+            <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+            <li><a href="order.html" data-translate="order-link">Order</a></li>
+            <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
         </ul>
         <div class="control-buttons">
-            <button class="language" id="flag-en">🇬🇧</button>
-            <button class="language" id="flag-fi">🇫🇮</button>
-            <button class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
+            <button class="login"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
         </div>
     </nav>
     <main>
-      <div class="form-toggle">
-        <div id="toggle-slider" class="toggle-slider"></div>
-        <button id="login-btn" class="toggle-btn active">Login</button>
-        <button id="register-btn" class="toggle-btn">Register</button>
-    </div>
-    <div class="login-background">
-    <div class="form-image-container"></div>
-    <div class="login-container">
-
-
-        <!-- Login Form -->
-        <form class="login-form form-content active" id="login-form">
-            <h2>Login</h2>
-            <div class="input-container">
-                <label for="login-email">Email</label>
-                <input type="email" id="login-email" name="login-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
-            </div>
-            <div class="input-container">
-                <label for="login-password">Password</label>
-                <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
-                <span class="toggle-password" data-target="login-password"><i data-target="login-password" class="fa-regular fa-eye-slash"></i></span>
-            </div>
-            <div class="form-buttons">
-                <button id="submit-button-login" class="submit-button" type="submit">Submit</button>
-                <button id="reset-button-login" class="reset-button" type="reset">Reset</button>
-            </div>
-        </form>
-
-        <!-- Register Form -->
-        <form class="register-form form-content" id="register-form">
-            <h2>Register</h2>
-            <div class="input-container">
-                <label for="register-username">Username</label>
-                <input type="text" id="register-username" name="register-username" autocomplete="off" minlength="5" required>
-            </div>
-            <div class="input-container">
-                <label for="register-email">Email</label>
-                <input type="email" id="register-email" name="register-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
-            </div>
-            <div class="input-container">
-                <label for="register-password">Password</label>
-                <input type="password" id="register-password" name="register-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
-                <span class="toggle-password" data-target="register-password"><i data-target="register-password" class="fa-regular fa-eye-slash"></i></span>
-            </div>
-            <div class="form-buttons">
-                <button id="submit-button-register" class="submit-button" type="submit">Submit</button>
-                <button id="reset-button-register" class="reset-button" type="reset">Reset</button>
-            </div>
-        </form>
-        <div class="form-message">
-            <span id="message-target">This is a message box</span>
+        <div class="form-toggle">
+            <div id="toggle-slider" class="toggle-slider"></div>
+            <button id="login-btn" class="toggle-btn active" data-translate="login-button">Login</button>
+            <button id="register-btn" class="toggle-btn" data-translate="register-button">Register</button>
         </div>
-    </div>
-    </div>
+        <div class="login-background">
+            <div class="form-image-container"></div>
+            <div class="login-container">
+
+                <!-- Login Form -->
+                <form class="login-form form-content active" id="login-form">
+                    <h2 data-translate="login-form-title">Login</h2>
+                    <div class="input-container">
+                        <label for="login-email" data-translate="email-label">Email</label>
+                        <input type="email" id="login-email" name="login-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="login-password" data-translate="password-label">Password</label>
+                        <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
+                        <span class="toggle-password" data-target="login-password"><i data-target="login-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="form-buttons">
+                        <button id="submit-button-login" class="submit-button" type="submit" data-translate="submit-button">Submit</button>
+                        <button id="reset-button-login" class="reset-button" type="reset" data-translate="reset-button">Reset</button>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form class="register-form form-content" id="register-form">
+                    <h2 data-translate="register-form-title">Register</h2>
+                    <div class="input-container">
+                        <label for="register-username" data-translate="username-label">Username</label>
+                        <input type="text" id="register-username" name="register-username" autocomplete="off" minlength="5" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-email" data-translate="email-label">Email</label>
+                        <input type="email" id="register-email" name="register-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-password" data-translate="password-label">Password</label>
+                        <input type="password" id="register-password" name="register-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
+                        <span class="toggle-password" data-target="register-password"><i data-target="register-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="form-buttons">
+                        <button id="submit-button-register" class="submit-button" type="submit" data-translate="submit-button">Submit</button>
+                        <button id="reset-button-register" class="reset-button" type="reset" data-translate="reset-button">Reset</button>
+                    </div>
+                </form>
+                <div class="form-message">
+                    <span id="message-target" data-translate="message">This is a message box</span>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="footer-container">
-          <div class="footer-logo">
-            <p>Tataki</p>
-          </div>
-          <div class="footer-nav">
-              <ul>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="about.html">About us</a></li>
-                  <li><a href="review.html">Review us</a></li>
-              </ul>
-          </div>
-          <div class="social-medias">
-            <ul>
-              <li id="facebook"><a href=""></a></li>
-              <label for="facebook">
-                <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-              <li id="instagram"><a href=""></a></li>
-              <label for="instagram">
-                <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
-              </label>
-            </ul>
-          </div>
+            <div class="footer-logo">
+                <p data-translate="restaurant-name">Tataki</p>
+            </div>
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+                    <li><a href="about.html" data-translate="about-link">About us</a></li>
+                    <li><a href="review.html" data-translate="review-link">Review us</a></li>
+                </ul>
+            </div>
+            <div class="social-medias">
+                <ul>
+                    <li id="facebook"><a href=""></a></li>
+                    <label for="facebook">
+                        <i class="fa-brands fa-square-facebook" aria-hidden="true" data-translate="facebook-icon"></i>
+                    </label>
+                    <li id="instagram"><a href=""></a></li>
+                    <label for="instagram">
+                        <i class="fa-brands fa-square-instagram" aria-hidden="true" data-translate="instagram-icon"></i>
+                    </label>
+                </ul>
+            </div>
         </div>
-      </footer>
+    </footer>
+
+    <script>
+        // Function to load translations based on selected language
+        const translations = {
+            "en": {
+                "title": "Login/Register Form",
+                "restaurant-name": "Tataki",
+                "home-link": "Home Page",
+                "menu-link": "Menu",
+                "order-link": "Order",
+                "reservation-link": "Reserve a table",
+                "login-button": "Login",
+                "register-button": "Register",
+                "login-form-title": "Login",
+                "email-label": "Email",
+                "password-label": "Password",
+                "submit-button": "Submit",
+                "reset-button": "Reset",
+                "register-form-title": "Register",
+                "username-label": "Username",
+                "message": "This is a message box",
+                "contact-link": "Contact us",
+                "about-link": "About us",
+                "review-link": "Review us",
+                
+                
+            },
+            "fi": {
+                "title": "Kirjaudu/Rekisteröidy Lomake",
+                "restaurant-name": "Tataki",
+                "home-link": "Etusivu",
+                "menu-link": "Ruokalista",
+                "order-link": "Tilaukset",
+                "reservation-link": "Varaa pöytä",
+                "login-button": "Kirjaudu",
+                "register-button": "Rekisteröidy",
+                "login-form-title": "Kirjaudu",
+                "email-label": "Sähköposti",
+                "password-label": "Salasana",
+                "submit-button": "Lähetä",
+                "reset-button": "Tyhjennä",
+                "register-form-title": "Rekisteröidy",
+                "username-label": "Käyttäjänimi",
+                "message": "Tämä on viestilaatikko",
+                "contact-link": "Ota yhteyttä",
+                "about-link": "Tietoa meistä",
+                "review-link": "Jätä arvostelu",  
+            }
+        };
+
+        // Function to change language
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach((el) => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+            localStorage.setItem('language', lang);
+        }
+
+        // Event listeners for language buttons
+        document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
+        document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
+
+        // Load saved language from localStorage
+        const savedLang = localStorage.getItem('language') || 'en';
+        changeLanguage(savedLang);
+    </script>
 </body>
 </html>
