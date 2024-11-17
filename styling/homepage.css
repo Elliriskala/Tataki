@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
   height: 100%;
   width: 100%;
-  background-color: var(--wine-red);
+  background-color: var(--soy-sauce);
 }
 
 .menu-page {
@@ -60,7 +60,7 @@ body {
   background-color: var(--sushi-graphite);
   position: relative;
   z-index: 10;
-  box-shadow: 0 0.5em 3em 0.5em var(--sushi-black);
+  box-shadow: 0 0.5em 2em 0.5em var(--sushi-black);
 }
 
 .hero-image {
@@ -76,7 +76,7 @@ body {
 .menus {
   margin-top: 3em;
   padding-bottom: 0.5em;
-  background-color: var(--wine-red);
+  background-color: var(--soy-sauce);
   color: var(--sushi-grey3);
 }
 
@@ -85,7 +85,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: var(--wine-red);
+  background-color: var(--soy-sauce);
   padding: 1.5em 0 1em 0;
 }
 
@@ -135,7 +135,7 @@ body {
   align-items: center;
   width: 100%;
   overflow: hidden;
-  height: 450px;
+  height: 500px;
 }
 
 .menu-track {
@@ -153,7 +153,6 @@ body {
   text-align: center;
   margin: 0.5em;
   padding: 1em;
-  transition: 0.3s;
   box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
 }
 
@@ -183,7 +182,7 @@ body {
   background-image: url(../img/sushi.jpg);
   background-size: cover;
   background-position: center;
-  height: 6em;
+  height: 10em;
   width: 90%;
   border-radius: 1em;
   border: solid 0.1em var(--sushi-black);
@@ -222,6 +221,7 @@ body {
 
 .more-button {
   font-size: 0.8em;
+  font-size: 1em;
 }
 
 .more-button li,
@@ -235,7 +235,7 @@ body {
   text-decoration: none;
   padding: 0.8em;
   border-radius: 1em;
-  border: solid 0.08em var(--sushi-black);
+  border: 0.01em solid var(--sushi-black);
   background-color: var(--sushi-red1);
   color: var(--lotus-flower);
   transition: all 0.5s;
@@ -255,12 +255,13 @@ body {
   align-items: center;
   background-color: var(--sushi-black);
   color: var(--sushi-grey2);
-  padding: 1em;
   width: 70%;
   margin: auto;
   border-radius: 1em;
   margin-bottom: 2em;
   margin-top: 1em;
+  padding: 1em 0;
+  border: 0.01em solid var(--sushi-red1);
 }
 
 .aboutus h3 {
@@ -279,14 +280,56 @@ body {
   padding: 1em 2em 1em 2em;
 }
 
+#read-more-button {
+  margin-bottom: 2em;
+  margin-top: 0;
+}
+
+.bottom-image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  margin: auto;
+  height: 50vh;
+  margin-bottom: 0.5em;
+}
+
+#home-page-img1 {
+  background-image: url(../img/sushi_background6.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  border-radius: 1em;
+  margin-right: 1em;
+  width: 50%;
+}
+
+#home-page-img2 {
+  background-image: url(../img/drinks.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 100%;
+  border-radius: 1em;
+}
+
 @media screen and (max-width: 950px) {
   .aboutus-placeholder {
     flex-direction: column;
     font-size: 0.9em;
   }
+  .hero-container {
+    height: 60vh;
+  }
 }
 
 @media screen and (max-width: 820px) {
+  .hero-container {
+    height: 50vh;
+  }
   .menu-page-placeholder {
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   }
@@ -305,9 +348,38 @@ body {
     flex: 0 0 29%;
     margin: 0.6em;
   }
+
+  .more-button {
+    font-size: 0.9em;
+  }
+
+  .aboutus-header {
+    width: 80%;
+  }
+
+  .bottom-image-placeholder {
+    flex-direction: column-reverse;
+    height: 70vh;
+    width: 90%;
+    margin-bottom: 0;
+  }
+
+  #home-page-img1 {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  #home-page-img2 {
+    margin-bottom: 1em;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 550px) {
+  .hero-container {
+    height: 35vh;
+  }
+
   .menu-header {
     font-size: 0.8em;
   }
@@ -332,6 +404,15 @@ body {
     transition: all 0.3s ease;
     transform: scale(1.1);
   }
+
+  .aboutus {
+    width: 90%;
+  }
+
+  .aboutus-header {
+    font-size: 1em;
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -352,10 +433,7 @@ body {
 
   .menu-track-container {
     width: 100%;
-  }
-
-  .menu-image {
-    height: 5em;
+    height: 550px;
   }
 
   .carousel-button {
@@ -363,12 +441,12 @@ body {
     margin-top: 7em;
   }
 
-  .more-button {
-    font-size: 0.7em;
+  .more-menus {
+    font-size: 0.8em;
   }
 
-  .aboutus h3 {
-    font-size: 1.2em;
+  .more-button {
+    font-size: 0.8em;
   }
 
   .aboutus-placeholder {

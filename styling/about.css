@@ -57,26 +57,46 @@ main {
   background-color: var(--soy-sauce);
   border-radius: 1em;
   border: 0.06em dashed var(--sushi-red1);
+  padding-top: 1em;
 }
 
 .about-restaurant {
   width: 50%;
   color: var(--sushi-grey2);
-  padding: 1em;
+  padding-left: 2em;
 }
 
 .about-restaurant h1 {
   font-size: 2em;
+  margin: 0;
 }
 
-.hero-image {
-  margin: 1em;
+.hero-image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 50%;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.hero-image, .about-image {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 1em;
-  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  margin: 0.5em;
+}
+
+.hero-image {
   background-image: url(../img/some_more_drinks.jpg);
+}
+
+.about-image {
+  background-image: url(../img/about-image.jpg);
 }
 
 .about-sections {
@@ -125,25 +145,38 @@ main {
 
 .story-section h1 {
   font-size: 2em;
+  margin: 0;
 }
 
+@media screen and (max-width: 1200px) {
+  .image-container {
+    height: 80vh;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .hero-image-placeholder {
+    height: 90vh;
+  }
+}
 
 @media screen and (max-width: 950px) {
+  .hero-image-placeholder {
+    flex-direction: row;
+    width: 95%;
+    margin: auto;
+  }
+
   .hero-container {
     flex-direction: column;
-    height: 800px;
+    height: 900px;
     width: 90%;
   }
 
   .about-restaurant {
     width: 90%;
     margin: 0 auto;
-  }
-
-  .hero-image {
-    width: 90%;
-    margin: auto;   
-    margin-bottom: 1em;
+    padding: 0 0.5em;
   }
 
   .about-sections {
@@ -160,14 +193,40 @@ main {
   .image-container {
     margin: auto;
     width: 90%;
-    height: 70vh;
+    height: 80vh;
     margin-bottom: 1em;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .hero-container {
+    height: 1300px;
+  }
+
+  .about-restaurant {
+    padding-bottom: 0;
+  }
+
+  .hero-image-placeholder {
+    flex-direction: column-reverse;
+    margin-top: 0;
+    width: 90%;
+  }
+
+  .hero-image, .about-image {
+    margin: 1em 0 0 0;
+    padding: 0;
   }
 }
 
 @media screen and (max-width: 600px) {
   .hero-container {
     font-size: 0.9em;
+    height: 1200px;
+  }
+  
+  .hero-image-placeholder {
+    height: 80vh;
   }
 
   .about-sections {
@@ -178,6 +237,11 @@ main {
 @media screen and (max-width: 450px) {
   .hero-container {
     font-size: 0.8em;
+    height: 1000px;
+  }
+
+  .hero-image-placeholder {
+    height: 70vh;
   }
 
   .about-sections {
