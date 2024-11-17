@@ -1,0 +1,94 @@
+@font-face {
+  font-family: "roboto";
+  src: url("../fonts/RobotoMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "roboto bold";
+  src: url("../fonts/RobotoMono-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  font-family: "roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+body {
+  padding: 0;
+  overflow-x: hidden;
+  margin: 0;
+  background-color: var(--soy-sauce);
+}
+
+:root {
+  --sushi-black: #0b090a;
+  --sushi-graphite: #161a1d;
+  --wine-red: #390d0d;
+  --sushi-red1: #420506;
+  --sushi-red2: #a4161a;
+  --sushi-red3: #ba181b;
+  --sushi-red4: #e5383b;
+  --sushi-grey1: #b1a7a6;
+  --sushi-grey2: #d3d3d3;
+  --sushi-grey3: #f5f3f4;
+  --sushi-white: #ffffff;
+  --dust-pink: #c8a9a9;
+  --grey: #252525;
+  --soy-sauce: #191919;
+  --brown-grey: rgba(44, 33, 33, 0.9);
+  --intense-red: #bf4d4d;
+  --forest-green: rgba(3, 32, 3, 0.8);
+  --grey-green: rgba(54, 71, 63, 0.9);
+  --lotus-flower: rgba(245, 245, 245, 0.9);
+}
+
+.admin-page-placeholder {
+  margin: auto;
+  color: var(--lotus-flower);
+  width: 70%;
+  background-color: var(--sushi-black);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1em;
+  border: 0.06em dashed var(--sushi-red1);
+  padding: 1em;
+  margin-top: 1em;
+}
+
+.admin-options {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-options button {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 0.5em;
+  background-color: var(--wine-red);
+  color: var(--lotus-flower);
+  border: 0.06em solid var(--sushi-red1);
+}
+
+.admin-options button:hover {
+  background-color: var(--sushi-red1);
+  color: var(--lotus-flower);
+  transform: scale(1.1);
+}
+
+@media  screen and (max-width: 1100px) {
+    .admin-page-placeholder {
+        width: 50%;
+    }
+
+    .admin-options {
+        flex-direction: column;
+    }
+    
+}

@@ -1,13 +1,13 @@
 @font-face {
   font-family: "roboto";
-  src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url("../fonts/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "roboto bold";
-  src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+  src: url("../fonts/RobotoMono-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -22,7 +22,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   margin: 0;
-  background-color: var(--sushi-red1);
+  background-color: var(--soy-sauce);
 }
 
 :root {
@@ -45,52 +45,6 @@ body {
   --forest-green: rgba(3, 32, 3, 0.8);
   --grey-green: rgba(54, 71, 63, 0.9);
   --lotus-flower: rgba(245, 245, 245, 0.9);
-}
-
-.navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5em;
-  background: linear-gradient(
-    0deg,
-    var(--sushi-graphite) 15%,
-    var(--sushi-black) 90%
-  );
-  color: var(--lotus-flower);
-  z-index: 50;
-  max-width: 100%;
-}
-
-.logo {
-  padding-left: 1em;
-  font-size: 1.2em;
-  color: var(--lotus-flower);
-  letter-spacing: 0.7em;
-}
-
-.login {
-  padding-right: 1em;
-}
-
-.login-button {
-  background-color: var(--sushi-graphite);
-  color: var(--lotus-flower);
-  border: 0.1em solid var(--sushi-black);
-  padding: 1em;
-  cursor: pointer;
-  transition: background-color 0.5s;
-  border-radius: 1em;
-}
-
-.login-button:hover {
-  background-color: var(--sushi-red1);
-  transition: all 0.5s;
-}
-
-.login-button a {
-  text-decoration: none;
-  color: var(--lotus-flower);
 }
 
 .order-management-header {
@@ -150,14 +104,14 @@ body {
   padding: 0.5em;
   color: var(--sushi-graphite);
   background-color: var(--sushi-grey3);
-  border: 0.1em solid var(--sushi-black);
+  border: 0.1em solid var(--sushi-red1);
   border-radius: 0.5em;
   cursor: pointer;
   transition: background-color 0.5s;
 }
 
 .search-bar .search-button:hover {
-  background-color: var(--sushi-graphite);
+  background-color: var(--sushi-red1);
   color: var(--sushi-grey2);
   transition: all 0.5s;
 }
@@ -167,8 +121,9 @@ body {
 .completed-orders {
   margin: 0.5em;
   padding: 1em;
-  background-color: var(--sushi-graphite);
+  background-color: var(--sushi-black);
   border-radius: 1em;
+  border: 0.07em dashed var(--sushi-red1);
 }
 
 .pending-orders h3,
@@ -222,3 +177,4 @@ body {
     margin: 0;
   }
 }
+
