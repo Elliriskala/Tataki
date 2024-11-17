@@ -95,6 +95,15 @@ section ul li {
     text-decoration: underline;
 }
 
+.about-image {
+  background-image: url(../img/about-image.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
 
 .map {
     height: 300px;
