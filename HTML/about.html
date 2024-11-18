@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Sushi Restaurant</title>
+    <title data-translate="title">About Us - Sushi Restaurant</title>
     <link rel="stylesheet" href="../styling/about.css">
     <link rel="stylesheet" href="../styling/nav.css">
     <script src="../src/main.js" defer></script>
@@ -13,14 +13,14 @@
     <nav class="navigation">
         <div class="logo">
             <button class="hamburger">☰</button>
-            <p>Tataki</p>
+            <p data-translate="restaurant-name">Tataki</p>
         </div>
         <ul class="nav-list">
-            <li><a href="index.html">Home Page</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="order.html">Order</a></li>
-            <li><a href="reservation.html">Reserve a table</a></li>
-        </ul>
+          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
+      </ul>
         <div class="control-buttons">
             <button type="button" class="language" aria-label="English" id="flag-en">🇬🇧</button>
             <button type="button" class="language" aria-label="Finnish" id="flag-fi">🇫🇮</button>
@@ -30,17 +30,17 @@
     <main>
       <div class="hero-container">
         <section class="about-restaurant">
-          <h1>About Us</h1>
-          <p>Welcome to Tataki, where tradition meets innovation in the heart of Helsinki. Located in the vibrant city center, Tataki is not just a sushi restaurant - it's an experience. Our mission is to bring the art of sushi to life, blending authentic Japanese techniques with a touch of Nordic flair.</p>
-          <p>We take pride in sourcing only the finest and freshest ingredients. Our chefs are highly trained and have years of experience in the art of sushi making.</p>
-          <p>Our restaurant offers:</p>
+          <h1 data-translate="about-us">About Us</h1>
+          <p data-translate="about-us-text1">Welcome to Tataki, where tradition meets innovation in the heart of Helsinki. Located in the vibrant city center, Tataki is not just a sushi restaurant - it's an experience. Our mission is to bring the art of sushi to life, blending authentic Japanese techniques with a touch of Nordic flair.</p>
+          <p data-translate="about-us-text2">We take pride in sourcing only the finest and freshest ingredients. Our chefs are highly trained and have years of experience in the art of sushi making.</p>
+          <p data-translate="about-us2">Our restaurant offers:</p>
           <ul>
-            <li>Fresh ingredients sourced from local and international markets.</li>
-            <li>A cozy and contemporary atmosphere inspired by Japanese minimalism.</li>
-            <li>Signature dishes crafted by award-winning chefs.</li>
-            <li>An unwavering commitment to sustainability and quality.</li>
+            <li data-translate="li1">Fresh ingredients sourced from local and international markets.</li>
+            <li data-translate="li2">A cozy and contemporary atmosphere inspired by Japanese minimalism.</li>
+            <li data-translate="li3">Signature dishes crafted by award-winning chefs.</li>
+            <li data-translate="li4">An unwavering commitment to sustainability and quality.</li>
           </ul>
-          <p>At Tataki dining is more than a meal — it's a journey into the heart of Japanese culture. We warmly welcome you to visit us!</p>
+          <p data-translate="about-us-text3">At Tataki dining is more than a meal — it's a journey into the heart of Japanese culture. We warmly welcome you to visit us!</p>
         </section>
         <div class="hero-image-placeholder">
           <div class="about-image"></div>
@@ -53,25 +53,25 @@
           <div class="image" id="img3"></div>
         </div>
         <section class="story-section">
-          <h1>Our Story</h1>
-          <p>Tataki was born from a passion for exceptional cuisine and a love for cultural fusion. Our journey began when our founder, a lifelong sushi enthusiast, spent years mastering the art of sushi-making in Japan. Upon returning to Finland, they envisioned a place where Helsinki’s culinary scene could embrace the intricate flavors and artistry of Japanese cuisine.</p>
+          <h1 data-translate="our-story">Our Story</h1>
+          <p data-translate="our-story-text1">Tataki was born from a passion for exceptional cuisine and a love for cultural fusion. Our journey began when our founder, a lifelong sushi enthusiast, spent years mastering the art of sushi-making in Japan. Upon returning to Finland, they envisioned a place where Helsinki’s culinary scene could embrace the intricate flavors and artistry of Japanese cuisine.</p>
             
-          <p>Since opening our doors, we’ve welcomed food lovers from all walks of life, creating unforgettable dining experiences. Each roll, bowl, and dish we serve tells a story of dedication, creativity, and the joy of sharing good food with good company. </p>
-          <p>Today, we continue to evolve, exploring new flavors while staying true to our roots. Thank you for being part of our story — we look forward to sharing many more meals and memories with you!</p>
+          <p data-translate="our-story-text2">Since opening our doors, we’ve welcomed food lovers from all walks of life, creating unforgettable dining experiences. Each roll, bowl, and dish we serve tells a story of dedication, creativity, and the joy of sharing good food with good company. </p>
+          <p data-translate="our-story-text3">Today, we continue to evolve, exploring new flavors while staying true to our roots. Thank you for being part of our story — we look forward to sharing many more meals and memories with you!</p>
         </section>
       </div>
     </main>
     <footer>
         <div class="footer-container">
           <div class="footer-logo">
-            <p>Tataki</p>
+            <p data-translate="restaurant-name">Tataki</p>
           </div>
           <div class="footer-nav">
-              <ul>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="about.html">About us</a></li>
-                  <li><a href="review.html">Review us</a></li>
-              </ul>
+            <ul>
+              <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+              <li><a href="about.html" data-translate="about-link">About us</a></li>
+              <li><a href="review.html" data-translate="review-link">Review us</a></li>
+          </ul>
           </div>
           <div class="social-medias">
             <ul>
@@ -87,120 +87,86 @@
         </div>
       </footer>
       <script>
-        "use strict";
-    
+        // Translations for review page
         const translations = {
-          en: {
-            navHome: "Home Page",
-            navMenu: "Menu",
-            navOrder: "Order",
-            navReservation: "Reserve a table",
-            footerContact: "Contact us",
-            footerAbout: "About us",
-            footerReview: "Review us",
-            footerFacebook: "Facebook",
-            footerInstagram: "Instagram",
-            aboutTitle: "About Us",
-            aboutText: "Welcome to Tataki, where tradition meets innovation in the heart of Helsinki. Located in the vibrant city center, Tataki is not just a sushi restaurant—it's an experience. Our mission is to bring the art of sushi to life, blending authentic Japanese techniques with a touch of Nordic flair.",
-            aboutList1: "Fresh ingredients sourced from local and international markets.",
-            aboutList2: "A cozy and contemporary atmosphere inspired by Japanese minimalism.",
-            aboutList3: "Signature dishes crafted by award-winning chefs.",
-            aboutList4: "An unwavering commitment to sustainability and quality.",
-            storyTitle: "Our Story",
-            storyText1: "Tataki was born from a passion for exceptional cuisine and a love for cultural fusion. Our journey began when our founder, a lifelong sushi enthusiast, spent years mastering the art of sushi-making in Japan. Upon returning to Finland, they envisioned a place where Helsinki’s culinary scene could embrace the intricate flavors and artistry of Japanese cuisine.",
-            storyText2: "Since opening our doors, we’ve welcomed food lovers from all walks of life, creating unforgettable dining experiences. Each roll, bowl, and dish we serve tells a story of dedication, creativity, and the joy of sharing good food with good company."
-          },
-          fi: {
-            navHome: "Etusivu",
-            navMenu: "Ruokalista",
-            navOrder: "Tilaukset",
-            navReservation: "Varaa pöytä",
-            footerContact: "Ota yhteyttä",
-            footerAbout: "Tietoa meistä",
-            footerReview: "Jätä arvostelu",
-            footerFacebook: "Facebook",
-            footerInstagram: "Instagram",
-            aboutTitle: "Tietoa Meistä",
-            aboutText: "Tervetuloa Tatakiin, jossa perinne kohtaa innovaatioita Helsingin sydämessä. Tataki ei ole vain sushi-ravintola - se on kokemus. Tavoitteenamme on tuoda sushin taide eloon, yhdistäen aidot japanilaiset tavat pohjoismaiseen vivahteeseen.",
-            aboutList1: "Tuoreita raaka-aineita paikallisilta ja kansainvälisiltä markkinoilta.",
-            aboutList2: "Kodikas ja moderni tunnelma, joka on saanut inspiraationsa japanilaisesta minimalismista.",
-            aboutList3: "Alansa huippukokkien luomat tunnusomaiset annokset.",
-            aboutList4: "Lujasti sitoutunut kestävyyteen ja laatuun.",
-            storyTitle: "Meidän tarinamme",
-            storyText1: "Tataki syntyi intohimosta erinomaisiin ruokiin ja kulttuuriin. Matkamme alkoi, kun perustajamme, elinikäinen sushin ystävä, vietti vuosia kouluttautuen sushin valmistuksen mestariksi Japanissa. Palattuaan Suomeen hän halusi luoda paikan, jossa Helsingin ruokakulttuuri voisi omaksua japanilaisen keittiön monimutkaiset maut ja taiteellisuuden.",
-            storyText2: "Ovet avattuamme olemme toivottaneet tervetulleeksi ruokaharrastajia eri puolilta maailmaa, luoden unohtumattomia ruokailukokemuksia. Jokainen rulla, kulho ja ruokalaji, jonka tarjoamme, kertoo omistautumisen, luovuuden ja hyvän ruoan jakamisen ilon tarinan."
-          }
+            "en": {
+                "title": "About-us page",
+                "restaurant-name": "Tataki",
+                "home-link": "Home Page",
+                "menu-link": "Menu",
+                "order-link": "Order",
+                "reservation-link": "Reserve a table",
+                "leave-review": "Leave a Review",
+                "about-us": "About Us",
+                "about-us-text1": "Welcome to Tataki, where tradition meets innovation in the heart of Helsinki. Located in the vibrant city center, Tataki is not just a sushi restaurant - it's an experience. Our mission is to bring the art of sushi to life, blending authentic Japanese techniques with a touch of Nordic flair.",
+                "about-us-text2": "We take pride in sourcing only the finest and freshest ingredients. Our chefs are highly trained and have years of experience in the art of sushi making.",
+                "about-us2": "Our restaurant offers:",
+                "li1": "Fresh ingredients sourced from local and international markets.",
+                "li2": "A cozy and contemporary atmosphere inspired by Japanese minimalism.",
+                "li3": "Signature dishes crafted by award-winning chefs.",
+                "li4": "An unwavering commitment to sustainability and quality.",
+                "about-us-text3": "At Tataki dining is more than a meal — it's a journey into the heart of Japanese culture. We warmly welcome you to visit us!",
+                "our-story": "Our Story",
+                "our-story-text1": "Tataki was born from a passion for exceptional cuisine and a love for cultural fusion. Our journey began when our founder, a lifelong sushi enthusiast, spent years mastering the art of sushi-making in Japan. Upon returning to Finland, they envisioned a place where Helsinki’s culinary scene could embrace the intricate flavors and artistry of Japanese cuisine.",
+                "our-story-text2": "Since opening our doors, we’ve welcomed food lovers from all walks of life, creating unforgettable dining experiences. Each roll, bowl, and dish we serve tells a story of dedication, creativity, and the joy of sharing good food with good company.",
+                "our-story-text3": "Today, we continue to evolve, exploring new flavors while staying true to our roots. Thank you for being part of our story — we look forward to sharing many more meals and memories with you!",
+                "contact-link": "Contact us",
+                "about-link": "About us",
+                "review-link": "Review us"
+            },
+            "fi": {
+                "title": "Meistä-sivu",
+                "restaurant-name": "Tataki",
+                "home-link": "Etusivu",
+                "menu-link": "Ruokalista",
+                "order-link": "Tilaukset",
+                "reservation-link": "Varaa pöytä",
+                "about-us": "Tietoa Meistä",
+                "about-us-text1": "Tervetuloa Tatakiin, jossa perinne kohtaa innovaatioita Helsingin sydämessä. Tataki ei ole vain sushi-ravintola - se on kokemus. Tavoitteenamme on tuoda sushin taide eloon, yhdistäen aidot japanilaiset tavat pohjoismaiseen vivahteeseen.",
+                "about-us-text2": "Voimme ylpeänä kertoa, että valitsemme huolella vain laadukkaimmat ja tuoreimmat raaka-aineet. Taidokkaat kokkimme ovat vuosien kokemuksella hioneet sushinvalmistuksen todelliseksi taiteeksi.",
+                "about-us2": "Ravintolamme tarjoaa:",
+                "li1": "Tuoreita raaka-aineita paikallisilta ja kansainvälisiltä markkinoilta.",
+                "li2": "Kodikas ja moderni tunnelma, joka on saanut inspiraationsa japanilaisesta minimalismista.",
+                "li3": "Alansa huippukokkien luomat tunnusomaiset annokset.",
+                "li4": "Sitoutumisen kestävyyteen ja laatuun.",
+                "about-us-text3": "Tatakin ravintolassa ruokailu on enemmän kuin ateria - se on matka japanilaisen kulttuurin sydämeen. Lämpimästi tervetuloa!",
+                "our-story": "Meidän tarinamme",
+                "our-story-text1": "Tataki syntyi intohimosta erinomaisiin ruokiin ja kulttuuriin. Matkamme alkoi, kun perustajamme, elinikäinen sushin ystävä, vietti vuosia kouluttautuen sushin valmistuksen mestariksi Japanissa. Palattuaan Suomeen hän halusi luoda paikan, jossa Helsingin ruokakulttuuri voisi omaksua japanilaisen keittiön monimutkaiset maut ja taiteellisuuden.",
+                "our-story-text2": "Ovet avattuamme olemme toivottaneet tervetulleeksi ruokaharrastajia eri puolilta maailmaa, luoden unohtumattomia ruokailukokemuksia. Jokainen rulla, kulho ja ruokalaji, jonka tarjoamme, kertoo omistautumisen, luovuuden ja hyvän ruoan jakamisen ilon tarinan.",
+                "our-story-text3": "Tänä päivänä jatkamme kehittymistä, tutkien uusia makuja, pysyen samalla uskollisina juurillemme. Kiitos, että olet osa tarinaamme - odotamme innolla, että voimme jakaa kanssasi monta muuta ateriaa ja muistoa!", 
+                "contact-link": "Ota yhteyttä",
+                "about-link": "Tietoja meistä",
+                "review-link": "Jätä arvostelu"
+            }
         };
     
-        const updateLanguage = (lang) => {
-          localStorage.setItem("language", lang);
+        // Function to change the language and store it in localStorage
+        function changeLanguage(lang) {
+            // Store the selected language in localStorage
+            localStorage.setItem('language', lang);
     
-          const navHome = document.querySelector(".nav-list a[href='index.html']");
-          if (navHome) navHome.textContent = translations[lang].navHome;
+            // Update the text content based on the selected language
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const translationKey = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][translationKey]) {
+                    element.textContent = translations[lang][translationKey];
+                }
+            });
+        }
     
-          const navMenu = document.querySelector(".nav-list a[href='menu.html']");
-          if (navMenu) navMenu.textContent = translations[lang].navMenu;
+        // Check if there's a language stored in localStorage
+        const storedLang = localStorage.getItem('language');
+        if (storedLang) {
+            changeLanguage(storedLang);
+        } else {
+            // Default language (English) if none is stored
+            changeLanguage('en');
+        }
     
-          const navOrder = document.querySelector(".nav-list a[href='order.html']");
-          if (navOrder) navOrder.textContent = translations[lang].navOrder;
-    
-          const navReservation = document.querySelector(".nav-list a[href='reservation.html']");
-          if (navReservation) navReservation.textContent = translations[lang].navReservation;
-    
-          const footerContact = document.querySelector(".footer-nav a[href='contact.html']");
-          if (footerContact) footerContact.textContent = translations[lang].footerContact;
-    
-          const footerAbout = document.querySelector(".footer-nav a[href='about.html']");
-          if (footerAbout) footerAbout.textContent = translations[lang].footerAbout;
-    
-          const footerReview = document.querySelector(".footer-nav a[href='review.html']");
-          if (footerReview) footerReview.textContent = translations[lang].footerReview;
-    
-          const footerFacebook = document.querySelector(".footer-nav a[href='https://www.facebook.com/']");
-          if (footerFacebook) footerFacebook.textContent = translations[lang].footerFacebook;
-    
-          const footerInstagram = document.querySelector(".footer-nav a[href='https://www.instagram.com/']");
-          if (footerInstagram) footerInstagram.textContent = translations[lang].footerInstagram;
-    
-          const aboutTitle = document.querySelector(".about-restaurant h1");
-          if (aboutTitle) aboutTitle.textContent = translations[lang].aboutTitle;
-    
-          const aboutText = document.querySelector(".about-restaurant p");
-          if (aboutText) aboutText.textContent = translations[lang].aboutText;
-    
-          const aboutList1 = document.querySelector(".about-restaurant ul li:nth-child(1)");
-          if (aboutList1) aboutList1.textContent = translations[lang].aboutList1;
-    
-          const aboutList2 = document.querySelector(".about-restaurant ul li:nth-child(2)");
-          if (aboutList2) aboutList2.textContent = translations[lang].aboutList2;
-    
-          const aboutList3 = document.querySelector(".about-restaurant ul li:nth-child(3)");
-          if (aboutList3) aboutList3.textContent = translations[lang].aboutList3;
-    
-          const aboutList4 = document.querySelector(".about-restaurant ul li:nth-child(4)");
-          if (aboutList4) aboutList4.textContent = translations[lang].aboutList4;
-    
-          const storyTitle = document.querySelector(".story-section h1");
-          if (storyTitle) storyTitle.textContent = translations[lang].storyTitle;
-    
-          const storyText1 = document.querySelector(".story-section p:nth-child(1)");
-          if (storyText1) storyText1.textContent = translations[lang].storyText1;
-    
-          const storyText2 = document.querySelector(".story-section p:nth-child(2)");
-          if (storyText2) storyText2.textContent = translations[lang].storyText2;
-        };
-    
-        document.addEventListener("DOMContentLoaded", () => {
-          const flagEn = document.getElementById("flag-en");
-          const flagFi = document.getElementById("flag-fi");
-    
-          const savedLanguage = localStorage.getItem("language") || "en";
-          updateLanguage(savedLanguage);
-    
-          flagEn.addEventListener("click", () => updateLanguage("en"));
-          flagFi.addEventListener("click", () => updateLanguage("fi"));
-        });
+        // Language buttons event listeners
+        document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
+        document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
     </script>
-    
 </body>
 </html>

@@ -166,11 +166,16 @@ body {
 @media screen and (max-width: 550px) {
   .menu-header {
     font-size: 0.8em;
+    margin-bottom: 0;
+    padding: 0;
   }
 
   .menu-list {
-    padding: 0.5em;
-    margin: 0;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1em;
+    padding-top: 0;
   }
 
   .select-category-button {
