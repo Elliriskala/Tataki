@@ -16,10 +16,10 @@
         <p>Tataki</p>
     </div>
     <ul class="nav-list">
-        <li><a href="index.html">Home Page</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="order.html">Order</a></li>
-        <li><a href="reservation.html">Reserve a table</a></li>
+        <li><a data-translate="navHome" href="index.html">Home Page</a></li>
+        <li><a data-translate="navHome" href="menu.html">Menu</a></li>
+        <li><a data-translate="navOrder" href="order.html">Order</a></li>
+        <li><a data-translate="navReservation" href="reservation.html">Reserve a table</a></li>
     </ul>
     <div class="control-buttons">
         <button class="language" id="flag-en">🇬🇧</button>
@@ -34,38 +34,38 @@
             Your browser does not support the video tag.
         </video>-->
         <div class="reservation-form">
-            <h1>Table Reservation</h1>
+            <h1 data-translate="reservationTitle">Table Reservation</h1>
             <form id="reservationForm">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" autocomplete="name" placeholder="Enter your name" required>
+                <label data-translate="reservationName" for="name">Full Name</label>
+                <input type="text" id="name" data-translate="placeholderName" name="name" autocomplete="name" placeholder="Enter your name" required>
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" autocomplete="email" data-translate="placeholderEmail" placeholder="Enter your email" required>
 
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Enter your phone number" required>
+                <label data-translate="reservationPhone" for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" data-translate="placeholderPhone" placeholder="Enter your phone number" required>
 
-                <label for="date">Reservation Date</label>
+                <label for="date" data-translate="reservationDate">Reservation Date</label>
                 <input type="date" id="date" name="date" required>
 
-                <label for="time">Reservation Time</label>
+                <label for="time" data-translate="reservationTime">Reservation Time</label>
                 <select id="time" name="time" required>
-                    <option value="">Select Time</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="13:00">1:00 PM</option>
-                    <option value="14:00">2:00 PM</option>
-                    <option value="15:00">3:00 PM</option>
-                    <option value="16:00">4:00 PM</option>
-                    <option value="17:00">5:00 PM</option>
-                    <option value="18:00">6:00 PM</option>
-                    <option value="19:00">7:00 PM</option>
-                    <option value="20:00">8:00 PM</option>
-                    <option value="21:00">9:00 PM</option>
+                    <option data-translate="timeOptionDefault" value="">Select Time</option>
+                    <option data-translate="timeOption1" value="10:00">10:00 AM</option>
+                    <option data-translate="timeOption2"="11:00">11:00 AM</option>
+                    <option data-translate="timeOption3" value="12:00">12:00 PM</option>
+                    <option data-translate="timeOption4" value="13:00">1:00 PM</option>
+                    <option data-translate="timeOption5" value="14:00">2:00 PM</option>
+                    <option data-translate="timeOption6" value="15:00">3:00 PM</option>
+                    <option data-translate="timeOption7" value="16:00">4:00 PM</option>
+                    <option data-translate="timeOption8" value="17:00">5:00 PM</option>
+                    <option data-translate="timeOption9" value="18:00">6:00 PM</option>
+                    <option data-translate="timeOption10" value="19:00">7:00 PM</option>
+                    <option data-translate="timeOption11" value="20:00">8:00 PM</option>
+                    <option data-translate="timeOption12" value="21:00">9:00 PM</option>
                 </select>
                 <div class="guest-selection">
-                <label for="guest-btn">Number of Guests</label>
+                <label data-translate="numberOfGuests" for="guest-btn">Number of Guests</label>
                   <div class="guest-buttons" id="guests">
                     <button type="button" class="guest-btn" id="guest-btn" data-value="1">1</button>
                     <button type="button" class="guest-btn" id="guest-btn" data-value="2">2</button>
@@ -77,14 +77,14 @@
                   <input type="hidden" name="guests" id="guests-input" required>
                 </div>
                 <details>
-                    <summary>Terms & Conditions</summary>
+                    <summary data-translate="detailsSummary">Terms & Conditions</summary>
                     <div class="content">
-                    <p>By clicking the "Reserve Now" button, you agree to our Terms & Conditions.</p>
-                    <p>Our restaurant has a 15-minute grace period. If you are running late, please call us to let us know. Otherwise, your reservation will be canceled. We appreciate your understanding.</p>
+                    <p data-translate="detailsContent1">By clicking the "Reserve Now" button, you agree to our Terms & Conditions.</p>
+                    <p data-translate="detailsContent2">Our restaurant has a 15-minute grace period. If you are running late, please call us to let us know. Otherwise, your reservation will be canceled. We appreciate your understanding.</p>
                     </div>
                 </details>
 
-                <button type="submit">Reserve Now</button>
+                <button data-translate="reserveNowButton" type="submit">Reserve Now</button>
             </form>
         </div>
     </main>
@@ -95,9 +95,9 @@
           </div>
           <div class="footer-nav">
               <ul>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="about.html">About us</a></li>
-                  <li><a href="review.html">Review us</a></li>
+                  <li><a data-translate="footerContact" href="contact.html">Contact us</a></li>
+                  <li><a data-translate="footerAbout" href="about.html">About us</a></li>
+                  <li><a data-translate="footerReview" href="review.html">Review us</a></li>
               </ul>
           </div>
           <div class="social-medias">
@@ -133,7 +133,8 @@
             reservationPhone: "Phone Number",
             reservationDate: "Reservation Date",
             reservationTime: "Reservation Time",
-            reserveNow: "Reserve Now",
+            numberOfGuests: "Number of Guests",
+            reserveNowButton: "Reserve Now",
             placeholderName: "Enter your name",
             placeholderEmail: "Enter your email",
             placeholderPhone: "Enter your phone number",
@@ -172,7 +173,8 @@
             reservationPhone: "Puhelinnumero",
             reservationDate: "Pöydän Varauspäivämäärä",
             reservationTime: "Varausaika",
-            reserveNow: "Varaa Nyt",
+            numberOfGuests: "Vieraiden Lukumäärä",
+            reserveNowButton: "Varaa Nyt",
             placeholderName: "Syötä nimesi",
             placeholderEmail: "Syötä sähköpostisi",
             placeholderPhone: "Syötä puhelinnumerosi",
@@ -197,104 +199,31 @@
           },
         };
     
-        const updateLanguage = (lang) => {
-          localStorage.setItem("language", lang);
-    
-          const navHome = document.querySelector(".nav-list a[href='index.html']");
-          if (navHome) navHome.textContent = translations[lang].navHome;
-    
-          const navMenu = document.querySelector(".nav-list a[href='menu.html']");
-          if (navMenu) navMenu.textContent = translations[lang].navMenu;
-    
-          const navOrder = document.querySelector(".nav-list a[href='order.html']");
-          if (navOrder) navOrder.textContent = translations[lang].navOrder;
-    
-          const navReservation = document.querySelector(".nav-list a[href='reservation.html']");
-          if (navReservation) navReservation.textContent = translations[lang].navReservation;
-    
-          const reservationTitle = document.querySelector("h1");
-          if (reservationTitle) reservationTitle.textContent = translations[lang].reservationTitle;
-    
-          const reservationName = document.querySelector("label[for='name']");
-          if (reservationName) reservationName.textContent = translations[lang].reservationName;
-    
-          const reservationEmail = document.querySelector("label[for='email']");
-          if (reservationEmail) reservationEmail.textContent = translations[lang].reservationEmail;
-    
-          const reservationPhone = document.querySelector("label[for='phone']");
-          if (reservationPhone) reservationPhone.textContent = translations[lang].reservationPhone;
-    
-          const reservationDate = document.querySelector("label[for='date']");
-          if (reservationDate) reservationDate.textContent = translations[lang].reservationDate;
-    
-          const reserveNowButton = document.querySelector("button[type='submit']");
-          if (reserveNowButton) reserveNowButton.textContent = translations[lang].reserveNow;
-    
-          const nameInput = document.querySelector("#name");
-          if (nameInput) nameInput.placeholder = translations[lang].placeholderName;
-    
-          const emailInput = document.querySelector("#email");
-          if (emailInput) emailInput.placeholder = translations[lang].placeholderEmail;
-    
-          const phoneInput = document.querySelector("#phone");
-          if (phoneInput) phoneInput.placeholder = translations[lang].placeholderPhone;
-    
-          const dateInput = document.querySelector("#date");
-          if (dateInput) dateInput.placeholder = translations[lang].placeholderDate;
-    
-          const footerContact = document.querySelector(".footer-nav a[href='contact.html']");
-          if (footerContact) footerContact.textContent = translations[lang].footerContact;
-    
-          const footerAbout = document.querySelector(".footer-nav a[href='about.html']");
-          if (footerAbout) footerAbout.textContent = translations[lang].footerAbout;
-    
-          const footerReview = document.querySelector(".footer-nav a[href='review.html']");
-          if (footerReview) footerReview.textContent = translations[lang].footerReview;
-    
-          const footerFacebook = document.querySelector(".footer-nav a[href='https://www.facebook.com/']");
-          if (footerFacebook) footerFacebook.textContent = translations[lang].footerFacebook;
-    
-          const footerInstagram = document.querySelector(".footer-nav a[href='https://www.instagram.com/']");
-          if (footerInstagram) footerInstagram.textContent = translations[lang].footerInstagram;
-    
-          // Update details and content inside details tag
-          const detailsSummary = document.querySelector("details summary");
-          if (detailsSummary) detailsSummary.textContent = translations[lang].detailsSummary;
-    
-          const detailsContent1 = document.querySelector("details .content p:first-of-type");
-          if (detailsContent1) detailsContent1.textContent = translations[lang].detailsContent1;
-    
-          const detailsContent2 = document.querySelector("details .content p:last-of-type");
-          if (detailsContent2) detailsContent2.textContent = translations[lang].detailsContent2;
-    
-         // Update the select dropdown for time
-          const timeSelectLabel = document.querySelector("label[for='time']");
-          if (timeSelectLabel) timeSelectLabel.textContent = translations[lang].timeSelectLabel;
-
-          // Update the default "Select Time" option
-          const timeSelectDefaultOption = document.querySelector("#time option[value='']");
-          if (timeSelectDefaultOption) {
-            timeSelectDefaultOption.textContent = translations[lang].timeOptionDefault;
+      function changeLanguage(lang) {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach((el) => {
+          const key = el.getAttribute('data-translate');
+          if (translations[lang] && translations[lang][key]) {
+            // Update inner text for non-input elements
+            if (el.tagName !== 'INPUT') {
+              el.innerText = translations[lang][key];
+            } else {
+              // Update placeholder for input elements
+              el.setAttribute('placeholder', translations[lang][key]);
+            }
           }
-
-          // Update the time options without affecting the default one
-          const timeOptions = document.querySelectorAll("#time option:not([value=''])");
-          timeOptions.forEach((option, index) => {
-            option.textContent = translations[lang][`timeOption${index + 1}`];
-          });
-
-        };
-    
-        document.addEventListener("DOMContentLoaded", () => {
-          const flagEn = document.getElementById("flag-en");
-          const flagFi = document.getElementById("flag-fi");
-    
-          const savedLanguage = localStorage.getItem("language") || "en";
-          updateLanguage(savedLanguage);
-    
-          flagEn.addEventListener("click", () => updateLanguage("en"));
-          flagFi.addEventListener("click", () => updateLanguage("fi"));
         });
+        localStorage.setItem('language', lang);
+      }
+
+
+        // Event listeners for language buttons
+        document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
+        document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
+
+        // Load saved language from localStorage
+        const savedLang = localStorage.getItem('language') || 'en';
+        changeLanguage(savedLang);
     </script>
     
     

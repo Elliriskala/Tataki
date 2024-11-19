@@ -186,11 +186,20 @@ function displayItineraryResults(itineraries) {
 
     // Map transport modes to Finnish
     const modeTranslation = {
+      fi: {
       WALK: "Kävely",
       RAIL: "Juna",
       BUS: "Linja-auto",
       TRAM: "Raitiovaunu",
-      FERRY: "Laiva",
+      FERRY: "Laiva"
+      },
+      en: {
+      WALK: "Walking",
+      RAIL: "Train",
+      BUS: "Bus",
+      TRAM: "Tram",
+      FERRY: "Ferry"
+      }
     };
 
     itineraryItem.innerHTML = `
@@ -201,7 +210,7 @@ function displayItineraryResults(itineraries) {
                   .map(
                     (leg) => `
                     <li>
-                        ${leg.mode ? `<strong>${translations[language]["mode"]}:</strong> ${modeTranslation[leg.mode] || leg.mode} ${leg.trip?.tripHeadsign ? `(${translations[language]["line"]}: ${leg.trip.tripHeadsign} ${leg.trip.routeShortName || ""})` : ""} <br>` : ""}
+                        ${leg.mode ? `<strong>${translations[language]["mode"]}:</strong> ${modeTranslation[language][leg.mode] || leg.mode} ${leg.trip?.tripHeadsign ? `(${translations[language]["line"]}: ${leg.trip.tripHeadsign} ${leg.trip.routeShortName || ""})` : ""} <br>` : ""}
                         ${leg.from?.name ? `<strong>${translations[language]["from"]}:</strong> ${leg.from.name} (${leg.from.lat}, ${leg.from.lon})<br>` : ""}
                         ${leg.from?.stop?.name ? `<strong>${translations[language]["stop-name"]}:</strong> ${leg.from.stop.name} <br>` : ""}
                         ${leg.from?.stop?.code ? `<strong>${translations[language]["stop-code"]}:</strong> ${leg.from.stop.code} <br>` : ""}<br>
