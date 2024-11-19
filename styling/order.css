@@ -467,16 +467,20 @@ input[type="checkbox"]:checked {
 @media screen and (max-width: 600px) {
   .menu-header {
     font-size: 0.8em;
+    margin-bottom: 0;
   }
+
   .menu-list {
-    padding: 0.5em;
-    margin: 0;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1em;
+    padding-top: 0.5em;
   }
+
   .select-category-button {
     padding: 0.5em;
-    margin: 0.5em;
     font-size: 0.8em;
-    transition: 0.2s;
   }
   .select-category-button:hover {
     transition: all 0.3s ease;
@@ -491,15 +495,6 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (max-width: 450px) {
-  .menus-header {
-    font-size: 1em;
-  }
-
-  .menu-list button {
-    margin: 0.2em;
-    font-size: 0.75em;
-  }
-
   .order-page-placeholder {
     font-size: 0.8em;
   }

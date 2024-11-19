@@ -57,13 +57,13 @@ main {
   background-color: var(--soy-sauce);
   border-radius: 1em;
   border: 0.06em dashed var(--sushi-red1);
-  padding-top: 1em;
+  padding: 1em
 }
 
 .about-restaurant {
   width: 50%;
   color: var(--sushi-grey2);
-  padding-left: 2em;
+  padding: 1em 2em;
 }
 
 .about-restaurant h1 {
@@ -75,10 +75,9 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 75vh;
   width: 50%;
   flex-direction: column;
-  padding: 1em;
   padding-top: 0;
 }
 
@@ -109,6 +108,7 @@ main {
   background-color: var(--soy-sauce);
   border-radius: 1em;
   border: 0.06em dashed var(--sushi-red1);
+  padding: 1em;
 }
 
 .image-container {
@@ -140,7 +140,7 @@ main {
 }
 
 .story-section {
-  padding: 1em;
+  padding: 1em 2em;
   width: 40%;
 }
 
@@ -177,7 +177,7 @@ main {
   .about-restaurant {
     width: 90%;
     margin: 0 auto;
-    padding: 0 0.5em;
+    padding-bottom: 1em;
   }
 
   .about-sections {

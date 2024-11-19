@@ -334,6 +334,13 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   }
 
+  .menu-header {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+  }
+
+
   .menu-carousel {
     margin-left: 0;
     margin-right: 0;
@@ -390,8 +397,11 @@ body {
   }
 
   .menu-list {
-    margin: 0;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
   }
+
 
   .select-category-button {
     padding: 0.5em;
