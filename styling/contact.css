@@ -20,6 +20,7 @@ html {
   height: 100%;
   width: 100%;
   font-family: "roboto", sans-serif;
+  overflow: hidden;
 }
 
 :root {
@@ -46,7 +47,10 @@ html {
 }
 
 main {
-  padding: 1em;
+  
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .contact-section ul {
