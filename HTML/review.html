@@ -32,7 +32,8 @@
         <h1 data-translate="leave-review">Leave a Review</h1>
         <form class="review-form">
             <label for="name" data-translate="your-name">Your Name</label>
-            <input type="text" id="name" name="name" autocomplete="name" placeholder="Enter your name or use a nickname" required>
+            <input type="text" id="name" name="name" autocomplete="name" 
+            data-translate="placeholderReviewName" placeholder="Enter your name or use a nickname" required>
 
             <label data-translate="rate-us">Rate Us</label>
             <div class="star-rating">
@@ -44,7 +45,7 @@
             </div>
 
             <label for="comments" data-translate="comments">Comments</label>
-            <textarea id="comments" name="comments" maxlength="200" rows="4" placeholder="Write your review here. Maximum of 200 characters."></textarea>
+            <textarea id="comments" name="comments" maxlength="200" rows="4" data-translate="placeHolderComments" placeholder="Write your review here. Maximum of 200 characters."></textarea>
 
             <button type="submit" data-translate="submit-review">Submit Review</button>
         </form>
@@ -93,7 +94,9 @@
             "submit-review": "Submit Review",
             "contact-link": "Contact us",
             "about-link": "About us",
-            "review-link": "Review us"
+            "review-link": "Review us",
+            "placeHolderComments": "Write your review here. Maximum of 200 characters.",
+            "placeholderReviewName": "Enter your name or use a nickname"
         },
         "fi": {
             "title": "Arvostelusivu",
@@ -109,37 +112,39 @@
             "submit-review": "Lähetä arvostelu",
             "contact-link": "Ota yhteyttä",
             "about-link": "Tietoja meistä",
-            "review-link": "Jätä arvostelu"
+            "review-link": "Jätä arvostelu",
+            "placeHolderComments": "Kirjoita arvostelusi tähän. Maksimissaan 200 merkkiä.",
+            "placeholderReviewName": "Kirjoita nimesi tai käytä nimimerkkiä."
         }
     };
 
-    // Function to change the language and store it in localStorage
     function changeLanguage(lang) {
-        // Store the selected language in localStorage
-        localStorage.setItem('language', lang);
-
-        // Update the text content based on the selected language
-        const elements = document.querySelectorAll('[data-translate]');
-        elements.forEach(element => {
-            const translationKey = element.getAttribute('data-translate');
-            if (translations[lang] && translations[lang][translationKey]) {
-                element.textContent = translations[lang][translationKey];
-            }
-        });
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach((el) => {
+    const key = el.getAttribute('data-translate');
+    if (key && translations[lang] && translations[lang][key]) {
+      // Handle text updates for non-input elements
+      if (el.tagName !== 'TEXTAREA' && el.tagName !== 'INPUT') {
+        el.innerText = translations[lang][key];
+      } else {
+        // Update placeholder for input or textarea elements
+        el.placeholder = translations[lang][key];
+      }
     }
+  });
 
-    // Check if there's a language stored in localStorage
-    const storedLang = localStorage.getItem('language');
-    if (storedLang) {
-        changeLanguage(storedLang);
-    } else {
-        // Default language (English) if none is stored
-        changeLanguage('en');
-    }
+  localStorage.setItem('language', lang);
+}
 
-    // Language buttons event listeners
-    document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
-    document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
+
+
+        // Event listeners for language buttons
+        document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
+        document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
+
+        // Load saved language from localStorage
+        const savedLang = localStorage.getItem('language') || 'en';
+        changeLanguage(savedLang);
 </script>
 </body>
 </html>

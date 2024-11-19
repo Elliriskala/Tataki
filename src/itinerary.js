@@ -45,7 +45,7 @@ const translations = {
 };
 
 // require('dotenv').config();
-const apiKey = "8b8ee0e6809a405e81615d51d3e6e738";
+const apiKey = "";
 
 const options = {
   enableHighAccuracy: true,
