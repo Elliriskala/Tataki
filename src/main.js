@@ -149,3 +149,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function changeLanguage(lang) {
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach((el) => {
+    const key = el.getAttribute('data-translate');
+    if (translations[lang] && translations[lang][key]) {
+      // Update inner text for non-input elements
+      if (el.tagName !== 'INPUT') {
+        el.innerText = translations[lang][key];
+      } else {
+        // Update placeholder for input elements
+        el.setAttribute('placeholder', translations[lang][key]);
+      }
+    }
+  });
+  localStorage.setItem('language', lang);
+}
+
+
+  // Event listeners for language buttons
+  document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
+  document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
+
+  // Load saved language from localStorage
+  const savedLang = localStorage.getItem('language') || 'en';
+  changeLanguage(savedLang);

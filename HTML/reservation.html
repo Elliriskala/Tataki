@@ -181,7 +181,7 @@
             placeholderDate: "Valitse päivämäärä",
             detailsSummary: "Ehdot ja säännöt",
             detailsContent1: "Napsauttamalla 'Varaa Nyt' -painiketta hyväksyt ehdot ja säännöt.",
-            detailsContent2: "Ravintolassamme on 15 minuutin armonaika. Jos myöhästyt, soita meille ja ilmoita asiasta. Muuten varauksesi perutaan. Kiitämme ymmärryksestäsi.",
+            detailsContent2: "Ravintolassamme on 15 minuutin armonaika. Jos myöhästyt, soita meille ja ilmoita asiasta. Muuten varauksesi perutaan. Kiitämme ymmärrystäsi.",
             timeSelectLabel: "Valitse Aika",
             timeOption1: "10:00",
             timeOption2: "11:00",
@@ -199,31 +199,7 @@
           },
         };
     
-      function changeLanguage(lang) {
-        const elements = document.querySelectorAll('[data-translate]');
-        elements.forEach((el) => {
-          const key = el.getAttribute('data-translate');
-          if (translations[lang] && translations[lang][key]) {
-            // Update inner text for non-input elements
-            if (el.tagName !== 'INPUT') {
-              el.innerText = translations[lang][key];
-            } else {
-              // Update placeholder for input elements
-              el.setAttribute('placeholder', translations[lang][key]);
-            }
-          }
-        });
-        localStorage.setItem('language', lang);
-      }
-
-
-        // Event listeners for language buttons
-        document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
-        document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
-
-        // Load saved language from localStorage
-        const savedLang = localStorage.getItem('language') || 'en';
-        changeLanguage(savedLang);
+      
     </script>
     
     
