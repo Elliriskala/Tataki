@@ -123,12 +123,36 @@ body {
 }
 
 .menu-image {
-  background-image: url(../img/sushi.jpg);
   background-size: cover;
   background-position: center;
-  height: 6em;
+  height: 10em;
   border-radius: 1em;
   width: 90%;
+}
+
+
+#menu-one-image {
+  background-image: url(../img/menu-images/salmon-avocado-roll2.jpg);
+}
+
+#menu-two-image {
+  background-image: url(../img/menu-images/california-roll2.jpg);
+}
+
+#menu-three-image {
+  background-image: url(../img/menu-images/spicy-tuna-maki2.jpg);
+}
+
+#menu-four-image {
+  background-image: url(../img/menu-images/vegan-sushi2.jpg);
+}
+
+#menu-five-image {
+  background-image: url(../img/menu-images/crunchy-shrimp-roll2.jpg);
+}
+
+#menu-six-image {
+  background-image: url(../img/menu-images/dragon-roll.jpg);
 }
 
 #menu-one,
