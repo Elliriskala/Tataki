@@ -149,34 +149,6 @@
               "review-link": "Jätä arvostelu"
           }
       };
-  
-      // Function to change the language and store it in localStorage
-      function changeLanguage(lang) {
-          // Store the selected language in localStorage
-          localStorage.setItem('language', lang);
-  
-          // Update the text content based on the selected language
-          const elements = document.querySelectorAll('[data-translate]');
-          elements.forEach(element => {
-              const translationKey = element.getAttribute('data-translate');
-              if (translations[lang] && translations[lang][translationKey]) {
-                  element.textContent = translations[lang][translationKey];
-              }
-          });
-      }
-  
-      // Check if there's a language stored in localStorage
-      const storedLang = localStorage.getItem('language');
-      if (storedLang) {
-          changeLanguage(storedLang);
-      } else {
-          // Default language (English) if none is stored
-          changeLanguage('en');
-      }
-  
-      // Language buttons event listeners
-      document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
-      document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
   </script>
   </body>
 </html>
