@@ -1,3 +1,4 @@
+import { Request } from 'express';
 
 interface Itinerary {
   duration: number;
@@ -104,6 +105,14 @@ interface RestaurantReview {
   created_at: Date;
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview };
+interface AuthenticatedRequest extends Request {
+  user?: string | object;
+  headers: {
+      authorization?: string;
+      [key: string]: any;
+  };
+}
+
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest };
 
 

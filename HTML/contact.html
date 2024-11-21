@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../styling/nav.css">
     <script src="../src/main.js" defer></script>
     <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
-    <script type="module" src="../src/itinerary.js"></script>
+    <script type="module" src="../src/API/itinerary.js"></script>
 </head>
 <body>
     <nav class="navigation">
@@ -133,37 +133,6 @@
         "review-link": "Arvioi meidät"
     }
 };
-
-function setLanguage(language) {
-    // Get all elements with the data-translate attribute
-    localStorage.setItem('language', language);
-    const translateElements = document.querySelectorAll('[data-translate]');
-    
-    translateElements.forEach((element) => {
-        const key = element.getAttribute('data-translate');
-        if (translations[language] && translations[language][key]) {
-            element.textContent = translations[language][key];
-        }
-    });
-}
-
-// Language switching logic for buttons
-document.getElementById('flag-en').addEventListener('click', () => {
-    setLanguage('en');
-});
-
-document.getElementById('flag-fi').addEventListener('click', () => {
-    setLanguage('fi');
-});
-
-const storedLang = localStorage.getItem('language');
-    if (storedLang) {
-        setLanguage(storedLang);
-    } else {
-        // Default language (English) if none is stored
-        setLanguage('en');
-    }
-
       </script>
 </body>
 </html>

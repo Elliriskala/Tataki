@@ -30,4 +30,4 @@ interface Itinerary {
     name: string;
   }
 
-export { Itinerary, Leg, Trip, Location, Stop };
+export type { Itinerary, Leg, Trip, Location, Stop };

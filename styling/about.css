@@ -109,6 +109,7 @@ main {
   border-radius: 1em;
   border: 0.06em dashed var(--sushi-red1);
   padding: 1em;
+  max-width: 1200px;
 }
 
 .image-container {
