@@ -1,4 +1,4 @@
-import { Itinerary, Leg } from '../src/utils/interfaces';
+import { Itinerary, Leg } from '../utils/interfaces';
 import 'dotenv/config';
 
 const getLocationButton = document.getElementById('getLocation');
