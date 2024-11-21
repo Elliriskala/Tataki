@@ -1,4 +1,13 @@
 "use strict";
+import translations from "./translations";
+
+interface Translations {
+  [lang: string]: {
+    [key: string]: string;
+  };
+}
+
+const translationsTyped = translations as Translations;
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
@@ -166,10 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
       guestButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
       guestInput.value = button.getAttribute("guests-input") || "";
-    });
-  });
+    const lang = localStorage.getItem("language") || "en";
+    const key = button.getAttribute("data-translate");
+    if (key && translationsTyped[lang] && (translationsTyped[lang] as { [key: string]: string })[key]) {
+      alert(translationsTyped[lang][key]);
+    }
 });
 
+/*
 function changeLanguage(lang: string) {
   const elements = document.querySelectorAll("[data-translate]");
   elements.forEach((el) => {
@@ -177,16 +190,17 @@ function changeLanguage(lang: string) {
     if (key && translations[lang] && translations[lang][key]) {
       // Handle text updates for non-input elements
       if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") {
-        el.innerText = translations[lang][key];
+        (el as HTMLElement).innerText = translations[lang][key];
       } else {
         // Update placeholder for input or textarea elements
-        el.placeholder = translations[lang][key];
+        (el as HTMLInputElement | HTMLTextAreaElement).placeholder = translations[lang][key];
       }
     }
   });
 
   localStorage.setItem("language", lang);
 }
+
 
 // Event listeners for language buttons
 const flagEn = document.getElementById("flag-en");
@@ -201,3 +215,6 @@ if (flagFi) {
 // Load saved language from localStorage
 const savedLang = localStorage.getItem("language") || "en";
 changeLanguage(savedLang);
+*/
+  });
+});

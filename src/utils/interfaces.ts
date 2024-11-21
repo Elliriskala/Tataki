@@ -40,13 +40,18 @@ interface UserLevel {
 }
 
 interface User {
-  user_id: number;
+  user_id?: number;
   username: string;
-  password_hash: string;
   email: string;
-  phone_number: string;
+  password_hash: string;
   user_level_id: number;
-  created_at: Date;
+}
+
+interface ModifiedUser {
+  username: string;
+  email: string;
+  password_hash: string;
+  user_level_id: number;
 }
 
 interface Menu {
@@ -80,12 +85,12 @@ interface OrderItem {
 }
 
 interface Reservation {
-  reservation_id: number;
+  reservation_id?: number;
   user_id: number;
   reservation_date: string;
   reservation_time: string;
   guests: string;
-  created_at: Date;
+  created_at?: Date;
 }
 
 interface FoodReview {
@@ -113,6 +118,6 @@ interface AuthenticatedRequest extends Request {
   };
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest };
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest };
 
 
