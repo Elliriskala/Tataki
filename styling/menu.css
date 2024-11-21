@@ -107,78 +107,33 @@ body {
   background-color: var(--sushi-graphite);
   border-radius: 1em;
   border: solid 0.1em var(--sushi-black);
-  padding: 1em;
-  transition: 0.3s;
+  padding: 2em;
   box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+  text-align: center;
+  color: var(--sushi-grey3);
+  transition: 0.1s;
 }
 
 .menu-page-placeholder:hover {
   transform: scale(1.03);
 }
 
+.menu-header {
+  font-family: "roboto bold";
+}
+
 .image-placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 10em;
 }
 
 .menu-image {
   background-size: cover;
   background-position: center;
-  height: 10em;
   border-radius: 1em;
   width: 90%;
-}
-
-
-#menu-one-image {
-  background-image: url(../img/menu-images/salmon-avocado-roll2.jpg);
-}
-
-#menu-two-image {
-  background-image: url(../img/menu-images/california-roll2.jpg);
-}
-
-#menu-three-image {
-  background-image: url(../img/menu-images/spicy-tuna-maki2.jpg);
-}
-
-#menu-four-image {
-  background-image: url(../img/menu-images/vegan-sushi2.jpg);
-}
-
-#menu-five-image {
-  background-image: url(../img/menu-images/crunchy-shrimp-roll2.jpg);
-}
-
-#menu-six-image {
-  background-image: url(../img/menu-images/dragon-roll.jpg);
-}
-
-#menu-one,
-#menu-two,
-#menu-three,
-#menu-four,
-#menu-five,
-#menu-six,
-#menu-seven,
-#menu-eight {
-  text-align: center;
-  color: var(--sushi-grey3);
-}
-
-#menu-one p,
-#menu-two p,
-#menu-three p,
-#menu-four p,
-#menu-five p,
-#menu-six p,
-#menu-seven p,
-#menu-eight p {
-  margin: auto;
-  padding: 0.5em;
-  width: 80%;
-  font-size: 0.9em;
 }
 
 @media screen and (max-width: 820px) {
@@ -188,11 +143,6 @@ body {
 }
 
 @media screen and (max-width: 550px) {
-  .menu-header {
-    font-size: 0.8em;
-    margin-bottom: 0;
-    padding: 0;
-  }
 
   .menu-list {
     flex-direction: column;

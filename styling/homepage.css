@@ -219,7 +219,7 @@ body {
   color: var(--sushi-grey3);
   transition: 0.3s;
   padding: 1em;
-  margin-top: 5em;
+  margin-top: 8em;
   transform: translateX(0.2em);
 }
 
@@ -470,7 +470,7 @@ body {
 
   .carousel-button {
     font-size: 1.5em;
-    margin-top: 7em;
+    margin-top: 12em;
   }
 
   .more-menus {
