@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-translate="title">front page</title>
+    <title data-translate="title">Menu page</title>
     <script src="build/main.js" defer></script>
     <link rel="stylesheet" href="../styling/menu.css"/>
     <link rel="stylesheet" href="../styling/nav.css" />
     <script src="../src/main.js" defer></script>
+    <script src="../src/menu.js" defer></script>
     <script
       src="https://kit.fontawesome.com/ce58f4085c.js"
       crossorigin="anonymous"
@@ -45,44 +46,7 @@
         <button class="select-category-button" data-translate="drinks">Drinks</button>
         <button class="select-category-button" data-translate="dessert">Dessert</button>
       </div>
-      <div class="menu-page-container">
-        <div class="menu-page-placeholder menu" id="menu-one">
-          <section class="image-placeholder">
-            <div class="menu-image" id="menu-one-image"></div>
-          </section>
-          <h3>MENU 1</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-two">
-          <section class="image-placeholder">
-            <div class="menu-image" id="menu-two-image"></div>
-          </section>
-          <h3>MENU 2</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-three">
-          <section class="image-placeholder">
-            <div class="menu-image" id="menu-three-image"></div>
-          </section>
-          <h3>MENU 3</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-four">
-          <section class="image-placeholder">
-            <div class="menu-image" id="menu-four-image"></div>
-          </section>
-          <h3>MENU 4</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-five">
-          <section class="image-placeholder">
-            <div class="menu-image" id="menu-five-image"></div>
-          </section>
-          <h3>MENU 5</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-six">
-          <section class="image-placeholder">
-            <div class="menu-image" id="menu-six-image"></div>
-          </section>
-          <h3>MENU 6</h3>
-        </div>
-      </div>
+      <div class="menu-page-container"></div>
     </main>
     <footer>
       <div class="footer-container">
@@ -113,7 +77,7 @@
       // Translations for menu page
       const translations = {
           "en": {
-              "title": "Home page",
+              "title": "Menu page",
               "restaurant-name": "Tataki",
               "home-link": "Home Page",
               "menu-link": "Menu",
