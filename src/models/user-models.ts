@@ -55,7 +55,6 @@ const registerUser = async (newUser: User): Promise<number> => {
         newUser.username,
         newUser.password_hash,
         newUser.email,
-        newUser.phone_number,
         newUser.user_level_id
     ];
     try {
@@ -90,7 +89,6 @@ const modifyUser = async (user_id: number, modifiedUser: User): Promise<number> 
         modifiedUser.username,
         modifiedUser.password_hash,
         modifiedUser.email,
-        modifiedUser.phone_number,
         modifiedUser.user_level_id,
         user_id
     ];
@@ -131,6 +129,32 @@ const deleteUser = async (user_id: number): Promise<{ success: boolean; error?: 
   }
 };
 
+const selectUsernameAndPassword = async (username: string, password: string): Promise<User | null> => {
+    const sql = 'SELECT * FROM Users WHERE username = ? AND password_hash = ?';
+    try {
+        const [rows]: any = await promisePool.query(sql, [username, password]);
+        if (rows && rows.length > 0) {
+            return rows[0];
+        } else {
+            throw new Error('SelectUsernameAndPassword, User not found');
+        }
+    } catch (e) {
+        console.error('selectUsernameAndPassword error:', (e as Error).message);
+        throw new Error('Database error: ' + (e as Error).message);
+    }
+}
+
+const checkUsernameOrEmailExists = async (username: string, email: string, user_id: number): Promise<boolean> => {
+    const sql = 'SELECT user_id FROM Users WHERE (username = ? OR email = ?) AND user_id != ?';
+    try {
+        const [rows]: any = await promisePool.query(sql, [username, email, user_id]);
+        return rows.length > 0;
+    } catch (e) {
+        console.error('checkUsernameOrEmailExists error:', (e as Error).message);
+        throw new Error('Database error: ' + (e as Error).message);
+    }
+}
 
 
-export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser};
+
+export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUsernameAndPassword, checkUsernameOrEmailExists };
