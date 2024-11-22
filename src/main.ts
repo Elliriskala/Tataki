@@ -1,6 +1,5 @@
 "use strict";
 import translations from "./translations";
-import { selectMenuToDisplay } from './menu.ts';
 
 interface Translations {
   [lang: string]: {
@@ -181,8 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (key && translationsTyped[lang] && (translationsTyped[lang] as { [key: string]: string })[key]) {
       alert(translationsTyped[lang][key]);
     }
-
-    selectMenuToDisplay('lunch');
 });
 
 /*

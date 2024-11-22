@@ -1,21 +1,16 @@
 'use strict';
-
-import { lunchMenus, dinnerMenus, sideMenus, drinkMenus, dessertMenus } from "./menuItems";
-import { MenuItems } from "./types";
-
+import { lunchMenus, dinnerMenus, sideMenus, drinkMenus, dessertMenus } from "/build/menuItems.js";
 // Creating the menus to display 
-
-const displayMenu = (menus: MenuItems[]): void => {
-    const menuContainer = document.querySelector(".menu-container") as HTMLDivElement | null;
-
+const displayMenu = (menus) => {
+    const menuContainer = document.querySelector(".menu-container");
     if (!menuContainer) {
         console.log("Menu container not found");
         return;
     }
 
     menuContainer.innerHTML = "";
-
-    menus.forEach((menu: MenuItems) => {
+    
+    menus.forEach((menu) => {
         const menuCard = document.createElement("div");
         menuCard.classList.add("menu-card");
         menuCard.innerHTML = `
@@ -34,49 +29,37 @@ const displayMenu = (menus: MenuItems[]): void => {
         menuContainer.appendChild(menuCard);
     });
 };
-  
-  // selecting the menus to display based on the button clicked
-  
-  const selectMenuToDisplay = () => {
+// selecting the menus to display based on the button clicked
+const selectMenuToDisplay = () => {
     const lunchButton = document.querySelector(".lunch-button");
     const dinnerButton = document.querySelector(".dinner-button");
     const sideButton = document.querySelector(".sides-button");
     const drinkButton = document.querySelector(".drinks-button");
     const dessertButton = document.querySelector(".desserts-button");
-  
-    if (
-      !lunchButton ||
-      !dinnerButton ||
-      !sideButton ||
-      !drinkButton ||
-      !dessertButton
-    ) {
-      console.log("Buttons not found");
-      return;
+    if (!lunchButton ||
+        !dinnerButton ||
+        !sideButton ||
+        !drinkButton ||
+        !dessertButton) {
+        console.log("Buttons not found");
+        return;
     }
-  
     lunchButton.addEventListener("click", () => {
-      displayMenu(lunchMenus);
+        displayMenu(lunchMenus);
     });
-  
     dinnerButton.addEventListener("click", () => {
-      displayMenu(dinnerMenus);
+        displayMenu(dinnerMenus);
     });
-  
     sideButton.addEventListener("click", () => {
-      displayMenu(sideMenus);
+        displayMenu(sideMenus);
     });
-  
     drinkButton.addEventListener("click", () => {
-      displayMenu(drinkMenus);
+        displayMenu(drinkMenus);
     });
-  
     dessertButton.addEventListener("click", () => {
-      displayMenu(dessertMenus);
+        displayMenu(dessertMenus);
     });
-  };
-  
-  selectMenuToDisplay(); // selecting different menu
-  displayMenu(lunchMenus); // Default menu
-
-  export { displayMenu, selectMenuToDisplay };
+};
+selectMenuToDisplay(); // selecting different menu
+displayMenu(lunchMenus); // Default menu
+//# sourceMappingURL=menu.js.map

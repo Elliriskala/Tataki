@@ -1,40 +1,54 @@
 "use strict";
 
+import { lunchMenus } from "./menuItems";
+import { displayMenu, selectMenuToDisplay } from "./menu";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const menuTracker = document.querySelector(".menu-track") as HTMLDivElement;
+  const menuTracker = document.querySelector(".menu-track") as HTMLDivElement | null;
   const leftArrow = document.querySelector(
     "#carousel-left"
-  ) as HTMLButtonElement;
+  ) as HTMLButtonElement | null;
   const rightArrow = document.querySelector(
     "#carousel-right"
-  ) as HTMLButtonElement;
+  ) as HTMLButtonElement | null;
+
+  if (!menuTracker || !leftArrow || !rightArrow) {
+    console.log("Menu tracker or arrows not found");
+    return;
+  }
 
   let menuPosition = 0; // initial position
-  const menuItems = document.querySelectorAll(
-    ".menu"
-  ) as NodeListOf<HTMLDivElement>;
-  const menuLength = menuItems.length;
 
+  const menuLength = lunchMenus.length;
   const container = menuTracker.parentElement as HTMLDivElement;
 
+  // calculate the width of each menu
   const calculateMenuWidth = () => {
-    const menuStyle = window.getComputedStyle(menuItems[0]);
-    const menuWidth = menuItems[0].offsetWidth;
-    const marginRight = parseInt(menuStyle.marginRight || "0");
-    return menuWidth + marginRight;
-  };
+    const menuItems = document.querySelectorAll(".menu-card");
+    if (menuItems.length > 0) {
+      const menuStyle = window.getComputedStyle(menuItems[0]);
+      const menuWidth = (menuItems[0] as HTMLElement).offsetWidth || 0;
+      const marginRight = parseInt(menuStyle.marginRight || "0", 10);
+      return menuWidth + marginRight;
+    } else {
+      console.log("Menu items not found");
+      return undefined;
+    }
+  }; 
 
   // calculate the number of visible menus
   const calculateVisibleMenus = () => {
     const containerWidth = container.offsetWidth;
     const menuWidth = calculateMenuWidth();
-    return Math.floor(containerWidth / menuWidth);
+    return menuWidth ? Math.floor(containerWidth / menuWidth) : 0;
   };
 
   // function to update the menu positions
   const updateCarousel = () => {
     const menuWidth = calculateMenuWidth();
-    menuTracker.style.transform = `translateX(-${menuPosition * menuWidth}px)`;
+    if (menuWidth !== undefined) {
+      menuTracker.style.transform = `translateX(-${menuPosition * menuWidth}px)`;
+    }
 
     rightArrow.disabled = menuPosition >= menuLength - calculateVisibleMenus();
 
@@ -63,5 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCarousel();
   });
 
-  updateCarousel();
+  displayMenu(lunchMenus);
+  setTimeout(() => {
+    updateCarousel();
+  }, 100);
+
+  selectMenuToDisplay();
 });
