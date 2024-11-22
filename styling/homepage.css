@@ -80,21 +80,20 @@ body {
   color: var(--sushi-grey3);
 }
 
-.menu-header {
+.menus-header {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: var(--soy-sauce);
   padding: 1.5em 0 1em 0;
 }
 
-.menu-header h3 {
+.menus-header h3 {
   margin: 1em;
   display: block;
 }
 
-.menu-header p {
+.menus-header p {
   margin: 0;
   display: block;
 }
@@ -124,91 +123,18 @@ body {
 
 .menu-carousel {
   position: relative;
-  width: 80%;
   margin: auto;
   overflow: hidden; /* hides the overflowing content */
   display: flex;
+  width: 80%;
 }
 
 .menu-track-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
   overflow: hidden;
-  height: 650px;
 }
 
 .menu-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.menu {
-  flex: 0 0 30%;
-  box-sizing: border-box;
-  color: var(--sushi-grey3);
-  background-color: var(--sushi-graphite);
-  border: solid 0.1em var(--sushi-black);
-  border-radius: 1em;
-  text-align: center;
-  margin: 0.5em;
-  padding: 1em;
-  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-}
-
-.menu:hover {
-  transform: scale(1.05);
-}
-
-#menu-one p,
-#menu-two p,
-#menu-three p,
-#menu-four p,
-#menu-five p,
-#menu-six p {
-  margin: auto;
-  padding: 0.5em;
-  width: 80%;
-  font-size: 0.9em;
-}
-
-.image-placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.menu-image {
-  background-size: cover;
-  background-position: center;
-  height: 10em;
-  width: 90%;
-  border-radius: 1em;
-  border: solid 0.1em var(--sushi-black);
-}
-
-#menu-one-image {
-  background-image: url(../img/menu-images/salmon-avocado-roll2.jpg);
-}
-
-#menu-two-image {
-  background-image: url(../img/menu-images/california-roll2.jpg);
-}
-
-#menu-three-image {
-  background-image: url(../img/menu-images/spicy-tuna-maki2.jpg);
-}
-
-#menu-four-image {
-  background-image: url(../img/menu-images/vegan-sushi2.jpg);
-}
-
-#menu-five-image {
-  background-image: url(../img/menu-images/crunchy-shrimp-roll2.jpg);
-}
-
-#menu-six-image {
-  background-image: url(../img/menu-images/dragon-roll.jpg);
+  transition: 0.5s ease-in-out;
 }
 
 .carousel-button {
@@ -217,9 +143,9 @@ body {
   cursor: pointer;
   font-size: 2em;
   color: var(--sushi-grey3);
-  transition: 0.3s;
+  transition: 0.2s;
   padding: 1em;
-  margin-top: 8em;
+  margin-top: 6em;
   transform: translateX(0.2em);
 }
 
@@ -227,6 +153,61 @@ body {
 #carousel-right:hover {
   color: var(--sushi-red2);
   transform: scale(1.2);
+}
+
+.menu-container {
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(auto-fit, minmax(15em, 4fr));
+  margin-bottom: 2em;
+}
+
+.menu-placeholder {
+  background-color: var(--sushi-graphite);
+  border-radius: 1em;
+  border: solid 0.1em var(--sushi-black);
+  padding: 1em;
+  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+  text-align: center;
+  color: var(--sushi-grey3);
+  letter-spacing: -0.6px;
+  margin: 1em 0.3em;
+  font-size: 0.9em;
+}
+
+.menu-header {
+  font-family: "roboto bold";
+  font-size: 1.4em;
+  color: var(--sushi-red2);
+}
+
+.image-placeholder {
+  height: 12em;
+}
+
+.menu-image {
+  border: 0.1em solid var(--sushi-black);
+  border-radius: 1em;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.price, .allergen-info {
+  font-family: "roboto bold";
+  font-size: 1.2em;
+  padding: 0;
+  margin: 0.3em;
+}
+
+.price {
+  color: var(--sushi-red2);
+}
+
+.allergen-info {
+  font-size: 1em;
+  color: var(--sushi-red4);
 }
 
 .more-button,
@@ -353,11 +334,7 @@ body {
   .hero-container {
     height: 50vh;
   }
-  .menu-page-placeholder {
-    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
-  }
-
-  .menu-header {
+  .menus-header {
     width: 90%;
     margin: auto;
     text-align: center;
@@ -409,11 +386,11 @@ body {
     height: 35vh;
   }
 
-  .menu-header {
+  .menus-header {
     font-size: 0.8em;
   }
 
-  .menu-header p {
+  .menus-header p {
     width: 80%;
     text-align: center;
   }
@@ -448,29 +425,17 @@ body {
 }
 
 @media screen and (max-width: 450px) {
-  .menu-header h3 {
+  .menus-header h3 {
     font-size: 1em;
-  }
-  .menu-header p {
-    font-size: 0.9em;
-  }
-  .menu {
-    flex: 0 0 26%;
-    margin: 0.5em;
-  }
-
-  .menu-carousel {
-    width: 100%;
   }
 
   .menu-track-container {
     width: 100%;
-    height: 700px;
   }
 
   .carousel-button {
     font-size: 1.5em;
-    margin-top: 12em;
+    margin-top: 8em;
   }
 
   .more-menus {

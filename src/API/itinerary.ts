@@ -1,6 +1,8 @@
 import { Itinerary, Leg } from '../utils/interfaces';
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 
+const apiKey = process.env.DT_KEY!; 
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
@@ -62,12 +64,14 @@ getLocationButton?.addEventListener('click', () => {
     // method must be POST
     // headers must include 'Content-Type': 'application/json' or 'application/graphql' and 'digitransit-subscription-key': apiKey
     try {
+      console.log(process.env.dtKey);
       const response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'digitransit-subscription-key': process.env.dtKey || '',
+          'digitransit-subscription-key': apiKey
         },
+        
         body: JSON.stringify({
           query: `
           query {

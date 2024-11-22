@@ -1,6 +1,5 @@
 'use strict';
 
-import { displayMenu } from './menu-components';
 
 // selecting the menus to display
 
@@ -15,15 +14,16 @@ export function selectMenuToDisplay(menuName: string) {
 
     lunchButton.addEventListener("click", () => {
         if (menuName === "lunch") {
-            displayMenu();
+            //displayMenu();
         }
     });
 
     dinnerButton.addEventListener("click", () => {
         if (menuName === "dinner") {
-            displayMenu();
+            //displayMenu();
         }
     });
 }
 
-console.log('menu.ts is included!');
+selectMenuToDisplay("lunch");
+console.log("Menu selected");

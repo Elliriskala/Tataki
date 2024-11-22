@@ -25,7 +25,7 @@
           <li><a href="index.html" data-translate="home-link">Home Page</a></li>
           <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
           <li><a href="order.html" data-translate="order-link">Order</a></li>
-          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a><li>
+          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
         </ul>
         <div class="control-buttons">
           <button class="language" id="flag-en">🇬🇧</button>
@@ -39,111 +39,28 @@
         <div class="hero-image"></div>
       </section>
       <div class="menus">
-        <div class="menu-header">
+        <div class="menus-header">
           <h1 data-translate="our-menus">Our menus</h1>
           <p data-translate="explore-menus">Explore our delicious menus and find your favorite!</p>
         </div>
         <div class="menu-list">
-          <button class="select-category-button" data-translate="lunch">Lunch</button>
-          <button class="select-category-button" data-translate="dinner">Dinner</button>
-          <button class="select-category-button" data-translate="sides">Sides</button>
-          <button class="select-category-button" data-translate="drinks">Drinks</button>
-          <button class="select-category-button" data-translate="dessert">Dessert</button>
+          <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
+          <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
+          <button class="select-category-button sides-button" data-translate="sides">Sides</button>
+          <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
+          <button class="select-category-button desserts-button" data-translate="dessert">Dessert</button>
         </div>
         <div class="menu-carousel">
           <div>
-            <button id="carousel-left" class="carousel-button">❮</button>
+            <button id="carousel-left" class="carousel-button" aria-label="Scroll left">❮</button>
           </div>
           <div class="menu-track-container">
             <div class= "menu-track">
-              <div class="menu" id="menu-one">
-                <section class="image-placeholder">
-                  <div class="menu-image" id="menu-one-image"></div>
-                </section>
-                <h3>Kyoto Bliss</h3>
-                <p>
-                  8-piece Spring Petal Roll, 4 pieces of tuna sashimi and wakame salad
-                </p>
-                <p>
-                  <bold>Spring Petal Roll: </bold>Salmon, avocado and cream cheese wrapped in sushi rice and nori, garnished with sesame seeds.<br /><br />
-                  16,90€
-                </p>
-                <p>Allergens: Fish, Milk</p>
-              </div>
-              <div class="menu" id="menu-two">
-                <section class="image-placeholder">
-                  <div class="menu-image" id="menu-two-image"></div>
-                </section>
-                <h3>MENU 2</h3>
-                <p>
-                  Large sushi set with miso soup and green tea<br />
-                  14,90€
-                </p>
-                <p>
-                  Large sashimi set with miso soup and a drink of your choice<br />
-                  18,90€
-                </p>
-              </div>
-              <div class="menu" id="menu-three">
-                <section class="image-placeholder">
-                  <div class="menu-image" id="menu-three-image"></div>
-                </section>
-                <h3>MENU 3</h3>
-                <p>
-                  Large sushi set with miso soup and green tea<br />
-                  14,90€
-                </p>
-                <p>
-                  Large sashimi set with miso soup and a drink of your choice<br />
-                  18,90€
-                </p>
-              </div>
-              <div class="menu" id="menu-four">
-                <section class="image-placeholder">
-                  <div class="menu-image" id="menu-four-image"></div>
-                </section>
-                <h3>MENU 4</h3>
-                <p>
-                  Large sushi set with miso soup and green tea<br />
-                  14,90€
-                </p>
-                <p>
-                  Large sashimi set with miso soup and a drink of your choice<br />
-                  18,90€
-                </p>
-              </div>
-              <div class="menu" id="menu-five">
-                <section class="image-placeholder">
-                  <div class="menu-image" id="menu-five-image"></div>
-                </section>
-                <h3>MENU 5</h3>
-                <p>
-                  Large sushi set with miso soup and green tea<br />
-                  14,90€
-                </p>
-                <p>
-                  Large sashimi set with miso soup and a drink of your choice<br />
-                  18,90€
-                </p>
-              </div>
-              <div class="menu" id="menu-six">
-                <section class="image-placeholder">
-                  <div class="menu-image" id="menu-six-image"></div>
-                </section>
-                <h3>MENU 6</h3>
-                <p>
-                  Large sushi set with miso soup and green tea<br />
-                  14,90€
-                </p>
-                <p>
-                  Large sashimi set with miso soup and a drink of your choice<br />
-                  18,90€
-                </p>
-              </div>
+              <div class="menu-container"></div>
             </div>
           </div>
           <div>
-            <button id="carousel-right" class="carousel-button">❯</button>
+            <button id="carousel-right" class="carousel-button" aria-label="Scroll">❯</button>
           </div>
         </div> 
       </div>

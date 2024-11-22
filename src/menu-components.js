@@ -3,10 +3,10 @@
 import {lunchMenus} from './menuItems';
 
 const displayMenu = () => {
-    const menuContainer = document.querySelector(".menu-page-container") as HTMLDivElement;
+    const menuContainer = document.querySelector(".menu-page-container");
     console.log("Menu Container:", menuContainer);
     lunchMenus.forEach((menu) => {
-      const menuCard = document.createElement("div") as HTMLDivElement;
+      const menuCard = document.createElement("div");
       menuCard.classList.add("menu-card");
       menuCard.innerHTML = `
           <div class="menu-page-placeholder">

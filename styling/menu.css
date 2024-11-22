@@ -95,15 +95,16 @@ body {
   margin-bottom: 3em;
 }
 
-.menu-page-container {
+.menu-container {
   display: grid;
   width: 80%;
   margin: auto;
   grid-template-columns: repeat(auto-fit, minmax(20em, 2fr));
   gap: 1em;
+  margin-bottom: 3em;
 }
 
-.menu-page-placeholder {
+.menu-placeholder {
   background-color: var(--sushi-graphite);
   border-radius: 1em;
   border: solid 0.1em var(--sushi-black);
@@ -111,24 +112,16 @@ body {
   box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
   text-align: center;
   color: var(--sushi-grey3);
-  transition: 0.1s;
   letter-spacing: -1.2px;
-}
-
-.menu-page-placeholder:hover {
-  transform: scale(1.03);
 }
 
 .menu-header {
   font-family: "roboto bold";
   font-size: 1.4em;
-  color: var(--sushi-red3);
+  color: var(--sushi-red2);
 }
 
 .image-placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 12em;
   width: 100%;
 }
@@ -142,20 +135,72 @@ body {
   height: 100%;
 }
 
-.price {
+.price, .allergen-info {
   font-family: "roboto bold";
-  font-size: 1.1em;
+  font-size: 1.2em;
+  padding: 0;
+  margin: 0.3em;
+}
+
+.price {
   color: var(--sushi-red2);
 }
 
+.allergen-info {
+  font-size: 1em;
+  color: var(--sushi-red4);
+}
+
+.allergens {
+  width: 50%;
+  margin: auto;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--sushi-black);
+  padding: 3em;
+  border-radius: 1em;
+  color: var(--sushi-grey3);
+  text-align: center;
+}
+
+.allergen-header {
+  text-align: center;
+  font-family: "roboto bold";
+  color: var(--sushi-red3);
+  font-size: 1.6em;
+}
+
+.allergen-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  text-align: left;
+}
+
+.allergen-list li {
+  color: var(--sushi-red4);
+}
+
+
+
 @media screen and (max-width: 820px) {
-  .menu-page-placeholder {
+  .menu-placeholder {
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   }
+
+  .image-placeholder {
+    height: 17em;
+  }
+
+  .allergens {
+    width: 60%;
+}
 }
 
 @media screen and (max-width: 550px) {
-
   .menu-list {
     flex-direction: column;
     width: 50%;
@@ -174,5 +219,9 @@ body {
   .select-category-button:hover {
     transition: all 0.3s ease;
     transform: scale(1.1);
+  }
+
+  .image-placeholder {
+    height: 14em;
   }
 }
