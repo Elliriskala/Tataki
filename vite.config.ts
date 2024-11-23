@@ -9,12 +9,14 @@ dotenv.config();
 export default defineConfig({
   base: "./",
   root: "./HTML", // Set the root to your HTML directory
+  envDir: "./",
+  publicDir: "./public",
   build: {
     outDir: "../dist", // Output the built files outside the HTML folder
     rollupOptions: {
         external: [],
       input: {
-        main: path.resolve(__dirname, "HTML/index.html"), // Specify your main HTML file
+        main: path.resolve(__dirname, "HTML/index.html"), 
         about: path.resolve(__dirname, "HTML/about.html"),
         admin: path.resolve(__dirname, "HTML/admin.html"),
         contact: path.resolve(__dirname, "HTML/contact.html"),

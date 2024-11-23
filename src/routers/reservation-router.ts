@@ -5,12 +5,12 @@ import authenticateToken from '../middlewares/authentication.ts';
 const reservationRouter = express.Router();
 
 reservationRouter
-.get('/', authenticateToken, getReservations)
+.get('/', getReservations)
 .post('/', postReservation);
 
 reservationRouter.get('/:reservation_id', authenticateToken, getReservationById);
 
-reservationRouter.get('/user/:user_id', authenticateToken, getReservationsByUserId);
+reservationRouter.get('/:user_id', authenticateToken, getReservationsByUserId);
 
 reservationRouter
 .delete('/:reservation_id', authenticateToken, deleteReservationById)

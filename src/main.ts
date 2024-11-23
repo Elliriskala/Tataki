@@ -1,4 +1,3 @@
-"use strict";
 import translations from "./translations";
 
 interface Translations {
@@ -217,4 +216,11 @@ const savedLang = localStorage.getItem("language") || "en";
 changeLanguage(savedLang);
 */
   });
+});
+
+const fetchReservations = document.getElementById("fetchReservations") as HTMLButtonElement;
+fetchReservations?.addEventListener("click", async () => {
+  const response = await fetch("/api/reservations");
+  const reservations = await response.json();
+  console.log(reservations);
 });
