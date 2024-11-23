@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
+// import { nodePolyfills } from "vite-plugin-node-polyfills";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -30,7 +30,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    nodePolyfills(),
+    // nodePolyfills(),
     VitePWA({
       registerType: "autoUpdate",
       devOptions: { enabled: true },

@@ -16,3 +16,4 @@ addMoreToCart.addEventListener('click', () => {
 removeFromCart.addEventListener('click', () => {
     console.log('Item removed from cart');
 });
+//# sourceMappingURL=order.js.map

@@ -30,4 +30,13 @@ interface Itinerary {
     name: string;
   }
 
-export type { Itinerary, Leg, Trip, Location, Stop };
+  interface MenuItems {
+    menuName: string;
+    menuDescription: string;
+    price: string;
+    allergens: string;
+    menuImage: string;
+  }
+
+
+export type { Itinerary, Leg, Trip, Location, Stop, MenuItems };

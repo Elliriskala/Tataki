@@ -1,19 +1,17 @@
 {
     "compilerOptions": {
       "moduleResolution": "node",
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "target": "ESNext",
+      "outDir": "./build",
+      "target": "ES6",
       "module": "ESNext",
       "noImplicitAny": true,
       "strict": true,
       "esModuleInterop": true,
       "allowUmdGlobalAccess": true,
       "allowSyntheticDefaultImports": true,
-      
       "allowImportingTsExtensions": true,
       "noEmit": true,
-      
+      "sourceMap": true,
       "resolveJsonModule": true,
       "isolatedModules": true,
       "skipLibCheck": true,

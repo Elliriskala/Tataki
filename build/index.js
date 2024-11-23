@@ -47,3 +47,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     updateCarousel();
 });
+//# sourceMappingURL=index.js.map

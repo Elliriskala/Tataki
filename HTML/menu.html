@@ -4,11 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-translate="title">front page</title>
-    <script src="build/main.js" defer></script>
+    <title data-translate="title">Menu page</title>
+    <script type="module" src="/build/menu.js"></script>
     <link rel="stylesheet" href="../styling/menu.css"/>
     <link rel="stylesheet" href="../styling/nav.css" />
-    <script src="../src/main.js" defer></script>
     <script
       src="https://kit.fontawesome.com/ce58f4085c.js"
       crossorigin="anonymous"
@@ -39,49 +38,27 @@
         <h1 data-translate="menu">Menu</h1>
       </div>
       <div class="menu-list">
-        <button class="select-category-button" data-translate="lunch">Lunch</button>
-        <button class="select-category-button" data-translate="dinner">Dinner</button>
-        <button class="select-category-button" data-translate="sides">Sides</button>
-        <button class="select-category-button" data-translate="drinks">Drinks</button>
-        <button class="select-category-button" data-translate="dessert">Dessert</button>
+        <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
+        <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
+        <button class="select-category-button sides-button" data-translate="sides">Sides</button>
+        <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
+        <button class="select-category-button desserts-button" data-translate="dessert">Dessert</button>
       </div>
-      <div class="menu-page-container">
-        <div class="menu-page-placeholder menu" id="menu-one">
-          <section class="image-placeholder">
-            <div class="menu-image"></div>
-          </section>
-          <h3>MENU 1</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-two">
-          <section class="image-placeholder">
-            <div class="menu-image"></div>
-          </section>
-          <h3>MENU 2</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-three">
-          <section class="image-placeholder">
-            <div class="menu-image"></div>
-          </section>
-          <h3>MENU 3</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-four">
-          <section class="image-placeholder">
-            <div class="menu-image"></div>
-          </section>
-          <h3>MENU 4</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-five">
-          <section class="image-placeholder">
-            <div class="menu-image"></div>
-          </section>
-          <h3>MENU 5</h3>
-        </div>
-        <div class="menu-page-placeholder menu" id="menu-six">
-          <section class="image-placeholder">
-            <div class="menu-image"></div>
-          </section>
-          <h3>MENU 6</h3>
-        </div>
+      <div class="menu-container"></div>
+      <div class="allergens">
+        <h2 class="allergen-header" data-translate="allergen-header">Allergen information</h2>
+        <p data-translate="allergen-info">
+          At our restaurant, we are committed to ensuring that all our customers can enjoy a safe and delicious dining experience. We strive to provide accurate and up-to-date allergen information for each of our menu items. 
+        </p>
+        <ul class="allergen-list">
+          <li data-translate="egg">E = contains egg</li>
+          <li data-translate="fish">F = contains fish</li>
+          <li data-translate="gluten">G = contains gluten</li>
+          <li data-translate="milk">M = contains milk</li>
+          <li data-translate="soy">S = contains soy</li>
+        </ul>
+        <p data-translate="allergen-info2">We make every effort to prevent cross-contamination in our kitchen, but please note that we use shared cooking and preparation areas. If you or someone in your party has a food allergy or intolerance, please inform our staff before placing your order, and we will be happy to assist you with your selection.</p>
+        <p data-translate="allergen-info3">Your safety and satisfaction are our top priorities. If you have any questions about allergens or need more information, feel free to ask our staff.</p>
       </div>
     </main>
     <footer>
@@ -113,7 +90,7 @@
       // Translations for menu page
       const translations = {
           "en": {
-              "title": "Home page",
+              "title": "Menu page",
               "restaurant-name": "Tataki",
               "home-link": "Home Page",
               "menu-link": "Menu",
@@ -126,6 +103,15 @@
               "sides": "Sides",
               "drinks": "Drinks",
               "dessert": "Dessert",
+              "alleren-header": "Allergen information",
+              "allergen-info": "At our restaurant, we are committed to ensuring that all our customers can enjoy a safe and delicious dining experience. We strive to provide accurate and up-to-date allergen information for each of our menu items.",
+              "egg": "E = contains egg",
+              "fish": "F = contains fish",
+              "gluten": "G = contains gluten",
+              "milk": "M = contains milk",
+              "soy": "S = contains soy",
+              "alleren-info2": "We make every effort to prevent cross-contamination in our kitchen, but please note that we use shared cooking and preparation areas. If you or someone in your party has a food allergy or intolerance, please inform our staff before placing your order, and we will be happy to assist you with your selection.",
+              "allergen-info3": "Your safety and satisfaction are our top priorities. If you have any questions about allergens or need more information, feel free to ask our staff.",
               "contact-link": "Contact us",
               "about-link": "About us",
               "review-link": "Review us"
@@ -144,39 +130,20 @@
               "sides": "Lisukkeet",
               "drinks": "Juomat",
               "dessert": "Jälkiruoka",
+              "alleren-header": "Allergeenitiedot",
+              "allergen-info": "Ravintolassamme sitoudumme varmistamaan, että kaikki asiakkaamme voivat nauttia turvallisesta ja herkullisesta ruokailukokemuksesta. Pyrimme tarjoamaan tarkkoja ja ajan tasalla olevia allergeenitietoja jokaisesta ruokalistamme tuotteesta.",
+              "egg": "E = sisältää munaa",
+              "fish": "F = sisältää kalaa",
+              "gluten": "G = sisältää gluteenia",
+              "milk": "M = sisältää maitoa",
+              "soy": "S = sisältää soijaa",
+              "alleren-info2": "Teemme parhaamme estääksemme risti kontaminaatiota keittiössämme, mutta huomioithan, että käytämme yhteisiä ruoanlaitto- ja valmistelualueita. Jos sinulla tai jollakin seurueestasi on ruoka-aineallergia tai intoleranssi, ilmoitathan siitä henkilökunnallemme ennen tilauksen tekemistä, niin pystymme auttamaan valinnan tekemisessä.",
+              "allergen-info3": "Turvallisuutesi ja tyytyväisyytesi ovat meille ensisijaisen tärkeitä. Jos sinulla on kysyttävää allergeeneista tai tarvitset lisätietoja, älä epäröi kysyä henkilökunnaltamme.", 
               "contact-link": "Ota yhteyttä",
               "about-link": "Tietoja meistä",
               "review-link": "Jätä arvostelu"
           }
       };
-  
-      // Function to change the language and store it in localStorage
-      function changeLanguage(lang) {
-          // Store the selected language in localStorage
-          localStorage.setItem('language', lang);
-  
-          // Update the text content based on the selected language
-          const elements = document.querySelectorAll('[data-translate]');
-          elements.forEach(element => {
-              const translationKey = element.getAttribute('data-translate');
-              if (translations[lang] && translations[lang][translationKey]) {
-                  element.textContent = translations[lang][translationKey];
-              }
-          });
-      }
-  
-      // Check if there's a language stored in localStorage
-      const storedLang = localStorage.getItem('language');
-      if (storedLang) {
-          changeLanguage(storedLang);
-      } else {
-          // Default language (English) if none is stored
-          changeLanguage('en');
-      }
-  
-      // Language buttons event listeners
-      document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
-      document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
   </script>
   </body>
 </html>
