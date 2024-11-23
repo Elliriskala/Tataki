@@ -1,5 +1,8 @@
 import { Itinerary, Leg } from '../utils/interfaces';
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+const apiKey: string = import.meta.env.VITE_DT_KEY;
 
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
@@ -66,8 +69,9 @@ getLocationButton?.addEventListener('click', () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'digitransit-subscription-key': process.env.dtKey || '',
+          'digitransit-subscription-key': apiKey
         },
+        
         body: JSON.stringify({
           query: `
           query {
@@ -190,3 +194,5 @@ getLocationButton?.addEventListener('click', () => {
     const date = new Date(timestamp);
     return date.toLocaleString(); // Converts the timestamp to a human-readable date and time
   }
+
+export {};

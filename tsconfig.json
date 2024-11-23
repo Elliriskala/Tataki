@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
       "moduleResolution": "node",
-      "outDir": "./build",
+      "outDir": "./dist",
+      "rootDir": "./src",
       "target": "ESNext",
       "module": "ESNext",
       "noImplicitAny": true,
@@ -12,6 +13,7 @@
       
       "allowImportingTsExtensions": true,
       "noEmit": true,
+      
       "resolveJsonModule": true,
       "isolatedModules": true,
       "skipLibCheck": true,
@@ -27,5 +29,6 @@
       ]
 
     },
-    "include": ["./src/**/*"]
+    "include": ["src/**/*.ts", "vite-env.d.ts"],
+    "exclude": ["node_modules"]
 }
