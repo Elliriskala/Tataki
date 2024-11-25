@@ -1,12 +1,19 @@
-import { Itinerary, Leg } from '../utils/interfaces';
+import { Itinerary, Leg } from '../utils/interfaces.ts';
+//import { env } from '../envZod.ts';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-const apiKey: string = import.meta.env.VITE_DT_KEY;
+const apiKey: string | undefined = process.env.VITE_DT_KEY!;
+if (apiKey) {
+  console.log('API key is set');
+} else {
+  console.error('API key is not set');
+}
 
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
+import 'dotenv/config';
 // unfortunately, I will not provide the API key for everyone to use. You can get your own API key from Digitransit
 
 const options = {

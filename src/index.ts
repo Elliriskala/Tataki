@@ -1,7 +1,5 @@
-"use strict";
-
-import { lunchMenus } from "./menuItems";
-import { displayMenu, selectMenuToDisplay } from "./menu";
+import { lunchMenus } from "./menuItems.ts";
+import { displayMenu, selectMenuToDisplay } from "./menu.ts";
 
 document.addEventListener("DOMContentLoaded", () => {
   const menuTracker = document.querySelector(".menu-track") as HTMLDivElement | null;

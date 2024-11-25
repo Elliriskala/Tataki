@@ -1,6 +1,6 @@
 "use strict";
 
-import { MenuItems } from "./types";
+import { MenuItems } from "./types.ts";
 
 const lunchMenus: MenuItems[] = [
   {

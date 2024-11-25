@@ -94,20 +94,20 @@ interface Reservation {
 }
 
 interface FoodReview {
-  review_id: number;
+  review_id?: number;
   user_id: number;
   menu_id: number;
   review: string;
   star_rating: number;
-  created_at: Date;
+  created_at?: Date;
 }
 
 interface RestaurantReview {
-  review_id: number;
+  review_id?: number;
   user_id: number;
   review: string;
   star_rating: number;
-  created_at: Date;
+  created_at?: Date;
 }
 
 interface AuthenticatedRequest extends Request {

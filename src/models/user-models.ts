@@ -1,5 +1,5 @@
 import { promisePool } from "../database.ts";
-import { User } from "../utils/interfaces";
+import { User } from "../utils/interfaces.ts";
 
 /**
  * 

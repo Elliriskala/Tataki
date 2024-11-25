@@ -1,4 +1,4 @@
-import translations from "./translations";
+import translations from "./translations.ts";
 
 interface Translations {
   [lang: string]: {
@@ -174,53 +174,65 @@ document.addEventListener("DOMContentLoaded", () => {
       guestButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
       guestInput.value = button.getAttribute("guests-input") || "";
-    const lang = localStorage.getItem("language") || "en";
-    const key = button.getAttribute("data-translate");
-    if (key && translationsTyped[lang] && (translationsTyped[lang] as { [key: string]: string })[key]) {
-      alert(translationsTyped[lang][key]);
-    }
+  const lang = localStorage.getItem("language") || "en";
+  const key = button.getAttribute("data-translate");
+  if (key && translationsTyped[lang] && (translationsTyped[lang] as { [key: string]: string })[key]) {
+    alert(translationsTyped[lang][key]);
+  }
+  });
 });
 
-/*
+
 function changeLanguage(lang: string) {
   const elements = document.querySelectorAll("[data-translate]");
   elements.forEach((el) => {
-    const key = el.getAttribute("data-translate");
-    if (key && translations[lang] && translations[lang][key]) {
+    const key = el.getAttribute("data-translate") as keyof Translations[string];
+    if (key && translationsTyped[lang] && translationsTyped[lang][key]) {
       // Handle text updates for non-input elements
       if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") {
-        (el as HTMLElement).innerText = translations[lang][key];
+        (el as HTMLElement).innerText = translationsTyped[lang][key];
       } else {
         // Update placeholder for input or textarea elements
-        (el as HTMLInputElement | HTMLTextAreaElement).placeholder = translations[lang][key];
+        (el as HTMLInputElement | HTMLTextAreaElement).placeholder = translationsTyped[lang][key];
       }
+    } else {
+      console.warn(`Missing translation for key: ${key} in language: ${lang}`);
     }
   });
 
   localStorage.setItem("language", lang);
+
+  // Optional: Highlight selected flag
+  updateFlagHighlight(lang);
 }
 
+function updateFlagHighlight(selectedLang: string) {
+  document.querySelectorAll(".flag").forEach(flag => {
+    flag.classList.remove("active");
+  });
+  document.getElementById(`flag-${selectedLang}`)?.classList.add("active");
+}
 
 // Event listeners for language buttons
-const flagEn = document.getElementById("flag-en");
-if (flagEn) {
-  flagEn.addEventListener("click", () => changeLanguage("en"));
-}
-const flagFi = document.getElementById("flag-fi");
-if (flagFi) {
-  flagFi.addEventListener("click", () => changeLanguage("fi"));
-}
+["en", "fi"].forEach(lang => {
+  const flag = document.getElementById(`flag-${lang}`);
+  if (flag) {
+    flag.addEventListener("click", () => changeLanguage(lang));
+  }
+});
 
 // Load saved language from localStorage
 const savedLang = localStorage.getItem("language") || "en";
 changeLanguage(savedLang);
-*/
-  });
-});
+
 
 const fetchReservations = document.getElementById("fetchReservations") as HTMLButtonElement;
+
 fetchReservations?.addEventListener("click", async () => {
-  const response = await fetch("/api/reservations");
+  const response = await fetch("http://127.0.0.1:3000/api/reservations", {
+    method: "GET",  // Specify the HTTP method (GET is default, but it's good to be explicit)
+  });
   const reservations = await response.json();
   console.log(reservations);
+});
 });

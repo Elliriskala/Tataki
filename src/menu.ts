@@ -1,7 +1,7 @@
 'use strict';
 
-import { lunchMenus, dinnerMenus, sideMenus, drinkMenus, dessertMenus } from "./menuItems";
-import { MenuItems } from "./types";
+import { lunchMenus, dinnerMenus, sideMenus, drinkMenus, dessertMenus } from "./menuItems.ts";
+import { MenuItems } from "./types.ts";
 
 // Creating the menus to display 
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Sushi Restaurant</title>
+    <link rel="stylesheet" href="/contact.css">
+    <link rel="stylesheet" href="/nav.css">
+    <script src="/src/main.ts" type="module"></script>
+    <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+    <script type="module" src="/src/API/itinerary.ts"></script>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="logo">
+            <button class="hamburger" data-translate="hamburger">☰</button>
+            <p data-translate="restaurant-name">Tataki</p>
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+            <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+            <li><a href="order.html" data-translate="order-link">Order</a></li>
+            <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
+        </ul>
+        <div class="control-buttons">
+            <button type="button" class="language" aria-label="English" id="flag-en" data-translate="english-flag">🇬🇧</button>
+            <button type="button" class="language" aria-label="Finnish" id="flag-fi" data-translate="finnish-flag">🇫🇮</button>
+            <button type="button" title="login/register" aria-label="Login/Register" class="login"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
+        </div>
+    </nav>
+    <main>
+        <div class="about-sections">
+            <section class="contact-section">
+                <h1 data-translate="contact-title">Contact Us</h1>
+                <ul>
+                    <li data-translate="address">Address: 123 Street, Helsinki, Finland</li>
+                    <li data-translate="phone">Phone: 123456789</li>
+                    <li data-translate="email">Email: <a href="mailto:ravintolatataki@gmail.com">ravintolatataki@gmail.com</a></li>
+                </ul>
+            </section>
+            <section class="map-section">
+                <h1 data-translate="find-us">Find Us</h1>
+                <div class="map"><h2 data-translate="map-placeholder">Map comes here</h2></div>
+            </section>
+            <section class="itinerary-section">
+              <h1 data-translate="itinerary-title">Your itinerary to Tataki</h1>
+              <button id="getLocation" data-translate="use-location">Use my location</button>
+              <form id="itineraryForm" style="display: none;">
+                <input type="hidden" id="toLat" placeholder="Tataki Latitude" value="60.1699"><br>
+                <input type="hidden" id="toLon" placeholder="Tataki Longitude" value="24.9384"><br>
+                <input type="hidden" id="fromLat" placeholder="Your Latitude" value=""><br>
+                <input type="hidden" id="fromLon" placeholder="Your Longitude" value=""><br>
+                <input type="hidden" id="walkSpeed" value="1.7" step="0.1"><br>
+                <button type="submit" data-translate="plan-itinerary">Plan Your Itinerary</button>
+              </form>
+              <div id="itineraryResults">
+                <h2 data-translate="itinerary-results">Itinerary Results</h2>
+                <ul id="itineraryList"></ul>
+              </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-logo">
+            <p data-translate="restaurant-name">Tataki</p>
+          </div>
+          <div class="footer-nav">
+              <ul>
+                  <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+                  <li><a href="about.html" data-translate="about-link">About us</a></li>
+                  <li><a href="review.html" data-translate="review-link">Review us</a></li>
+              </ul>
+          </div>
+          <div class="social-medias">
+            <ul>
+              <li id="facebook"><a href=""></a></li>
+              <label for="facebook">
+                <i class="fa-brands fa-square-facebook" aria-hidden="true" data-translate="facebook-icon"></i>
+              </label>
+              <li id="instagram"><a href=""></a></li>
+              <label for="instagram">
+                <i class="fa-brands fa-square-instagram" aria-hidden="true" data-translate="instagram-icon"></i>
+              </label>
+            </ul>
+          </div>
+        </div>
+    </footer>
+</body>
+</html>
