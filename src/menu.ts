@@ -53,7 +53,7 @@ const displayMenu = (menus: Menu[]): void => {
                             <div>
                                     <h3 class="menu-header">${menu.course_name}</h3>
                                     <p>${menu.course_description}</p>
-                                    <p class="price">${menu.price}</p>
+                                    <p class="price">${menu.price}€</p>
                                     <p class="allergen-info">Allergens: ${allergens}</p>
                             </div>
                     </div>
@@ -87,6 +87,7 @@ const selectMenuToDisplay = () => {
   lunchButton.addEventListener("click", async () => {
     const lunchMenus = await fetchMenuItemsByCategory("lunch");
     displayMenu(lunchMenus);
+    console.log("lunch button clicked");
   });
 
   dinnerButton.addEventListener("click", async () => {

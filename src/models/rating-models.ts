@@ -1,4 +1,4 @@
-import { FoodReview, RestaurantReview } from "../utils/interfaces";
+import { FoodReview, RestaurantReview } from "../utils/interfaces.ts";
 import { promisePool } from "../database.ts";
 
 /**

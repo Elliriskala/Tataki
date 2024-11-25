@@ -1,5 +1,5 @@
 import { promisePool } from "../database.ts";
-import { Reservation } from "../utils/interfaces";
+import { Reservation } from "../utils/interfaces.ts";
 
 /**
  * 

@@ -1,7 +1,7 @@
-import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists} from "../models/user-models"; 
-import { User, ModifiedUser} from "../utils/interfaces";
+import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists} from "../models/user-models.ts"; 
+import { User, ModifiedUser} from "../utils/interfaces.ts";
 import { Response } from 'express';
-import { AuthenticatedRequest as Request } from '../utils/interfaces';
+import { AuthenticatedRequest as Request } from '../utils/interfaces.ts';
 
 const getUsers = async (_req: Request, res: Response): Promise<void> => {
     try {
@@ -44,7 +44,7 @@ const postUser = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-const modifyUserById = async (req: Request, res: Response): Promise<Response> => {
+const modifyUserById = async (req: Request, res: Response): Promise<void> => {
     const id: number = parseInt(req.params.id);
     const moddedUser: ModifiedUser = {
       username: req.body.username,
@@ -57,12 +57,12 @@ const modifyUserById = async (req: Request, res: Response): Promise<Response> =>
       // Fetch the user to validate ownership
       const item: User | null = await fetchUserById(id);
       if (!item) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
       }
   
       // Check if the requesting user is allowed to modify this user
-      if (!req.user || item.user_id !== (req.user as User).user_id && (req.user as User).user_level_id !== 1) {
-        return res.status(403).json({ message: 'Only admins can modify other users.' });
+      if (!req.user || item?.user_id !== (req.user as User).user_id && (req.user as User).user_level_id !== 1) {
+        res.status(403).json({ message: 'Only admins can modify other users.' });
       }
   
       // Check if the new username or email already exists for another user
@@ -72,19 +72,19 @@ const modifyUserById = async (req: Request, res: Response): Promise<Response> =>
         id
       );
       if (isConflict) {
-        return res.status(409).json({ message: 'Username or email is already taken' });
+        res.status(409).json({ message: 'Username or email is already taken' });
       }
   
       // Update the user
       const result: number = await modifyUser(id, moddedUser);
       if (result > 0) {
-        return res.status(200).json({ message: 'User modified', id });
+        res.status(200).json({ message: 'User modified', id });
       } else {
-        return res.status(500).json({ message: 'Failed to modify user' });
+        res.status(500).json({ message: 'Failed to modify user' });
       }
     } catch (e: any) {
       console.error('modifyUserById', e.message);
-      return res.status(500).json({ message: 'Error in modifyUserById database query' });
+      res.status(500).json({ message: 'Error in modifyUserById database query' });
     }
   };
 

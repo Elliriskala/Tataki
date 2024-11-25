@@ -98,42 +98,38 @@ body {
   display: block;
 }
 
-.menu-list {
-  display: flex;
-  justify-content: center;
-  padding: 1em;
+.carousel {
+  text-align: center;
+  position: relative;
 }
 
-.select-category-button {
+.carousel h2 {
+  margin: auto;
   padding: 1em;
-  margin: 0.5em;
-  border: 0.1em solid var(--sushi-black);
-  background-color: var(--sushi-graphite);
-  color: var(--sushi-grey3);
-  border-radius: 0.5em;
-  transition: 0.3s;
-  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-}
-
-.select-category-button:hover {
-  background-color: var(--soy-sauce);
-  transform: scale(1.15);
-  color: var(--sushi-red4);
+  border-bottom: 0.1em solid var(--sushi-red2);
+  border-bottom-style: groove;
+  width: 60%;
+  color: var(--sushi-red2);
+  text-shadow: #0b090a 0.1em 0.1em 0.1em;
 }
 
 .menu-carousel {
   position: relative;
   margin: auto;
   overflow: hidden; /* hides the overflowing content */
-  display: flex;
-  width: 80%;
+  width: 70%;
 }
 
 .menu-track-container {
-  overflow: hidden;
+  margin: 1em;
+}
+
+.menu-track-container::-webkit-scrollbar {
+  display: none;
 }
 
 .menu-track {
+  gap: 0.5em;
   transition: 0.5s ease-in-out;
 }
 
@@ -145,8 +141,19 @@ body {
   color: var(--sushi-grey3);
   transition: 0.2s;
   padding: 1em;
-  margin-top: 6em;
+  margin: 0.5em;
   transform: translateX(0.2em);
+  position: absolute;
+  top: 45%;
+  z-index: 10;
+}
+
+#carousel-left {
+  left: 5%;
+}
+
+#carousel-right {
+  right: 5%;
 }
 
 #carousel-left:hover,
@@ -156,10 +163,14 @@ body {
 }
 
 .menu-container {
-  display: grid;
-  margin: auto;
-  grid-template-columns: repeat(auto-fit, minmax(15em, 4fr));
-  margin-bottom: 2em;
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+}
+
+.menu-card {
+  flex: 0 0 300px;
+  max-width: 300px;
 }
 
 .menu-placeholder {
@@ -171,7 +182,7 @@ body {
   text-align: center;
   color: var(--sushi-grey3);
   letter-spacing: -0.6px;
-  margin: 1em 0.3em;
+  margin: 0.3em;
   font-size: 0.9em;
 }
 
@@ -340,16 +351,6 @@ body {
     text-align: center;
   }
 
-  .menu-carousel {
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-  }
-
-  .menu-track-container {
-    width: 100%;
-  }
-
   .menu {
     flex: 0 0 29%;
     margin: 0.6em;
@@ -395,23 +396,17 @@ body {
     text-align: center;
   }
 
-  .menu-list {
-    flex-direction: column;
-    width: 50%;
-    margin: auto;
+  .menu-card {
+    flex: 0 0 250px;
+    max-width: 250px;
   }
 
-
-  .select-category-button {
-    padding: 0.5em;
-    margin: 0.3em;
-    font-size: 0.8em;
-    transition: 0.2s;
+  #carousel-left {
+    left: 0;
   }
 
-  .select-category-button:hover {
-    transition: all 0.3s ease;
-    transform: scale(1.1);
+  #carousel-right {
+    right: 0;
   }
 
   .aboutus {
@@ -429,13 +424,8 @@ body {
     font-size: 1em;
   }
 
-  .menu-track-container {
-    width: 100%;
-  }
-
   .carousel-button {
     font-size: 1.5em;
-    margin-top: 8em;
   }
 
   .more-menus {

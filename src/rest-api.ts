@@ -1,5 +1,8 @@
 import express from 'express';
 import reservationRouter from './routers/reservation-router';
+import ratingRouter from './routers/rating-router.ts';
+import userRouter from './routers/user-router.ts';
+import authRouter from './routers/auth-router.ts';
 import menuRouter from './routers/menu-router';
 
 
@@ -11,16 +14,15 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-/*
+
 app.use('/api/users', userRouter);
 
+app.use('/api/reservations', reservationRouter);
 app.use('/api/ratings', ratingRouter);
 app.use('/api/auth', authRouter);
-*/
 
 app.use('/api/menus', menuRouter);
 
-app.use('/api/reservations', reservationRouter);
 
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
