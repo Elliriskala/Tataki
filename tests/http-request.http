@@ -1,0 +1,5 @@
+## Menu resource
+
+## getting menus based on a category
+
+GET http://localhost:3000/api/menus:category=lunch

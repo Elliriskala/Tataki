@@ -1,10 +1,11 @@
 "use strict";
 
-import { lunchMenus } from "./menuItems";
-import { displayMenu, selectMenuToDisplay } from "./menu";
+import { fetchMenuItemsByCategory, selectMenuToDisplay } from "./menu";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const menuTracker = document.querySelector(".menu-track") as HTMLDivElement | null;
+  const menuTracker = document.querySelector(
+    ".menu-track"
+  ) as HTMLDivElement | null;
   const leftArrow = document.querySelector(
     "#carousel-left"
   ) as HTMLButtonElement | null;
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let menuPosition = 0; // initial position
 
-  const menuLength = lunchMenus.length;
+  const menuLength = 6;
   const container = menuTracker.parentElement as HTMLDivElement;
 
   // calculate the width of each menu
@@ -34,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Menu items not found");
       return undefined;
     }
-  }; 
+  };
 
   // calculate the number of visible menus
   const calculateVisibleMenus = () => {
@@ -77,10 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCarousel();
   });
 
-  displayMenu(lunchMenus);
-  setTimeout(() => {
-    updateCarousel();
-  }, 100);
+  selectMenuToDisplay(); // selecting different menu
+  fetchMenuItemsByCategory("lunch");
 
-  selectMenuToDisplay();
 });
+

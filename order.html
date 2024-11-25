@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate="title">front page</title>
+    <link rel="stylesheet" href="/styling/order.css" />
+    <link rel="stylesheet" href="/styling/nav.css" />
+    <script type="module" src="src/main.ts"></script>
+    <script type="module" src="src/order.ts"></script>
+    <script
+      src="https://kit.fontawesome.com/ce58f4085c.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="menu-page-body">
+    <header>
+      <nav class="navigation">
+        <div class="logo">
+          <button class="hamburger">☰</button>
+          <p>Tataki</p>
+        </div>
+        <ul class="nav-list">
+          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a><li>
+        </ul>
+        <div class="control-buttons">
+          <button class="language" id="flag-en">🇬🇧</button>
+          <button class="language" id="flag-fi">🇫🇮</button>
+          <button class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
+        </div>
+      </nav>
+    </header>
+    <main class="menu-page">
+      <div class="menus-header">
+        <h1 data-translate="order">Order</h1>
+      </div>
+      <div class="menu-list">
+        <button class="select-category-button" data-translate="lunch">Lunch</button>
+        <button class="select-category-button" data-translate="dinner">Dinner</button>
+        <button class="select-category-button" data-translate="sides">Sides</button>
+        <button class="select-category-button" data-translate="drinks">Drinks</button>
+        <button class="select-category-button" data-translate="dessert">Dessert</button>
+      </div>
+      <div class="order-page-placeholder">
+        <div class="order-menu-placeholder" id="menu-one">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image" id="menu-one-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>Sakura set</h3>
+            <p>
+              Sushi set with miso soup and green tea<br />
+              <br />
+              12,90€
+            </p>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-one-checkbox" />
+            <label for="menu-one-checkbox" class="checkbox-label">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-two">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image" id="menu-two-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 2</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-two-checkbox" />
+            <label for="menu-two-checkbox" class="checkbox-label">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-three">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image" id="menu-three-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 3</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-three-checkbox" />
+            <label for="menu-three-checkbox" class="checkbox-label">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-four">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image" id="menu-four-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 4</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-four-checkbox" />
+            <label for="menu-three-checkbox" class="checkbox-label">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-five">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image" id="menu-five-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 5</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-five-checkbox" />
+            <label for="menu-three-checkbox" class="checkbox-label">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
+            </label>
+          </div>
+        </div>
+        <div class="order-menu-placeholder" id="menu-six">
+          <div>
+            <section class="order-image-placeholder">
+              <div class="order-menu-image" id="menu-six-image"></div>
+            </section>
+          </div>
+          <div class="order-menu">
+            <h3>MENU 6</h3>
+          </div>
+          <div class="order-checkbox">
+            <input type="checkbox" class="select-item-checkbox" id="menu-six-checkbox" />
+            <label for="menu-three-checkbox" class="checkbox-label">
+              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <h1 class="your-order-header" data-translate="your-order">Your order:</h1>
+      <div class="order-info">
+        <div class="your-order">
+          <div class="order-content">
+            <table class="order-table">
+              <tr>
+                <th data-translate="menu">Menu</th>
+                <th></th>
+                <th data-translate="price">Price</th>
+                <th data-translate="qty">Qty</th>
+              </tr>
+              <tr>
+      
+                <td>Sakura set:</td>
+                <td>Sushi set with miso soup and green tea</td>
+                <td>12,90€</td>
+                <td>
+                  <div class="qty-checkbox">
+                    <input type="checkbox" class="remove-checkbox" id="remove-checkbox" />
+                    <label for="remove-checkbox"><i class="fa-solid fa-minus"></i></label>
+                    <p>1</p>
+                    <input type="checkbox" class="add-checkbox" id="add-checkbox" />
+                    <label for="add-checkbox"><i class="fa-solid fa-plus"></i></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Flower set:</td>
+                <td>Large sushi set with miso soup and green tea</td>
+                <td>14,90€</td>
+                <td>
+                  <div class="qty-checkbox">
+                    <input type="checkbox" class="remove-checkbox" id="remove-checkbox" />
+                    <label for="remove-checkbox"><i class="fa-solid fa-minus"></i></label>
+                    <p>1</p>
+                    <input type="checkbox" class="add-checkbox" id="add-checkbox" />
+                    <label for="add-checkbox"><i class="fa-solid fa-plus"></i></label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div class="order-total">
+              <h4 data-translate="total">Total: 27,80€</h4>
+            </div>
+            <div class="additional-comment">
+              <textarea
+                name="comment"
+                id="leave-comment"
+                cols="30"
+                rows="4"
+                placeholder="Leave additional comments here"
+              ></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="order-user-info">
+              <h3 data-translate="your-info">Your information:</h3>
+              <input type="text" placeholder="Name" />
+              <input type="text" placeholder="Phone number" />
+              <input type="text" placeholder="Email" />
+              <input type="text" placeholder="Address" />
+              <input type="text" placeholder="Postal code" />
+            </div>
+            <div class="use-existing-info">
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="existing-info-checkbox" />
+                <label for="existing-info-checkbox" data-translate="use-existing-info">Use existing delivery information</label>
+              </checkbox>
+            </div>
+          </div>
+          <div class="right-column">
+            <div class="delivery-method">
+              <div>
+                <h4 data-translate="select-delivery">Select delivery method:</h4>
+              </div>
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="delivery-checkbox" />
+                <label for="delivery-checkbox" data-translate="delivery">Delivery</label>
+              </checkbox>
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="pickup-checkbox" />
+                <label for="pickup-checkbox" data-translate="pickup">Pickup</label>
+            </div>
+            <div class="add-instructions">
+              <textarea
+                name="instructions"
+                id="instructions"
+                cols="25"
+                rows="4"
+                placeholder="Add instructions for courier here"
+              ></textarea>
+            </div>
+            <div class="terms-and-conditions-placeholder">
+              <details>
+                <summary data-translate="terms-summary">Terms & Conditions</summary>
+                <div class="content" style="max-height: 200px;">
+                <p data-translate="agree">To order you need to agree to our Terms & Conditions.</p>
+                <p data-translate="terms">
+                  Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We will do our best to resolve the issue. We appreciate your understanding and cooperation, thank you!
+                </p>
+                </div>
+            </details>
+              <checkbox>
+                <input type="checkbox" class="checkbox" id="terms-checkbox" />
+                <label for="terms-checkbox" data-translate="agree-checkbox">
+                  I agree to the terms and conditions
+                </label>
+            </div>
+            <div class="order-button">
+              <button type="submit" data-translate="order-now">ORDER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <p data-translate="restaurant-name">Tataki</p>
+        </div>
+        <div class="footer-nav">
+          <ul>
+            <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+            <li><a href="about.html" data-translate="about-link">About us</a></li>
+            <li><a href="review.html" data-translate="review-link">Review us</a></li>
+          </ul>
+        </div>
+        <div class="social-medias">
+          <ul>
+            <li id="facebook"><a href=""></a></li>
+            <label for="facebook">
+              <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+            <li id="instagram"><a href=""></a></li>
+            <label for="instagram">
+              <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+            </label>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Translations for order page
+      const translations = {
+          "en": {
+              "title": "Home page",
+              "restaurant-name": "Tataki",
+              "home-link": "Home Page",
+              "menu-link": "Menu",
+              "order-link": "Order",
+              "reservation-link": "Reserve a table",
+              "leave-review": "Leave a Review",
+              "order": "Order",
+              "lunch": "Lunch",
+              "dinner": "Dinner",
+              "sides": "Sides",
+              "drinks": "Drinks",
+              "dessert": "Dessert",
+              "add-to-cart": "Add to cart",
+              "your-order": "Your order:",
+              "menu": "Menu",
+              "price": "Price",
+              "qty": "Qty",
+              "total": "Total: 27,80€",
+              "additional-comment": "Leave additional comments here",
+              "your-info": "Your information:",
+              "use-existing-info": "Use existing delivery information",
+              "select-delivery": "Select delivery method:",
+              "delivery": "Delivery",
+              "pickup": "Pickup",
+              "add-instructions": "Add instructions for courier here",
+              "terms-summary": "Terms & Conditions",
+              "agree": "To order you need to agree to our Terms & Conditions.",
+              "terms": "Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We will do our best to resolve the issue. We appreciate your understanding and cooperation, thank you!",
+              "agree-checkbox": "I agree to the terms and conditions",
+              "order-now": "ORDER",
+              "contact-link": "Contact us",
+              "about-link": "About us",
+              "review-link": "Review us"
+          },
+          "fi": {
+              "title": "Tilausivu",
+              "restaurant-name": "Tataki",
+              "home-link": "Etusivu",
+              "menu-link": "Ruokalista",
+              "order-link": "Tilaukset",
+              "reservation-link": "Varaa pöytä",
+              "leave-review": "Jätä arvostelu",
+              "order": "Tilaa",
+              "lunch": "Lounas",
+              "dinner": "Päivällinen",
+              "sides": "Lisukkeet",
+              "drinks": "Juomat",
+              "dessert": "Jälkiruoka",
+              "add-to-cart": "Lisää ostoskoriin",
+              "your-order": "Tilauksesi:",
+              "menu": "Annos",
+              "price": "Hinta",
+              "qty": "Määrä",
+              "total": "Yhteensä: 27,80€",
+              "additional-comment": "Jätä lisäkommentti tähän",
+              "your-info": "Tietosi:",
+              "use-existing-info": "Käytä olemassa olevaa toimitusosoitetta",
+              "select-delivery": "Valitse toimitustapa:",
+              "delivery": "Toimitus",
+              "pickup": "Nouto",
+              "add-instructions": "Lisää ohjeita kuriirille tähän",
+              "terms-summary": "Käyttöehdot",
+              "agree": "Tilataksesi sinun tulee hyväksyä käyttöehdot.",
+              "terms": "Toimitusaikamme ovat 20-50 minuuttia ja toimitamme 15 km säteellä. Emme hyväksy käteismaksuja tai puhelimitse tehtyjä tilauksia. Emme hyväksy palautuksia tai peruutuksia. Jos sinulla on ongelmia tilauksesi kanssa, ota meihin yhteyttä välittömästi. Teemme parhaamme ratkaistaksemme ongelman. Arvostamme ymmärrystäsi ja yhteistyötä, kiitos!",
+              "agree-checkbox": "Hyväksyn käyttöehdot",
+              "order-now": "TILAA",
+              "contact-link": "Ota yhteyttä",
+              "about-link": "Tietoja meistä",
+              "review-link": "Jätä arvostelu"
+          }
+      };
+  
+      // Function to change the language and store it in localStorage
+      function changeLanguage(lang) {
+          // Store the selected language in localStorage
+          localStorage.setItem('language', lang);
+  
+          // Update the text content based on the selected language
+          const elements = document.querySelectorAll('[data-translate]');
+          elements.forEach(element => {
+              const translationKey = element.getAttribute('data-translate');
+              if (translations[lang] && translations[lang][translationKey]) {
+                  element.textContent = translations[lang][translationKey];
+              }
+          });
+      }
+  
+      // Check if there's a language stored in localStorage
+      const storedLang = localStorage.getItem('language');
+      if (storedLang) {
+          changeLanguage(storedLang);
+      } else {
+          // Default language (English) if none is stored
+          changeLanguage('en');
+      }
+  
+      // Language buttons event listeners
+      document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
+      document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
+  </script>
+  </body>
+</html>

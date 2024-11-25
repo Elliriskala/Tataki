@@ -1,5 +1,6 @@
 import express from 'express';
 import reservationRouter from './routers/reservation-router';
+import menuRouter from './routers/menu-router';
 
 
 const hostname = '127.0.0.1';
@@ -16,6 +17,9 @@ app.use('/api/users', userRouter);
 app.use('/api/ratings', ratingRouter);
 app.use('/api/auth', authRouter);
 */
+
+app.use('/api/menus', menuRouter);
+
 app.use('/api/reservations', reservationRouter);
 
 app.listen(port, hostname, () => {

@@ -1,8 +1,9 @@
 import { Itinerary, Leg } from '../utils/interfaces';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 dotenv.config();
 
-const apiKey = process.env.DT_KEY!; 
+const apiKey: string = import.meta.env.VITE_DT_KEY;
+
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');
 const itineraryResults = document.getElementById('itineraryResults');
@@ -64,7 +65,6 @@ getLocationButton?.addEventListener('click', () => {
     // method must be POST
     // headers must include 'Content-Type': 'application/json' or 'application/graphql' and 'digitransit-subscription-key': apiKey
     try {
-      console.log(process.env.dtKey);
       const response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
         method: 'POST',
         headers: {
@@ -194,3 +194,5 @@ getLocationButton?.addEventListener('click', () => {
     const date = new Date(timestamp);
     return date.toLocaleString(); // Converts the timestamp to a human-readable date and time
   }
+
+export {};

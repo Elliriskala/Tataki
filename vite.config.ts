@@ -8,22 +8,21 @@ dotenv.config();
 
 export default defineConfig({
   base: "./",
-  root: "./HTML", // Set the root to your HTML directory
   build: {
-    outDir: "../dist", // Output the built files outside the HTML folder
+    outDir: "./dist", // Output the built files outside the HTML folder
     rollupOptions: {
-        external: [],
+      external: [],
       input: {
-        main: path.resolve(__dirname, "HTML/index.html"), // Specify your main HTML file
-        about: path.resolve(__dirname, "HTML/about.html"),
-        admin: path.resolve(__dirname, "HTML/admin.html"),
-        contact: path.resolve(__dirname, "HTML/contact.html"),
-        menu: path.resolve(__dirname, "HTML/menu.html"),
-        order_management: path.resolve(__dirname, "HTML/order_management.html"),
-        order: path.resolve(__dirname, "HTML/order.html"),
-        review: path.resolve(__dirname, "HTML/review.html"),
-        reservation: path.resolve(__dirname, "HTML/reservation.html"),
-        user: path.resolve(__dirname, "HTML/user.html")
+        main: path.resolve(__dirname, "index.html"),
+        about: path.resolve(__dirname, "about.html"),
+        admin: path.resolve(__dirname, "admin.html"),
+        contact: path.resolve(__dirname, "contact.html"),
+        menu: path.resolve(__dirname, "menu.html"),
+        order_management: path.resolve(__dirname, "order_management.html"),
+        order: path.resolve(__dirname, "order.html"),
+        review: path.resolve(__dirname, "review.html"),
+        reservation: path.resolve(__dirname, "reservation.html"),
+        user: path.resolve(__dirname, "user.html"),
       },
     },
   },
@@ -31,11 +30,17 @@ export default defineConfig({
     // nodePolyfills(),
     VitePWA({
       registerType: "autoUpdate",
-      devOptions: { enabled: true },
+      devOptions: {
+        enabled: true,
+        type: "module",
+      },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,jpg,jpeg,svg,ttf,json}"], // Match all assets
       },
       includeAssets: [
+        "robots.txt",
+        "fonts/*",
+        "img/*",
         "about.css",
         "admin.css",
         "contact.css",
@@ -46,7 +51,7 @@ export default defineConfig({
         "order_management.css",
         "order.css",
         "reservation.css",
-        "review.css"
+        "review.css",
       ],
       manifest: {
         name: "Tataki Sushi",
@@ -58,6 +63,7 @@ export default defineConfig({
     }),
   ],
   resolve: {
+    extensions: [".js", ".ts", ".json"],
     alias: {
       "@": path.resolve(__dirname, "src"), // Make 'src' an alias for easier imports
     },

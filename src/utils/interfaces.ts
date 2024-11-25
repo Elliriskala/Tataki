@@ -59,7 +59,9 @@ interface Menu {
   course_name: string;
   course_description: string;
   price: number;
+  menu_image: string;
   category: string;
+  allergens: Allergen[];
 }
 
 interface Allergen {

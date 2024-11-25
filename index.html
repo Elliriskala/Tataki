@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate="title">Home page</title>
+    <link rel="stylesheet" href="/styling/homepage.css" />
+    <link rel="stylesheet" href="/styling/nav.css" />
+    <script type="module" src="src/main.ts"></script>
+    <script type="module" src="src/index.ts"></script>
+    <script
+      src="https://kit.fontawesome.com/ce58f4085c.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navigation">
+        <div class="logo">
+          <button class="hamburger">☰</button>
+          <p data-translate="restaurant-name">Tataki</p>
+        </div>
+        <ul class="nav-list">
+          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
+        </ul>
+        <div class="control-buttons">
+          <button class="language" id="flag-en">🇬🇧</button>
+          <button class="language" id="flag-fi">🇫🇮</button>
+          <button class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="hero-container">
+        <div class="hero-image"></div>
+      </section>
+      <div class="menus">
+        <div class="menus-header">
+          <h1 data-translate="our-menus">Our menus</h1>
+          <p data-translate="explore-menus">Explore our delicious menus and find your favorite!</p>
+        </div>
+        <div class="menu-list">
+          <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
+          <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
+          <button class="select-category-button sides-button" data-translate="sides">Sides</button>
+          <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
+          <button class="select-category-button desserts-button" data-translate="dessert">Dessert</button>
+        </div>
+        <div class="menu-carousel">
+          <div>
+            <button id="carousel-left" class="carousel-button" aria-label="Scroll left">❮</button>
+          </div>
+          <div class="menu-track-container">
+            <div class= "menu-track">
+              <div class="menu-container"></div>
+            </div>
+          </div>
+          <div>
+            <button id="carousel-right" class="carousel-button" aria-label="Scroll">❯</button>
+          </div>
+        </div> 
+      </div>
+        <div>
+          <ul class="more-menus">
+            <li><a href="menu.html" data-translate="view-more">View more options</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="aboutus">
+        <div class="aboutus-header">
+          <h3 data-translate="our-story">This is us</h3>
+          <p data-translate="read-about-us">Learn more about our restaurant and our team!</p>
+        </div>
+        <div class="aboutus-placeholder">
+          <div class="aboutus-info">
+            <h3 data-translate="restaurant">Restaurant</h3>
+            <p data-translate="our-restaurant">
+              Our restaurant is located in the heart of the city. We offer a
+              wide range of sushi and sashimi sets, as well as other Japanese
+              dishes. Our team of experienced chefs will make sure you have an unforgettable dining experience.
+            </p>
+          </div>
+          <div class="aboutus-info">
+            <h3 data-translate="team">Team</h3>
+            <p data-translate="our-team">
+              Our team of experienced chefs assure that each customer's needs are met. We use only the freshest ingredients
+              to create delicious and authentic Japanese dishes. We warmly welcome you to visit us and learn more about our team!
+            </p>
+          </div>
+        </div>
+        <div>
+          <ul class="more-button" id="read-more-button">
+            <li><a href="about.html" data-translate="read-more">Read more</a></li>
+          </ul>
+        </div>
+        <div class="bottom-image-placeholder">
+          <div class="image" id="home-page-img1"></div>
+          <div class="image" id="home-page-img2"></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <p data-translate="restaurant-name">Tataki</p>
+        </div>
+        <div class="footer-nav">
+          <ul>
+            <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+            <li><a href="about.html" data-translate="about-link">About us</a></li>
+            <li><a href="review.html" data-translate="review-link">Review us</a></li>
+        </ul>
+        </div>
+        <div class="social-medias">
+          <ul>
+            <li id="facebook"><a href=""></a></li>
+            <label for="facebook">
+              <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+            <li id="instagram"><a href=""></a></li>
+            <label for="instagram">
+              <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+            </label>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Translations for home page
+      const translations = {
+          "en": {
+              "title": "Home page",
+              "restaurant-name": "Tataki",
+              "home-link": "Home Page",
+              "menu-link": "Menu",
+              "order-link": "Order",
+              "reservation-link": "Reserve a table",
+              "leave-review": "Leave a Review",
+              "our-menus": "Our menus",
+              "explore-menus": "Explore our delicious menus and find your favorite!",
+              "lunch": "Lunch",
+              "dinner": "Dinner",
+              "sides": "Sides",
+              "drinks": "Drinks",
+              "dessert": "Dessert",
+              "view-more": "View more options",
+              "our-story": "This is us",
+              "read-about-us": "Learn more about our restaurant and our team!",
+              "restaurant": "Restaurant",
+              "our-restaurant": "Our restaurant is located in the heart of the city. We offer a wide range of sushi and sashimi sets, as well as other Japanese dishes. Our team of experienced chefs will make sure you have an unforgettable dining experience.",
+              "team": "Team",
+              "our-team": "Our team of experienced chefs assure that each customer's needs are met. We use only the freshest ingredients to create delicious and authentic Japanese dishes. We warmly welcome you to visit us and learn more about our team!",
+              "read-more": "Read more",
+              "contact-link": "Contact us",
+              "about-link": "About us",
+              "review-link": "Review us"
+          },
+          "fi": {
+              "title": "Etusivu",
+              "restaurant-name": "Tataki",
+              "home-link": "Etusivu",
+              "menu-link": "Ruokalista",
+              "order-link": "Tilaukset",
+              "reservation-link": "Varaa pöytä",
+              "leave-review": "Jätä arvostelu",
+              "our-menus": "Ruokalistamme",
+              "explore-menus": "Selaa meidän herkullisia ruokalistoja ja löydä suosikkisi!",
+              "lunch": "Lounas",
+              "dinner": "Päivällinen",
+              "sides": "Lisukkeet",
+              "drinks": "Juomat",
+              "dessert": "Jälkiruoka",
+              "view-more": "Lisää vaihtoehtoja",
+              "our-story": "Tietoa meistä",
+              "read-about-us": "Lue lisää ravintolastamme ja tiimistämme!",
+              "restaurant": "Ravintola",
+              "our-restaurant": "Ravintolamme sijaitsee kaupungin sydämessä. Tarjoamme laajan valikoiman sushia ja sashimia, sekä muita japanilaisia ruokia. Kokeneet kokkimme varmistavat sinulle unohtumattoman ruokailukokemuksen.",
+              "team": "Tiimi",
+              "our-team": "Kokkitiimimme varmistaa, että jokaisen asiakkaan tarpeet täyttyvät. Käytämme vain tuoreimpia raaka-aineita luodaksemme herkullisia ja aitoja japanilaisia ruokia. Lämpimästi tervetuloa tutustumaan asiantuntevaan tiimiimme!",
+              "read-more": "Lue lisää",
+              "contact-link": "Ota yhteyttä",
+              "about-link": "Tietoja meistä",
+              "review-link": "Jätä arvostelu"
+          }
+      };
+  </script>
+  </body>
+</html>
