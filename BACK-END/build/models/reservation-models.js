@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.modifyReservation = exports.deleteReservation = exports.createReservation = exports.fetchReservationsByUserId = exports.fetchReservationById = exports.fetchReservations = void 0;
-const database_1 = require("../database");
+import { promisePool } from "../database.js";
 /**
  *
  * @returns all reservations from the database
@@ -10,7 +7,8 @@ const database_1 = require("../database");
  */
 const fetchReservations = async () => {
     try {
-        const rows = await database_1.promisePool.query("SELECT * FROM reservations");
+        const sql = 'SELECT * FROM reservations';
+        const [rows] = await promisePool.query(sql);
         if (rows) {
             return rows;
         }
@@ -20,7 +18,6 @@ const fetchReservations = async () => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchReservations = fetchReservations;
 /**
  *
  * @param reservation_id
@@ -31,7 +28,7 @@ exports.fetchReservations = fetchReservations;
 const fetchReservationById = async (reservation_id) => {
     try {
         const sql = 'SELECT * FROM reservations WHERE reservation_id = ?';
-        const [rows] = await database_1.promisePool.query(sql, [reservation_id]);
+        const [rows] = await promisePool.query(sql, [reservation_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -44,7 +41,6 @@ const fetchReservationById = async (reservation_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchReservationById = fetchReservationById;
 /**
  *
  * @param user_id
@@ -55,7 +51,7 @@ exports.fetchReservationById = fetchReservationById;
 const fetchReservationsByUserId = async (user_id) => {
     try {
         const sql = 'SELECT * FROM reservations WHERE user_id = ?';
-        const [rows] = await database_1.promisePool.query(sql, [user_id]);
+        const [rows] = await promisePool.query(sql, [user_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -68,7 +64,6 @@ const fetchReservationsByUserId = async (user_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchReservationsByUserId = fetchReservationsByUserId;
 /**
  *
  * @param newReservation
@@ -85,7 +80,7 @@ const createReservation = async (newReservation) => {
         newReservation.guests
     ];
     try {
-        const [result] = await database_1.promisePool.query(sql, params);
+        const [result] = await promisePool.query(sql, params);
         if (result.affectedRows === 1) {
             return result.insertId;
         }
@@ -103,7 +98,6 @@ const createReservation = async (newReservation) => {
         }
     }
 };
-exports.createReservation = createReservation;
 const modifyReservation = async (reservation_id, newReservation) => {
     const sql = 'UPDATE reservations SET reservation_date = ?, reservation_time = ?, guests = ? WHERE reservation_id = ?';
     const params = [
@@ -113,7 +107,7 @@ const modifyReservation = async (reservation_id, newReservation) => {
         reservation_id
     ];
     try {
-        const [result] = await database_1.promisePool.query(sql, params);
+        const [result] = await promisePool.query(sql, params);
         if (result.affectedRows > 0) {
             return result.affectedRows;
         }
@@ -126,7 +120,6 @@ const modifyReservation = async (reservation_id, newReservation) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.modifyReservation = modifyReservation;
 /**
  *
  * @param reservation_id
@@ -137,7 +130,7 @@ exports.modifyReservation = modifyReservation;
 const deleteReservation = async (reservation_id) => {
     const sql = 'DELETE FROM reservations WHERE reservation_id = ?';
     try {
-        const [result] = await database_1.promisePool.query(sql, [reservation_id]);
+        const [result] = await promisePool.query(sql, [reservation_id]);
         if (result.affectedRows === 1) {
             return reservation_id;
         }
@@ -150,5 +143,5 @@ const deleteReservation = async (reservation_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.deleteReservation = deleteReservation;
+export { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation };
 //# sourceMappingURL=reservation-models.js.map

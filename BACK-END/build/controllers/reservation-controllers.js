@@ -1,16 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.modifyReservationById = exports.deleteReservationById = exports.postReservation = exports.getReservationsByUserId = exports.getReservationById = exports.getReservations = void 0;
-const reservation_models_1 = require("../models/reservation-models");
+import { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation } from '../models/reservation-models.js';
 /**
  *
  * @returns all reservations from the database
  * @throws Error
  * @returns {Promise<Reservation[]>} - Array of reservations
  */
-const getReservations = async (_req, res) => {
+const getReservations = async (req, res) => {
     try {
-        const reservations = await (0, reservation_models_1.fetchReservations)();
+        const reservations = await fetchReservations();
         res.json(reservations);
     }
     catch (e) {
@@ -18,7 +15,6 @@ const getReservations = async (_req, res) => {
         throw new Error('getReservations error: ' + e.message);
     }
 };
-exports.getReservations = getReservations;
 /**
  *
  * @param req
@@ -30,7 +26,7 @@ exports.getReservations = getReservations;
 const getReservationById = async (req, res) => {
     const reservation_id = Number(req.params.reservation_id);
     try {
-        const reservation = await (0, reservation_models_1.fetchReservationById)(reservation_id);
+        const reservation = await fetchReservationById(reservation_id);
         res.json(reservation);
     }
     catch (e) {
@@ -38,7 +34,6 @@ const getReservationById = async (req, res) => {
         throw new Error('getReservationById error: ' + e.message);
     }
 };
-exports.getReservationById = getReservationById;
 /**
  *
  * @param req
@@ -50,7 +45,7 @@ exports.getReservationById = getReservationById;
 const getReservationsByUserId = async (req, res) => {
     const user_id = Number(req.params.user_id);
     try {
-        const reservations = await (0, reservation_models_1.fetchReservationsByUserId)(user_id);
+        const reservations = await fetchReservationsByUserId(user_id);
         res.json(reservations);
     }
     catch (e) {
@@ -58,7 +53,6 @@ const getReservationsByUserId = async (req, res) => {
         throw new Error('getReservationsByUserId error: ' + e.message);
     }
 };
-exports.getReservationsByUserId = getReservationsByUserId;
 /**
  *
  * @param req
@@ -76,7 +70,7 @@ const postReservation = async (req, res) => {
         special_request: req.body.special_request
     };
     try {
-        const reservation_id = await (0, reservation_models_1.createReservation)(newReservation);
+        const reservation_id = await createReservation(newReservation);
         if (reservation_id) {
             res.status(201).json({ message: 'Reservation added: ', id: { reservation_id } });
         }
@@ -89,7 +83,6 @@ const postReservation = async (req, res) => {
         throw new Error('postReservation error: ' + e.message);
     }
 };
-exports.postReservation = postReservation;
 /**
  *
  * @param req
@@ -101,7 +94,7 @@ exports.postReservation = postReservation;
 const deleteReservationById = async (req, res) => {
     const reservation_id = Number(req.params.reservation_id);
     try {
-        const result = await (0, reservation_models_1.deleteReservation)(reservation_id);
+        const result = await deleteReservation(reservation_id);
         if (result) {
             res.status(200).json({ message: 'Reservation deleted: ', id: { reservation_id } });
         }
@@ -114,7 +107,6 @@ const deleteReservationById = async (req, res) => {
         throw new Error('deleteReservationById error: ' + e.message);
     }
 };
-exports.deleteReservationById = deleteReservationById;
 /**
  *
  * @param req
@@ -132,7 +124,7 @@ const modifyReservationById = async (req, res) => {
         guests: req.body.guests
     };
     try {
-        const result = await (0, reservation_models_1.modifyReservation)(reservation_id, newReservation);
+        const result = await modifyReservation(reservation_id, newReservation);
         if (result) {
             res.status(200).json({ message: 'Reservation modified: ', id: { reservation_id } });
         }
@@ -145,5 +137,5 @@ const modifyReservationById = async (req, res) => {
         throw new Error('modifyReservationById error: ' + e.message);
     }
 };
-exports.modifyReservationById = modifyReservationById;
+export { getReservations, getReservationById, getReservationsByUserId, postReservation, deleteReservationById, modifyReservationById };
 //# sourceMappingURL=reservation-controllers.js.map

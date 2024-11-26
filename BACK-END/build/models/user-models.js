@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkUsernameOrEmailExists = exports.selectUsernameAndPassword = exports.deleteUser = exports.modifyUser = exports.registerUser = exports.fetchUserById = exports.fetchUsers = void 0;
-const database_1 = require("../database");
+import { promisePool } from "../database.js";
 /**
  *
  * @returns all users from the database
@@ -10,7 +7,7 @@ const database_1 = require("../database");
  */
 const fetchUsers = async () => {
     try {
-        const rows = await database_1.promisePool.query("SELECT * FROM Users");
+        const [rows] = await promisePool.query("SELECT * FROM Users");
         if (rows) {
             return rows;
         }
@@ -20,7 +17,6 @@ const fetchUsers = async () => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchUsers = fetchUsers;
 /**
  *
  * @param user_id
@@ -31,7 +27,7 @@ exports.fetchUsers = fetchUsers;
 const fetchUserById = async (user_id) => {
     try {
         const sql = 'SELECT * FROM Users WHERE user_id = ?';
-        const [rows] = await database_1.promisePool.query(sql, [user_id]);
+        const [rows] = await promisePool.query(sql, [user_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -44,7 +40,6 @@ const fetchUserById = async (user_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchUserById = fetchUserById;
 /**
  *
  * @param newUser
@@ -58,10 +53,11 @@ const registerUser = async (newUser) => {
         newUser.username,
         newUser.password_hash,
         newUser.email,
+        newUser.phone_number,
         newUser.user_level_id
     ];
     try {
-        const [result] = await database_1.promisePool.query(sql, params);
+        const [result] = await promisePool.query(sql, params);
         if (result && result.affectedRows) {
             return result.insertId;
         }
@@ -79,7 +75,6 @@ const registerUser = async (newUser) => {
         }
     }
 };
-exports.registerUser = registerUser;
 /**
  *
  * Modifies a user in the database
@@ -95,11 +90,12 @@ const modifyUser = async (user_id, modifiedUser) => {
         modifiedUser.username,
         modifiedUser.password_hash,
         modifiedUser.email,
+        modifiedUser.phone_number,
         modifiedUser.user_level_id,
         user_id
     ];
     try {
-        const [result] = await database_1.promisePool.query(sql, params);
+        const [result] = await promisePool.query(sql, params);
         if (result && result.affectedRows) {
             return result.affectedRows;
         }
@@ -112,7 +108,6 @@ const modifyUser = async (user_id, modifiedUser) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.modifyUser = modifyUser;
 /**
  *
  * Deletes a user from the database
@@ -122,7 +117,7 @@ exports.modifyUser = modifyUser;
 const deleteUser = async (user_id) => {
     const sql = 'DELETE FROM Users WHERE user_id = ?';
     try {
-        const [result] = await database_1.promisePool.query(sql, [user_id]);
+        const [result] = await promisePool.query(sql, [user_id]);
         if (result.affectedRows > 0) {
             console.log('deleteUserById', `User with ID ${user_id} was deleted.`);
             return { success: true };
@@ -137,11 +132,10 @@ const deleteUser = async (user_id) => {
         return { success: false, error: 'Database error: ' + e.message };
     }
 };
-exports.deleteUser = deleteUser;
 const selectUsernameAndPassword = async (username, password) => {
     const sql = 'SELECT * FROM Users WHERE username = ? AND password_hash = ?';
     try {
-        const [rows] = await database_1.promisePool.query(sql, [username, password]);
+        const [rows] = await promisePool.query(sql, [username, password]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -154,11 +148,10 @@ const selectUsernameAndPassword = async (username, password) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.selectUsernameAndPassword = selectUsernameAndPassword;
 const checkUsernameOrEmailExists = async (username, email, user_id) => {
     const sql = 'SELECT user_id FROM Users WHERE (username = ? OR email = ?) AND user_id != ?';
     try {
-        const [rows] = await database_1.promisePool.query(sql, [username, email, user_id]);
+        const [rows] = await promisePool.query(sql, [username, email, user_id]);
         return rows.length > 0;
     }
     catch (e) {
@@ -166,5 +159,5 @@ const checkUsernameOrEmailExists = async (username, email, user_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.checkUsernameOrEmailExists = checkUsernameOrEmailExists;
+export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUsernameAndPassword, checkUsernameOrEmailExists };
 //# sourceMappingURL=user-models.js.map

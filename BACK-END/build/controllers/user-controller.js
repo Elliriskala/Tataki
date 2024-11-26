@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUserById = exports.modifyUserById = exports.postUser = exports.getUserById = exports.getUsers = void 0;
-const user_models_1 = require("../models/user-models");
+import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists } from "../models/user-models.js";
 const getUsers = async (_req, res) => {
     try {
-        const users = await (0, user_models_1.fetchUsers)();
+        const users = await fetchUsers();
         res.json(users);
     }
     catch (e) {
@@ -12,11 +9,10 @@ const getUsers = async (_req, res) => {
         throw new Error('getUsers error: ' + e.message);
     }
 };
-exports.getUsers = getUsers;
 const getUserById = async (req, res) => {
     const user_id = Number(req.params.user_id);
     try {
-        const user = await (0, user_models_1.fetchUserById)(user_id);
+        const user = await fetchUserById(user_id);
         res.json(user);
     }
     catch (e) {
@@ -24,7 +20,6 @@ const getUserById = async (req, res) => {
         throw new Error('getUserById error: ' + e.message);
     }
 };
-exports.getUserById = getUserById;
 const postUser = async (req, res) => {
     const newUser = {
         username: req.body.username,
@@ -32,8 +27,12 @@ const postUser = async (req, res) => {
         email: req.body.email,
         user_level_id: req.body.user_level_id || 2
     };
+    if (!newUser.username || !newUser.password_hash || !newUser.email) {
+        res.status(400).json({message: 'Missing required information'});
+        return;
+    }
     try {
-        const user_id = await (0, user_models_1.registerUser)(newUser);
+        const user_id = await registerUser(newUser);
         if (user_id) {
             res.status(201).json({ message: 'User added: ', id: { user_id } });
         }
@@ -46,7 +45,6 @@ const postUser = async (req, res) => {
         throw new Error('postUser error: ' + e.message);
     }
 };
-exports.postUser = postUser;
 const modifyUserById = async (req, res) => {
     const id = parseInt(req.params.id);
     const moddedUser = {
@@ -57,38 +55,37 @@ const modifyUserById = async (req, res) => {
     };
     try {
         // Fetch the user to validate ownership
-        const item = await (0, user_models_1.fetchUserById)(id);
+        const item = await fetchUserById(id);
         if (!item) {
-            return res.status(404).json({ message: 'User not found' });
+            res.status(404).json({ message: 'User not found' });
         }
         // Check if the requesting user is allowed to modify this user
-        if (!req.user || item.user_id !== req.user.user_id && req.user.user_level_id !== 1) {
-            return res.status(403).json({ message: 'Only admins can modify other users.' });
+        if (!req.user || item?.user_id !== req.user.user_id && req.user.user_level_id !== 1) {
+            res.status(403).json({ message: 'Only admins can modify other users.' });
         }
         // Check if the new username or email already exists for another user
-        const isConflict = await (0, user_models_1.checkUsernameOrEmailExists)(moddedUser.username, moddedUser.email, id);
+        const isConflict = await checkUsernameOrEmailExists(moddedUser.username, moddedUser.email, id);
         if (isConflict) {
-            return res.status(409).json({ message: 'Username or email is already taken' });
+            res.status(409).json({ message: 'Username or email is already taken' });
         }
         // Update the user
-        const result = await (0, user_models_1.modifyUser)(id, moddedUser);
+        const result = await modifyUser(id, moddedUser);
         if (result > 0) {
-            return res.status(200).json({ message: 'User modified', id });
+            res.status(200).json({ message: 'User modified', id });
         }
         else {
-            return res.status(500).json({ message: 'Failed to modify user' });
+            res.status(500).json({ message: 'Failed to modify user' });
         }
     }
     catch (e) {
         console.error('modifyUserById', e.message);
-        return res.status(500).json({ message: 'Error in modifyUserById database query' });
+        res.status(500).json({ message: 'Error in modifyUserById database query' });
     }
 };
-exports.modifyUserById = modifyUserById;
 const deleteUserById = async (req, res) => {
     const user_id = Number(req.params.user_id);
     try {
-        const result = await (0, user_models_1.deleteUser)(user_id);
+        const result = await deleteUser(user_id);
         if (result) {
             res.json({ message: 'User deleted: ', id: user_id });
         }
@@ -101,5 +98,5 @@ const deleteUserById = async (req, res) => {
         throw new Error('deleteUserById error: ' + e.message);
     }
 };
-exports.deleteUserById = deleteUserById;
+export { getUsers, getUserById, postUser, modifyUserById, deleteUserById };
 //# sourceMappingURL=user-controller.js.map

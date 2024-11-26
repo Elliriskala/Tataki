@@ -1,5 +1,8 @@
 -- Creating database for Tataki
 
+-- karri: source C:/Users/karri/OneDrive/Documents/Project-fall2024/BACK-END/database/create-db.sql;
+
+
 DROP DATABASE IF EXISTS tataki;
 CREATE DATABASE tataki;
 USE tataki;
@@ -18,7 +21,7 @@ CREATE TABLE Users (
     email VARCHAR(50) NOT NULL UNIQUE,
     phone_number VARCHAR(15) NOT NULL,
     user_level_id INT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_level_id) REFERENCES UserLevels(level_id)
 );
 
@@ -45,7 +48,7 @@ CREATE TABLE Orders (
     user_id INT NOT NULL,
     order_type VARCHAR(50) NOT NULL,
     order_status VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -67,7 +70,7 @@ CREATE TABLE Reservations (
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
     guests VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -78,7 +81,7 @@ CREATE TABLE FoodReview (
     menu_id INT NOT NULL,
     review TEXT NOT NULL,
     star_rating TINYINT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (menu_id) REFERENCES Menus(menu_id)
 );
@@ -89,7 +92,7 @@ CREATE TABLE RestaurantReview (
     user_id INT NOT NULL,
     review TEXT NOT NULL,
     star_rating TINYINT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -98,7 +101,7 @@ CREATE TABLE RestaurantReview (
 INSERT INTO UserLevels (level_name) VALUES ('Admin'), ('User');
 
 -- Insert users
-INSERT INTO Users (username, password_hash, email, phone_number, user_level_id, created_at) VALUES ('ellinoora', 'popokissa', 'elli@metropolia.fi', '0452115710', 1, NULL), ('joel', 'joel123', 'joelii@integral.com', '0453006000', 2, NULL), ('popo', 'popo123', 'popodii@popokissa.fi', '0452006000', 2, NULL);
+INSERT INTO Users (username, password_hash, email, phone_number, user_level_id, created_at) VALUES ('ellinoora', 'popokissa', 'elli@metropolia.fi', '0452115710', 1), ('joel', 'joel123', 'joelii@integral.com', '0453006000', 2), ('popo', 'popo123', 'popodii@popokissa.fi', '0452006000', 2);
 
 -- Insert menus
 INSERT INTO Menus (course_name, course_description, price, category) VALUES ('Dragonroll', '8 pieces of maki', 11.95, 'Lunch'), 
@@ -120,19 +123,19 @@ INSERT INTO Menus (course_name, course_description, price, category) VALUES ('Dr
 INSERT INTO Allergens (menu_id, allergen_description) VALUES (1, 'Gluten'), (1, 'Soy'), (1, 'Fish'), (2, 'Fish'), (3, 'Soy'), (3, 'Fish'), (4, 'Fish'), (5, 'Soy'), (6, 'Gluten'), (6, 'Soy'), (6, 'Fish'), (7, 'Soy'), (8, 'Gluten'), (10, 'Gluten'), (10, 'Milk'), (11, 'Gluten'), (11, 'Egg'), (12, 'Alcohol'), (13, 'Alcohol'), (14, 'Caffeine');
 
 -- Insert orders
-INSERT INTO Orders (user_id, order_type, order_status, created_at) VALUES (2, 'Takeaway', 'Inprogress', NULL), (3, 'Delivery', 'Pending', NULL), (1, 'Delivery', 'Pending', NULL);
+INSERT INTO Orders (user_id, order_type, order_status, created_at) VALUES (2, 'Takeaway', 'Inprogress'), (3, 'Delivery', 'Pending'), (1, 'Delivery', 'Pending');
 
 -- Insert order items
 INSERT INTO OrderItems (order_id, menu_id, item_quantity, comment) VALUES (1, 1, 1, 'Extra wasabi'), (2, 2, 1, 'Extra soy sauce'), (2, 3, 1, 'Extra ginger'), (3, 4, 1, 'Extra wasabi'), (3, 5, 1, 'Extra soy sauce');
 
 -- Insert reservations
-INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests, created_at) VALUES (2, '2021-12-24', '18:00:00', '2', NULL), (3, '2021-12-25', '19:00:00', '4', NULL), (1, '2021-12-26', '20:00:00', '6', NULL);
+INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests, created_at) VALUES (2, '2021-12-24', '18:00:00', '2'), (3, '2021-12-25', '19:00:00', '4'), (1, '2021-12-26', '20:00:00', '6');
 
 -- Insert food reviews
-INSERT INTO FoodReview (user_id, menu_id, review, star_rating, created_at) VALUES (2, 1, 'Best sushi in town!', 5, NULL), (3, 2, 'Fresh and delicious!', 4, NULL), (1, 3, 'Great value for money!', 5, NULL);
+INSERT INTO FoodReview (user_id, menu_id, review, star_rating, created_at) VALUES (2, 1, 'Best sushi in town!', 5), (3, 2, 'Fresh and delicious!', 4), (1, 3, 'Great value for money!', 5);
 
 -- Insert restaurant reviews
-INSERT INTO RestaurantReview (user_id, review, star_rating, created_at) VALUES (2, 'Great service!', 5, NULL), (3, 'Nice atmosphere!', 4, NULL), (1, 'Good location!', 4, NULL);
+INSERT INTO RestaurantReview (user_id, review, star_rating, created_at) VALUES (2, 'Great service!', 5), (3, 'Nice atmosphere!', 4), (1, 'Good location!', 4);
 
 
 -- Query to get menu items by category

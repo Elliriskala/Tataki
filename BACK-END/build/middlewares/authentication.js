@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-require("dotenv/config");
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 const authenticateToken = (req, res, next) => {
     console.log('AuthenticateToken', req.headers);
     const authHeader = req.headers['authorization'];
@@ -14,7 +9,7 @@ const authenticateToken = (req, res, next) => {
         return;
     }
     try {
-        req.user = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        req.user = jwt.verify(token, process.env.JWT_SECRET);
         next();
     }
     catch (e) {
@@ -27,5 +22,5 @@ const authenticateToken = (req, res, next) => {
         }
     }
 };
-exports.default = authenticateToken;
+export default authenticateToken;
 //# sourceMappingURL=authentication.js.map

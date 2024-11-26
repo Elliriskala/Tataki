@@ -235,3 +235,43 @@ fetchReservations?.addEventListener("click", async () => {
   const reservations = await response.json();
   console.log(reservations);
 });
+
+
+const fetchButton = document.getElementById("fetch") as HTMLButtonElement;
+const target = document.getElementById("contactMap") as HTMLDivElement;
+
+
+fetchButton?.addEventListener("click", async () => {
+  try {
+    const response = await fetch('http://localhost:3000/api/reservations', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    // Check if the response is ok (status 200-299)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Parse the response body as JSON
+    const data = await response.json();
+
+    // Log the data to the console for debugging
+    console.log(data);
+
+    // Update the target element with the formatted data
+    if (target) {
+      target.innerHTML = JSON.stringify(data, null, 2);  // Pretty-print JSON
+    }
+  } catch (error) {
+    // Log any errors
+    console.error('Fetch error:', error);
+
+    // Optionally show an error message to the user
+    if (target) {
+      target.innerHTML = `<p>Error fetching data: ${(error as Error).message}</p>`;
+    }
+  }
+});
+

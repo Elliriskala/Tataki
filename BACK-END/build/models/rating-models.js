@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteRestaurantReview = exports.fetchRestaurantReviewsByUserId = exports.fetchRestaurantReviews = exports.deleteFoodReview = exports.modifyFoodReview = exports.addFoodReview = exports.fetchFoodReviewsByMenuId = exports.fetchFoodReviewsByUserId = exports.fetchFoodReviewById = exports.fetchFoodReviews = void 0;
-const database_1 = require("../database");
+import { promisePool } from "../database.js";
 /**
  *
  * @returns all food reviews from the database
@@ -10,7 +7,7 @@ const database_1 = require("../database");
  */
 const fetchFoodReviews = async () => {
     try {
-        const rows = await database_1.promisePool.query("SELECT * FROM foodreview");
+        const rows = await promisePool.query("SELECT * FROM foodreview");
         if (rows) {
             return rows;
         }
@@ -20,7 +17,6 @@ const fetchFoodReviews = async () => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchFoodReviews = fetchFoodReviews;
 /**
  *
  * @param food_review_id
@@ -31,7 +27,7 @@ exports.fetchFoodReviews = fetchFoodReviews;
 const fetchFoodReviewById = async (food_review_id) => {
     try {
         const sql = 'SELECT * FROM foodreview WHERE review_id = ?';
-        const [rows] = await database_1.promisePool.query(sql, [food_review_id]);
+        const [rows] = await promisePool.query(sql, [food_review_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -44,7 +40,6 @@ const fetchFoodReviewById = async (food_review_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchFoodReviewById = fetchFoodReviewById;
 /**
  *
  * @param user_id
@@ -55,7 +50,7 @@ exports.fetchFoodReviewById = fetchFoodReviewById;
 const fetchFoodReviewsByUserId = async (user_id) => {
     try {
         const sql = 'SELECT * FROM foodreview WHERE user_id = ?';
-        const [rows] = await database_1.promisePool.query(sql, [user_id]);
+        const [rows] = await promisePool.query(sql, [user_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -68,7 +63,6 @@ const fetchFoodReviewsByUserId = async (user_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchFoodReviewsByUserId = fetchFoodReviewsByUserId;
 /**
  *
  * @param menu_id
@@ -79,7 +73,7 @@ exports.fetchFoodReviewsByUserId = fetchFoodReviewsByUserId;
 const fetchFoodReviewsByMenuId = async (menu_id) => {
     try {
         const sql = 'SELECT * FROM foodreview WHERE menu_id = ?';
-        const [rows] = await database_1.promisePool.query(sql, [menu_id]);
+        const [rows] = await promisePool.query(sql, [menu_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -92,7 +86,6 @@ const fetchFoodReviewsByMenuId = async (menu_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchFoodReviewsByMenuId = fetchFoodReviewsByMenuId;
 /**
  *
  * @param newFoodReview
@@ -109,7 +102,7 @@ const addFoodReview = async (newFoodReview) => {
         newFoodReview.menu_id
     ];
     try {
-        const [result] = await database_1.promisePool.query(sql, params);
+        const [result] = await promisePool.query(sql, params);
         if (result.affectedRows === 1) {
             return result.insertId;
         }
@@ -122,7 +115,6 @@ const addFoodReview = async (newFoodReview) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.addFoodReview = addFoodReview;
 /**
  *
  * @param food_review_id
@@ -139,7 +131,7 @@ const modifyFoodReview = async (food_review_id, newFoodReview) => {
         food_review_id
     ];
     try {
-        const [result] = await database_1.promisePool.query(sql, params);
+        const [result] = await promisePool.query(sql, params);
         if (result.affectedRows === 1) {
             return result.insertId;
         }
@@ -152,7 +144,6 @@ const modifyFoodReview = async (food_review_id, newFoodReview) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.modifyFoodReview = modifyFoodReview;
 /**
  *
  * @param food_review_id
@@ -163,7 +154,7 @@ exports.modifyFoodReview = modifyFoodReview;
 const deleteFoodReview = async (food_review_id) => {
     const sql = 'DELETE FROM ratings WHERE rating_id = ?';
     try {
-        const [result] = await database_1.promisePool.query(sql, [food_review_id]);
+        const [result] = await promisePool.query(sql, [food_review_id]);
         if (result.affectedRows > 0) {
             console.log('deleteRating', 'Deleted rating with ID', food_review_id);
             return result.affectedRows;
@@ -178,7 +169,6 @@ const deleteFoodReview = async (food_review_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.deleteFoodReview = deleteFoodReview;
 /**
  *
  * @returns all restaurant reviews from the database
@@ -187,7 +177,7 @@ exports.deleteFoodReview = deleteFoodReview;
  */
 const fetchRestaurantReviews = async () => {
     try {
-        const rows = await database_1.promisePool.query("SELECT * FROM restreview");
+        const rows = await promisePool.query("SELECT * FROM restreview");
         if (rows) {
             return rows;
         }
@@ -197,11 +187,10 @@ const fetchRestaurantReviews = async () => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchRestaurantReviews = fetchRestaurantReviews;
 const fetchRestaurantReviewsByUserId = async (user_id) => {
     try {
         const sql = 'SELECT * FROM restreview WHERE user_id = ?';
-        const [rows] = await database_1.promisePool.query(sql, [user_id]);
+        const [rows] = await promisePool.query(sql, [user_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
@@ -214,11 +203,10 @@ const fetchRestaurantReviewsByUserId = async (user_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.fetchRestaurantReviewsByUserId = fetchRestaurantReviewsByUserId;
 const deleteRestaurantReview = async (rest_review_id) => {
     const sql = 'DELETE FROM restreview WHERE review_id = ?';
     try {
-        const [result] = await database_1.promisePool.query(sql, [rest_review_id]);
+        const [result] = await promisePool.query(sql, [rest_review_id]);
         if (result.affectedRows > 0) {
             console.log('deleteRating', 'Deleted rating with ID', rest_review_id);
             return result.affectedRows;
@@ -233,5 +221,5 @@ const deleteRestaurantReview = async (rest_review_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-exports.deleteRestaurantReview = deleteRestaurantReview;
+export { fetchFoodReviews, fetchFoodReviewById, fetchFoodReviewsByUserId, fetchFoodReviewsByMenuId, addFoodReview, modifyFoodReview, deleteFoodReview, fetchRestaurantReviews, fetchRestaurantReviewsByUserId, deleteRestaurantReview };
 //# sourceMappingURL=rating-models.js.map

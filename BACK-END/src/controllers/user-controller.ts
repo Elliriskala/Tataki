@@ -31,6 +31,10 @@ const postUser = async (req: Request, res: Response): Promise<void> => {
         email: req.body.email,
         user_level_id: req.body.user_level_id || 2
     }
+    if (!newUser.username || !newUser.password_hash || !newUser.email) {
+        res.status(400).json({message: 'Missing required information'});
+        return;
+    }
     try {
         const user_id = await registerUser(newUser);
         if (user_id) {
@@ -50,7 +54,7 @@ const modifyUserById = async (req: Request, res: Response): Promise<void> => {
       username: req.body.username,
       email: req.body.email,
       password_hash: req.body.password_hash,
-      user_level_id: req.body.user_level_id,
+      user_level_id: req.body.user_level_id
     };
   
     try {
