@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Reservation</title>
+    <link rel="stylesheet" href="/reservation.css">
+    <link rel="stylesheet" href="/nav.css">
+    <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+    <script src="./src/main.ts" type="module"></script>
+</head>
+<body>
+  <nav class="navigation">
+    <div class="logo">
+        <button class="hamburger">☰</button>
+        <p>Tataki</p>
+    </div>
+    <ul class="nav-list">
+        <li><a data-translate="navHome" href="index.html">Home Page</a></li>
+        <li><a data-translate="navHome" href="menu.html">Menu</a></li>
+        <li><a data-translate="navOrder" href="order.html">Order</a></li>
+        <li><a data-translate="navReservation" href="reservation.html">Reserve a table</a></li>
+    </ul>
+    <div class="control-buttons">
+        <button class="language" id="flag-en">🇬🇧</button>
+          <button class="language" id="flag-fi">🇫🇮</button>
+        <button class="login"><a href="./user.html"><i class="fa-regular fa-user"></i></a></button>
+    </div>
+  </nav>
+
+    <main>
+        <!--<video autoplay muted loop playsinline class="background-video">
+            <source src="./img/frying.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>-->
+        <div class="reservation-form">
+            <h1 data-translate="reservationTitle">Table Reservation</h1>
+            <form id="reservationForm">
+                <label data-translate="reservationName" for="name">Full Name</label>
+                <input type="text" id="name" data-translate="placeholderName" name="name" autocomplete="name" placeholder="Enter your name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" data-translate="placeholderEmail" placeholder="Enter your email" required>
+
+                <label data-translate="reservationPhone" for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" data-translate="placeholderPhone" placeholder="Enter your phone number" required>
+
+                <label for="date" data-translate="reservationDate">Reservation Date</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time" data-translate="reservationTime">Reservation Time</label>
+                <select id="time" name="time" required>
+                    <option data-translate="timeOptionDefault" value="">Select Time</option>
+                    <option data-translate="timeOption1" value="10:00">10:00 AM</option>
+                    <option data-translate="timeOption2" value="11:00">11:00 AM</option>
+                    <option data-translate="timeOption3" value="12:00">12:00 PM</option>
+                    <option data-translate="timeOption4" value="13:00">1:00 PM</option>
+                    <option data-translate="timeOption5" value="14:00">2:00 PM</option>
+                    <option data-translate="timeOption6" value="15:00">3:00 PM</option>
+                    <option data-translate="timeOption7" value="16:00">4:00 PM</option>
+                    <option data-translate="timeOption8" value="17:00">5:00 PM</option>
+                    <option data-translate="timeOption9" value="18:00">6:00 PM</option>
+                    <option data-translate="timeOption10" value="19:00">7:00 PM</option>
+                    <option data-translate="timeOption11" value="20:00">8:00 PM</option>
+                    <option data-translate="timeOption12" value="21:00">9:00 PM</option>
+                </select>
+                <div class="guest-selection">
+                <label data-translate="numberOfGuests" for="guest-btn">Number of Guests</label>
+                  <div class="guest-buttons" id="guests">
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="1">1</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="2">2</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="3">3</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="4">4</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="5">5</button>
+                    <button type="button" class="guest-btn" id="guest-btn" data-value="6+">6+</button>
+                  </div>
+                  <input type="hidden" name="guests" id="guests-input" required>
+                </div>
+                <details>
+                    <summary data-translate="detailsSummary">Terms & Conditions</summary>
+                    <div class="content">
+                    <p data-translate="detailsContent1">By clicking the "Reserve Now" button, you agree to our Terms & Conditions.</p>
+                    <p data-translate="detailsContent2">Our restaurant has a 15-minute grace period. If you are running late, please call us to let us know. Otherwise, your reservation will be canceled. We appreciate your understanding.</p>
+                    </div>
+                </details>
+
+                <button data-translate="reserveNowButton" type="submit">Reserve Now</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-logo">
+            <p>Tataki</p>
+          </div>
+          <div class="footer-nav">
+              <ul>
+                  <li><a data-translate="footerContact" href="contact.html">Contact us</a></li>
+                  <li><a data-translate="footerAbout" href="about.html">About us</a></li>
+                  <li><a data-translate="footerReview" href="review.html">Review us</a></li>
+              </ul>
+          </div>
+          <div class="social-medias">
+            <ul>
+              <li id="facebook"><a href=""></a></li>
+              <label for="facebook">
+                <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+              <li id="instagram"><a href=""></a></li>
+              <label for="instagram">
+                <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+              </label>
+              <button id="fetchReservations">fetch</button>
+            </ul>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

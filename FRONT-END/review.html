@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-translate="title">Review page</title>
+  <link rel="stylesheet" href="/review.css">
+  <link rel="stylesheet" href="/nav.css">
+  <script src="./src/main.ts" type="module"></script>
+  <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navigation">
+      <div class="logo">
+          <button class="hamburger">☰</button>
+          <p data-translate="restaurant-name">Tataki</p>
+      </div>
+      <ul class="nav-list">
+          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
+      </ul>
+      <div class="control-buttons">
+          <button class="language" id="flag-en">🇬🇧</button>
+          <button class="language" id="flag-fi">🇫🇮</button>
+        <button class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
+    </div>
+    </nav>
+    <main>
+      <div class="review-container">
+          <h1 data-translate="leave-review">Leave a Review</h1>
+          <form class="review-form">
+              <label for="name" data-translate="your-name">Your Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" 
+              data-translate="placeholderReviewName" placeholder="Enter your name or use a nickname" required>
+  
+              <label data-translate="rate-us">Rate Us</label>
+              <div class="star-rating">
+                  <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                  <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                  <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                  <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                  <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+              </div>
+  
+              <label for="comments" data-translate="comments">Comments</label>
+              <textarea id="comments" name="comments" maxlength="200" rows="4" data-translate="placeHolderComments" placeholder="Write your review here. Maximum of 200 characters."></textarea>
+  
+              <button type="submit" data-translate="submit-review">Submit Review</button>
+          </form>
+      </div>
+    </main>
+    <footer class="main-footer">
+      <div class="footer-container">
+          <div class="footer-logo">
+              <p data-translate="restaurant-name">Tataki</p>
+          </div>
+          <div class="footer-nav">
+              <ul>
+                  <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+                  <li><a href="about.html" data-translate="about-link">About us</a></li>
+                  <li><a href="review.html" data-translate="review-link">Review us</a></li>
+              </ul>
+          </div>
+          <div class="social-medias">
+              <ul>
+                  <li id="facebook"><a href=""></a></li>
+                  <label for="facebook">
+                      <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                  </label>
+                  <li id="instagram"><a href=""></a></li>
+                  <label for="instagram">
+                      <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                  </label>
+              </ul>
+          </div>
+      </div>
+    </footer>
+  </body>
+</html>
