@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-translate="title">front page</title>
-    <script src="../build/main.js" defer></script>
-    <link rel="stylesheet" href="../styling/order.css" />
-    <link rel="stylesheet" href="../styling/nav.css" />
-    <script src="../build/order.js" defer></script>
+    <link rel="stylesheet" href="/order.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <script src="./src/order.ts" type="module"></script>
+    <script src="./src/main.ts" type="module"></script>
     <script
       src="https://kit.fontawesome.com/ce58f4085c.js"
       crossorigin="anonymous"
@@ -294,110 +294,5 @@
         </div>
       </div>
     </footer>
-    <script>
-      // Translations for order page
-      const translations = {
-          "en": {
-              "title": "Home page",
-              "restaurant-name": "Tataki",
-              "home-link": "Home Page",
-              "menu-link": "Menu",
-              "order-link": "Order",
-              "reservation-link": "Reserve a table",
-              "leave-review": "Leave a Review",
-              "order": "Order",
-              "lunch": "Lunch",
-              "dinner": "Dinner",
-              "sides": "Sides",
-              "drinks": "Drinks",
-              "dessert": "Dessert",
-              "add-to-cart": "Add to cart",
-              "your-order": "Your order:",
-              "menu": "Menu",
-              "price": "Price",
-              "qty": "Qty",
-              "total": "Total: 27,80€",
-              "additional-comment": "Leave additional comments here",
-              "your-info": "Your information:",
-              "use-existing-info": "Use existing delivery information",
-              "select-delivery": "Select delivery method:",
-              "delivery": "Delivery",
-              "pickup": "Pickup",
-              "add-instructions": "Add instructions for courier here",
-              "terms-summary": "Terms & Conditions",
-              "agree": "To order you need to agree to our Terms & Conditions.",
-              "terms": "Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We will do our best to resolve the issue. We appreciate your understanding and cooperation, thank you!",
-              "agree-checkbox": "I agree to the terms and conditions",
-              "order-now": "ORDER",
-              "contact-link": "Contact us",
-              "about-link": "About us",
-              "review-link": "Review us"
-          },
-          "fi": {
-              "title": "Tilausivu",
-              "restaurant-name": "Tataki",
-              "home-link": "Etusivu",
-              "menu-link": "Ruokalista",
-              "order-link": "Tilaukset",
-              "reservation-link": "Varaa pöytä",
-              "leave-review": "Jätä arvostelu",
-              "order": "Tilaa",
-              "lunch": "Lounas",
-              "dinner": "Päivällinen",
-              "sides": "Lisukkeet",
-              "drinks": "Juomat",
-              "dessert": "Jälkiruoka",
-              "add-to-cart": "Lisää ostoskoriin",
-              "your-order": "Tilauksesi:",
-              "menu": "Annos",
-              "price": "Hinta",
-              "qty": "Määrä",
-              "total": "Yhteensä: 27,80€",
-              "additional-comment": "Jätä lisäkommentti tähän",
-              "your-info": "Tietosi:",
-              "use-existing-info": "Käytä olemassa olevaa toimitusosoitetta",
-              "select-delivery": "Valitse toimitustapa:",
-              "delivery": "Toimitus",
-              "pickup": "Nouto",
-              "add-instructions": "Lisää ohjeita kuriirille tähän",
-              "terms-summary": "Käyttöehdot",
-              "agree": "Tilataksesi sinun tulee hyväksyä käyttöehdot.",
-              "terms": "Toimitusaikamme ovat 20-50 minuuttia ja toimitamme 15 km säteellä. Emme hyväksy käteismaksuja tai puhelimitse tehtyjä tilauksia. Emme hyväksy palautuksia tai peruutuksia. Jos sinulla on ongelmia tilauksesi kanssa, ota meihin yhteyttä välittömästi. Teemme parhaamme ratkaistaksemme ongelman. Arvostamme ymmärrystäsi ja yhteistyötä, kiitos!",
-              "agree-checkbox": "Hyväksyn käyttöehdot",
-              "order-now": "TILAA",
-              "contact-link": "Ota yhteyttä",
-              "about-link": "Tietoja meistä",
-              "review-link": "Jätä arvostelu"
-          }
-      };
-  
-      // Function to change the language and store it in localStorage
-      function changeLanguage(lang) {
-          // Store the selected language in localStorage
-          localStorage.setItem('language', lang);
-  
-          // Update the text content based on the selected language
-          const elements = document.querySelectorAll('[data-translate]');
-          elements.forEach(element => {
-              const translationKey = element.getAttribute('data-translate');
-              if (translations[lang] && translations[lang][translationKey]) {
-                  element.textContent = translations[lang][translationKey];
-              }
-          });
-      }
-  
-      // Check if there's a language stored in localStorage
-      const storedLang = localStorage.getItem('language');
-      if (storedLang) {
-          changeLanguage(storedLang);
-      } else {
-          // Default language (English) if none is stored
-          changeLanguage('en');
-      }
-  
-      // Language buttons event listeners
-      document.getElementById('flag-en').addEventListener('click', () => changeLanguage('en'));
-      document.getElementById('flag-fi').addEventListener('click', () => changeLanguage('fi'));
-  </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import { FoodReview, RestaurantReview } from "../utils/interfaces";
-import { promisePool } from "../database.ts";
+import { promisePool } from "../database";
 
 /**
  * 

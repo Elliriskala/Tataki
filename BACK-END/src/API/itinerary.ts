@@ -2,7 +2,7 @@ import { Itinerary, Leg } from '../utils/interfaces';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-const apiKey: string = import.meta.env.VITE_DT_KEY;
+const apiKey: string = '8b8ee0e6809a405e81615d51d3e6e738';
 
 const getLocationButton = document.getElementById('getLocation');
 const itineraryForm = document.getElementById('itineraryForm');

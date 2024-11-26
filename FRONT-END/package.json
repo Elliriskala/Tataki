@@ -32,12 +32,7 @@
     "vite-plugin-pwa": "^0.21.0"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "jsonwebtoken": "^9.0.2",
-    "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.11.4",
-    "playwright": "^1.48.2",
     "vite-plugin-node-polyfills": "^0.22.0"
   }
 }

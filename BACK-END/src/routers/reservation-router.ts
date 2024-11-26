@@ -1,6 +1,6 @@
 import express from 'express';
-import { getReservations, getReservationById, getReservationsByUserId, postReservation, deleteReservationById, modifyReservationById } from '../controllers/reservation-controllers.ts';
-import authenticateToken from '../middlewares/authentication.ts';
+import { getReservations, getReservationById, getReservationsByUserId, postReservation, deleteReservationById, modifyReservationById } from '../controllers/reservation-controllers';
+import authenticateToken from '../middlewares/authentication';
 
 const reservationRouter = express.Router();
 

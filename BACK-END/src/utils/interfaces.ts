@@ -54,13 +54,23 @@ interface ModifiedUser {
   user_level_id: number;
 }
 
+
 interface Menu {
+
   menu_id: number;
-  course_name: string;
-  course_description: string;
+
+  name: string;
+
+  description: string;
+
   price: number;
+
   category: string;
+
+  allergens?: Allergen[];
+
 }
+
 
 interface Allergen {
   allergen_id: number;
@@ -94,12 +104,12 @@ interface Reservation {
 }
 
 interface FoodReview {
-  review_id: number;
+  review_id?: number;
   user_id: number;
   menu_id: number;
   review: string;
   star_rating: number;
-  created_at: Date;
+  created_at?: Date;
 }
 
 interface RestaurantReview {

@@ -27,6 +27,6 @@
       ]
 
     },
-    "include": ["src/**/*.ts", "vite-env.d.ts"],
+    "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
 }

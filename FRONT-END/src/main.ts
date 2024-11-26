@@ -1,12 +1,6 @@
 import translations from "./translations";
 
-interface Translations {
-  [lang: string]: {
-    [key: string]: string;
-  };
-}
-
-const translationsTyped = translations as Translations;
+const translationsTyped = translations;
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
@@ -99,24 +93,29 @@ document.addEventListener("DOMContentLoaded", () => {
       // Retrieve the target ID from the data-target attribute
       const targetId = iconContainer.getAttribute("data-target");
       if (!targetId) {
-        console.warn("data-target attribute not found on iconContainer:", iconContainer);
+        console.warn(
+          "data-target attribute not found on iconContainer:",
+          iconContainer
+        );
         return;
       }
-  
+
       // Retrieve the associated password input field
-      const input = document.getElementById(targetId) as HTMLInputElement | null;
+      const input = document.getElementById(
+        targetId
+      ) as HTMLInputElement | null;
       if (!input) {
         console.warn("Target input not found for targetId:", targetId);
         return;
       }
-  
+
       // Select the <i> icon inside the span
       const icon = iconContainer.querySelector("i");
-  
+
       // Toggle between password and text
       const isPasswordType = input.getAttribute("type") === "password";
       input.setAttribute("type", isPasswordType ? "text" : "password");
-  
+
       // Toggle icon classes
       if (icon) {
         icon.classList.toggle("fa-eye", !isPasswordType);
@@ -124,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-  
 
   // Reset form function to clear inputs and validation state
   const resetForm = (form: HTMLFormElement) => {
@@ -150,7 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (event) => {
     const target = event.target as Node;
-    const isInsideNav = navList.contains(target) || hamburgerMenu.contains(target);
+    const isInsideNav =
+      navList.contains(target) || hamburgerMenu.contains(target);
     if (!isInsideNav) {
       navList.classList.remove("active");
     }
@@ -174,51 +173,63 @@ document.addEventListener("DOMContentLoaded", () => {
       guestButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
       guestInput.value = button.getAttribute("guests-input") || "";
-    const lang = localStorage.getItem("language") || "en";
-    const key = button.getAttribute("data-translate");
-    if (key && translationsTyped[lang] && (translationsTyped[lang] as { [key: string]: string })[key]) {
-      alert(translationsTyped[lang][key]);
-    }
-});
-
-/*
-function changeLanguage(lang: string) {
-  const elements = document.querySelectorAll("[data-translate]");
-  elements.forEach((el) => {
-    const key = el.getAttribute("data-translate");
-    if (key && translations[lang] && translations[lang][key]) {
-      // Handle text updates for non-input elements
-      if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") {
-        (el as HTMLElement).innerText = translations[lang][key];
-      } else {
-        // Update placeholder for input or textarea elements
-        (el as HTMLInputElement | HTMLTextAreaElement).placeholder = translations[lang][key];
+      const lang = localStorage.getItem("language") || "en";
+      const key = button.getAttribute("data-translate");
+      if (
+        key &&
+        translationsTyped[lang] &&
+        (translationsTyped[lang] as { [key: string]: string })[key]
+      ) {
+        alert(translationsTyped[lang][key]);
       }
+    });
+
+    function changeLanguage(lang: string) {
+      if (!(lang in translations)) {
+        console.warn(`Invalid language key: ${lang}`);
+        lang = "en"; // Default to 'en' if the key is invalid
+      }
+
+      const languageKey = button.getAttribute("data-translate") || "en";
+      const elements = document.querySelectorAll("[data-translate]");
+      elements.forEach((el) => {
+        const key = el.getAttribute("data-translate");
+        if (key && translations[languageKey][key]) {
+          if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") {
+            (el as HTMLElement).innerText = translations[languageKey][key];
+          } else {
+            (el as HTMLInputElement | HTMLTextAreaElement).placeholder =
+              translations[languageKey][key];
+          }
+        }
+      });
+
+      localStorage.setItem("language", languageKey);
     }
-  });
 
-  localStorage.setItem("language", lang);
-}
+    // Event listeners for language buttons
+    const flagEn = document.getElementById("flag-en");
+    if (flagEn) {
+      flagEn.addEventListener("click", () => changeLanguage("en"));
+    }
+    const flagFi = document.getElementById("flag-fi");
+    if (flagFi) {
+      flagFi.addEventListener("click", () => changeLanguage("fi"));
+    }
 
-
-// Event listeners for language buttons
-const flagEn = document.getElementById("flag-en");
-if (flagEn) {
-  flagEn.addEventListener("click", () => changeLanguage("en"));
-}
-const flagFi = document.getElementById("flag-fi");
-if (flagFi) {
-  flagFi.addEventListener("click", () => changeLanguage("fi"));
-}
-
-// Load saved language from localStorage
-const savedLang = localStorage.getItem("language") || "en";
-changeLanguage(savedLang);
-*/
+    // Load saved language from localStorage
+    const savedLang = localStorage.getItem("language") || "en";
+    if (!(savedLang in translations)) {
+      console.warn(`Invalid saved language: ${savedLang}. Defaulting to 'en'.`);
+    }
+    changeLanguage(savedLang in translations ? savedLang : "en");
+    
   });
 });
 
-const fetchReservations = document.getElementById("fetchReservations") as HTMLButtonElement;
+const fetchReservations = document.getElementById(
+  "fetchReservations"
+) as HTMLButtonElement;
 fetchReservations?.addEventListener("click", async () => {
   const response = await fetch("/api/reservations");
   const reservations = await response.json();

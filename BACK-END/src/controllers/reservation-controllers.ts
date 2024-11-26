@@ -1,4 +1,4 @@
-import { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation } from '../models/reservation-models.ts';
+import { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation } from '../models/reservation-models';
 import { Response } from 'express';
 import { AuthenticatedRequest as Request } from '../utils/interfaces';
 

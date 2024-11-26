@@ -1,13 +1,27 @@
 @font-face {
   font-family: "roboto";
-  src: url("../fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url("/fonts/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "roboto bold";
-  src: url("../fonts/RobotoMono-Bold.ttf") format("truetype");
+  src: url("/fonts/RobotoMono-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "urbanist";
+  src: url('/fonts/Urbanist-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "urbanist bold";
+  src: url('/fonts/Urbanist-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
@@ -112,12 +126,18 @@ body {
   box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
   text-align: center;
   color: var(--sushi-grey3);
-  letter-spacing: -1.2px;
+}
+
+.menu-placeholder p {
+  font-family: "urbanist";
+  padding: 0.5em;
+  letter-spacing: 0.1em;
 }
 
 .menu-header {
   font-family: "roboto bold";
-  font-size: 1.4em;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
   color: var(--sushi-red2);
 }
 
