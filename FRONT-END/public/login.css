@@ -1,6 +1,6 @@
 @font-face {
   font-family: "roboto";
-  src: url("/fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -85,13 +85,13 @@ main {
 }
 
 .form-image-container {
-  background-image: url(../img/table-legend.jpg);
+  background-image: url(./img/table-legend.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .form-image-container.register-image {
-  background-image: url(../img/reservation-legend2.png);
+  background-image: url(./img/reservation-legend2.png);
 }
 
 .login-container {

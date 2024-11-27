@@ -29,17 +29,6 @@ app.use('/api/orders', orderRouter);
 app.get('/', (_req, res) => {
     res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
-// Dynamic route to serve other HTML files based on route name (for other pages)
-app.get('/:page', (req, res) => {
-    const { page } = req.params;
-    const filePath = path.join(__dirname, '../public', `${page}.html`);
-    res.sendFile(filePath, (err) => {
-        if (err) {
-            console.error(`File not found: ${filePath}`);
-            res.status(404).send('Page not found');
-        }
-    });
-});
 // Start the server
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);

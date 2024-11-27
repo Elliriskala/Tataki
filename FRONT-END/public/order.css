@@ -1,13 +1,13 @@
 @font-face {
   font-family: "roboto";
-  src: url("/fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "roboto bold";
-  src: url("/fonts/RobotoMono-Bold.ttf") format("truetype");
+  src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -146,27 +146,27 @@ body {
 }
 
 #menu-one-image {
-  background-image: url(../img/menu-images/salmon-avocado-roll2.jpg);
+  background-image: url(./img/menu-images/salmon-avocado-roll2.jpg);
 }
 
 #menu-two-image {
-  background-image: url(../img/menu-images/california-roll2.jpg);
+  background-image: url(./img/menu-images/california-roll2.jpg);
 }
 
 #menu-three-image {
-  background-image: url(../img/menu-images/spicy-tuna-maki2.jpg);
+  background-image: url(./img/menu-images/spicy-tuna-maki2.jpg);
 }
 
 #menu-four-image {
-  background-image: url(../img/menu-images/vegan-sushi2.jpg);
+  background-image: url(./img/menu-images/vegan-sushi2.jpg);
 }
 
 #menu-five-image {
-  background-image: url(../img/menu-images/crunchy-shrimp-roll2.jpg);
+  background-image: url(./img/menu-images/crunchy-shrimp-roll2.jpg);
 }
 
 #menu-six-image {
-  background-image: url(../img/menu-images/dragon-roll.jpg);
+  background-image: url(./img/menu-images/dragon-roll.jpg);
 }
 
 .order-menu {

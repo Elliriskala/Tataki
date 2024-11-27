@@ -1,7 +1,7 @@
 /* General styles */
 @font-face {
   font-family: "roboto";
-  src: url("/fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -92,11 +92,11 @@ main {
 }
 
 .hero-image {
-  background-image: url(../img/some_more_drinks.jpg);
+  background-image: url(./img/some_more_drinks.jpg);
 }
 
 .about-image {
-  background-image: url(../img/about-image.jpg);
+  background-image: url(./img/about-image.jpg);
 }
 
 .about-sections {
@@ -132,12 +132,12 @@ main {
 }
 
 #img2 {
-  background-image: url(../img/some_sushi.jpg);
+  background-image: url(./img/some_sushi.jpg);
   margin-bottom: 1em;
 }
 
 #img3 {
-  background-image: url(../img/sashimi.jpg);
+  background-image: url(./img/sashimi.jpg);
 }
 
 .story-section {
