@@ -34,3 +34,22 @@ GET http://localhost:3000/api/orders/1
 
 GET http://localhost:3000/api/orders/user/1
 
+### create an order
+
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "order_items": [
+        {
+            "menu_id": 1,
+            "course_name": "Kyoto Bliss",
+            "item_quantity": 2,
+            "comment": "no onions"
+        }
+    ],
+    "order_status": "pending",
+    "order_type": "delivery"
+}
+

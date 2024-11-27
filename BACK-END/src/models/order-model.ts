@@ -149,6 +149,13 @@ const createOrder = async (
   next: (err: Error) => void
 ): Promise<Order | null> => {
   try {
+    if (
+      !order_items ||
+      !Array.isArray(order_items) ||
+      order_items.length === 0
+    ) {
+      throw new Error("Invalid order_items: Expected a non-empty array.");
+    }
     // insert order into orders table
     const orderSql =
       "INSERT INTO orders (user_id, order_type, order_status) VALUES (?, ?, ?)";
@@ -163,15 +170,18 @@ const createOrder = async (
 
     // insert order items into order_items table
     const orderItemsSql =
-      "INSERT INTO order_items (order_id, menu_id, course_name item_quantity, comment) VALUES ?";
+      "INSERT INTO orderitems (order_id, menu_id, course_name, item_quantity, comment) VALUES ?";
 
-    const orderItemsValues = order_items.map((item) => [
-      orderId,
-      item.menu_id,
-      item.course_name,
-      item.item_quantity,
-      item.comment || null,
-    ]);
+    const orderItemsValues =
+      Array.isArray(order_items) && order_items.length > 0
+        ? order_items.map((item) => [
+            orderId,
+            item.menu_id,
+            item.course_name,
+            item.item_quantity,
+            item.comment || null,
+          ])
+        : [];
 
     // insert order items at once
 
@@ -181,7 +191,7 @@ const createOrder = async (
     const orderWithItemsSql = `
             SELECT Orders.*,
                    OrderItems.menu_id,
-                   OrederItems.course_name,
+                   OrderItems.course_name,
                    OrderItems.item_quantity,
                    OrderItems.comment
             FROM Orders
@@ -207,7 +217,11 @@ const createOrder = async (
       created_at: orderItemsResult[0].created_at,
     };
 
-    return order;
+    if (!orderItemsResult || orderItemsResult.length === 0) {
+      throw new Error("Failed to fetch the created order.");
+    } else {
+      return order;
+    }
   } catch (e) {
     console.error("createOrder error:", (e as Error).message);
     next(customError("Database error: " + (e as Error).message));

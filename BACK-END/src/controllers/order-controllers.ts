@@ -151,20 +151,24 @@ const postOrder = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const order: Order = {
-    user_id: req.body.user_id,
-    order_items: req.body.order_items as OrderItem[],
-    order_type: req.body.order_type,
-    order_status: req.body.order_status,
-    created_at: req.body.created_at,
-  };
   try {
+    console.log("Incoming payload:", req.body);
+
+    const { user_id, order_items, order_type, order_status } = req.body;
+
+    if (
+      !order_items ||
+      !Array.isArray(order_items) ||
+      order_items.length === 0
+    ) {
+      throw new Error("Missing or invalid order_items in the request.");
+    }
     // Create an order
     const newOrder = await createOrder(
-      order.user_id,
-      order.order_items,
-      order.order_type,
-      order.order_status,
+      user_id,
+      order_items,
+      order_type,
+      order_status,
       next
     );
 
@@ -180,4 +184,10 @@ const postOrder = async (
   }
 };
 
-export { getAllOrders, getOrderById, getOrdersByUserId, getOrdersByStatus, postOrder };
+export {
+  getAllOrders,
+  getOrderById,
+  getOrdersByUserId,
+  getOrdersByStatus,
+  postOrder,
+};

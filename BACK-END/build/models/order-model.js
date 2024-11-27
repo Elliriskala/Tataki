@@ -125,6 +125,11 @@ const fetchOrderByUserId = async (user_id, next) => {
  */
 const createOrder = async (user_id, order_items, order_type, order_status, next) => {
     try {
+        if (!order_items ||
+            !Array.isArray(order_items) ||
+            order_items.length === 0) {
+            throw new Error("Invalid order_items: Expected a non-empty array.");
+        }
         // insert order into orders table
         const orderSql = "INSERT INTO orders (user_id, order_type, order_status) VALUES (?, ?, ?)";
         const [orderResult] = await promisePool.query(orderSql, [
@@ -135,21 +140,23 @@ const createOrder = async (user_id, order_items, order_type, order_status, next)
         // get the order id
         const orderId = orderResult.insertId;
         // insert order items into order_items table
-        const orderItemsSql = "INSERT INTO order_items (order_id, menu_id, course_name item_quantity, comment) VALUES ?";
-        const orderItemsValues = order_items.map((item) => [
-            orderId,
-            item.menu_id,
-            item.course_name,
-            item.item_quantity,
-            item.comment || null,
-        ]);
+        const orderItemsSql = "INSERT INTO orderitems (order_id, menu_id, course_name, item_quantity, comment) VALUES ?";
+        const orderItemsValues = Array.isArray(order_items) && order_items.length > 0
+            ? order_items.map((item) => [
+                orderId,
+                item.menu_id,
+                item.course_name,
+                item.item_quantity,
+                item.comment || null,
+            ])
+            : [];
         // insert order items at once
         await promisePool.query(orderItemsSql, [orderItemsValues]);
         // fetch the created order, with its items
         const orderWithItemsSql = `
             SELECT Orders.*,
                    OrderItems.menu_id,
-                   OrederItems.course_name,
+                   OrderItems.course_name,
                    OrderItems.item_quantity,
                    OrderItems.comment
             FROM Orders
@@ -172,7 +179,12 @@ const createOrder = async (user_id, order_items, order_type, order_status, next)
             })),
             created_at: orderItemsResult[0].created_at,
         };
-        return order;
+        if (!orderItemsResult || orderItemsResult.length === 0) {
+            throw new Error("Failed to fetch the created order.");
+        }
+        else {
+            return order;
+        }
     }
     catch (e) {
         console.error("createOrder error:", e.message);
