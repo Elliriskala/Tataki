@@ -69,8 +69,7 @@ const postReservation = async (req: Request, res: Response): Promise<void> => {
         user_id: req.body.user_id,
         reservation_date: req.body.reservation_date,
         reservation_time: req.body.reservation_time,
-        guests: req.body.guests,
-        special_request: req.body.special_request
+        guests: req.body.guests
     }
     try {
         const reservation_id = await createReservation(newReservation);

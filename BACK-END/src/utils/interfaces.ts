@@ -80,7 +80,7 @@ interface Allergen {
 }
 
 interface Order {
-  order_id: number;
+  order_id?: number;
   user_id: number;
   order_type: string;
   order_status: string;
@@ -89,7 +89,7 @@ interface Order {
 
 interface OrderItem {
   order_item_id: number;
-  order_id: number;
+  order_id?: number;
   menu_id: number;
   item_quantity: number;
   comment?: string;
@@ -97,7 +97,7 @@ interface OrderItem {
 
 interface Reservation {
   reservation_id?: number;
-  user_id: number;
+  user_id?: number;
   reservation_date: string;
   reservation_time: string;
   guests: string;
@@ -114,8 +114,8 @@ interface FoodReview {
 }
 
 interface RestaurantReview {
-  review_id: number;
-  user_id: number;
+  review_id?: number;
+  user_id?: number;
   review: string;
   star_rating: number;
   created_at: Date;
