@@ -22,6 +22,7 @@ app.use('/api/users', userRouter);
 app.use('/api/ratings', ratingRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/reservations', reservationRouter);
+app.use('/api/menus', menuRouter);
 // Serve the main index.html for the root route (no conflicts with the API)
 app.get('/', (_req, res) => {
     res.sendFile(path.join(__dirname, '../public', 'index.html'));
