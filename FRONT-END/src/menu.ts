@@ -171,4 +171,4 @@ const selectSpecialsToDisplay = () => {
   fetchSpecialMenus().then(displayMenu);
 };
 
-export { displayMenu, selectMenuToDisplay, fetchMenuItemsByCategory };
+export { displayMenu, selectMenuToDisplay, fetchMenuItemsByCategory, fetchMenuItems, fetchSpecialMenus, selectSpecialsToDisplay };
