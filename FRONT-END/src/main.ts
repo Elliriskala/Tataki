@@ -184,46 +184,61 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Change language function
     function changeLanguage(lang: string) {
+      // Check if the language exists in the translations object
       if (!(lang in translations)) {
-        console.warn(`Invalid language key: ${lang}`);
+        console.warn(`Invalid language key: ${lang}. Defaulting to 'en'.`);
         lang = "en"; // Default to 'en' if the key is invalid
       }
 
-      const languageKey = button.getAttribute("data-translate") || "en";
+      // Retrieve the translation keys and update the elements with the 'data-translate' attribute
+      const languageData = translations[lang];
       const elements = document.querySelectorAll("[data-translate]");
+
       elements.forEach((el) => {
         const key = el.getAttribute("data-translate");
-        if (key && translations[languageKey][key]) {
+        if (key && languageData[key]) {
           if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") {
-            (el as HTMLElement).innerText = translations[languageKey][key];
+            // If it's not a form input, update the innerText
+            (el as HTMLElement).innerText = languageData[key];
           } else {
+            // For input/textarea, update the placeholder
             (el as HTMLInputElement | HTMLTextAreaElement).placeholder =
-              translations[languageKey][key];
+              languageData[key];
           }
         }
       });
 
-      localStorage.setItem("language", languageKey);
+      // Save the selected language in localStorage
+      localStorage.setItem("language", lang);
     }
 
     // Event listeners for language buttons
     const flagEn = document.getElementById("flag-en");
     if (flagEn) {
-      flagEn.addEventListener("click", () => changeLanguage("en"));
-    }
-    const flagFi = document.getElementById("flag-fi");
-    if (flagFi) {
-      flagFi.addEventListener("click", () => changeLanguage("fi"));
+      flagEn.addEventListener("click", () => {
+        changeLanguage("en");
+        console.log("English selected");
+      });
     }
 
-    // Load saved language from localStorage
+    const flagFi = document.getElementById("flag-fi");
+    if (flagFi) {
+      flagFi.addEventListener("click", () => {
+        changeLanguage("fi");
+        console.log("Finnish selected");
+      });
+    }
+
+    // Load saved language from localStorage when the page loads
     const savedLang = localStorage.getItem("language") || "en";
     if (!(savedLang in translations)) {
       console.warn(`Invalid saved language: ${savedLang}. Defaulting to 'en'.`);
+      changeLanguage("en"); // Default to 'en' if the saved language is invalid
+    } else {
+      changeLanguage(savedLang);
     }
-    changeLanguage(savedLang in translations ? savedLang : "en");
-    
   });
 });
 
@@ -236,16 +251,14 @@ fetchReservations?.addEventListener("click", async () => {
   console.log(reservations);
 });
 
-
 const fetchButton = document.getElementById("fetch") as HTMLButtonElement;
 const target = document.getElementById("contactMap") as HTMLDivElement;
 
-
 fetchButton?.addEventListener("click", async () => {
   try {
-    const response = await fetch('http://localhost:3000/api/users', {
+    const response = await fetch("http://localhost:3000/api/users", {
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
     });
 
@@ -261,10 +274,9 @@ fetchButton?.addEventListener("click", async () => {
     console.log(data);
 
     // Update the target element with the formatted data
-    
   } catch (error) {
     // Log any errors
-    console.error('Fetch error:', error);
+    console.error("Fetch error:", error);
 
     // Optionally show an error message to the user
     if (target) {
@@ -272,4 +284,3 @@ fetchButton?.addEventListener("click", async () => {
     }
   }
 });
-
