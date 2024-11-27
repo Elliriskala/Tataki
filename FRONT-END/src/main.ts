@@ -1,7 +1,6 @@
 import translations from "./translations";
 import { selectMenuToDisplay } from "./menu";
 
-const translationsTyped = translations;
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
@@ -174,75 +173,66 @@ document.addEventListener("DOMContentLoaded", () => {
       guestButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
       guestInput.value = button.getAttribute("guests-input") || "";
-      const lang = localStorage.getItem("language") || "en";
-      const key = button.getAttribute("data-translate");
-      if (
-        key &&
-        translationsTyped[lang] &&
-        (translationsTyped[lang] as { [key: string]: string })[key]
-      ) {
-        alert(translationsTyped[lang][key]);
-      }
     });
+  });
 
-    // Change language function
-    function changeLanguage(lang: string) {
-      // Check if the language exists in the translations object
-      if (!(lang in translations)) {
-        console.warn(`Invalid language key: ${lang}. Defaulting to 'en'.`);
-        lang = "en"; // Default to 'en' if the key is invalid
+  // Language change logic
+function changeLanguage(lang: string) {
+  // Check if the language exists in the translations object
+  if (!(lang in translations)) {
+    console.warn(`Invalid language key: ${lang}. Defaulting to 'en'.`);
+    lang = "en"; // Default to 'en' if the key is invalid
+  }
+
+  // Retrieve the translation keys and update the elements with the 'data-translate' attribute
+  const languageData = translations[lang];
+  const elements = document.querySelectorAll("[data-translate]");
+
+  elements.forEach((el) => {
+    const key = el.getAttribute("data-translate");
+    if (key && languageData[key]) {
+      if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") {
+        // If it's not a form input, update the innerText
+        (el as HTMLElement).innerText = languageData[key];
+      } else {
+        // For input/textarea, update the placeholder
+        (el as HTMLInputElement | HTMLTextAreaElement).placeholder =
+          languageData[key];
       }
-
-      // Retrieve the translation keys and update the elements with the 'data-translate' attribute
-      const languageData = translations[lang];
-      const elements = document.querySelectorAll("[data-translate]");
-
-      elements.forEach((el) => {
-        const key = el.getAttribute("data-translate");
-        if (key && languageData[key]) {
-          if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") {
-            // If it's not a form input, update the innerText
-            (el as HTMLElement).innerText = languageData[key];
-          } else {
-            // For input/textarea, update the placeholder
-            (el as HTMLInputElement | HTMLTextAreaElement).placeholder =
-              languageData[key];
-          }
-        }
-      });
-
-      // Save the selected language in localStorage
-      localStorage.setItem("language", lang);
-    }
-
-    // Event listeners for language buttons
-    const flagEn = document.getElementById("flag-en");
-    if (flagEn) {
-      flagEn.addEventListener("click", () => {
-        changeLanguage("en");
-        console.log("English selected");
-      });
-    }
-
-    const flagFi = document.getElementById("flag-fi");
-    if (flagFi) {
-      flagFi.addEventListener("click", () => {
-        changeLanguage("fi");
-        console.log("Finnish selected");
-      });
-    }
-
-    // Load saved language from localStorage when the page loads
-    const savedLang = localStorage.getItem("language") || "en";
-    if (!(savedLang in translations)) {
-      console.warn(`Invalid saved language: ${savedLang}. Defaulting to 'en'.`);
-      changeLanguage("en"); // Default to 'en' if the saved language is invalid
-    } else {
-      changeLanguage(savedLang);
     }
   });
-});
 
+  // Save the selected language in localStorage
+  localStorage.setItem("language", lang);
+}
+
+// Event listeners for language buttons
+const flagEn = document.getElementById("flag-en");
+if (flagEn) {
+  flagEn.addEventListener("click", () => {
+    changeLanguage("en");
+    console.log("English selected");
+  });
+}
+
+const flagFi = document.getElementById("flag-fi");
+if (flagFi) {
+  flagFi.addEventListener("click", () => {
+    changeLanguage("fi");
+    console.log("Finnish selected");
+  });
+}
+
+// Load saved language from localStorage when the page loads
+const savedLang = localStorage.getItem("language") || "en";
+if (!(savedLang in translations)) {
+  console.warn(`Invalid saved language: ${savedLang}. Defaulting to 'en'.`);
+  changeLanguage("en"); // Default to 'en' if the saved language is invalid
+} else {
+  changeLanguage(savedLang);
+}
+
+   
 const fetchReservations = document.getElementById(
   "fetchReservations"
 ) as HTMLButtonElement;
@@ -253,7 +243,6 @@ fetchReservations?.addEventListener("click", async () => {
 });
 
 selectMenuToDisplay();
-
 
 const fetchButton = document.getElementById("fetch") as HTMLButtonElement;
 const target = document.getElementById("contactMap") as HTMLDivElement;
@@ -287,4 +276,5 @@ fetchButton?.addEventListener("click", async () => {
       target.innerHTML = `<p>Error fetching data: ${(error as Error).message}</p>`;
     }
   }
+});
 });
