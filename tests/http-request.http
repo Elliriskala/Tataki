@@ -7,8 +7,11 @@ GET http://localhost:3000/api/menus
 
 ### getting menus based on a category
 
-
 GET http://localhost:3000/api/menus/lunch
+
+### getting special menus
+
+GET http://localhost:3000/api/menus/is_special
 
 
 ### getting all users
@@ -17,5 +20,17 @@ GET http://localhost:3000/api/users
 
 ### getting all orders 
 
+GET http://localhost:3000/api/orders
 
+### getting all orders based on order status
+
+GET http://localhost:3000/api/orders/pending
+
+### getting all orders based on a order id
+
+GET http://localhost:3000/api/orders/1
+
+### getting all orders based on a user id
+
+GET http://localhost:3000/api/orders/user/1
 

@@ -1,9 +1,10 @@
 import express from 'express';
-import { getAllMenuItems, getMenuItemsByCategory  } from '../controllers/menu-controllers';
+import { getAllMenuItems, getMenuItemsByCategory, getSpecialMenuItems  } from '../controllers/menu-controllers';
 
 const menuRouter = express.Router();
 
 menuRouter.get('/', getAllMenuItems);
 menuRouter.get('/:category', getMenuItemsByCategory);
+menuRouter.get('/is_special', getSpecialMenuItems);
 
 export default menuRouter;
