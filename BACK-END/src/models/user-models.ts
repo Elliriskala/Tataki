@@ -55,6 +55,7 @@ const registerUser = async (newUser: User): Promise<number> => {
         newUser.username,
         newUser.password_hash,
         newUser.email,
+        newUser.phone_number,
         newUser.user_level_id
     ];
     try {
@@ -89,6 +90,7 @@ const modifyUser = async (user_id: number, modifiedUser: User): Promise<number> 
         modifiedUser.username,
         modifiedUser.password_hash,
         modifiedUser.email,
+        modifiedUser.phone_number,
         modifiedUser.user_level_id,
         user_id
     ];

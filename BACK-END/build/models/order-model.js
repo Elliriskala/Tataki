@@ -1,5 +1,5 @@
-import { promisePool } from "../database";
-import { customError } from "../middlewares/error-handlers";
+import { promisePool } from "../database.js";
+import { customError } from "../middlewares/error-handlers.js";
 /**
  *
  * @returns all orders from the database

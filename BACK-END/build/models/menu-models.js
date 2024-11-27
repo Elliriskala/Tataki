@@ -1,4 +1,4 @@
-import { promisePool } from "../database";
+import { promisePool } from "../database.js";
 /**
  *
  * @returns all menu items from the database based on the category

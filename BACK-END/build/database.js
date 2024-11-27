@@ -1,5 +1,6 @@
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise';
 import 'dotenv/config';
+
 const promisePool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -9,5 +10,6 @@ const promisePool = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
+
 export { promisePool };
 //# sourceMappingURL=database.js.map

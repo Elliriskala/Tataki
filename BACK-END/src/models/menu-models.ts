@@ -8,7 +8,7 @@ import { Menu } from "../utils/interfaces";
  * @returns {Promise<Menu[]>} - Array of menu items
  */
 
-const fetchMenuItems = async (category: string): Promise<Menu[] | null> => {
+const fetchMenuItemsByCategory = async (category: string): Promise<Menu[] | null> => {
     try {
         const sql = 'SELECT * FROM menus WHERE category = ?';
         const [rows]: any = await promisePool.query(sql, [category]);

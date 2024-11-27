@@ -1,4 +1,4 @@
-import { promisePool } from "../database";
+import { promisePool } from "../database.js";
 /**
  *
  * @returns all users from the database
@@ -7,7 +7,7 @@ import { promisePool } from "../database";
  */
 const fetchUsers = async () => {
     try {
-        const rows = await promisePool.query("SELECT * FROM Users");
+        const [rows] = await promisePool.query("SELECT * FROM Users");
         if (rows) {
             return rows;
         }
@@ -53,6 +53,7 @@ const registerUser = async (newUser) => {
         newUser.username,
         newUser.password_hash,
         newUser.email,
+        newUser.phone_number,
         newUser.user_level_id
     ];
     try {
@@ -89,6 +90,7 @@ const modifyUser = async (user_id, modifiedUser) => {
         modifiedUser.username,
         modifiedUser.password_hash,
         modifiedUser.email,
+        modifiedUser.phone_number,
         modifiedUser.user_level_id,
         user_id
     ];

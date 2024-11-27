@@ -1,4 +1,4 @@
-import { fetchMenuItems, fetchMenuAllergens } from "../models/menu-models";
+import { fetchMenuItems, fetchMenuAllergens } from "../models/menu-models.js";
 /**
  * Fetch menu items based on the category
  * @param req

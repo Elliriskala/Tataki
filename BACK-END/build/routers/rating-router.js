@@ -1,6 +1,6 @@
 import express from "express";
-import { getFoodReviews, getFoodReviewById, getFoodReviewsByUserId, getFoodReviewsByMenuId, createFoodReview, updateFoodReview, removeFoodReview, getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview } from "../controllers/rating-controller";
-import authenticateToken from "../middlewares/authentication";
+import { getFoodReviews, getFoodReviewById, getFoodReviewsByUserId, getFoodReviewsByMenuId, createFoodReview, updateFoodReview, removeFoodReview, getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview } from "../controllers/rating-controllers.js";
+import authenticateToken from "../middlewares/authentication.js";
 const ratingRouter = express.Router();
 ratingRouter
     .get('/food/ratings', getFoodReviews)

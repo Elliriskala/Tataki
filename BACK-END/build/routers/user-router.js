@@ -1,6 +1,6 @@
-import { getUsers, getUserById, postUser, modifyUserById, deleteUserById } from '../controllers/user-controller';
+import { getUsers, getUserById, postUser, modifyUserById, deleteUserById } from '../controllers/user-controller.js';
 import express from 'express';
-import authenticateToken from '../middlewares/authentication';
+import authenticateToken from '../middlewares/authentication.js';
 const userRouter = express.Router();
 userRouter.get('/', getUsers)
     .post('/', postUser);

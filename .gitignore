@@ -1,4 +1,8 @@
-node_modules
+FRONT-END/node_modules/
+BACK-END/node_modules/
+BACK-END/build/
+BACK-END/.env
+BACK-END/public/
 .history
 img/*.mp4
 .env
@@ -8,3 +12,4 @@ img/*.mp4
 /playwright/.cache/
 .vscode
 dist/
+node_modules

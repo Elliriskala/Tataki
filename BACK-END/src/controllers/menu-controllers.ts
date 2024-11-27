@@ -2,6 +2,49 @@ import { fetchMenuItems, fetchMenuAllergens } from "../models/menu-models";
 import { Request, Response } from "express";
 import { Allergen } from "../utils/interfaces";
 
+// Fetch all menu items
+
+/**
+ * Fetch all menu items
+ * @param req
+ * @param res
+ * @returns all menu items with allergens included
+ * @throws Error
+ * @returns {Promise<void>} - Menu items or null if not found
+ */
+
+const getAllMenuItems = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // Fetch all menu items
+    const menuItems = await fetchMenuItems();
+
+    if (!menuItems) {
+      res.status(404).json({ message: "Menu items not found" });
+      return;
+    }
+
+    // Fetch allergens for each menu item
+    for (const menuItem of menuItems) {
+      const allergenDescription = await fetchMenuAllergens(menuItem.menu_id);
+
+      const allergens: Allergen[] = allergenDescription
+        ? allergenDescription.map((description) => ({
+            // id is hardcoded to 1 for now
+            allergen_id: 1,
+            menu_id: menuItem.menu_id,
+            allergen_description: description,
+          }))
+        : [];
+      menuItem.allergens = allergens;
+    }
+    // the menu items with allergens
+    res.json(menuItems);
+  } catch (e) {
+    console.error("getAllMenuItems error:", (e as Error).message);
+    throw new Error("getAllMenuItems error: " + (e as Error).message);
+  }
+};
+
 /**
  * Fetch menu items based on the category
  * @param req

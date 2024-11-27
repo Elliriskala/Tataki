@@ -2,4 +2,4 @@
 
 ## getting menus based on a category
 
-GET http://localhost:5173/api/menus/:category
+GET http://localhost:3000/api/menus

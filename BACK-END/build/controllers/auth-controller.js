@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { fetchUserById, selectUsernameAndPassword } from '../models/user-models';
+import { fetchUserById, selectUsernameAndPassword } from '../models/user-models.js';
 import 'dotenv/config';
 const postLogin = async (req, res) => {
     console.log('postLogin', req.body);
@@ -9,7 +9,8 @@ const postLogin = async (req, res) => {
         const jwtSecret = process.env.JWT_SECRET;
         const jwtExpiresIn = process.env.JWT_EXPIRES_IN;
         if (!jwtSecret || !jwtExpiresIn) {
-            return res.status(500).json({ message: 'JWT_SECRET or JWT_EXPIRES_IN is not defined' });
+            res.status(500).json({ message: 'JWT_SECRET or JWT_EXPIRES_IN is not defined' });
+            return;
         }
         const token = jwt.sign({ user_id: user.user_id, user_level_id: user.user_level_id }, jwtSecret, { expiresIn: jwtExpiresIn });
         res.json({ token });

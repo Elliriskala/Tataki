@@ -11,7 +11,7 @@ interface LoginRequest extends Request {
   };
 }
 
-const postLogin = async (req: LoginRequest, res: Response) => {
+const postLogin = async (req: LoginRequest, res: Response): Promise<void> => {
     console.log('postLogin', req.body);
     const {username, password} = req.body;
     const user = await selectUsernameAndPassword(username, password);
@@ -19,7 +19,8 @@ const postLogin = async (req: LoginRequest, res: Response) => {
       const jwtSecret = process.env.JWT_SECRET;
       const jwtExpiresIn = process.env.JWT_EXPIRES_IN;
       if (!jwtSecret || !jwtExpiresIn) {
-        return res.status(500).json({message: 'JWT_SECRET or JWT_EXPIRES_IN is not defined'});
+        res.status(500).json({message: 'JWT_SECRET or JWT_EXPIRES_IN is not defined'});
+        return;
       }
       const token = jwt.sign({user_id: user.user_id, user_level_id: user.user_level_id}, jwtSecret, {expiresIn: jwtExpiresIn});
       res.json({token});

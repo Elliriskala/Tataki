@@ -1,5 +1,5 @@
 import express from "express";
-import { getFoodReviews, getFoodReviewById, getFoodReviewsByUserId, getFoodReviewsByMenuId, createFoodReview, updateFoodReview, removeFoodReview, getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview } from "../controllers/rating-controller";
+import { getFoodReviews, getFoodReviewById, getFoodReviewsByUserId, getFoodReviewsByMenuId, createFoodReview, updateFoodReview, removeFoodReview, getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview } from "../controllers/rating-controllers";
 import authenticateToken from "../middlewares/authentication";
 
 const ratingRouter = express.Router();

@@ -1,4 +1,4 @@
-import { promisePool } from "../database";
+import { promisePool } from "../database.js";
 /**
  *
  * @returns all reservations from the database
@@ -7,7 +7,8 @@ import { promisePool } from "../database";
  */
 const fetchReservations = async () => {
     try {
-        const rows = await promisePool.query("SELECT * FROM reservations");
+        // const rows = await promisePool.query("SELECT * FROM reservations");
+        const [rows] = await promisePool.query("SELECT * FROM reservations");
         if (rows) {
             return rows;
         }
