@@ -133,7 +133,21 @@ const translations: {
         "comments": "Comments",
         "submit-review": "Submit Review",
         "placeHolderComments": "Write your review here. Maximum of 200 characters.",
-        "placeholderReviewName": "Enter your name or use a nickname"
+        "placeholderReviewName": "Enter your name or use a nickname",
+
+        // login page translations
+        "login-button": "Login",
+        "register-button": "Register",
+        "login-form-title": "Login",
+        "password-label": "Password",
+        "submit-button": "Submit",
+        "reset-button": "Reset",
+        "register-form-title": "Register",
+        "username-label": "Username",
+        "email-label": "Email",
+        "message": "This is a message box"
+
+
     },
     fi: {
         // Navigation and about page translations
@@ -263,7 +277,20 @@ const translations: {
         "comments": "Kommentit",
         "submit-review": "Lähetä arvostelu",
         "placeHolderComments": "Kirjoita arvostelusi tähän. Maksimissaan 200 merkkiä.",
-        "placeholderReviewName": "Kirjoita nimesi tai käytä nimimerkkiä."
+        "placeholderReviewName": "Kirjoita nimesi tai käytä nimimerkkiä.",
+
+        // login page translations
+        "login-button": "Kirjaudu sisään",
+        "register-button": "Rekisteröidy",
+        "login-form-title": "Kirjaudu sisään",
+        "password-label": "Salasana",
+        "submit-button": "Lähetä",
+        "reset-button": "Tyhjennä kentät",
+        "register-form-title": "Rekisteröidy",
+        "username-label": "Käyttäjänimi",
+        "email-label": "Sähköposti",
+        "message": "Tämä on viestilaatikko"
+
     }
 };
 

@@ -46,7 +46,7 @@
                     </div>
                     <div class="input-container">
                         <label for="login-password" data-translate="password-label">Password</label>
-                        <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
+                        <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." minlength="10" maxlength="25" required>
                         <span class="toggle-password" data-target="login-password"><i data-target="login-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
                     </div>
                     <div class="form-buttons">
