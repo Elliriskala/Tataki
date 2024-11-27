@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import  userRouter  from './routers/user-router';
 import  ratingRouter  from './routers/rating-router';
 import  authRouter  from './routers/auth-router';
+import  menuRouter from './routers/menu-router'; 
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -27,6 +28,7 @@ app.use('/api/users', userRouter);
 app.use('/api/ratings', ratingRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/reservations', reservationRouter);
+app.use('/api/menus', menuRouter);
 
 /*
 app.get('*', (_req, res) => {

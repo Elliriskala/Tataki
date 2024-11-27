@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",        // Makes sure modules are resolved like in Node.js
-    "module": "es2022",                 // Use ES modules
-    "target": "es2020",                 // Target ES2020 or higher for compatibility
-    "outDir": "./build",                // The directory for the compiled JavaScript files
-    "rootDir": "./src",                 // The root directory of your source files
-    "esModuleInterop": true,            // Ensures compatibility with CommonJS modules
+    "moduleResolution": "node", // Makes sure modules are resolved like in Node.js
+    "module": "es2022", // Use ES modules
+    "target": "es2020", // Target ES2020 or higher for compatibility
+    "outDir": "./build", // The directory for the compiled JavaScript files
+    "rootDir": "./src", // The root directory of your source files
+    "esModuleInterop": true, // Ensures compatibility with CommonJS modules
     "allowSyntheticDefaultImports": true, // Allows default imports from CommonJS
-    "resolveJsonModule": true,           // Allows importing .json files
-    "sourceMap": true,                   // Generates source maps
-    "noImplicitAny": true,               // Enables strict type-checking
-    "strict": true,                      // Enables all strict type-checking options
+    "resolveJsonModule": true, // Allows importing .json files
+    "sourceMap": true, // Generates source maps
+    "noImplicitAny": true, // Enables strict type-checking
+    "strict": true, // Enables all strict type-checking options
     "skipLibCheck": true,
-    "allowJs": true               // Skip type checking for declaration files
+    "allowJs": true // Skip type checking for declaration files
   },
   "include": [
-    "src/**/*"                           // Include all files under src
+    "src/**/*" // Include all files under src
   ],
   "exclude": [
-    "node_modules"                       // Exclude node_modules
+    "node_modules" // Exclude node_modules
   ],
   "plugins": [
     {
@@ -26,4 +26,3 @@
     }
   ]
 }
-

@@ -1,4 +1,4 @@
-import { fetchMenuItems, fetchMenuAllergens } from "../models/menu-models";
+import { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens } from "../models/menu-models";
 import { Request, Response } from "express";
 import { Allergen } from "../utils/interfaces";
 
@@ -54,11 +54,11 @@ const getAllMenuItems = async (req: Request, res: Response): Promise<void> => {
  * @returns {Promise<void>} - Menu items or null if not found
  */
 
-const getMenuItems = async (req: Request, res: Response): Promise<void> => {
+const getMenuItemsByCategory = async (req: Request, res: Response): Promise<void> => {
   const category = req.params.category;
   try {
     // Fetch menu items based on the category
-    const menuItems = await fetchMenuItems(category);
+    const menuItems = await fetchMenuItemsByCategory(category);
 
     if (!menuItems) {
       res.status(404).json({ message: "Menu items not found" });
@@ -87,4 +87,4 @@ const getMenuItems = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getMenuItems };
+export { getAllMenuItems, getMenuItemsByCategory };

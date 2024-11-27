@@ -1,11 +1,32 @@
 import { promisePool } from "../database.js";
+// fetch all menus
+/**
+ *
+ * @returns all menu items from the database
+ * @throws Error
+ * @returns {Promise<Menu[]>} - Array of menu items
+ */
+const fetchMenuItems = async () => {
+    try {
+        const sql = 'SELECT * FROM menus';
+        const [rows] = await promisePool.query(sql);
+        if (rows && rows.length > 0) {
+            return rows;
+        }
+        return null;
+    }
+    catch (e) {
+        console.error('fetchMenuItems error:', e.message);
+        throw new Error('Database error: ' + e.message);
+    }
+};
 /**
  *
  * @returns all menu items from the database based on the category
  * @throws Error
  * @returns {Promise<Menu[]>} - Array of menu items
  */
-const fetchMenuItems = async (category) => {
+const fetchMenuItemsByCategory = async (category) => {
     try {
         const sql = 'SELECT * FROM menus WHERE category = ?';
         const [rows] = await promisePool.query(sql, [category]);
@@ -34,5 +55,5 @@ const fetchMenuAllergens = async (menuId) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-export { fetchMenuItems, fetchMenuAllergens };
+export { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens };
 //# sourceMappingURL=menu-models.js.map
