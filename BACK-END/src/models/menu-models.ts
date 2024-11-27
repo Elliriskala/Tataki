@@ -45,12 +45,28 @@ const fetchMenuItemsByCategory = async (category: string): Promise<Menu[] | null
     }
 }
 
+// fetch special menu items; 
+
+const fetchSpecialMenus = async (): Promise<Menu[] | null> => {
+    try {
+        const sql = 'SELECT * FROM menus WHERE is_special = true';
+        const [rows]: any = await promisePool.query(sql);
+        if (rows && rows.length > 0) {
+            return rows;
+        }
+        return null;
+    } catch (e) {
+        console.error('fetchSpecialMenus error:', (e as Error).message);
+        throw new Error('Database error: ' + (e as Error).message);
+    }
+};
+
 // fetch menu allergens 
 
-const fetchMenuAllergens = async (menuId: number): Promise<string[] | null> => {
+const fetchMenuAllergens = async (menu_id: number): Promise<string[] | null> => {
     try {
         const sql = 'SELECT allergen_description FROM allergens WHERE menu_id = ?';
-        const [rows]: any = await promisePool.query(sql, [menuId]);
+        const [rows]: any = await promisePool.query(sql, [menu_id]);
         if (rows && rows.length > 0) {
             return rows.map((row: any) => row.allergen_description);
         }
@@ -61,4 +77,4 @@ const fetchMenuAllergens = async (menuId: number): Promise<string[] | null> => {
     }
 }
 
-export { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens };
+export { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens, fetchSpecialMenus };

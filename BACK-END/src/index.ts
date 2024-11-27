@@ -7,6 +7,7 @@ import  userRouter  from './routers/user-router';
 import  ratingRouter  from './routers/rating-router';
 import  authRouter  from './routers/auth-router';
 import  menuRouter from './routers/menu-router'; 
+import orderRouter from './routers/order-router';
 
 
 const hostname = '127.0.0.1';
@@ -29,6 +30,7 @@ app.use('/api/ratings', ratingRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/reservations', reservationRouter);
 app.use('/api/menus', menuRouter);
+app.use('/api/orders', orderRouter);
 
 // Serve the main index.html for the root route (no conflicts with the API)
 app.get('/', (_req, res) => {

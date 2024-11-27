@@ -92,6 +92,7 @@ interface OrderItem {
   order_item_id: number;
   order_id?: number;
   menu_id: number;
+  course_name: string;
   item_quantity: number;
   comment?: string;
 }
