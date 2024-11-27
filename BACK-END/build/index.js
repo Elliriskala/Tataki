@@ -2,6 +2,7 @@ import express from 'express';
 import reservationRouter from './routers/reservation-router.js';
 import path from 'path';
 import cors from 'cors';
+import { fileURLToPath } from 'url';
 import userRouter from './routers/user-router.js';
 import ratingRouter from './routers/rating-router.js';
 import authRouter from './routers/auth-router.js';
@@ -11,11 +12,12 @@ const port = 3000;
 const app = express();
 app.use(cors());
 app.use(express.json());
+const __filename = fileURLToPath(new URL(import.meta.url));
+const __dirname = path.dirname(__filename);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 /*
-const __filename = fileURLToPath(new URL (import.meta.url));
-const __dirname = path.dirname(__filename);
+
 */
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/users', userRouter);

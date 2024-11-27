@@ -5,7 +5,10 @@ import { Menu } from "./utils/interfaces";
 
 const fetchMenuItemsByCategory = async (category: string): Promise<Menu[]> => {
   try {
-    const response = await fetch(`/api/menus/${category}`);
+    const response = await fetch(`/api/menus/${category}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+
     if (!response.ok) {
       throw new Error("Failed to fetch menu items");
     }

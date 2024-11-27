@@ -1,6 +1,5 @@
 import { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens } from "../models/menu-models.js";
-// Fetch all menu items
-/**
+/*
  * Fetch all menu items
  * @param req
  * @param res

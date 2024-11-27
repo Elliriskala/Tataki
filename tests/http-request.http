@@ -1,5 +1,21 @@
 ## Menu resource
 
-## getting menus based on a category
+### getting menus based on a category
 
 GET http://localhost:3000/api/menus
+
+
+### getting menus based on a category
+
+
+GET http://localhost:3000/api/menus/lunch
+
+
+### getting all users
+
+GET http://localhost:3000/api/users
+
+### getting all orders 
+
+
+

@@ -1,4 +1,5 @@
 import translations from "./translations";
+import { selectMenuToDisplay } from "./menu";
 
 const translationsTyped = translations;
 
@@ -235,6 +236,8 @@ fetchReservations?.addEventListener("click", async () => {
   const reservations = await response.json();
   console.log(reservations);
 });
+
+selectMenuToDisplay();
 
 
 const fetchButton = document.getElementById("fetch") as HTMLButtonElement;

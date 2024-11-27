@@ -2,9 +2,7 @@ import { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens } from "..
 import { Request, Response } from "express";
 import { Allergen } from "../utils/interfaces";
 
-// Fetch all menu items
-
-/**
+/*
  * Fetch all menu items
  * @param req
  * @param res
