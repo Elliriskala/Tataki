@@ -243,7 +243,7 @@ const target = document.getElementById("contactMap") as HTMLDivElement;
 
 fetchButton?.addEventListener("click", async () => {
   try {
-    const response = await fetch('http://localhost:3000/api/reservations', {
+    const response = await fetch('http://localhost:3000/api/users', {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -261,9 +261,7 @@ fetchButton?.addEventListener("click", async () => {
     console.log(data);
 
     // Update the target element with the formatted data
-    if (target) {
-      target.innerHTML = JSON.stringify(data, null, 2);  // Pretty-print JSON
-    }
+    
   } catch (error) {
     // Log any errors
     console.error('Fetch error:', error);

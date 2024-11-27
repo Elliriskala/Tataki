@@ -12,23 +12,27 @@ const port = 3000;
 const app = express();
 
 app.use(cors());
-
-const __filename = fileURLToPath(new URL (import.meta.url));
-const __dirname = path.dirname(__filename);
-
 app.use(express.json());
 
-app.use(express.static(path.resolve(__dirname, '../../front-end/dist')));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+/*
+const __filename = fileURLToPath(new URL (import.meta.url));
+const __dirname = path.dirname(__filename);
+*/
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', userRouter);
 app.use('/api/ratings', ratingRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/reservations', reservationRouter);
 
+/*
 app.get('*', (_req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../front-end/dist/index.html'));
+    res.sendFile(path.resolve(__dirname, 'index.html'));
 });
-
+*/
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });

@@ -5,7 +5,7 @@ import { fetchReservations, fetchReservationById, fetchReservationsByUserId, cre
  * @throws Error
  * @returns {Promise<Reservation[]>} - Array of reservations
  */
-const getReservations = async (req, res) => {
+const getReservations = async (_req, res) => {
     try {
         const reservations = await fetchReservations();
         res.json(reservations);
