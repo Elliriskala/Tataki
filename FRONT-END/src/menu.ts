@@ -1,22 +1,73 @@
 "use strict";
 import { Menu } from "./utils/interfaces";
 
-// Fetching the menu items from the database based on the category
+// Fetching the menu items from the database
 
-const fetchMenuItemsByCategory = async (category: string): Promise<Menu[]> => {
+const fetchMenuItems = async (): Promise<Menu[]> => {
   try {
-    const response = await fetch(`/api/menus/${category}`, {
+    const response = await fetch("http://localhost:3000/api/menus", {
       headers: { "Content-Type": "application/json" },
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch menu items");
+      console.error("Failed to fetch menu items:", response.statusText);
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    const menudata: Menu[] = await response.json();
+
+    const responseText = await response.text();
+    
+    const menudata: Menu[] = JSON.parse(responseText);
+    return menudata;
+  } catch (error) {
+    console.error("fetchMenuItems error:", error);
+    throw new Error("Failed to fetch menu items");
+  }
+};
+
+// Fetching the menu items from the database based on the category
+
+const fetchMenuItemsByCategory = async (category: string): Promise<Menu[]> => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/menus/${category}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      console.error("Failed to fetch menu items:", response.statusText);
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const responseText = await response.text();
+
+    const menudata: Menu[] = JSON.parse(responseText);
     return menudata;
   } catch (error) {
     console.error("fetchMenuItemsByCategory error:", error);
     throw new Error("Failed to fetch menu items by category");
+  }
+};
+
+// fetch special menus from the database
+
+const fetchSpecialMenus = async (): Promise<Menu[]> => {
+  try {
+    const response = await fetch("http://localhost:3000/api/menus/specials", {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      console.error("Failed to fetch special menu items:", response.statusText);
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const responseText = await response.text();
+
+    const menudata: Menu[] = JSON.parse(responseText);
+    return menudata;
+  } catch (error) {
+
+    console.error("fetchSpecialMenus error:", error);
+    throw new Error("Failed to fetch special menu items");
   }
 };
 
@@ -112,6 +163,12 @@ const selectMenuToDisplay = () => {
     const dessertMenus = await fetchMenuItemsByCategory("desserts");
     displayMenu(dessertMenus);
   });
+};
+
+// select chef's specials to display
+
+const selectSpecialsToDisplay = () => {
+  fetchSpecialMenus().then(displayMenu);
 };
 
 export { displayMenu, selectMenuToDisplay, fetchMenuItemsByCategory };

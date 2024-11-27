@@ -1,5 +1,5 @@
-import { lunchMenus } from "./menuItems";
 import { displayMenu } from "./menu";
+import { lunchMenus } from "./menuItems";
 
 document.addEventListener("DOMContentLoaded", () => {
   const menuTracker = document.querySelector(

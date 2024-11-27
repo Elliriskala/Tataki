@@ -13,3 +13,4 @@ img/*.mp4
 .vscode
 dist/
 node_modules
+BACK-END/database/create-db.sql/
