@@ -9,6 +9,8 @@ const getUsers = async (_req, res) => {
         throw new Error('getUsers error: ' + e.message);
     }
 };
+
+
 const getUserById = async (req, res) => {
     const user_id = Number(req.params.user_id);
     try {
@@ -82,6 +84,7 @@ const modifyUserById = async (req, res) => {
         res.status(500).json({ message: 'Error in modifyUserById database query' });
     }
 };
+
 const deleteUserById = async (req, res) => {
     const user_id = Number(req.params.user_id);
     try {
@@ -98,5 +101,11 @@ const deleteUserById = async (req, res) => {
         throw new Error('deleteUserById error: ' + e.message);
     }
 };
-export { getUsers, getUserById, postUser, modifyUserById, deleteUserById };
-//# sourceMappingURL=user-controller.js.map
+
+export {
+  getUsers,
+  getUserById,
+  postUser,
+  modifyUserById,
+  deleteUserById,
+};

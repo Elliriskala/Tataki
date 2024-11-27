@@ -1,109 +1,134 @@
 "use strict";
 
-import { MenuItems } from "./types";
+import { Menu, Allergen } from "./utils/interfaces";
 
-const lunchMenus: MenuItems[] = [
+const lunchMenus: Menu[] = [
   {
-    menuName: "Kyoto Bliss",
-    menuDescription:
+    menu_id: 1,
+    course_name: "Kyoto Bliss",
+    course_description:
       "8-piece Spring Petal Roll, 4 pieces of tuna sashimi and wakame salad.<br><br>Spring Petal Roll: Salmon, avocado and cream cheese wrapped in sushi rice and nori, garnished with sesame seeds.",
-    price: "16,90€",
-    allergens: "F, M",
-    menuImage: "/img/menu-images/salmon-avocado-roll2.jpg",
+    price: 16.90,
+    allergens: ["F" as unknown as Allergen, "M" as unknown as Allergen],
+    menu_image: "/img/menu-images/salmon-avocado-roll2.jpg",
+    category: "lunch"
   },
   {
-    menuName: "Hokkaido Harmony",
-    menuDescription:
+    menu_id: 2,
+    course_name: "Hokkaido Harmony",
+    course_description:
       "8-piece California Roll, 4 pieces of yellowtail sashimi and edamame beans.<br><br>California Roll: Creamy avocado, imitation crab, and cucumber rolled in rice and nori, topped with roe and vegan mayonnaise.",
-    price: "15,90€",
-    allergens: "F",
-    menuImage: "/img/menu-images/california-roll2.jpg",
+    price: 15.90,
+    allergens: ["F" as unknown as Allergen],
+    menu_image: "/img/menu-images/california-roll2.jpg",
+    category: "lunch"
   },
   {
-    menuName: "Ocean Zen Platter",
-    menuDescription:
+    menu_id: 3,
+    course_name: "Ocean Zen Platter",
+    course_description:
       "6-piece Flame Roll, 4 pieces of sake nigiri and edamame beans.<br><br>Flame Roll: Spicy tuna with avocado, wrapped in rice and nori, topped with sesame seeds and spicy vegan mayonnaise.",
-    price: "18,90€",
-    menuImage: "/img/menu-images/spicy-tuna-maki2.jpg",
-    allergens: "F, G, S",
+    price: 18.90,
+    allergens: ["F" as unknown as Allergen, "G" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/spicy-tuna-maki2.jpg",
+    category: "lunch"
   },
   {
-    menuName: "Golden Sun",
-    menuDescription:
+    menu_id: 4,
+    course_name: "Golden Sun",
+    course_description:
       "8-piece Crunchy Shrimp Roll, 2 pieces of unagi nigiri and miso soup.<br><br>Crunchy Shrimp Roll: Tempura shrimp, avocado, and cucumber wrapped in rice and nori, finished with a drizzle of eel sauce.",
-    price: "19,90€",
-    menuImage: "/img/menu-images/crunchy-shrimp-roll2.jpg",
-    allergens: "F, G, S",
+    price: 19.90,
+    allergens: ["F" as unknown as Allergen, "G" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/crunchy-shrimp-roll2.jpg",
+    category: "lunch"
   },
   {
-    menuName: "Sakura Delight",
-    menuDescription:
+    menu_id: 5,
+    course_name: "Sakura Delight",
+    course_description:
       "8-piece Garden Harmony Roll, 4 pieces of tofu nigiri and edamame beans.<br><br>Garden Harmony Roll: A vibrant mix of red cabbage, wakame salad, carrot, paprika and tofu rolled in rice and nori, topped with sesame seeds.",
-    price: "15,90€",
-    menuImage: "/img/menu-images/vegan-sushi2.jpg",
-    allergens: "S",
+    price: 15.90,
+    allergens: ["S" as unknown as Allergen],
+    menu_image: "/img/menu-images/vegan-sushi2.jpg",
+    category: "lunch"
   },
   {
-    menuName: "Tokyo Trio",
-    menuDescription:
+    menu_id: 6,
+    course_name: "Tokyo Trio",
+    course_description:
       "8-piece Golden Dragon roll, 2 pieces of maguro nigiri and miso soup.<br><br>Golden Dragon Roll: White fish, cucumber, and carrot wrapped in sushi rice, topped with freshwater eel, herbs and eel sauce.",
-    price: "19,90€",
-    menuImage: "/img/menu-images/dragon-roll.jpg",
-    allergens: "F, S",
+    price: 19.90,
+    allergens: ["F" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/dragon-roll.jpg",
+    category: "lunch"
   },
 ];
 
-const dinnerMenus: MenuItems[] = [
+const dinnerMenus: Menu[] = [
   {
-    menuName: "Moonlight Ocean",
-    menuDescription:
+    menu_id: 7,
+    course_name: "Moonlight Ocean",
+    course_description:
       "6 pieces of unagi nigiri, 3 pieces of sake, ebi, hirame and maguro nigiris, 5 pieces of tako sashimi<br><br>Served with wakame salad and warm miso soup.",
-    price: "28,90€",
-    allergens: "F",
-    menuImage: "/img/menu-images/dinnerplate3.jpg",
+    price: 28.90,
+    allergens: ["F" as unknown as Allergen],
+    menu_image: "/img/menu-images/dinnerplate3.jpg",
+    category: "dinner"
   },
   {
-    menuName: "Imperial Feast",
-    menuDescription:
+    menu_id: 8,
+    course_name: "Imperial Feast",
+    course_description:
       "2 pieces of sake nigiri, 4 makis of Philadelphia Roll, 8 salmon makis, 5 pieces of salmon sashimi, a bowl of duck ramen soup<br><br>Philadelphia Roll: Avocado and cream cheese wrapped in sushi rice and nori, topped with salmon.<br><br>Ramen soup: Roasted duck slices, ramen noodles, boiled egg, chili oil and herbs",
-    price: "29,90€",
-    allergens: "E, F, G, S",
-    menuImage: "/img/menu-images/dinnerplate7.jpg",
+    price: 29.90,
+    allergens: ["E" as unknown as Allergen, "F" as unknown as Allergen, "G" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/dinnerplate7.jpg",
+    category: "dinner"
   },
   {
-    menuName: "Emperor’s Delight",
-    menuDescription:
+    menu_id: 9,
+    course_name: "Emperor’s Delight",
+    course_description:
       "9 pieces of sake nigiri, 6 pieces of unagi nigiri, 3 pieces of ebi nigiri, 4 makis of Dragon Roll  and 2 makis of Philadelphia Roll<br><br>Dragon Roll: Salmon, avocado and cream cheese, wrapped in sushi rice and nori, topped with freshwater eel and sesame seeds.<br><br>Philadelphia Roll: Avocado and cream cheese wrapped in sushi rice and nori, topped with salmon.",
-    price: "34,90€",
-    allergens: "F, M, S",
-    menuImage: "/img/menu-images/dinnerplate1.jpg",
+    price: 34.90,
+    allergens: ["F" as unknown as Allergen, "G" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/dinnerplate1.jpg",
+    category: "dinner"
   },
   {
-    menuName: "Dragon's Elegance",
-    menuDescription:
+    menu_id: 10,
+    course_name: "Dragon's Elegance",
+    course_description:
       "Combination of freely chosen nigiris, 6 makis of California and Philadelphia Roll<br><br>California Roll: Creamy avocado, imitation crab, and cucumber rolled in rice and nori, topped with roe and vegan mayonnaise.<br><br>Philadelphia Roll: Avocado and cream cheese wrapped in sushi rice and nori, topped with salmon.",
-    price: "42,90€",
-    allergens: "F, M, S",
-    menuImage: "/img/menu-images/dinnerplate2.jpg",
+    price: 42.90,
+    allergens: ["F" as unknown as Allergen, "M" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/dinnerplate2.jpg",
+    category: "dinner"
   },
   {
-    menuName: "Traditional Harmony Bento",
-    menuDescription:
+    menu_id: 11,
+    course_name: "Traditional Harmony Bento",
+    course_description:
       "A perfect balance of flavors and textures:<br><br>Fresh slices of salmon and tuna sashimi,<br><br>Crispy shrimp and vegetable tempura, sweet tamagoyaki, braised tofu, and a selection of simmered vegetables,<br><br>Miso soup, white rice topped with black sesame seeds and a traditional pickled plum.",
-    price: "28,90€",
-    allergens: "F, G, S",
-    menuImage: "/img/menu-images/bento-box.jpg",
+    price: 28.90,
+    allergens: ["F" as unknown as Allergen, "G" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/bento-box.jpg",
+    category: "dinner"
   },
   {
-    menuName: "Deluxe Fusion Bento",
-    menuDescription:
+    menu_id: 12,
+    course_name: "Deluxe Fusion Bento",
+    course_description:
       "Combination of Japanese classics:<br><br>Sake, unagi and ebi nigiris, cucumber and salmon makis, salmon and tuna sashimi,<br><br>Sliced breaded chicken cutlet and prawns, garnished with green onions,<br><br>Wakame salad, steamed white rice and edamame beans.",
-    price: "32,90€",
-    allergens: "F, G, S",
-    menuImage: "/img/menu-images/bento2.jpg",
+    price: 32.90,
+    allergens: ["F" as unknown as Allergen, "G" as unknown as Allergen, "S" as unknown as Allergen],
+    menu_image: "/img/menu-images/bento2.jpg",
+    category: "dinner"
   },
 ];
 
+/*
 const sideMenus: MenuItems[] = [
   {
     menuName: "Wakame Salad",
@@ -256,4 +281,6 @@ const dessertMenus: MenuItems[] = [
   },
 ];
 
-export { lunchMenus, dinnerMenus, sideMenus, drinkMenus, dessertMenus };
+*/
+
+export { lunchMenus, dinnerMenus};

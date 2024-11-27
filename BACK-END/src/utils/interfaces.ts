@@ -85,6 +85,7 @@ interface Order {
   order_type: string;
   order_status: string;
   created_at: Date;
+  order_items: OrderItem[];
 }
 
 interface OrderItem {

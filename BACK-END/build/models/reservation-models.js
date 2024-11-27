@@ -7,6 +7,7 @@ import { promisePool } from "../database.js";
  */
 const fetchReservations = async () => {
     try {
+        // const rows = await promisePool.query("SELECT * FROM reservations");
         const [rows] = await promisePool.query("SELECT * FROM Reservations");
         if (rows) {
             return rows;
