@@ -21,7 +21,7 @@ const customError = (message, status) => {
  * @param {*} next
  * @returns
  */
-const validationErrorHandler = (req, res, next) => {
+const validationErrorHandler = (req, next) => {
     console.log('post req body', req.body);
     // validation errors can be retrieved from the request object (added by express-validator middleware)
     const errors = validationResult(req);
@@ -39,7 +39,7 @@ const validationErrorHandler = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-const notFoundHandler = (req, res, next) => {
+const notFoundHandler = (req, next) => {
     const error = new CustomError(`Not Found - ${req.originalUrl}`, 404);
     next(error); // forward error to error handler
 };
@@ -47,7 +47,7 @@ const notFoundHandler = (req, res, next) => {
  * Custom default middleware for handling errors
  */
 // eslint-disable-next-line no-unused-vars
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, res) => {
     res.status(err.status || 500); // default is 500 if err.status is not defined
     res.json({
         error: {

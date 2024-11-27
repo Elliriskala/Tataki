@@ -1,4 +1,4 @@
-import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists } from "../models/user-models.ts";
+import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists } from "../models/user-models";
 const getUsers = async (_req, res) => {
     try {
         const users = await fetchUsers();

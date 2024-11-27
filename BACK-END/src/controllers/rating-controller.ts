@@ -1,6 +1,6 @@
-import { fetchFoodReviews, fetchFoodReviewById, fetchFoodReviewsByUserId, fetchFoodReviewsByMenuId, addFoodReview, modifyFoodReview, deleteFoodReview, fetchRestaurantReviews, fetchRestaurantReviewsByUserId, deleteRestaurantReview } from '../models/rating-models.ts';
+import { fetchFoodReviews, fetchFoodReviewById, fetchFoodReviewsByUserId, fetchFoodReviewsByMenuId, addFoodReview, modifyFoodReview, deleteFoodReview, fetchRestaurantReviews, fetchRestaurantReviewsByUserId, deleteRestaurantReview } from '../models/rating-models';
 import { Response } from 'express';
-import { AuthenticatedRequest as Request } from '../utils/interfaces.ts';
+import { AuthenticatedRequest as Request } from '../utils/interfaces';
 
 /**
  * 

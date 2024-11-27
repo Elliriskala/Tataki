@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from '../utils/interfaces.ts';
+import { AuthenticatedRequest } from '../utils/interfaces';
 
 const authenticateToken = (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
     console.log('AuthenticateToken', req.headers);

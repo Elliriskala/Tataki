@@ -27,8 +27,7 @@
     "@types/glob": "^8.1.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/multer": "^1.4.7",
-    "@types/mysql2": "^3.3.3",
-    "@types/bcrypt": "^5.1.0",
+    "@types/bcrypt": "^5.0.0",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"

@@ -1,7 +1,7 @@
-import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists} from "../models/user-models.ts"; 
-import { User, ModifiedUser} from "../utils/interfaces.ts";
+import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists} from "../models/user-models"; 
+import { User, ModifiedUser} from "../utils/interfaces";
 import { Response } from 'express';
-import { AuthenticatedRequest as Request } from '../utils/interfaces.ts';
+import { AuthenticatedRequest as Request } from '../utils/interfaces';
 
 const getUsers = async (_req: Request, res: Response): Promise<void> => {
     try {
