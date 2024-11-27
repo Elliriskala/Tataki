@@ -2,7 +2,7 @@ import { readdirSync, statSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 // Directory containing the built JavaScript files
-const buildDir = './build'; // Replace with your actual build directory
+const buildDir = './build'; 
 
 /**
  * Recursively process files in a directory
