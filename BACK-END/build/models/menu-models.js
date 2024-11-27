@@ -40,11 +40,26 @@ const fetchMenuItemsByCategory = async (category) => {
         throw new Error('Database error: ' + e.message);
     }
 };
+// fetch special menu items; 
+const fetchSpecialMenus = async () => {
+    try {
+        const sql = 'SELECT * FROM menus WHERE is_special = true';
+        const [rows] = await promisePool.query(sql);
+        if (rows && rows.length > 0) {
+            return rows;
+        }
+        return null;
+    }
+    catch (e) {
+        console.error('fetchSpecialMenus error:', e.message);
+        throw new Error('Database error: ' + e.message);
+    }
+};
 // fetch menu allergens 
-const fetchMenuAllergens = async (menuId) => {
+const fetchMenuAllergens = async (menu_id) => {
     try {
         const sql = 'SELECT allergen_description FROM allergens WHERE menu_id = ?';
-        const [rows] = await promisePool.query(sql, [menuId]);
+        const [rows] = await promisePool.query(sql, [menu_id]);
         if (rows && rows.length > 0) {
             return rows.map((row) => row.allergen_description);
         }
@@ -55,5 +70,5 @@ const fetchMenuAllergens = async (menuId) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-export { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens };
+export { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens, fetchSpecialMenus };
 //# sourceMappingURL=menu-models.js.map
