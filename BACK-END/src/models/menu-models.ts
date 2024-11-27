@@ -38,4 +38,4 @@ const fetchMenuAllergens = async (menuId: number): Promise<string[] | null> => {
     }
 }
 
-export { fetchMenuItems, fetchMenuAllergens };
+export { fetchMenuItemsByCategory, fetchMenuAllergens };

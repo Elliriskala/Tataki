@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch src --exec ts-node build/index.js",
     "start": "node build/index.js",
-    "build": "tsc"
+    "build": "tsc && node add-js-to-imports.js"
   },
   "keywords": [],
   "author": "",

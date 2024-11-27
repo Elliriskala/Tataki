@@ -5,7 +5,7 @@ import { promisePool } from "../database.js";
  * @throws Error
  * @returns {Promise<Menu[]>} - Array of menu items
  */
-const fetchMenuItems = async (category) => {
+const fetchMenuItemsByCategory = async (category) => {
     try {
         const sql = 'SELECT * FROM menus WHERE category = ?';
         const [rows] = await promisePool.query(sql, [category]);
@@ -34,5 +34,5 @@ const fetchMenuAllergens = async (menuId) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-export { fetchMenuItems, fetchMenuAllergens };
+export { fetchMenuItemsByCategory, fetchMenuAllergens };
 //# sourceMappingURL=menu-models.js.map
