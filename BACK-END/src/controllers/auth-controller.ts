@@ -6,15 +6,15 @@ import { Request, Response } from 'express';
 
 interface LoginRequest extends Request {
   body: {
-    username: string;
+    email: string;
     password: string;
   };
 }
 
 const postLogin = async (req: LoginRequest, res: Response): Promise<void> => {
     console.log('postLogin', req.body);
-    const {username, password} = req.body;
-    const user = await selectUsernameAndPassword(username, password);
+    const {email, password} = req.body;
+    const user = await selectUsernameAndPassword(email, password);
     if (user) {
       const jwtSecret = process.env.JWT_SECRET;
       const jwtExpiresIn = process.env.JWT_EXPIRES_IN;
