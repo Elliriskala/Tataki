@@ -97,7 +97,7 @@ CREATE TABLE FoodReview (
 CREATE TABLE RestaurantReview (
     review_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    review TEXT NOT NULL,
+    review TEXT NULL DEFAULT 'User only rated the restaurant with a star rating.',
     star_rating TINYINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
