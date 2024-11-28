@@ -138,7 +138,7 @@ const selectUserByEmail = async (email) => {
             return rows[0];
         }
         else {
-            throw new Error('selectUserByEmail, User not found');
+            return null;
         }
     }
     catch (e) {

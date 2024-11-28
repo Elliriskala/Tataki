@@ -2,5 +2,5 @@ node_modules/
 dist/
 .env
 build/
-database/create-db.sql/
+
 

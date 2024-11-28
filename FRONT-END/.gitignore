@@ -9,5 +9,5 @@ img/*.mp4
 /blob-report/
 /playwright/.cache/
 .vscode
-dist/
+dist
 dev-dist/

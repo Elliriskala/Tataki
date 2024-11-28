@@ -20,7 +20,7 @@ CREATE TABLE Users (
     password_hash VARCHAR(150) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     phone_number VARCHAR(15) DEFAULT NULL,
-    user_level_id INT NOT NULL,
+    user_level_id INT NOT NULL DEFAULT 2,
     customer_address TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_level_id) REFERENCES UserLevels(level_id)

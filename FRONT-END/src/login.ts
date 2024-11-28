@@ -29,7 +29,7 @@ const getLanguage = () => {
 // URL for the login endpoint
 const BASE_URL = 'http://localhost:3000';
 const LOGIN_URL = '/api/auth/login'; // Replace with your actual API endpoint
-const REGISTER_URL = '/api/users'; // Replace with your actual API endpoint
+const REGISTER_URL = '/api/auth/register'; // Replace with your actual API endpoint
 
 // Function to handle login logic
 const handleLogin = async (event: Event) => {

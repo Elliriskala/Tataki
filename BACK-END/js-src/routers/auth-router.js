@@ -3,7 +3,7 @@ import { getMe } from '../controllers/auth-controller.js';
 import authenticateToken from '../middlewares/authentication.js';
 import { postLogin } from '../controllers/auth-controller.js';
 import { postUser } from '../controllers/user-controller.js';
-import { body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
 import { validationErrorHandler } from '../middlewares/error-handlers.js';
 
 const authRouter = express.Router();

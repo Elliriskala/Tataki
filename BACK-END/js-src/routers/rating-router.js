@@ -1,5 +1,5 @@
 import express from "express";
-import { getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview } from "../controllers/rating-controller.js";
+import { getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview, postReview} from "../controllers/rating-controller.js";
 import authenticateToken from "../middlewares/authentication.js";
 const ratingRouter = express.Router();
 
