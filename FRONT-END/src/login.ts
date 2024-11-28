@@ -86,6 +86,7 @@ const handleLogin = async (event: Event) => {
 
 
 // Function to handle registration logic
+// Function to handle registration logic
 const handleRegister = async (event: Event) => {
     event.preventDefault();
 
@@ -110,15 +111,32 @@ const handleRegister = async (event: Event) => {
             body: JSON.stringify({ email, password, username }),
         });
 
-        if (!response.ok) {
+        // Check if the response is OK (status code 200-299)
+        if (response.ok) {
+            // Success - Registration was successful
+            messageTarget.textContent = "Registration successful, you may now log in!";
+            messageTarget.style.color = "green";
+        } else {
+            // If the response is not OK, handle different status codes
             const errorData = await response.json();
-            messageTarget.textContent = errorData.message || "Registration failed.";
-            messageTarget.style.color = "red";
-            return;
+            switch (response.status) {
+                case 400:
+                    messageTarget.textContent = errorData.message || "Invalid input. Please check your data.";
+                    messageTarget.style.color = "red";
+                    break;
+                case 409:
+                    messageTarget.textContent = errorData.message || "Email or username already exists.";
+                    messageTarget.style.color = "red";
+                    break;
+                case 500:
+                    messageTarget.textContent = errorData.message || "Server error. Please try again later.";
+                    messageTarget.style.color = "red";
+                    break;
+                default:
+                    messageTarget.textContent = errorData.message || "Registration failed.";
+                    messageTarget.style.color = "red";
+            }
         }
-
-        messageTarget.textContent = "Registration successful, you may now log in!";
-        messageTarget.style.color = "green";
 
     } catch (error) {
         console.error("Registration error:", error);
@@ -128,6 +146,7 @@ const handleRegister = async (event: Event) => {
         registerSubmit.disabled = false;
     }
 };
+
 
 // Attach the event listener to the login button
 loginSubmit.addEventListener('click', handleLogin);
