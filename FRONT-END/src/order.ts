@@ -275,9 +275,137 @@ const addMoreToCart = (index: number) => {
   updateCartDisplay();
 };
 
+// place the order
+
+const placeOrder = async () => {
+  try {
+    const orderData = collectOrderData();
+    console.log("Order data:", orderData);
+   
+    const response = await fetch("http://localhost:3000/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ order: orderData }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error placing order: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    console.log(`Order placed successfully! Order ID: ${result.orderId}`);
+
+    // clearing the cart after placing the order
+    localStorage.removeItem("cart");
+    updateCartDisplay();
+  } catch (error) {
+    console.error("Error placing order:", error);
+    console.log("There was an issue placing your order. Please try again.");
+  }
+};
+
+// collect the order details
+const collectOrderData = () => {
+  // Get cart items
+  const cartItems: { name: string; price: number; quantity: number }[] = [];
+  const cartRows = document.querySelectorAll("#cart-items tr");
+  cartRows.forEach((row) => {
+    const nameElement = row.querySelector("td:nth-child(1)");
+    const name = nameElement ? nameElement.textContent?.trim() || "" : "";
+    const priceElement = row.querySelector("td:nth-child(2)");
+    const price = priceElement ? parseFloat(priceElement.textContent?.trim().replace('€', '') || '0') : 0;
+    const quantityElement = row.querySelector("td:nth-child(3)");
+    const quantity = quantityElement ? parseInt(quantityElement.textContent?.trim() || '0') : 0;
+    
+    cartItems.push({ name, price, quantity });
+  });
+
+  // Get customer information
+  const customerInfo = {
+    name: (document.querySelector(".order-user-info input[placeholder='Name']") as HTMLInputElement)?.value.trim() || "",
+    phone: (document.querySelector(".order-user-info input[placeholder='Phone number']") as HTMLInputElement)?.value.trim() || "",
+    email: (document.querySelector(".order-user-info input[placeholder='Email']") as HTMLInputElement)?.value.trim() || "",
+    address: (document.querySelector(".order-user-info input[placeholder='Address']") as HTMLInputElement)?.value.trim() || "",
+    postalCode: (document.querySelector(".order-user-info input[placeholder='Postal code']") as HTMLInputElement)?.value.trim() || "",
+  };
+
+  // Check delivery method
+  const deliveryCheckbox = document.getElementById("delivery-checkbox") as HTMLInputElement | null;
+  const isDelivery = deliveryCheckbox ? deliveryCheckbox.checked : false;
+  const pickupCheckbox = document.getElementById("pickup-checkbox") as HTMLInputElement | null;
+  const isPickup = pickupCheckbox ? pickupCheckbox.checked : false;
+
+  let deliveryMethod = null;
+  if (isDelivery && !isPickup) {
+    deliveryMethod = "delivery";
+  } else if (!isDelivery && isPickup) {
+    deliveryMethod = "pickup";
+  } else {
+    throw new Error("Please select either Delivery or Pickup, but not both.");
+  }
+
+  // Get comments
+  const additionalCommentElement = document.getElementById("leave-comment");
+  const additionalComment = additionalCommentElement ? (additionalCommentElement as HTMLTextAreaElement).value.trim() : "";
+  const deliveryInstructionsElement = document.getElementById("instructions");
+  const deliveryInstructions = deliveryInstructionsElement ? (deliveryInstructionsElement as HTMLTextAreaElement).value.trim() : "";
+
+  // Check terms and conditions
+  const termsCheckbox = document.getElementById("terms-checkbox") as HTMLInputElement | null;
+  const hasAgreedToTerms = termsCheckbox ? termsCheckbox.checked : false;
+  if (!hasAgreedToTerms) {
+    throw new Error("You must agree to the Terms and Conditions to place an order.");
+  }
+
+  // Calculate total price
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  // Return the collected data
+  return {
+    customer_mame: customerInfo.name,
+    customerInfo,
+    cartItems,
+    deliveryMethod,
+    additionalComment,
+    deliveryInstructions,
+    totalPrice,
+  };
+};
+
+// Event listener for delivery method checkboxes
+const deliveryCheckbox = document.getElementById("delivery-checkbox");
+const pickupCheckbox = document.getElementById("pickup-checkbox");
+
+if (deliveryCheckbox) {
+  deliveryCheckbox.addEventListener("change", () => {
+    if ((deliveryCheckbox as HTMLInputElement).checked) {
+      if (pickupCheckbox) {
+        (pickupCheckbox as HTMLInputElement).checked = false;
+      }
+    }
+  });
+}
+
+if (pickupCheckbox) {
+  pickupCheckbox.addEventListener("change", () => {
+    if ((pickupCheckbox as HTMLInputElement).checked) {
+      if (deliveryCheckbox) {
+        (deliveryCheckbox as HTMLInputElement).checked = false;
+      }
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Loaded");
 
   selectOrderMenuToDisplay();
   updateCartDisplay();
+
+  const placeOrderButton = document.getElementById("place-order-button");
+  if (placeOrderButton) {
+    placeOrderButton.addEventListener("click", placeOrder);
+  }
 });

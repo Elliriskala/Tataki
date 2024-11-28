@@ -45,6 +45,13 @@ CREATE TABLE Allergens (
     FOREIGN KEY (menu_id) REFERENCES Menus(menu_id) 
 );
 
+
+-- Table for order status
+CREATE TABLE OrderStatus (
+    status_id INT AUTO_INCREMENT PRIMARY KEY,
+    status_name VARCHAR(50) UNIQUE
+);
+
 -- Create table for orders
 CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,10 +59,12 @@ CREATE TABLE Orders (
     customer_name VARCHAR(50) NOT NULL,
     total_price DECIMAL(10, 2),
     order_type ENUM('Pickup', 'Delivery') NOT NULL,
-    delivery_address TEXT,
-    order_status ENUM('Pending', 'Inprogress', 'Completed', 'Cancelled') DEFAULT 'Pending',
+    status_id INT DEFAULT 1,
+    general_comment TEXT,
+    is_delivery BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (status_id) REFERENCES OrderStatus(status_id)
 );
 
 -- Create table for order items
@@ -65,9 +74,18 @@ CREATE TABLE OrderItems (
     menu_id INT NOT NULL,
     course_name VARCHAR(50) NOT NULL,
     item_quantity INT NOT NULL,
-    comment TEXT,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (menu_id) REFERENCES Menus(menu_id)
+);
+
+-- Delivery details table
+CREATE TABLE DeliveryDetails (
+    delivery_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    delivery_address TEXT NOT NULL,
+    postal_code VARCHAR(10),
+    delivery_instructions TEXT,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE
 );
 
 -- Create table for reservations
@@ -117,6 +135,10 @@ INSERT INTO Menus (course_name, course_description, price, menu_image, category,
 -- Insert allergens
 INSERT INTO Allergens (menu_id, allergen_description) VALUES 
 (1, 'F, M'), (2, 'F'), (3, 'F, G, S'), (4, 'F, G, S'), (5, 'S'), (6, 'F, S'), (7, 'F'), (8, 'E, F, G, S'), (9, 'F, G, S'), (10, 'F, M, S'), (11, 'F, G, S'), (12, 'F, G, S'), (13, 'S'), (14, 'S'), (15, 'S'), (16, 'F'), (17, 'F'), (18, 'F'), (19, 'M'), (22, 'G'), (23, 'G'), (25, 'E, G, M'), (26, 'G'), (27, 'E, G, M'), (29, 'S'), (30, 'E, G, M');
+
+-- initial statuses for orders
+INSERT INTO OrderStatus (status_name) VALUES 
+('Pending'), ('Inprogress'), ('Completed'), ('Cancelled');
 
 -- Insert reservations
 INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests) VALUES (2, '2021-12-24', '18:00:00', '2'), (3, '2021-12-25', '19:00:00', '4'), (1, '2021-12-26', '20:00:00', '6');

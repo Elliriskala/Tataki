@@ -6,6 +6,7 @@ import {
   createOrder,
   updateOrderStatus,
 } from "../models/order-model.js";
+import { validateString, validatePositiveNumber } from "../middlewares/validation.js";
 import { customError } from "../middlewares/error-handlers.js";
 
 /**
@@ -124,18 +125,10 @@ const postOrder = async (req, res, next) => {
       order_status,
     } = req.body;
 
-    if (!customer_name || typeof customer_name !== "string") {
-      throw new Error("Missing or invalid customer_name in the request.");
-    }
-    if (typeof total_price !== "number" || total_price <= 0) {
-      throw new Error("Missing or invalid total_price in the request.");
-    }
-    if (!order_type || typeof order_type !== "string") {
-      throw new Error("Missing or invalid order_type in the request.");
-    }
-    if (!order_status || typeof order_status !== "string") {
-      throw new Error("Missing or invalid order_status in the request.");
-    }
+    validateString(customer_name, "customer_name");
+    validatePositiveNumber(total_price, "total_price");
+    validateString(order_type, "order_type");
+    validateString(order_status, "order_status");
 
     if (
       !order_items ||
