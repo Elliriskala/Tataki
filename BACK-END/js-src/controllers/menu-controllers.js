@@ -1,4 +1,4 @@
-import { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens, fetchSpecialMenus } from "../models/menu-models.js";
+import { fetchMenuItems, fetchMenuItemsById, fetchMenuItemsByCategory, fetchMenuAllergens, fetchSpecialMenus } from "../models/menu-models.js";
 /**
  * Fetch all menu items
  * @param req
@@ -36,6 +36,44 @@ const getAllMenuItems = async (req, res) => {
         throw new Error("getAllMenuItems error: " + e.message);
     }
 };
+
+/**
+ * fetch menu item baed on id
+ * @param req 
+ * @param res 
+ * @returns menu item with the given id
+ */
+
+const getMenuItemById = async (req, res) => {
+    const id = req.params.menu_id;
+    try {
+        // Fetch menu item by id
+        const menuItems = await fetchMenuItemsById(id);
+        if (!menuItems) {
+            res.status(404).json({ message: "Menu items not found" });
+            return;
+        }
+        // Fetch allergens for each menu item
+        for (const menuItem of menuItems) {
+            const allergenDescription = await fetchMenuAllergens(menuItem.menu_id);
+            const allergens = allergenDescription
+                ? allergenDescription.map((description) => ({
+                    allergen_id: 1,
+                    menu_id: menuItem.menu_id,
+                    allergen_description: description,
+                }))
+                : [];
+            menuItem.allergens = allergens;
+        }
+        // the menu items with allergens
+        res.json(menuItems);
+    }
+    catch (e) {
+        console.error("getMenuItemById error:", e.message);
+        throw new Error("getMenuItemById error: " + e.message);
+    }
+};
+
 /**
  * Fetch menu items based on the category
  * @param req
@@ -109,4 +147,4 @@ const getSpecialMenuItems = async (req, res) => {
         throw new Error("getSpecialMenuItems error: " + e.message);
     }
 };
-export { getAllMenuItems, getMenuItemsByCategory, getSpecialMenuItems };
+export { getAllMenuItems, getMenuItemById, getMenuItemsByCategory, getSpecialMenuItems };

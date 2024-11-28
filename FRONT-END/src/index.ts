@@ -1,5 +1,5 @@
-import { displayMenu } from "./menu";
-import { lunchMenus } from "./menuItems";
+import { displayMenu, fetchSpecialMenus } from "./menu";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const menuTracker = document.querySelector(
@@ -20,10 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = menuTracker.parentElement as HTMLDivElement;
   let menuPosition = 0; // initial position
 
-  displayMenu(lunchMenus);
+  // fetch special menus
+  const initializeCarousel = async () => {
 
-  const initializeCarousel = () => {
-    const menuLength = lunchMenus.length;
+    let specialMenus = [];
+    specialMenus = await fetchSpecialMenus();
+    const menuLength = specialMenus.length;
+
+    // display special menus
+    displayMenu(specialMenus);
 
     // calculate the width of each menu
     const calculateMenuWidth = () => {
@@ -79,4 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   setTimeout(initializeCarousel, 100);
+  setTimeout(() => initializeCarousel(), 100);
 });
+

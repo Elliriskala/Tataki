@@ -15,7 +15,7 @@ const fetchMenuItems = async (): Promise<Menu[]> => {
     }
 
     const responseText = await response.text();
-    
+
     const menudata: Menu[] = JSON.parse(responseText);
     return menudata;
   } catch (error) {
@@ -28,9 +28,12 @@ const fetchMenuItems = async (): Promise<Menu[]> => {
 
 const fetchMenuItemsByCategory = async (category: string): Promise<Menu[]> => {
   try {
-    const response = await fetch(`http://localhost:3000/api/menus/${category}`, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/menus/category/${category}`,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     if (!response.ok) {
       console.error("Failed to fetch menu items:", response.statusText);
@@ -51,7 +54,7 @@ const fetchMenuItemsByCategory = async (category: string): Promise<Menu[]> => {
 
 const fetchSpecialMenus = async (): Promise<Menu[]> => {
   try {
-    const response = await fetch("http://localhost:3000/api/menus/specials", {
+    const response = await fetch("http://localhost:3000/api/menus/specials/1", {
       headers: { "Content-Type": "application/json" },
     });
 
@@ -65,7 +68,6 @@ const fetchSpecialMenus = async (): Promise<Menu[]> => {
     const menudata: Menu[] = JSON.parse(responseText);
     return menudata;
   } catch (error) {
-
     console.error("fetchSpecialMenus error:", error);
     throw new Error("Failed to fetch special menu items");
   }
@@ -118,14 +120,14 @@ const displayMenu = (menus: Menu[]): void => {
 
 // selecting the menus to display based on the button clicked
 
+const lunchButton = document.querySelector(".lunch-button");
+const dinnerButton = document.querySelector(".dinner-button");
+const sideButton = document.querySelector(".sides-button");
+const drinkButton = document.querySelector(".drinks-button");
+const dessertButton = document.querySelector(".desserts-button");
+
 const selectMenuToDisplay = () => {
   fetchMenuItemsByCategory("lunch").then(displayMenu);
-
-  const lunchButton = document.querySelector(".lunch-button");
-  const dinnerButton = document.querySelector(".dinner-button");
-  const sideButton = document.querySelector(".sides-button");
-  const drinkButton = document.querySelector(".drinks-button");
-  const dessertButton = document.querySelector(".desserts-button");
 
   if (
     !lunchButton ||
@@ -171,4 +173,11 @@ const selectSpecialsToDisplay = () => {
   fetchSpecialMenus().then(displayMenu);
 };
 
-export { displayMenu, selectMenuToDisplay, fetchMenuItemsByCategory, fetchMenuItems, fetchSpecialMenus, selectSpecialsToDisplay };
+export {
+  displayMenu,
+  selectMenuToDisplay,
+  fetchMenuItemsByCategory,
+  fetchMenuItems,
+  fetchSpecialMenus,
+  selectSpecialsToDisplay,
+};

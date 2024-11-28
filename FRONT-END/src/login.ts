@@ -2,6 +2,8 @@
 import { UserLoggedIn } from "./utils/interfaces";
 import { loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
+
+
 const registerSubmit = document.getElementById('submit-button-register') as HTMLButtonElement;
 //const loginForm = document.getElementById('login-form') as HTMLFormElement;
 //const registerForm = document.getElementById('register-form') as HTMLFormElement;
@@ -9,11 +11,13 @@ const registerSubmit = document.getElementById('submit-button-register') as HTML
 //const registerToggle = document.getElementById('register-btn') as HTMLButtonElement;
 //const userPageButton = document.getElementById('login-register-user') as HTMLButtonElement;
 
-const loginEmail = document.getElementById('login-email') as HTMLInputElement;
-const loginPassword = document.getElementById('login-password') as HTMLInputElement;
 const registerEmail = document.getElementById('register-email') as HTMLInputElement;
 const registerPassword = document.getElementById('register-password') as HTMLInputElement;
 const registerUsername = document.getElementById('register-username') as HTMLInputElement;
+
+
+const loginEmail = document.getElementById('login-email') as HTMLInputElement;
+const loginPassword = document.getElementById('login-password') as HTMLInputElement;
 const messageTarget = document.getElementById('message-target') as HTMLSpanElement;
 
 

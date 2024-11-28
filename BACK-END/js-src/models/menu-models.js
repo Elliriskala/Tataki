@@ -20,6 +20,29 @@ const fetchMenuItems = async () => {
         throw new Error('Database error: ' + e.message);
     }
 };
+
+/**
+ * fetch menu items by item id
+ * @returns menu item with the given id
+ * @throws Error
+ * @returns {Promise<Menu[]>} - Array of menu items
+ */
+
+const fetchMenuItemsById = async (id) => {
+    try {
+        const sql = 'SELECT * FROM menus WHERE menu_id = ?';
+        const [rows] = await promisePool.query(sql, [id]);
+        if (rows && rows.length > 0) {
+            return rows;
+        }
+        return null;
+    }
+    catch (e) {
+        console.error('fetchMenuItems error:', e.message);
+        throw new Error('Database error: ' + e.message);
+    }
+};
+
 /**
  *
  * @returns all menu items from the database based on the category
@@ -70,4 +93,4 @@ const fetchMenuAllergens = async (menu_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-export { fetchMenuItems, fetchMenuItemsByCategory, fetchMenuAllergens, fetchSpecialMenus };
+export { fetchMenuItems, fetchMenuItemsById, fetchMenuItemsByCategory, fetchMenuAllergens, fetchSpecialMenus };
