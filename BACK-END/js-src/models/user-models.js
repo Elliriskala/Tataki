@@ -157,4 +157,17 @@ const checkUsernameOrEmailExists = async (username, email, user_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUserByEmail, checkUsernameOrEmailExists };
+
+const checkUserExists = async (email, username) => {
+    const sql = 'SELECT user_id FROM Users WHERE email = ? OR username = ?';
+    try {
+        const [rows] = await promisePool.query(sql, [email, username]);
+        return rows.length > 0;
+    }
+    catch (e) {
+        console.error('checkUserExists error:', e.message);
+        throw new Error('Database error: ' + e.message);
+    }
+}
+
+export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUserByEmail, checkUsernameOrEmailExists, checkUserExists };
