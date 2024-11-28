@@ -36,121 +36,13 @@
         <h1 data-translate="order">Order</h1>
       </div>
       <div class="menu-list">
-        <button class="select-category-button" data-translate="lunch">Lunch</button>
-        <button class="select-category-button" data-translate="dinner">Dinner</button>
-        <button class="select-category-button" data-translate="sides">Sides</button>
-        <button class="select-category-button" data-translate="drinks">Drinks</button>
-        <button class="select-category-button" data-translate="dessert">Dessert</button>
+        <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
+        <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
+        <button class="select-category-button sides-button" data-translate="sides">Sides</button>
+        <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
+        <button class="select-category-button desserts-button" data-translate="dessert">Dessert</button>
       </div>
-      <div class="order-page-placeholder">
-        <div class="order-menu-placeholder" id="menu-one">
-          <div>
-            <section class="order-image-placeholder">
-              <div class="order-menu-image" id="menu-one-image"></div>
-            </section>
-          </div>
-          <div class="order-menu">
-            <h3>Sakura set</h3>
-            <p>
-              Sushi set with miso soup and green tea<br />
-              <br />
-              12,90€
-            </p>
-          </div>
-          <div class="order-checkbox">
-            <input type="checkbox" class="select-item-checkbox" id="menu-one-checkbox" />
-            <label for="menu-one-checkbox" class="checkbox-label">
-              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
-            </label>
-          </div>
-        </div>
-        <div class="order-menu-placeholder" id="menu-two">
-          <div>
-            <section class="order-image-placeholder">
-              <div class="order-menu-image" id="menu-two-image"></div>
-            </section>
-          </div>
-          <div class="order-menu">
-            <h3>MENU 2</h3>
-          </div>
-          <div class="order-checkbox">
-            <input type="checkbox" class="select-item-checkbox" id="menu-two-checkbox" />
-            <label for="menu-two-checkbox" class="checkbox-label">
-              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
-            </label>
-          </div>
-        </div>
-        <div class="order-menu-placeholder" id="menu-three">
-          <div>
-            <section class="order-image-placeholder">
-              <div class="order-menu-image" id="menu-three-image"></div>
-            </section>
-          </div>
-          <div class="order-menu">
-            <h3>MENU 3</h3>
-          </div>
-          <div class="order-checkbox">
-            <input type="checkbox" class="select-item-checkbox" id="menu-three-checkbox" />
-            <label for="menu-three-checkbox" class="checkbox-label">
-              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
-            </label>
-          </div>
-        </div>
-        <div class="order-menu-placeholder" id="menu-four">
-          <div>
-            <section class="order-image-placeholder">
-              <div class="order-menu-image" id="menu-four-image"></div>
-            </section>
-          </div>
-          <div class="order-menu">
-            <h3>MENU 4</h3>
-          </div>
-          <div class="order-checkbox">
-            <input type="checkbox" class="select-item-checkbox" id="menu-four-checkbox" />
-            <label for="menu-three-checkbox" class="checkbox-label">
-              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
-            </label>
-          </div>
-        </div>
-        <div class="order-menu-placeholder" id="menu-five">
-          <div>
-            <section class="order-image-placeholder">
-              <div class="order-menu-image" id="menu-five-image"></div>
-            </section>
-          </div>
-          <div class="order-menu">
-            <h3>MENU 5</h3>
-          </div>
-          <div class="order-checkbox">
-            <input type="checkbox" class="select-item-checkbox" id="menu-five-checkbox" />
-            <label for="menu-three-checkbox" class="checkbox-label">
-              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
-            </label>
-          </div>
-        </div>
-        <div class="order-menu-placeholder" id="menu-six">
-          <div>
-            <section class="order-image-placeholder">
-              <div class="order-menu-image" id="menu-six-image"></div>
-            </section>
-          </div>
-          <div class="order-menu">
-            <h3>MENU 6</h3>
-          </div>
-          <div class="order-checkbox">
-            <input type="checkbox" class="select-item-checkbox" id="menu-six-checkbox" />
-            <label for="menu-three-checkbox" class="checkbox-label">
-              <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-              <span class="tooltip" data-translate="add-to-cart">Add to cart</span>
-            </label>
-          </div>
-        </div>
-      </div>
+      <div class="menu-container"></div>
       <h1 class="your-order-header" data-translate="your-order">Your order:</h1>
       <div class="order-info">
         <div class="your-order">
@@ -163,7 +55,6 @@
                 <th data-translate="qty">Qty</th>
               </tr>
               <tr>
-      
                 <td>Sakura set:</td>
                 <td>Sushi set with miso soup and green tea</td>
                 <td>12,90€</td>
