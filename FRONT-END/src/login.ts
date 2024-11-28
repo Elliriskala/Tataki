@@ -1,6 +1,6 @@
+
 import { UserLoggedIn } from "./utils/interfaces";
-
-
+import { loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
 const registerSubmit = document.getElementById('submit-button-register') as HTMLButtonElement;
 //const loginForm = document.getElementById('login-form') as HTMLFormElement;
@@ -17,6 +17,11 @@ const registerUsername = document.getElementById('register-username') as HTMLInp
 const messageTarget = document.getElementById('message-target') as HTMLSpanElement;
 
 
+const getLanguage = () => {
+    return localStorage.getItem('language') || 'en';
+}
+
+
 // URL for the login endpoint
 const BASE_URL = 'http://localhost:3000';
 const LOGIN_URL = '/api/auth/login'; // Replace with your actual API endpoint
@@ -25,6 +30,8 @@ const REGISTER_URL = '/api/users'; // Replace with your actual API endpoint
 // Function to handle login logic
 const handleLogin = async (event: Event) => {
     event.preventDefault();
+
+    const language = getLanguage();
 
     const email = loginEmail.value.trim();
     const password = loginPassword.value.trim();
@@ -49,23 +56,12 @@ const handleLogin = async (event: Event) => {
         // Check for specific status codes
         if (!response.ok) {
             const errorData = await response.json();
-            switch (response.status) {
-                case 400:
-                    messageTarget.textContent = "Invalid input, please check your details.";
-                    break;
-                case 401:
-                    messageTarget.textContent = errorData.message || "Invalid username or password.";
-                    break;
-                case 500:
-                    messageTarget.textContent = "Server error, please try again later.";
-                    break;
-                default:
-                    messageTarget.textContent = "Login failed.";
-                    break;
-            }
-            messageTarget.style.color = "red";
-            return;
-        }
+        let errorMessage = loginErrorMessages[language][errorData.status] || loginErrorMessages[language].default;
+
+        messageTarget.textContent = errorMessage;
+        messageTarget.style.color = "red";
+        return;
+    }
 
         const data: UserLoggedIn = await response.json();
         messageTarget.textContent = "Login successful!";
@@ -90,6 +86,8 @@ const handleLogin = async (event: Event) => {
 const handleRegister = async (event: Event) => {
     event.preventDefault();
 
+    const language = getLanguage();
+    console.log(language);
     const email = registerEmail.value.trim();
     const password = registerPassword.value.trim();
     const username = registerUsername.value.trim();
@@ -118,24 +116,10 @@ const handleRegister = async (event: Event) => {
             messageTarget.style.color = "green";
         } else {
             // If the response is not OK, handle different status codes
-            const errorData = await response.json();
-            switch (response.status) {
-                case 400:
-                    messageTarget.textContent = errorData.message || "Invalid input. Please check your data.";
-                    messageTarget.style.color = "red";
-                    break;
-                case 409:
-                    messageTarget.textContent = errorData.message || "Email or username already exists.";
-                    messageTarget.style.color = "red";
-                    break;
-                case 500:
-                    messageTarget.textContent = errorData.message || "Server error. Please try again later.";
-                    messageTarget.style.color = "red";
-                    break;
-                default:
-                    messageTarget.textContent = errorData.message || "Registration failed.";
-                    messageTarget.style.color = "red";
-            }
+            let errorMessage = registerErrorMessages[language][response.status] || registerErrorMessages[language].default;
+            messageTarget.textContent = errorMessage;
+            messageTarget.style.color = "red";
+            return;
         }
 
     } catch (error) {
