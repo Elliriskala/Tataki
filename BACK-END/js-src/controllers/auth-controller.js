@@ -1,24 +1,31 @@
 import jwt from 'jsonwebtoken';
-import { fetchUserById, selectUsernameAndPassword } from '../models/user-models.js';
+import bcrypt from 'bcryptjs';
+import { fetchUserById, selectUserByEmail } from '../models/user-models.js';
 import 'dotenv/config';
-const postLogin = async (req, res) => {
+import {customError} from '../middlewares/error-handlers.js';
+
+
+const postLogin = async (req, res, next) => {
     console.log('postLogin', req.body);
-    const { username, password } = req.body;
-    const user = await selectUsernameAndPassword(username, password);
-    if (user) {
-        const jwtSecret = process.env.JWT_SECRET;
-        const jwtExpiresIn = process.env.JWT_EXPIRES_IN;
-        if (!jwtSecret || !jwtExpiresIn) {
-            res.status(500).json({ message: 'JWT_SECRET or JWT_EXPIRES_IN is not defined' });
-            return;
-        }
-        const token = jwt.sign({ user_id: user.user_id, user_level_id: user.user_level_id }, jwtSecret, { expiresIn: jwtExpiresIn });
-        res.json({ token });
+    const {email, password} = req.body;
+    const user = await selectUserByEmail(email);
+    if (!user) {
+      return next(customError(`Username not found.`, 401));
     }
-    else {
-        res.sendStatus(401);
+    const pwMatch = await bcrypt.compare(password, user.password_hash);
+    if (pwMatch) {
+      const token = jwt.sign({user_id: user.user_id}, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+      });
+      // DO not include password hash into response
+      delete user.password_hash;
+      return res.json({...user, token});
+    } else {
+      return next(customError(`Password invalid.`, 401));
     }
-};
+  };
+
+
 const getMe = async (req, res) => {
     const id = req.body.user_id;
     try {

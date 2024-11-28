@@ -1,19 +1,21 @@
 import { validationResult } from "express-validator";
+
 /**
- *
- * @param {string} message
- * @param {string} status
- * @returns {object} error object
+ * 
+ * @param {string} message Error message
+ * @param {string} status HTTP status code
+ * @returns {object} Error object
  */
-class CustomError extends Error {
-    constructor(message, status = 500) {
-        super(message);
-        this.status = status;
+const customError = (message, status, errors) => {
+    const error = new Error(message);
+    error.status = error.status = Number.isInteger(status) ? status : 500;
+    if (errors) {
+      error.errors = errors;
     }
-}
-const customError = (message, status) => {
-    return new CustomError(message, status || 500);
-};
+    return error
+  };
+
+
 /**
  *
  * @param {*} req
@@ -21,18 +23,23 @@ const customError = (message, status) => {
  * @param {*} next
  * @returns
  */
-const validationErrorHandler = (req, next) => {
-    console.log('post req body', req.body);
+const validationErrorHandler = (req, res, next) => {
     // validation errors can be retrieved from the request object (added by express-validator middleware)
-    const errors = validationResult(req);
+    //const errors = validationResult(req);
+    const errors = validationResult(req, {strictParams: ['body']});
     // check if any validation errors
     if (!errors.isEmpty()) {
-        console.error('Validation errors:', errors.array());
-        const errorsString = errors.array().map((error) => error.msg).join(', ');
-        return next(customError('Validation errors in: ' + errorsString, 400));
+      // console.log('validation errors', errors.array({onlyFirstError: true}));
+      // extract field names & messages from error array (only one error per field)
+      const validationErrors = errors.array({onlyFirstError: true}).map((error) => {
+        return {field: error.path, msg: error.msg};
+      });
+      return next(customError('Invalid input data', 400, validationErrors));
     }
-    next(); // no validation errors, continue to next middleware
-};
+    next();
+  };
+
+
 /**
  * 404 error handler
  * @param {*} req
@@ -47,13 +54,14 @@ const notFoundHandler = (req, next) => {
  * Custom default middleware for handling errors
  */
 // eslint-disable-next-line no-unused-vars
-const errorHandler = (err, res) => {
+const errorHandler = (err, req, res, next) => {
     res.status(err.status || 500); // default is 500 if err.status is not defined
     res.json({
-        error: {
-            message: err.message,
-            status: err.status || 500,
-        },
+      error: {
+        message: err.message,
+        status: err.status || 500,
+        errors: err.errors,
+      },
     });
-};
+  };
 export { notFoundHandler, errorHandler, customError, validationErrorHandler };

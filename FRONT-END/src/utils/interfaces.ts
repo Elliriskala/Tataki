@@ -51,8 +51,8 @@ interface UserLoggedIn {
   user_id: number;
   username: string;
   email: string;
-  token: string;
   user_level_id: number;
+  token: string;
 }
 
 interface ModifiedUser {

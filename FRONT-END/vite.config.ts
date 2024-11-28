@@ -8,7 +8,7 @@ export default defineConfig({
   envDir: "./",
   publicDir: "./public",
   build: {
-    outDir: "../BACK-END/public", // Output the built files outside the HTML folder
+    outDir: "./dist", // Output the built files outside the HTML folder
     rollupOptions: {
         external: [],
       input: {
