@@ -1,9 +1,6 @@
+import { Translation } from "./utils/interfaces";
 
-const translations: {
-    [lang: string]: {
-      [key: string]: string;
-    };
-  } = {
+const translations: Translation = {
     en: {
         // Navigation and about page translations
         "nav-home": "Home",
@@ -294,4 +291,36 @@ const translations: {
     }
 };
 
-export default translations;
+
+const loginErrorMessages: Translation = {
+  en: {
+      400: "Invalid input, please check your input.",
+      401: "Invalid username or password.",
+      500: "Server error, please try again later.",
+      default: "Login failed."
+  },
+  fi : {
+      400: "Virheellinen syöte, tarkista syötteet.",
+      401: "Virheellinen käyttäjätunnus tai salasana.",
+      500: "Palvelinvirhe, yritä myöhemmin uudelleen.",
+      default: "Kirjautuminen epäonnistui."
+  }
+}
+
+const registerErrorMessages: Translation = {
+  en: {
+      400: "Invalid input. Please check your input.",
+      409: "Email or username already exists.",
+      500: "Server error. Please try again later.",
+      default: "Registration failed."
+  },
+  fi: {
+      400: "Virheellinen syöte. Tarkista syötteet.",
+      409: "Sähköposti tai käyttäjänimi on jo käytössä.",
+      500: "Palvelinvirhe. Yritä myöhemmin uudelleen.",
+      default: "Rekisteröinti epäonnistui."
+  }
+}
+
+
+export { translations, loginErrorMessages, registerErrorMessages };

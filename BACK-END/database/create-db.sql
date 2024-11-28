@@ -17,11 +17,11 @@ CREATE TABLE UserLevels (
 CREATE TABLE Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(15) NOT NULL UNIQUE,
-    password_hash VARCHAR(50) NOT NULL,
+    password_hash VARCHAR(150) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
-    phone_number VARCHAR(15) NOT NULL,
-    customer_address TEXT,
+    phone_number VARCHAR(15) DEFAULT NULL,
     user_level_id INT NOT NULL,
+    customer_address TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_level_id) REFERENCES UserLevels(level_id)
 );

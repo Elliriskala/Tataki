@@ -48,13 +48,11 @@ const fetchUserById = async (user_id) => {
  * @returns {Promise<number>} - user_id of the newly created user
  */
 const registerUser = async (newUser) => {
-    const sql = 'INSERT INTO Users (username, password_hash, email, phone_number, user_level_id) VALUES (?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO Users (username, password_hash, email) VALUES (?, ?, ?)';
     const params = [
         newUser.username,
         newUser.password_hash,
-        newUser.email,
-        newUser.phone_number,
-        newUser.user_level_id
+        newUser.email
     ];
     try {
         const [result] = await promisePool.query(sql, params);
@@ -132,15 +130,15 @@ const deleteUser = async (user_id) => {
         return { success: false, error: 'Database error: ' + e.message };
     }
 };
-const selectUsernameAndPassword = async (username, password) => {
-    const sql = 'SELECT * FROM Users WHERE username = ? AND password_hash = ?';
+const selectUserByEmail = async (email) => {
+    const sql = 'SELECT user_id, username, password_hash, email, user_level_id, created_at FROM Users WHERE email = ?';
     try {
-        const [rows] = await promisePool.query(sql, [username, password]);
+        const [rows] = await promisePool.query(sql, [email]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
         else {
-            throw new Error('SelectUsernameAndPassword, User not found');
+            throw new Error('selectUserByEmail, User not found');
         }
     }
     catch (e) {
@@ -159,4 +157,17 @@ const checkUsernameOrEmailExists = async (username, email, user_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUsernameAndPassword, checkUsernameOrEmailExists };
+
+const checkUserExists = async (email, username) => {
+    const sql = 'SELECT user_id FROM Users WHERE email = ? OR username = ?';
+    try {
+        const [rows] = await promisePool.query(sql, [email, username]);
+        return rows.length > 0;
+    }
+    catch (e) {
+        console.error('checkUserExists error:', e.message);
+        throw new Error('Database error: ' + e.message);
+    }
+}
+
+export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUserByEmail, checkUsernameOrEmailExists, checkUserExists };
