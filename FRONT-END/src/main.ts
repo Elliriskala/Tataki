@@ -1,7 +1,6 @@
 import translations from "./translations";
 import { selectMenuToDisplay } from "./menu";
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
   const registerButton = document.getElementById(
@@ -175,8 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
       guestInput.value = button.getAttribute("guests-input") || "";
     });
   });
+});
 
-  // Language change logic
+// Language change logic
 function changeLanguage(lang: string) {
   // Check if the language exists in the translations object
   if (!(lang in translations)) {
@@ -232,7 +232,6 @@ if (!(savedLang in translations)) {
   changeLanguage(savedLang);
 }
 
-   
 const fetchReservations = document.getElementById(
   "fetchReservations"
 ) as HTMLButtonElement;
@@ -243,38 +242,3 @@ fetchReservations?.addEventListener("click", async () => {
 });
 
 selectMenuToDisplay();
-
-const fetchButton = document.getElementById("fetch") as HTMLButtonElement;
-const target = document.getElementById("contactMap") as HTMLDivElement;
-
-fetchButton?.addEventListener("click", async () => {
-  try {
-    const response = await fetch("http://localhost:3000/api/users", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    // Check if the response is ok (status 200-299)
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    // Parse the response body as JSON
-    const data = await response.json();
-
-    // Log the data to the console for debugging
-    console.log(data);
-
-    // Update the target element with the formatted data
-  } catch (error) {
-    // Log any errors
-    console.error("Fetch error:", error);
-
-    // Optionally show an error message to the user
-    if (target) {
-      target.innerHTML = `<p>Error fetching data: ${(error as Error).message}</p>`;
-    }
-  }
-});
-});

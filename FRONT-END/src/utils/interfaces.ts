@@ -47,6 +47,14 @@ interface User {
   user_level_id: number;
 }
 
+interface UserLoggedIn {
+  user_id: number;
+  username: string;
+  email: string;
+  token: string;
+  user_level_id: number;
+}
+
 interface ModifiedUser {
   username: string;
   email: string;
@@ -121,6 +129,6 @@ interface AuthenticatedRequest extends Request {
   };
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest };
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn };
 
 
