@@ -48,43 +48,17 @@
         <div class="your-order">
           <div class="order-content">
             <table class="order-table">
-              <tr>
-                <th data-translate="menu">Menu</th>
-                <th></th>
-                <th data-translate="price">Price</th>
-                <th data-translate="qty">Qty</th>
-              </tr>
-              <tr>
-                <td>Sakura set:</td>
-                <td>Sushi set with miso soup and green tea</td>
-                <td>12,90€</td>
-                <td>
-                  <div class="qty-checkbox">
-                    <input type="checkbox" class="remove-checkbox" id="remove-checkbox" />
-                    <label for="remove-checkbox"><i class="fa-solid fa-minus"></i></label>
-                    <p>1</p>
-                    <input type="checkbox" class="add-checkbox" id="add-checkbox" />
-                    <label for="add-checkbox"><i class="fa-solid fa-plus"></i></label>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Flower set:</td>
-                <td>Large sushi set with miso soup and green tea</td>
-                <td>14,90€</td>
-                <td>
-                  <div class="qty-checkbox">
-                    <input type="checkbox" class="remove-checkbox" id="remove-checkbox" />
-                    <label for="remove-checkbox"><i class="fa-solid fa-minus"></i></label>
-                    <p>1</p>
-                    <input type="checkbox" class="add-checkbox" id="add-checkbox" />
-                    <label for="add-checkbox"><i class="fa-solid fa-plus"></i></label>
-                  </div>
-                </td>
-              </tr>
+              <thead>
+                <tr>
+                  <th data-translate="item">Menu</th>
+                  <th data-translate="price">Price</th>
+                  <th data-translate="quantity">Qty</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items"></tbody>
             </table>
             <div class="order-total">
-              <h4 data-translate="total">Total: 27,80€</h4>
+              <p data-translate="total" id="total-price">Total:</p>
             </div>
             <div class="additional-comment">
               <textarea

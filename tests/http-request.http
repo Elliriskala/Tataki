@@ -4,14 +4,18 @@
 
 GET http://localhost:3000/api/menus
 
+### getting menus based on a menu id
+
+GET http://localhost:3000/api/menus/2
+
 
 ### getting menus based on a category
 
-GET http://localhost:3000/api/menus/lunch
+GET http://localhost:3000/api/menus/category/lunch
 
 ### getting special menus
 
-GET http://localhost:3000/api/menus/is_special
+GET http://localhost:3000/api/menus/specials/true
 
 
 ### getting all users
@@ -22,17 +26,18 @@ GET http://localhost:3000/api/users
 
 GET http://localhost:3000/api/orders
 
+### getting all orders based on a customer name
+
+GET http://localhost:3000/api/orders/customer/Elli%20Riskala
+
 ### getting all orders based on order status
 
-GET http://localhost:3000/api/orders/Inprogress
+GET http://localhost:3000/api/orders/status/Inprogress
 
 ### getting all orders based on a order id
 
-GET http://localhost:3000/api/orders/10
+GET http://localhost:3000/api/orders/1
 
-### getting all orders based on a user id
-
-GET http://localhost:3000/api/orders/user/1
 
 ### create an order
 
@@ -43,15 +48,15 @@ Content-Type: application/json
     "customer_name": "Elli Riskala",
     "order_items": [
         {
-            "menu_id": 1,
-            "course_name": "Kyoto Bliss",
-            "item_quantity": 2,
+            "menu_id": 2,
+            "course_name": "Ocean Roll",
+            "item_quantity": 1,
             "comment": "extra wasabi"
         }
     ],
-    "total_price": 20,
+    "total_price": 10,
     "order_status": "pending",
-    "order_type": "delivery"
+    "order_type": "pickup"
 }
 
 ### update an order
