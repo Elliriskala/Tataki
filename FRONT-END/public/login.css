@@ -300,6 +300,75 @@ main {
   text-align: start;
 }
 
+#user-main {
+  background-color: var(--sushi-graphite);
+  color: var(--sushi-white);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem;
+  font-family: 'roboto', sans-serif;
+  animation: fade-in 0.5s ease-in-out;
+}
+
+#user-main h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--sushi-white);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#user-main .welcome-message {
+  font-size: 1.2rem;
+  color: var(--sushi-grey2);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#user-main .profile-container {
+  background-color: var(--sushi-grey3);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#user-main .profile-container h2 {
+  font-size: 1.8rem;
+  color: var(--sushi-white);
+  margin-bottom: 1rem;
+}
+
+#user-main .profile-container p {
+  font-size: 1rem;
+  color: var(--sushi-grey1);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#user-main .logout-button {
+  padding: 12px 30px;
+  background-color: var(--sushi-red3);
+  color: var(--sushi-white);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#user-main .logout-button:hover {
+  background-color: var(--sushi-red4);
+  transform: translateY(-2px);
+}
+
 
 @keyframes fade-in {
   from {
@@ -332,6 +401,23 @@ main {
 
   .login-background.toggle-view .login-container {
     transform: none;
+  }
+
+  #user-main .profile-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  #user-main h1 {
+    font-size: 2rem;
+  }
+
+  #user-main .welcome-message {
+    font-size: 1rem;
+  }
+
+  #user-main .logout-button {
+    width: 100%;
   }
 
 }

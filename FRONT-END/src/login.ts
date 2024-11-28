@@ -69,7 +69,10 @@ const handleLogin = async (event: Event) => {
 
         // Store the token in local storage or a cookie
         localStorage.setItem('authToken', data.token);
+        localStorage.setItem('user_id', data.user_id.toString());
         console.log(data);
+
+        loadUserPage();
 
     } catch (error) {
         console.error("Login error:", error);
@@ -131,6 +134,35 @@ const handleRegister = async (event: Event) => {
     }
 };
 
+
+const loadUserPage = () => {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+        return;
+    } else {
+        const loginContent = document.getElementById('login-main');
+        const userContent = document.getElementById('user-main');
+        if (loginContent && userContent) {
+            loginContent.style.display = 'none';
+            userContent.style.display = 'flex';
+        }
+        //loadUserProfile() fetch user data
+    }
+}
+
+const logOutButton = document.getElementById('logout-btn') as HTMLButtonElement;
+logOutButton.addEventListener('click', () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user_id');
+    const loginContent = document.getElementById('login-main');
+    const userContent = document.getElementById('user-main');
+    if (loginContent && userContent) {
+        loginContent.style.display = 'block';
+        userContent.style.display = 'none';
+    }
+});
+
+window.onload = loadUserPage;
 
 // Attach the event listener to the login button
 loginSubmit.addEventListener('click', handleLogin);
