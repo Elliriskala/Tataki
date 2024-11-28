@@ -1,4 +1,4 @@
-import { promisePool } from "../../build/database.js";
+import { promisePool } from "../database.js";
 /**
  *
  * @returns all food reviews from the database

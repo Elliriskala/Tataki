@@ -1,4 +1,4 @@
-import { promisePool } from "../../build/database.js";
+import { promisePool } from "../database.js";
 import { customError } from "../middlewares/error-handlers.js";
 /**
  *

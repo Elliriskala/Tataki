@@ -2,11 +2,11 @@
   "name": "back-end",
   "version": "1.0.0",
   "type": "module",
-  "main": "build/index.js",
+  "main": "js-src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js",
-    "start": "node js-src/index.js",
+    "dev": "nodemon js-src/app.js",
+    "start": "node js-src/app.js",
     "build": "tsc && node add-js-to-imports.js"
   },
   "keywords": [],
