@@ -42,9 +42,11 @@ interface UserLevel {
 interface User {
   user_id?: number;
   username: string;
+  customer_name?: string;
   email: string;
   phone_number?: string;
   password_hash: string;
+  customer_address?: string;
   user_level_id: number;
 }
 
@@ -57,21 +59,13 @@ interface ModifiedUser {
 
 
 interface Menu {
-
   menu_id: number;
-
   name: string;
-
   description: string;
-
   price: number;
-
   category: string;
-
   allergens?: Allergen[];
-
 }
-
 
 interface Allergen {
   allergen_id: number;
@@ -81,8 +75,11 @@ interface Allergen {
 
 interface Order {
   order_id?: number;
-  user_id: number;
+  user_id?: number;
+  customer_name: string;
+  total_price: number;
   order_type: string;
+  delivery_address?: string;
   order_status: string;
   created_at: Date;
   order_items: OrderItem[];

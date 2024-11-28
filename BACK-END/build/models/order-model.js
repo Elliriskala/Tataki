@@ -123,7 +123,7 @@ const fetchOrderByUserId = async (user_id, next) => {
  * @paran OrderStatus - order status
  * @returns {Promise<OrderItem | null>} - order object with items
  */
-const createOrder = async (user_id, order_items, order_type, order_status, next) => {
+const createOrder = async (customer_name, total_price, order_items, order_type, order_status, next) => {
     try {
         if (!order_items ||
             !Array.isArray(order_items) ||
@@ -131,9 +131,10 @@ const createOrder = async (user_id, order_items, order_type, order_status, next)
             throw new Error("Invalid order_items: Expected a non-empty array.");
         }
         // insert order into orders table
-        const orderSql = "INSERT INTO orders (user_id, order_type, order_status) VALUES (?, ?, ?)";
+        const orderSql = "INSERT INTO orders (customer_name, total_price, order_type, order_status) VALUES (?, ?, ?, ?)";
         const [orderResult] = await promisePool.query(orderSql, [
-            user_id,
+            customer_name,
+            total_price,
             order_type,
             order_status,
         ]);
@@ -169,7 +170,8 @@ const createOrder = async (user_id, order_items, order_type, order_status, next)
         ]);
         const order = {
             order_id: orderItemsResult[0].order_id,
-            user_id: orderItemsResult[0].user_id,
+            customer_name: orderItemsResult[0].customer_name,
+            total_price: orderItemsResult[0].total_price,
             order_type: orderItemsResult[0].order_type,
             order_status: orderItemsResult[0].order_status,
             order_items: orderItemsResult.map((item) => ({
@@ -192,5 +194,23 @@ const createOrder = async (user_id, order_items, order_type, order_status, next)
         return null;
     }
 };
-export { fetchOrderById, fetchOrders, createOrder, fetchOrderByUserId, fetchOrdersByStatus, };
+/**
+ * update order status
+ * @param order_id - order id
+ * @param order_status - order status
+ * @returns {Promise<boolean>} - true if the order status is updated
+ */
+const updateOrderStatus = async (order_id, order_status, next) => {
+    try {
+        const sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
+        const [result] = await promisePool.query(sql, [order_status, order_id]);
+        return result.affectedRows > 0;
+    }
+    catch (e) {
+        console.error("updateOrderStatus error:", e.message);
+        next(customError("Database error: " + e.message));
+        return false;
+    }
+};
+export { fetchOrderById, fetchOrders, createOrder, fetchOrderByUserId, fetchOrdersByStatus, updateOrderStatus, };
 //# sourceMappingURL=order-model.js.map

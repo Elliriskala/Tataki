@@ -4,6 +4,7 @@ import {
   fetchOrderByUserId,
   fetchOrdersByStatus,
   createOrder,
+  updateOrderStatus
 } from "../models/order-model";
 import { Request, Response, NextFunction } from "express";
 import { Order } from "../utils/interfaces";
@@ -154,7 +155,7 @@ const postOrder = async (
   try {
     console.log("Incoming payload:", req.body);
 
-    const { user_id, order_items, order_type, order_status } = req.body;
+    const { customer_name, total_price, order_items, order_type, order_status } = req.body;
 
     if (
       !order_items ||
@@ -165,7 +166,8 @@ const postOrder = async (
     }
     // Create an order
     const newOrder = await createOrder(
-      user_id,
+      customer_name,
+      total_price,
       order_items,
       order_type,
       order_status,
@@ -184,10 +186,48 @@ const postOrder = async (
   }
 };
 
+/**
+ * Update order status
+ * @param req
+ * @param res
+ * @returns updated order status
+ * @throws Error
+ * @returns {Promise<void>} - Order status or null if not found
+ */
+
+const putOrderStatus = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const orderId = Number(req.params.order_id);
+    const orderStatus = req.body.order_status;
+
+    // Update order status
+    const updatedOrderStatus = await updateOrderStatus(
+      orderId,
+      orderStatus,
+      next
+    );
+
+    if (!updatedOrderStatus) {
+      return next(customError("Order status not updated", 404));
+    }
+
+    // the order status
+    res.json({ order_id: orderId, order_status: orderStatus });
+  } catch (e) {
+    console.error("putOrderStatus error:", (e as Error).message);
+    return next(customError("putOrderStatus error: " + (e as Error).message));
+  }
+};
+
 export {
   getAllOrders,
   getOrderById,
   getOrdersByUserId,
   getOrdersByStatus,
   postOrder,
+  putOrderStatus
 };

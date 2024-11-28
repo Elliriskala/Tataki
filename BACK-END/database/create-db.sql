@@ -17,9 +17,11 @@ CREATE TABLE UserLevels (
 CREATE TABLE Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(15) NOT NULL UNIQUE,
+    customer_name VARCHAR(50),
     password_hash VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     phone_number VARCHAR(15) NOT NULL,
+    customer_address TEXT,
     user_level_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_level_id) REFERENCES UserLevels(level_id)
@@ -47,9 +49,12 @@ CREATE TABLE Allergens (
 -- Create table for orders
 CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    order_type VARCHAR(50) NOT NULL,
-    order_status VARCHAR(50) NOT NULL,
+    user_id INT,
+    customer_name VARCHAR(50) NOT NULL,
+    total_price DECIMAL(10, 2),
+    order_type ENUM('Pickup', 'Delivery') NOT NULL,
+    delivery_address TEXT,
+    order_status ENUM('Pending', 'Inprogress', 'Completed', 'Cancelled') DEFAULT 'Pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
@@ -113,13 +118,6 @@ INSERT INTO Menus (course_name, course_description, price, menu_image, category,
 -- Insert allergens
 INSERT INTO Allergens (menu_id, allergen_description) VALUES 
 (1, 'F, M'), (2, 'F'), (3, 'F, G, S'), (4, 'F, G, S'), (5, 'S'), (6, 'F, S'), (7, 'F'), (8, 'E, F, G, S'), (9, 'F, G, S'), (10, 'F, M, S'), (11, 'F, G, S'), (12, 'F, G, S'), (13, 'S'), (14, 'S'), (15, 'S'), (16, 'F'), (17, 'F'), (18, 'F'), (19, 'M'), (22, 'G'), (23, 'G'), (25, 'E, G, M'), (26, 'G'), (27, 'E, G, M'), (29, 'S'), (30, 'E, G, M');
-
-
--- Insert orders
-INSERT INTO Orders (user_id, order_type, order_status) VALUES (2, 'Takeaway', 'Inprogress'), (3, 'Delivery', 'Pending'), (1, 'Delivery', 'Pending');
-
--- Insert order items
-INSERT INTO OrderItems (order_id, menu_id, course_name, item_quantity, comment) VALUES (1, 1, 'Kyoto Bliss', 1, 'Extra wasabi'), (2, 3, 'Ocean Zen Platter', 1, 'Extra soy sauce'), (2, 30, 'Black Sesame Cheesecake', 1, 'Extra raspberry'), (3, 26, 'Sake', 1, NULL), (3, 19, 'Wakame salad', 1, 'Extra soy sauce');
 
 -- Insert reservations
 INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests) VALUES (2, '2021-12-24', '18:00:00', '2'), (3, '2021-12-25', '19:00:00', '4'), (1, '2021-12-26', '20:00:00', '6');

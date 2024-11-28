@@ -40,16 +40,26 @@ POST http://localhost:3000/api/orders
 Content-Type: application/json
 
 {
-    "user_id": 1,
+    "customer_name": "Elli Riskala",
     "order_items": [
         {
             "menu_id": 1,
             "course_name": "Kyoto Bliss",
             "item_quantity": 2,
-            "comment": "no onions"
+            "comment": "extra wasabi"
         }
     ],
+    "total_price": 20,
     "order_status": "pending",
     "order_type": "delivery"
+}
+
+### update an order
+
+PUT http://localhost:3000/api/orders/1
+Content-Type: application/json
+
+{
+    "order_status": "Inprogress"
 }
 

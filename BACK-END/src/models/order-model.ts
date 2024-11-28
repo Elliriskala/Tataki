@@ -142,7 +142,8 @@ const fetchOrderByUserId = async (
  */
 
 const createOrder = async (
-  user_id: number,
+  customer_name: string,
+  total_price: number,
   order_items: OrderItem[],
   order_type: string,
   order_status: string,
@@ -158,9 +159,10 @@ const createOrder = async (
     }
     // insert order into orders table
     const orderSql =
-      "INSERT INTO orders (user_id, order_type, order_status) VALUES (?, ?, ?)";
+      "INSERT INTO orders (customer_name, total_price, order_type, order_status) VALUES (?, ?, ?, ?)";
     const [orderResult]: any = await promisePool.query(orderSql, [
-      user_id,
+      customer_name,
+      total_price,
       order_type,
       order_status,
     ]);
@@ -206,7 +208,8 @@ const createOrder = async (
 
     const order: Order = {
       order_id: orderItemsResult[0].order_id,
-      user_id: orderItemsResult[0].user_id,
+      customer_name: orderItemsResult[0].customer_name,
+      total_price: orderItemsResult[0].total_price,
       order_type: orderItemsResult[0].order_type,
       order_status: orderItemsResult[0].order_status,
       order_items: orderItemsResult.map((item: any) => ({
@@ -229,10 +232,35 @@ const createOrder = async (
   }
 };
 
+/**
+ * update order status
+ * @param order_id - order id
+ * @param order_status - order status
+ * @returns {Promise<boolean>} - true if the order status is updated
+ */
+
+const updateOrderStatus = async (
+  order_id: number,
+  order_status: string,
+  next: (err: Error) => void
+): Promise<boolean> => {
+  try {
+    const sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
+    const [result]: any = await promisePool.query(sql, [order_status, order_id]);
+    return result.affectedRows > 0;
+  } catch (e) {
+    console.error("updateOrderStatus error:", (e as Error).message);
+    next(customError("Database error: " + (e as Error).message));
+    return false;
+  }
+};
+
+
 export {
   fetchOrderById,
   fetchOrders,
   createOrder,
   fetchOrderByUserId,
   fetchOrdersByStatus,
+  updateOrderStatus,
 };
