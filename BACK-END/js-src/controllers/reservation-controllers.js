@@ -1,4 +1,5 @@
-import { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation } from '../models/reservation-models.js';
+import { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation, checkAvailability } from '../models/reservation-models.js';
+import { customError } from '../middlewares/error-handlers.js';
 /**
  *
  * @returns all reservations from the database
@@ -136,4 +137,32 @@ const modifyReservationById = async (req, res) => {
         throw new Error('modifyReservationById error: ' + e.message);
     }
 };
-export { getReservations, getReservationById, getReservationsByUserId, postReservation, deleteReservationById, modifyReservationById };
+
+
+const validateAvailability = async (req, res, next) => {
+    const {reservation_date, reservation_time, guests} = req.body;
+
+    if (!reservation_date || !reservation_time || !guests) {
+        return next(customError('Missing required fields', 400));
+    }
+
+    try {
+        const availability = await checkAvailability(reservation_date, reservation_time, guests);
+
+        if (!availability) {
+            return next(customError('Time slot is fully booked', 400));
+        }
+
+        return res.status(200).json({
+            message: 'Time slot is available',
+            available_time: availability.reservation_time,
+            max_guests: availability.max_guests
+        });
+    } catch (e) {
+        console.error('validateAvailability', e.message);
+        return next(customError('Error in validateAvailability', 503));
+    }
+};
+
+
+export { getReservations, getReservationById, getReservationsByUserId, postReservation, deleteReservationById, modifyReservationById, validateAvailability};

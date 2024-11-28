@@ -52,10 +52,12 @@ CREATE TABLE Orders (
     customer_name VARCHAR(50) NOT NULL,
     total_price DECIMAL(10, 2),
     order_type ENUM('Pickup', 'Delivery') NOT NULL,
-    delivery_address TEXT,
-    order_status ENUM('Pending', 'Inprogress', 'Completed', 'Cancelled') DEFAULT 'Pending',
+    status_id INT DEFAULT 1,
+    general_comment TEXT,
+    is_delivery BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (status_id) REFERENCES OrderStatus(status_id)
 );
 
 -- Create table for order items
@@ -65,7 +67,6 @@ CREATE TABLE OrderItems (
     menu_id INT NOT NULL,
     course_name VARCHAR(50) NOT NULL,
     item_quantity INT NOT NULL,
-    comment TEXT,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (menu_id) REFERENCES Menus(menu_id)
 );
@@ -76,10 +77,19 @@ CREATE TABLE Reservations (
     user_id INT NOT NULL,
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
-    guests VARCHAR(50) NOT NULL,
+    guests INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+
+-- Timeslots for reservations
+CREATE TABLE TimeSlots (
+    timeslot_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_time TIME NOT NULL,
+    max_guests INT NOT NULL
+);
+
 
 -- Create table for food reviews
 CREATE TABLE FoodReview (

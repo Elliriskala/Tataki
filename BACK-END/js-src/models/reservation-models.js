@@ -142,4 +142,39 @@ const deleteReservation = async (reservation_id) => {
         throw new Error('Database error: ' + e.message);
     }
 };
-export { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation };
+
+
+const checkAvailability = async (req, res) => {
+    const {reservation_date, reservation_time, guests} = req.body;
+    const sql = `
+        SELECT 
+            TimeSlots.reservation_time, 
+            TimeSlots.max_guests, 
+            IFNULL(SUM(CAST(Reservations.guests AS UNSIGNED)), 0) AS total_guests 
+        FROM 
+            TimeSlots
+        LEFT JOIN 
+            Reservations 
+        ON 
+            TimeSlots.reservation_time = Reservations.reservation_time 
+        AND 
+            Reservations.reservation_date = ?
+        WHERE 
+            TimeSlots.reservation_time = ?
+        GROUP BY 
+            TimeSlots.reservation_time
+        HAVING 
+            total_guests + ? <= TimeSlots.max_guests;
+    `;
+    try {
+        const [rows] = await promisePool.query(sql, [reservation_date, reservation_time, guests]);
+        return rows || null;
+    }
+    catch (e) {
+        console.error('validateAvailability error:', e.message);
+        res.status(500).json({ message: 'Database error' });
+    }
+};
+
+
+export { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation, checkAvailability };
