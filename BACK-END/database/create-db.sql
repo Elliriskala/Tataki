@@ -75,7 +75,8 @@ CREATE TABLE OrderItems (
     course_name VARCHAR(50) NOT NULL,
     item_quantity INT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (menu_id) REFERENCES Menus(menu_id)
+    FOREIGN KEY (menu_id) REFERENCES Menus(menu_id),
+    FOREIGN KEY (course_name) REFERENCES Menus(course_name)
 );
 
 -- Delivery details table

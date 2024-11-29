@@ -126,21 +126,21 @@ const displayOrderDetails = (order: Order): void => {
 
   orderDetails.innerHTML = `
     <h2>Order Details</h2>
+    <p><strong>Order time:</strong> ${new Date(order.created_at).toLocaleString()}</p>
     <p><strong>Order ID:</strong> ${order.order_id}</p>
     <p><strong>Customer:</strong> ${order.customer_name}</p>
-    <p><strong>Status:</strong> ${order.order_status}</p>
-    <p><strong>Total Price:</strong> ${order.total_price}</p>
     <p><strong>Order Type:</strong> ${order.order_type}</p>
     <p><strong>Items:</strong> ${order.order_items || "No items"}</p>
     <p><strong>Comments:</strong> ${order.general_comment || "No comments"}</p>
-    <p><strong>Created At:</strong> ${new Date(order.created_at).toLocaleString()}</p>
+    <p><strong>Total Price:</strong> ${order.total_price}</p>
+    <p><strong>Status:</strong> ${order.order_status}</p>
   `;
 
   if (order.is_delivery) {
     orderDetails.innerHTML += `
-      <p><strong>Delivery Address:</strong> ${order.delivery_details?.delivery_address}</p>
-      <p><strong>Postal Code:</strong> ${order.delivery_details?.postal_code}</p>
-      <p><strong>Delivery Instructions:</strong> ${order.delivery_details?.delivery_instructions || "No instructions"}</p>
+      <p><strong>Delivery Address:</strong> ${order.delivery_address}</p>
+      <p><strong>Postal Code:</strong> ${order.postal_code}</p>
+      <p><strong>Delivery Instructions:</strong> ${order.delivery_instructions || "No instructions"}</p>
     `;
   }
 

@@ -36,7 +36,7 @@ GET http://localhost:3000/api/orders/status/Inprogress
 
 ### getting all orders based on a order id
 
-GET http://localhost:3000/api/orders/1
+GET http://localhost:3000/api/orders/10
 
 
 ### create an order

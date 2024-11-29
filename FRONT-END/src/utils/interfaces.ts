@@ -88,7 +88,9 @@ interface Order {
   user_id?: number;
   customer_name: string;
   total_price: number;
-  delivery_details?: DeliveryDetails;
+  delivery_address?: string;
+  postal_code?: string;
+  delivery_instructions?: string;
   order_type: string;
   status_id: number;
   order_status?: string;
@@ -104,12 +106,6 @@ interface OrderItem {
   menu_id: number;
   course_name: string;
   item_quantity: number;
-}
-
-interface DeliveryDetails {
-  delivery_address: string;
-  postal_code: string;
-  delivery_instructions?: string;
 }
 
 interface Reservation {
@@ -152,6 +148,6 @@ interface Translation {
   }
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, OrderStatus, Order, OrderItem, DeliveryDetails, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation };
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, OrderStatus, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation };
 
 

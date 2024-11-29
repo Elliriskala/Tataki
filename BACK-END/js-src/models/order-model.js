@@ -74,19 +74,35 @@ const fetchOrderById = async (order_id, next) => {
   try {
     const sql = `
         SELECT 
-        Orders.*,
-        OrderItems.menu_id,
-        OrderItems.course_name,
-        OrderItems.item_quantity,
-        OrderStatus.status_name AS order_status,
-        DeliveryDetails.delivery_address,
-        DeliveryDetails.postal_code,
-        DeliveryDetails.delivery_instructions
-    FROM Orders
-    LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
-    LEFT JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id
-    LEFT JOIN DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
-    WHERE Orders.order_id = ?
+    Orders.order_id,
+    Orders.customer_name,
+    Orders.total_price,
+    Orders.order_type,
+    Orders.general_comment,
+    Orders.created_at,
+    Orders.is_delivery,
+    OrderStatus.status_name AS order_status,
+    GROUP_CONCAT(
+        CONCAT(OrderItems.course_name, ' (x', OrderItems.item_quantity, ')') 
+        SEPARATOR ', '
+    ) AS order_items,
+    DeliveryDetails.delivery_address,
+    DeliveryDetails.postal_code,
+    DeliveryDetails.delivery_instructions
+FROM 
+    Orders
+LEFT JOIN 
+    OrderStatus ON Orders.status_id = OrderStatus.status_id
+LEFT JOIN 
+    OrderItems ON Orders.order_id = OrderItems.order_id
+LEFT JOIN 
+    DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
+WHERE 
+    Orders.order_id = ?
+GROUP BY 
+    Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
+    Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
+    DeliveryDetails.postal_code, DeliveryDetails.delivery_instructions
     ORDER BY Orders.created_at DESC;
 `;
     const [rows] = await promisePool.query(sql, [order_id]);
@@ -102,7 +118,7 @@ const fetchOrderById = async (order_id, next) => {
 };
 /**
  * fetch orders by customer name
- * @param cusr_name - customer name
+ * @param customer_name - customer name
  * @returns all orders from the database
  * @returns - Array of orders
  */
@@ -197,7 +213,7 @@ const createOrder = async (
       postal_code: postal_code,
       delivery_instructions: delivery_instructions || null,
     });
-    
+
     const [orderResult] = await promisePool.query(orderSql, [
       customer_name || 'Anonymous',
       total_price || 0,
