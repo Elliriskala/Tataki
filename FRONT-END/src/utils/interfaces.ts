@@ -78,11 +78,22 @@ interface Allergen {
   allergen_description: string;
 }
 
+interface OrderStatus {
+  status_id: number;
+  status_name: 'Pending' | 'In progress' | 'Completed';
+}
+
 interface Order {
   order_id: number;
-  user_id: number;
+  user_id?: number;
+  customer_name: string;
+  total_price: number;
+  delivery_details?: DeliveryDetails;
   order_type: string;
-  order_status: string;
+  status_id: number;
+  order_status?: string;
+  general_comment?: string;
+  is_delivery: boolean;
   created_at: Date;
   order_items: OrderItem[];
 }
@@ -91,8 +102,14 @@ interface OrderItem {
   order_item_id: number;
   order_id: number;
   menu_id: number;
+  course_name: string;
   item_quantity: number;
-  comment?: string;
+}
+
+interface DeliveryDetails {
+  delivery_address: string;
+  postal_code: string;
+  delivery_instructions?: string;
 }
 
 interface Reservation {
@@ -135,6 +152,6 @@ interface Translation {
   }
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation };
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, OrderStatus, Order, OrderItem, DeliveryDetails, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation };
 
 

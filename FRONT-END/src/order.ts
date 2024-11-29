@@ -58,7 +58,7 @@ const displayOrderMenu = (menus: Menu[]): void => {
                         </div>
                         <div class="menu-description">
                             <details>
-                              <summmary>Menu description</summary>
+                              <summary>Menu description</summary>
                               <div class="content" style="max-height: 400px;">${menu.course_description}</div>
                             </details>
                         </div>
@@ -312,10 +312,50 @@ const placeOrder = async () => {
     // clearing the cart after placing the order
     localStorage.removeItem("cart");
     updateCartDisplay();
+
+    // reset the form fields
+    resetFormFields();
   } catch (error) {
     console.error("Error placing order:", error);
     console.log("There was an issue placing your order. Please try again.");
   }
+};
+
+// function to reset the form fields after placing the order
+const resetFormFields = () => {
+  const formFields = [
+    ".order-user-info input[placeholder='Name']",
+    ".order-user-info input[placeholder='Email']",
+    ".order-user-info input[placeholder='Phone number']",
+    ".order-user-info input[placeholder='Address']",
+    ".order-user-info input[placeholder='Postal code']",
+    "#leave-comment",
+    "#instructions",
+  ];
+
+  formFields.forEach((field) => {
+    const element = document.querySelector(field) as
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | null;
+    if (element) {
+      element.value = ""; // Reset value
+    }
+  });
+
+  // Reset checkboxes
+  const checkboxes = [
+    "#delivery-checkbox",
+    "#pickup-checkbox",
+    "#terms-checkbox",
+  ];
+
+  checkboxes.forEach((checkbox) => {
+    const element = document.querySelector(checkbox) as HTMLInputElement | null;
+    if (element) {
+      element.checked = false; // Uncheck the checkbox
+    }
+  });
 };
 
 // collect the order details
@@ -386,7 +426,7 @@ const collectOrderData = () => {
     : "";
 
   console.log("Additional Comment:", additionalComment);
-  
+
   const deliveryInstructionsElement = document.getElementById("instructions");
   const deliveryInstructions = deliveryInstructionsElement
     ? (deliveryInstructionsElement as HTMLTextAreaElement).value.trim()

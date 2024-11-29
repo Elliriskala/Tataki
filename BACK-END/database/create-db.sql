@@ -94,19 +94,10 @@ CREATE TABLE Reservations (
     user_id INT NOT NULL,
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
-    guests INT NOT NULL,
+    guests VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
-
-
--- Timeslots for reservations
-CREATE TABLE TimeSlots (
-    timeslot_id INT AUTO_INCREMENT PRIMARY KEY,
-    reservation_time TIME NOT NULL,
-    max_guests INT NOT NULL
-);
-
 
 -- Create table for food reviews
 CREATE TABLE FoodReview (
@@ -183,7 +174,7 @@ LEFT JOIN
 LEFT JOIN 
     DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
 WHERE 
-    Orders.order_id = 1
+    Orders.order_id = 10
 GROUP BY 
     Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
     Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
