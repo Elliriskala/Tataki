@@ -63,9 +63,10 @@ const getReservationsByUserId = async (req, res, next) => {
  * @returns {Promise<void>} - reservation_id of the newly created reservation
  */
 const validateAndAddReservation = async (req, res, next) => {
-    const { user_id, reservation_date, reservation_time, full_name, phone_number, guests } = req.body;  // Get the data from the request body
+    const { user_id, reservation_date, email, reservation_time, full_name, phone_number, guests } = req.body;  // Get the data from the request body
 
-    if (!reservation_date || !reservation_time || !guests || !full_name || !phone_number) {
+    if (!reservation_date || !reservation_time || !guests || !full_name || !phone_number || !email) {
+        console.log('Missing required fields');
         return next(customError('Missing required fields', 400));
     }
 
@@ -75,11 +76,12 @@ const validateAndAddReservation = async (req, res, next) => {
 
         if (available && available.length > 0) {
             // If availability is found, add the reservation
-            const newReservation = { user_id, reservation_date, reservation_time, full_name, phone_number, guests };
+            const newReservation = { user_id, reservation_date, reservation_time, full_name, phone_number, email, guests };
             const result = await addReservation(newReservation);
             if (result.success) {
                 res.status(200).json({ message: 'Reservation successfully added' });
             } else {
+                console.log('Error adding reservation:', result.message);
                 res.status(500).json({ message: result.message });
             }
         } else {

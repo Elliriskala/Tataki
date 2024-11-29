@@ -7,9 +7,18 @@ reservationRouter
     .get('/', getReservations)
     .get('/times', validateAvailability)
     .post('/', validateAndAddReservation);
+
+
 reservationRouter.get('/:reservation_id', authenticateToken, getReservationById);
-reservationRouter.get('/:user_id', authenticateToken, getReservationsByUserId);
+
+
+reservationRouter
+.get('/:user_id', authenticateToken, getReservationsByUserId);
+
+
 reservationRouter
     .delete('/:reservation_id', authenticateToken, deleteReservationById)
     .put('/:reservation_id', authenticateToken, modifyReservationById);
-export default reservationRouter;
+
+
+    export default reservationRouter;
