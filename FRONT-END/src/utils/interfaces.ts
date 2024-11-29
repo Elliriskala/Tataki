@@ -135,6 +135,17 @@ interface Translation {
   }
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation };
+interface TimeSlot {
+  time: string;
+  availableSeats: number;
+}
+
+
+
+interface Times {
+  availableTimes: [string];
+}
+
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation, TimeSlot, Times };
 
 

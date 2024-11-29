@@ -1,12 +1,12 @@
 import express from 'express';
-import { getReservations, getReservationById, getReservationsByUserId, postReservation, deleteReservationById, modifyReservationById } from '../controllers/reservation-controllers.js';
+import { getReservations, getReservationById, getReservationsByUserId, validateAndAddReservation, deleteReservationById, modifyReservationById } from '../controllers/reservation-controllers.js';
 import authenticateToken from '../middlewares/authentication.js';
 import { validateAvailability } from '../controllers/reservation-controllers.js';
 const reservationRouter = express.Router();
 reservationRouter
     .get('/', getReservations)
-    .get('/availability', validateAvailability)
-    .post('/', postReservation);
+    .get('/times', validateAvailability)
+    .post('/', validateAndAddReservation);
 reservationRouter.get('/:reservation_id', authenticateToken, getReservationById);
 reservationRouter.get('/:user_id', authenticateToken, getReservationsByUserId);
 reservationRouter
