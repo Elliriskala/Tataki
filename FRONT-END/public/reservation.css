@@ -184,6 +184,56 @@ main {
   transition: transform 0.3s;
 }
 
+p#reservation-description {
+  color: var(--sushi-white);
+}
+
+div.reservation-message {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--sushi-red4);
+  animation: 2s error-message-bounce linear;
+}
+
+@keyframes error-message-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+
+button#use-user-info {
+  padding: 14px;
+  background-color: var(--sushi-red4);
+  color: var(--sushi-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-block: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+  max-width: 15rem
+}
+
 
 
 details {

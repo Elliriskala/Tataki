@@ -43,6 +43,7 @@ interface User {
   user_id?: number;
   username: string;
   email: string;
+  phone_number?: string;
   password_hash: string;
   user_level_id: number;
 }
@@ -51,6 +52,7 @@ interface UserLoggedIn {
   user_id: number;
   username: string;
   email: string;
+  phone_number?: string;
   user_level_id: number;
   token: string;
 }
