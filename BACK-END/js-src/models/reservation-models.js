@@ -1,4 +1,6 @@
-import { promisePool } from "../database.js";
+import {promisePool} from '../database.js';
+import {customError} from '../middlewares/error-handlers.js';
+
 /**
  *
  * @returns all reservations from the database
@@ -6,16 +8,15 @@ import { promisePool } from "../database.js";
  * @returns {Promise<Reservation[]>} - Array of reservations
  */
 const fetchReservations = async () => {
-    try {
-        const [rows] = await promisePool.query("SELECT * FROM Reservations");
-        if (rows) {
-            return rows;
-        }
+  try {
+    const [rows] = await promisePool.query('SELECT * FROM Reservations');
+    if (rows) {
+      return rows;
     }
-    catch (e) {
-        console.error('fetchReservations error:', e.message);
-        throw new Error('Database error: ' + e.message);
-    }
+  } catch (e) {
+    console.error('fetchReservations error:', e.message);
+    return customError('Database error: ' + e.message, 500);
+  }
 };
 /**
  *
@@ -25,20 +26,18 @@ const fetchReservations = async () => {
  * @returns {Promise<Reservation | null>} - Reservation object or null if not found
  */
 const fetchReservationById = async (reservation_id) => {
-    try {
-        const sql = 'SELECT * FROM Reservations WHERE reservation_id = ?';
-        const [rows] = await promisePool.query(sql, [reservation_id]);
-        if (rows && rows.length > 0) {
-            return rows[0];
-        }
-        else {
-            throw new Error('FetchReservationById, Reservation not found');
-        }
+  try {
+    const sql = 'SELECT * FROM Reservations WHERE reservation_id = ?';
+    const [rows] = await promisePool.query(sql, [reservation_id]);
+    if (rows && rows.length > 0) {
+      return rows[0];
+    } else {
+      throw new Error('FetchReservationById, Reservation not found');
     }
-    catch (e) {
-        console.error('fetchReservationById error:', e.message);
-        throw new Error('Database error: ' + e.message);
-    }
+  } catch (e) {
+    console.error('fetchReservationById error:', e.message);
+    throw new Error('Database error: ' + e.message);
+  }
 };
 /**
  *
@@ -48,20 +47,18 @@ const fetchReservationById = async (reservation_id) => {
  * @returns {Promise<Reservation | null>} - Reservation object or null if not found
  */
 const fetchReservationsByUserId = async (user_id) => {
-    try {
-        const sql = 'SELECT * FROM Reservations WHERE user_id = ?';
-        const [rows] = await promisePool.query(sql, [user_id]);
-        if (rows && rows.length > 0) {
-            return rows[0];
-        }
-        else {
-            throw new Error('FetchReservationById, Reservation not found');
-        }
+  try {
+    const sql = 'SELECT * FROM Reservations WHERE user_id = ?';
+    const [rows] = await promisePool.query(sql, [user_id]);
+    if (rows && rows.length > 0) {
+      return rows[0];
+    } else {
+      throw new Error('FetchReservationById, Reservation not found');
     }
-    catch (e) {
-        console.error('fetchReservationById error:', e.message);
-        throw new Error('Database error: ' + e.message);
-    }
+  } catch (e) {
+    console.error('fetchReservationById error:', e.message);
+    throw new Error('Database error: ' + e.message);
+  }
 };
 /**
  *
@@ -70,54 +67,69 @@ const fetchReservationsByUserId = async (user_id) => {
  * @throws Error
  * @returns {Promise<number>} - reservation_id of the newly created reservation
  */
-const createReservation = async (newReservation) => {
-    const sql = 'INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests) VALUES (?, ?, ?, ?)';
+
+const addReservation = async (newReservation) => {
+  try {
+    // Step 1: Find the timeslot_id based on the selected reservation_time
+    const timeSlotSQL =
+      'SELECT timeslot_id FROM TimeSlots WHERE reservation_time = ?';
+    const [timeslot] = await promisePool.query(timeSlotSQL, [
+      newReservation.reservation_time,
+    ]);
+
+    if (!timeslot || timeslot.length === 0) {
+      throw new Error('Timeslot not found');
+    }
+
+    const timeslot_id = timeslot[0].timeslot_id;
+
+    const addSQL =
+      'INSERT INTO Reservations (user_id, reservation_date, reservation_time, full_name, phone_number, timeslot_id, guests) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
     const params = [
-        newReservation.user_id,
-        newReservation.reservation_date,
-        newReservation.reservation_time,
-        newReservation.guests
+      newReservation.user_id || null,
+      newReservation.reservation_date,
+      newReservation.reservation_time,
+      newReservation.full_name,
+      newReservation.phone_number,
+      timeslot_id,
+      newReservation.guests,
     ];
-    try {
-        const [result] = await promisePool.query(sql, params);
-        if (result.affectedRows === 1) {
-            return result.insertId;
-        }
-        else {
-            throw new Error('CreateReservation, Reservation not created');
-        }
+
+    // Step 2: Insert the reservation into the Reservations table
+    const result = await promisePool.query(addSQL, params);
+
+    if (result[0].affectedRows === 1) {
+      return result[0].insertId;
+    } else {
+      throw new Error('AddReservation, Reservation not added');
     }
-    catch (e) {
-        if (e.code === 'ER_DUP_ENTRY') {
-            throw new Error('Reservation already exists');
-        }
-        else {
-            console.error('createReservation error:', e.message);
-            throw new Error('Database error: ' + e.message);
-        }
-    }
+  } catch (error) {
+    console.error('Error adding reservation:', error.message);
+    throw new Error('Database error: ' + error.message);
+  }
 };
+
 const modifyReservation = async (reservation_id, newReservation) => {
-    const sql = 'UPDATE Reservations SET reservation_date = ?, reservation_time = ?, guests = ? WHERE reservation_id = ?';
-    const params = [
-        newReservation.reservation_date,
-        newReservation.reservation_time,
-        newReservation.guests,
-        reservation_id
-    ];
-    try {
-        const [result] = await promisePool.query(sql, params);
-        if (result.affectedRows > 0) {
-            return result.affectedRows;
-        }
-        else {
-            throw new Error('ModifyReservation, Reservation not modified');
-        }
+  const sql =
+    'UPDATE Reservations SET reservation_date = ?, reservation_time = ?, guests = ? WHERE reservation_id = ?';
+  const params = [
+    newReservation.reservation_date,
+    newReservation.reservation_time,
+    newReservation.guests,
+    reservation_id,
+  ];
+  try {
+    const [result] = await promisePool.query(sql, params);
+    if (result.affectedRows > 0) {
+      return result.affectedRows;
+    } else {
+      throw new Error('ModifyReservation, Reservation not modified');
     }
-    catch (e) {
-        console.error('modifyReservation error:', e.message);
-        throw new Error('Database error: ' + e.message);
-    }
+  } catch (e) {
+    console.error('modifyReservation error:', e.message);
+    throw new Error('Database error: ' + e.message);
+  }
 };
 /**
  *
@@ -127,54 +139,46 @@ const modifyReservation = async (reservation_id, newReservation) => {
  * @returns {Promise<number>} - reservation_id of the deleted reservation
  */
 const deleteReservation = async (reservation_id) => {
-    const sql = 'DELETE FROM Reservations WHERE reservation_id = ?';
-    try {
-        const [result] = await promisePool.query(sql, [reservation_id]);
-        if (result.affectedRows === 1) {
-            return reservation_id;
-        }
-        else {
-            throw new Error('DeleteReservation, Reservation not deleted');
-        }
+  const sql = 'DELETE FROM Reservations WHERE reservation_id = ?';
+  try {
+    const [result] = await promisePool.query(sql, [reservation_id]);
+    if (result.affectedRows === 1) {
+      return reservation_id;
+    } else {
+      throw new Error('DeleteReservation, Reservation not deleted');
     }
-    catch (e) {
-        console.error('deleteReservation error:', e.message);
-        throw new Error('Database error: ' + e.message);
-    }
+  } catch (e) {
+    console.error('deleteReservation error:', e.message);
+    throw new Error('Database error: ' + e.message);
+  }
 };
 
-
-const checkAvailability = async (req, res) => {
-    const {reservation_date, reservation_time, guests} = req.body;
-    const sql = `
-        SELECT 
-            TimeSlots.reservation_time, 
-            TimeSlots.max_guests, 
-            IFNULL(SUM(CAST(Reservations.guests AS UNSIGNED)), 0) AS total_guests 
-        FROM 
-            TimeSlots
-        LEFT JOIN 
-            Reservations 
-        ON 
-            TimeSlots.reservation_time = Reservations.reservation_time 
-        AND 
-            Reservations.reservation_date = ?
-        WHERE 
-            TimeSlots.reservation_time = ?
-        GROUP BY 
-            TimeSlots.reservation_time
-        HAVING 
-            total_guests + ? <= TimeSlots.max_guests;
-    `;
-    try {
-        const [rows] = await promisePool.query(sql, [reservation_date, reservation_time, guests]);
-        return rows || null;
-    }
-    catch (e) {
-        console.error('validateAvailability error:', e.message);
-        res.status(500).json({ message: 'Database error' });
-    }
+const checkAvailability = async (date, guests) => {
+  // SQL query to find available timeslots
+  const sql = `
+    SELECT t.reservation_time, t.max_guests
+    FROM TimeSlots t
+    LEFT JOIN Reservations r
+        ON t.reservation_time = r.reservation_time
+        AND r.reservation_date = ?
+    WHERE t.max_guests >= ?
+    GROUP BY t.timeslot_id, t.reservation_time, t.max_guests
+    HAVING COUNT(r.reservation_id) < t.max_guests`;
+  try {
+    const [rows] = await promisePool.query(sql, [date, guests]);
+    return rows; // Return the available timeslots (array of objects)
+  } catch (e) {
+    console.error('checkAvailability error:', e.message);
+    throw new Error('Database query failed');
+  }
 };
 
-
-export { fetchReservations, fetchReservationById, fetchReservationsByUserId, createReservation, deleteReservation, modifyReservation, checkAvailability };
+export {
+  fetchReservations,
+  fetchReservationById,
+  fetchReservationsByUserId,
+  addReservation,
+  deleteReservation,
+  modifyReservation,
+  checkAvailability,
+};
