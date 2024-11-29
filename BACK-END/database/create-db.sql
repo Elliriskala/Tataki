@@ -109,6 +109,7 @@ CREATE TABLE Reservations (
     reservation_time TIME NOT NULL,
     full_name VARCHAR(50) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
+    email VARCHAR(50) NOT NULL,
     timeslot_id INT,
     guests INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

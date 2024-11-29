@@ -78,18 +78,19 @@ const addReservation = async (newReservation) => {
     ]);
 
     if (!timeslot || timeslot.length === 0) {
-      throw new Error('Timeslot not found');
+      return {success: false, message: 'Timeslot not found'};
     }
 
     const timeslot_id = timeslot[0].timeslot_id;
 
     const addSQL =
-      'INSERT INTO Reservations (user_id, reservation_date, reservation_time, full_name, phone_number, timeslot_id, guests) VALUES (?, ?, ?, ?, ?, ?, ?)';
+      'INSERT INTO Reservations (user_id, reservation_date, reservation_time, email, full_name, phone_number, timeslot_id, guests) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 
     const params = [
-      newReservation.user_id || null,
+      newReservation.user_id,
       newReservation.reservation_date,
       newReservation.reservation_time,
+      newReservation.email,
       newReservation.full_name,
       newReservation.phone_number,
       timeslot_id,
@@ -98,15 +99,16 @@ const addReservation = async (newReservation) => {
 
     // Step 2: Insert the reservation into the Reservations table
     const result = await promisePool.query(addSQL, params);
+    console.log('AddReservation, result:', result);
 
     if (result[0].affectedRows === 1) {
-      return result[0].insertId;
+      return {success: true, insertId: result.insertId};
     } else {
-      throw new Error('AddReservation, Reservation not added');
+      return {success: false, message: 'Reservation not added'};
     }
   } catch (error) {
-    console.error('Error adding reservation:', error.message);
-    throw new Error('Database error: ' + error.message);
+    console.error('Error adding reservation:', error);
+    return {success: false, message: 'Database error' + error};
   }
 };
 
