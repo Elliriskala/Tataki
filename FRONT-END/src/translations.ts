@@ -142,7 +142,8 @@ const translations: Translation = {
         "register-form-title": "Register",
         "username-label": "Username",
         "email-label": "Email",
-        "message": "This is a message box"
+        "message": "This is a message box",
+        "phone-label": "Phone Number"
 
 
     },
@@ -286,7 +287,8 @@ const translations: Translation = {
         "register-form-title": "Rekisteröidy",
         "username-label": "Käyttäjänimi",
         "email-label": "Sähköposti",
-        "message": "Tämä on viestilaatikko"
+        "message": "Tämä on viestilaatikko",
+        "phone-label": "Puhelinnumero"
 
     }
 };
