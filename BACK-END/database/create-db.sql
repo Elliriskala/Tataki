@@ -94,10 +94,19 @@ CREATE TABLE Reservations (
     user_id INT NOT NULL,
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
-    guests VARCHAR(50) NOT NULL,
+    guests INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+
+-- Timeslots for reservations
+CREATE TABLE TimeSlots (
+    timeslot_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_time TIME NOT NULL,
+    max_guests INT NOT NULL
+);
+
 
 -- Create table for food reviews
 CREATE TABLE FoodReview (
