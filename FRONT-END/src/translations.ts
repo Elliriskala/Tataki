@@ -297,7 +297,7 @@ const loginErrorMessages: Translation = {
       400: "Invalid input, please check your input.",
       401: "Invalid username or password.",
       500: "Server error, please try again later.",
-      default: "Login failed."
+      default: "Login failed. User does not exist."
   },
   fi : {
       400: "Virheellinen syöte, tarkista syötteet.",

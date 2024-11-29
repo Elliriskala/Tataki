@@ -5,9 +5,12 @@ import {
   fetchOrdersByStatus,
   createOrder,
   updateOrderStatus,
-} from "../models/order-model.js";
-import { validateString, validatePositiveNumber } from "../middlewares/validation.js";
-import { customError } from "../middlewares/error-handlers.js";
+} from '../models/order-model.js';
+import {
+  validateString,
+  validatePositiveNumber,
+} from '../middlewares/validation.js';
+import {customError} from '../middlewares/error-handlers.js';
 
 /**
  * Fetch all orders
@@ -22,13 +25,13 @@ const getAllOrders = async (req, res, next) => {
     // Fetch all orders
     const orders = await fetchOrders(next);
     if (!orders) {
-      return next(customError("Orders not found", 404));
+      return next(customError('Orders not found', 404));
     }
     // the orders
     res.status(200).json(orders);
   } catch (e) {
-    console.error("getAllOrders error:", e.message);
-    return next(customError("getAllOrders error: " + e.message));
+    console.error('getAllOrders error:', e.message);
+    return next(customError('getAllOrders error: ' + e.message));
   }
 };
 
@@ -46,13 +49,13 @@ const getOrderById = async (req, res, next) => {
     // Fetch order by order id
     const order = await fetchOrderById(orderId, next);
     if (!order) {
-      return next(customError("Order not found", 404));
+      return next(customError('Order not found', 404));
     }
     // the order
     res.status(200).json(order);
   } catch (e) {
-    console.error("getOrderById error:", e.message);
-    return next(customError("getOrderById error: " + e.message));
+    console.error('getOrderById error:', e.message);
+    return next(customError('getOrderById error: ' + e.message));
   }
 };
 
@@ -70,13 +73,13 @@ const getOrdersByCustomerName = async (req, res, next) => {
     // Fetch orders by user id
     const orders = await fetchOrderByCustomerName(customerName, next);
     if (!orders) {
-      return next(customError("Orders not found", 404));
+      return next(customError('Orders not found', 404));
     }
     // the orders
     res.status(200).json(orders);
   } catch (e) {
-    console.error("getOrdersByCustomerName error:", e.message);
-    return next(customError("getOrdersByCustomerName error: " + e.message));
+    console.error('getOrdersByCustomerName error:', e.message);
+    return next(customError('getOrdersByCustomerName error: ' + e.message));
   }
 };
 
@@ -94,13 +97,13 @@ const getOrdersByStatus = async (req, res, next) => {
     // Fetch orders by status
     const orders = await fetchOrdersByStatus(status, next);
     if (!orders) {
-      return next(customError("Orders not found", 404));
+      return next(customError('Orders not found', 404));
     }
     // the orders
     res.status(200).json(orders);
   } catch (e) {
-    console.error("getOrdersByStatus error:", e.message);
-    return next(customError("getOrdersByStatus error: " + e.message));
+    console.error('getOrdersByStatus error:', e.message);
+    return next(customError('getOrdersByStatus error: ' + e.message));
   }
 };
 
@@ -113,30 +116,26 @@ const getOrdersByStatus = async (req, res, next) => {
  * @returns - Order or null if not found
  */
 
-const postOrder = async (req, res, next) => {
+const postOrder = async (req, res) => {
   try {
-    console.log("Incoming payload:", req.body);
+    console.log('Incoming payload:', req.body);
 
-    const {
-      customer_name,
-      total_price,
-      order_items,
-      order_type,
-      order_status,
-    } = req.body;
+    const {customer_name, total_price, order_items, order_type, order_status, general_comment, delivery_address, postal_code, delivery_instructions} =
+      req.body;
 
-    validateString(customer_name, "customer_name");
-    validatePositiveNumber(total_price, "total_price");
-    validateString(order_type, "order_type");
-    validateString(order_status, "order_status");
+    validateString(customer_name, 'customer_name');
+    validatePositiveNumber(total_price, 'total_price');
+    validateString(order_type, 'order_type');
+    validateString(order_status, 'order_status');
 
     if (
       !order_items ||
       !Array.isArray(order_items) ||
       order_items.length === 0
     ) {
-      throw new Error("Missing or invalid order_items in the request.");
+      throw new Error('Missing or invalid order_items in the request.');
     }
+
     // Create an order
     const newOrder = await createOrder(
       customer_name,
@@ -144,20 +143,21 @@ const postOrder = async (req, res, next) => {
       order_type,
       order_status,
       order_items,
-      next
+      general_comment,
+      delivery_address,
+      postal_code,
+      delivery_instructions
     );
 
     if (!newOrder) {
-      return next(customError("Order not created", 404));
+      throw new Error('Order not created');
     }
 
     // the order
     res.status(200).json(newOrder);
   } catch (e) {
-    console.error("postOrder error:", e.message);
-    return next(
-      customError("postOrder error: " + (e?.message || "Unknown error"))
-    );
+    console.error('postOrder error:', e.message);
+    throw new Error('postOrder error: ' + e.message);
   }
 };
 
@@ -179,18 +179,18 @@ const putOrderStatus = async (req, res, next) => {
     const updatedOrderStatus = await updateOrderStatus(
       orderId,
       orderStatus,
-      next
+      next,
     );
 
     if (!updatedOrderStatus) {
-      return next(customError("Order status not updated", 404));
+      return next(customError('Order status not updated', 404));
     }
 
     // the order status
-    res.status(200).json({ order_id: orderId, order_status: orderStatus });
+    res.status(200).json({order_id: orderId, order_status: orderStatus});
   } catch (e) {
-    console.error("putOrderStatus error:", e.message);
-    return next(customError("putOrderStatus error: " + e.message));
+    console.error('putOrderStatus error:', e.message);
+    return next(customError('putOrderStatus error: ' + e.message));
   }
 };
 

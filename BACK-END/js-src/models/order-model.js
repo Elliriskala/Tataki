@@ -38,6 +38,11 @@ const fetchOrders = async (next) => {
  */
 const fetchOrdersByStatus = async (order_status, next) => {
   try {
+    console.log('Validating order_status:', order_status);
+    if (typeof order_status !== 'string') {
+      throw new Error('Invalid order_status: Must be a string');
+    }
+
     const sql = `
           SELECT 
               Orders.*, 
@@ -51,10 +56,7 @@ const fetchOrdersByStatus = async (order_status, next) => {
           ORDER BY Orders.created_at DESC;
   `;
     const [rows] = await promisePool.query(sql, [order_status]);
-    if (rows && rows.length > 0) {
-      return rows;
-    }
-    return null;
+    return rows.length > 0 ? rows : [];
   } catch (e) {
     console.error('fetchOrdersByStatus error:', e.message);
     next(customError('Database error: ' + e.message));
@@ -76,9 +78,8 @@ const fetchOrderById = async (order_id, next) => {
         OrderItems.menu_id,
         OrderItems.course_name,
         OrderItems.item_quantity,
-        OrderItems.comment,
         OrderStatus.status_name AS order_status,
-        DeliveryDetails.address,
+        DeliveryDetails.delivery_address,
         DeliveryDetails.postal_code,
         DeliveryDetails.delivery_instructions
     FROM Orders
@@ -112,7 +113,7 @@ const fetchOrderByCustomerName = async (customer_name, next) => {
         Orders.*, 
         GROUP_CONCAT(CONCAT(OrderItems.course_name, ':', OrderItems.item_quantity)) AS items,
         OrderStatus.status_name AS order_status,
-        DeliveryDetails.address,
+        DeliveryDetails.delivery_address,
         DeliveryDetails.postal_code
     FROM Orders
     LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
@@ -151,30 +152,29 @@ const createOrder = async (
   order_type,
   order_status,
   order_items,
+  general_comment = null,
   delivery_address = null,
   postal_code = null,
   delivery_instructions = null,
-  next,
 ) => {
   try {
-    if (
-      !order_items ||
-      !Array.isArray(order_items) ||
-      order_items.length === 0 ||
-      !order_items.every(
-        (item) =>
-          item.menu_id &&
-          typeof item.menu_id === 'number' &&
-          typeof item.item_quantity === 'number' &&
-          item.item_quantity > 0,
-      )
-    ) {
-      throw new Error('Invalid order_items: Expected a non-empty array.');
+    // Validate inputs
+    if (!customer_name || typeof customer_name !== 'string') {
+      throw new Error('Invalid customer_name');
+    }
+    if (!total_price || typeof total_price !== 'number') {
+      throw new Error('Invalid total_price');
+    }
+    if (!Array.isArray(order_items) || order_items.length === 0) {
+      throw new Error('Invalid order_items');
     }
 
     // Fetch status_id from OrderStatus table
     const statusSql = `SELECT status_id FROM OrderStatus WHERE status_name = ?`;
     const [statusResult] = await promisePool.query(statusSql, [order_status]);
+
+    console.log('Order status:', order_status);
+    console.log('Status result:', statusResult);
 
     if (!statusResult || statusResult.length === 0) {
       throw new Error(`Invalid order_status: ${order_status}`);
@@ -182,23 +182,37 @@ const createOrder = async (
     const order_status_id = statusResult[0].status_id;
     // insert order into orders table
     const orderSql = `
-        INSERT INTO orders (customer_name, total_price, order_type, status_id, is_delivery) 
-         VALUES (?, ?, ?, ?, ?)
+        INSERT INTO orders (customer_name, total_price, order_type, status_id, is_delivery, general_comment) 
+         VALUES (?, ?, ?, ?, ?, ?)
     `;
-    const [orderResult] = await promisePool.query(orderSql, [
+
+    console.log({
       customer_name,
       total_price,
       order_type,
       order_status_id,
-      order_type === 'Delivery',
+      is_delivery: order_type.toLowerCase() === 'delivery',
+      general_comment: general_comment || null,
+      delivery_address: delivery_address,
+      postal_code: postal_code,
+      delivery_instructions: delivery_instructions || null,
+    });
+    
+    const [orderResult] = await promisePool.query(orderSql, [
+      customer_name || 'Anonymous',
+      total_price || 0,
+      order_type || 'Pickup',
+      order_status_id || 1,
+      order_type.toLowerCase() === 'delivery',
+      general_comment || null,
     ]);
 
     // get the order id
     const orderId = orderResult.insertId;
 
-    if (order_type === 'Delivery' && delivery_address) {
+    if (order_type.toLowerCase() === 'delivery') {
       const deliverySql = `
-          INSERT INTO DeliveryDetails (order_id, address, postal_code, delivery_instructions)
+          INSERT INTO DeliveryDetails (order_id, delivery_address, postal_code, delivery_instructions)
           VALUES (?, ?, ?, ?)
       `;
       await promisePool.query(deliverySql, [
@@ -211,18 +225,16 @@ const createOrder = async (
 
     // insert order items into order_items table
     const orderItemsSql =
-      'INSERT INTO orderitems (order_id, menu_id, course_name, item_quantity, comment) VALUES ?';
+      'INSERT INTO orderitems (order_id, menu_id, course_name, item_quantity) VALUES ?';
 
-    const orderItemsValues =
-      Array.isArray(order_items) && order_items.length > 0
-        ? order_items.map((item) => [
-            orderId,
-            item.menu_id,
-            item.course_name,
-            item.item_quantity,
-            item.comment || null,
-          ])
-        : [];
+    const orderItemsValues = order_items.map((item) => [
+      orderId,
+      item.menu_id,
+      item.course_name,
+      item.item_quantity,
+    ]);
+
+    console.log('Order items values:', orderItemsValues);
 
     // insert order items at once
 
@@ -239,9 +251,8 @@ const createOrder = async (
         OrderItems.menu_id,
         OrderItems.course_name,
         OrderItems.item_quantity,
-        OrderItems.comment,
         OrderStatus.status_name AS order_status,
-        DeliveryDetails.address,
+        DeliveryDetails.delivery_address,
         DeliveryDetails.postal_code,
         DeliveryDetails.delivery_instructions
       FROM Orders
@@ -269,7 +280,7 @@ const createOrder = async (
       delivery_details:
         order_type === 'Delivery'
           ? {
-              address: orderItemsResult[0].address,
+              address: orderItemsResult[0].delivery_address,
               postal_code: orderItemsResult[0].postal_code,
               instructions: orderItemsResult[0].delivery_instructions || null,
             }
@@ -278,17 +289,15 @@ const createOrder = async (
         menu_id: item.menu_id,
         course_name: item.course_name,
         item_quantity: item.item_quantity,
-        comment: item.comment || null,
       })),
+      general_comment: orderItemsResult[0].general_comment,
       created_at: orderItemsResult[0].created_at,
     };
-  
-    return order;
 
+    return order;
   } catch (e) {
     console.error('createOrder error:', e.message);
-    next(customError('Database error: ' + e.message));
-    return null;
+    throw new Error('Database error: ' + e.message);
   }
 };
 
@@ -299,7 +308,7 @@ const createOrder = async (
  * @returns - true if the order status is updated
  */
 
-const updateOrderStatus = async (order_id, order_status, next) => {
+const updateOrderStatus = async (order_id, order_status) => {
   try {
     const sql = `
     UPDATE orders 
@@ -310,8 +319,7 @@ const updateOrderStatus = async (order_id, order_status, next) => {
     return result.affectedRows > 0;
   } catch (e) {
     console.error('updateOrderStatus error:', e.message);
-    next(customError('Database error: ' + e.message));
-    return false;
+    throw new Error('Database error: ' + e.message);
   }
 };
 

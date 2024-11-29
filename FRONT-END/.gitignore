@@ -1,0 +1,13 @@
+node_modules/
+build/
+.env
+.history
+img/*.mp4
+.env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+.vscode
+dist
+dev-dist/

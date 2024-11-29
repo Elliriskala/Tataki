@@ -3,6 +3,7 @@ import { UserLoggedIn } from "./utils/interfaces";
 import { loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
 
+
 const registerSubmit = document.getElementById('submit-button-register') as HTMLButtonElement;
 //const loginForm = document.getElementById('login-form') as HTMLFormElement;
 //const registerForm = document.getElementById('register-form') as HTMLFormElement;
@@ -13,6 +14,7 @@ const registerSubmit = document.getElementById('submit-button-register') as HTML
 const registerEmail = document.getElementById('register-email') as HTMLInputElement;
 const registerPassword = document.getElementById('register-password') as HTMLInputElement;
 const registerUsername = document.getElementById('register-username') as HTMLInputElement;
+
 
 const loginEmail = document.getElementById('login-email') as HTMLInputElement;
 const loginPassword = document.getElementById('login-password') as HTMLInputElement;
@@ -27,7 +29,7 @@ const getLanguage = () => {
 // URL for the login endpoint
 const BASE_URL = 'http://localhost:3000';
 const LOGIN_URL = '/api/auth/login'; // Replace with your actual API endpoint
-const REGISTER_URL = '/api/users'; // Replace with your actual API endpoint
+const REGISTER_URL = '/api/auth/register'; // Replace with your actual API endpoint
 
 // Function to handle login logic
 const handleLogin = async (event: Event) => {
@@ -71,7 +73,10 @@ const handleLogin = async (event: Event) => {
 
         // Store the token in local storage or a cookie
         localStorage.setItem('authToken', data.token);
+        localStorage.setItem('user_id', data.user_id.toString());
         console.log(data);
+
+        loadUserPage();
 
     } catch (error) {
         console.error("Login error:", error);
@@ -133,6 +138,35 @@ const handleRegister = async (event: Event) => {
     }
 };
 
+
+const loadUserPage = () => {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+        return;
+    } else {
+        const loginContent = document.getElementById('login-main');
+        const userContent = document.getElementById('user-main');
+        if (loginContent && userContent) {
+            loginContent.style.display = 'none';
+            userContent.style.display = 'flex';
+        }
+        //loadUserProfile() fetch user data
+    }
+}
+
+const logOutButton = document.getElementById('logout-btn') as HTMLButtonElement;
+logOutButton.addEventListener('click', () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user_id');
+    const loginContent = document.getElementById('login-main');
+    const userContent = document.getElementById('user-main');
+    if (loginContent && userContent) {
+        loginContent.style.display = 'block';
+        userContent.style.display = 'none';
+    }
+});
+
+window.onload = loadUserPage;
 
 // Attach the event listener to the login button
 loginSubmit.addEventListener('click', handleLogin);

@@ -20,7 +20,7 @@ CREATE TABLE Users (
     password_hash VARCHAR(150) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     phone_number VARCHAR(15) DEFAULT NULL,
-    user_level_id INT NOT NULL,
+    user_level_id INT NOT NULL DEFAULT 2,
     customer_address TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_level_id) REFERENCES UserLevels(level_id)
@@ -115,7 +115,7 @@ CREATE TABLE FoodReview (
 CREATE TABLE RestaurantReview (
     review_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    review TEXT NOT NULL,
+    review TEXT NULL DEFAULT 'User only rated the restaurant with a star rating.',
     star_rating TINYINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
@@ -150,6 +150,36 @@ INSERT INTO FoodReview (user_id, menu_id, review, star_rating) VALUES (2, 1, 'Be
 INSERT INTO RestaurantReview (user_id, review, star_rating) VALUES (2, 'Great service!', 5), (3, 'Nice atmosphere!', 4), (1, 'Good location!', 4);
 
 /*
+-- query to get orders
+SELECT 
+    Orders.order_id,
+    Orders.customer_name,
+    Orders.total_price,
+    Orders.order_type,
+    Orders.general_comment,
+    OrderStatus.status_name AS order_status,
+    GROUP_CONCAT(
+        CONCAT(OrderItems.course_name, ' (x', OrderItems.item_quantity, ')') 
+        SEPARATOR ', '
+    ) AS order_items,
+    DeliveryDetails.delivery_address,
+    DeliveryDetails.postal_code,
+    DeliveryDetails.delivery_instructions
+FROM 
+    Orders
+LEFT JOIN 
+    OrderStatus ON Orders.status_id = OrderStatus.status_id
+LEFT JOIN 
+    OrderItems ON Orders.order_id = OrderItems.order_id
+LEFT JOIN 
+    DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
+WHERE 
+    Orders.order_id = 1
+GROUP BY 
+    Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
+    Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
+    DeliveryDetails.postal_code, DeliveryDetails.delivery_instructions;
+
 -- Query to get menu items by category
 SELECT * FROM Menus WHERE category = 'Lunch';
 SELECT * FROM Menus WHERE category = 'Dinner';

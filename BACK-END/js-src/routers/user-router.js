@@ -2,8 +2,7 @@ import { getUsers, getUserById, postUser, modifyUserById, deleteUserById } from 
 import express from 'express';
 import authenticateToken from '../middlewares/authentication.js';
 const userRouter = express.Router();
-userRouter.get('/', getUsers)
-    .post('/', postUser);
+userRouter.get('/', getUsers);
 userRouter.get('/:user_id', authenticateToken, getUserById);
 userRouter.delete('/:user_id', authenticateToken, deleteUserById);
 userRouter.put('/:user_id', authenticateToken, modifyUserById);

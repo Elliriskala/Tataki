@@ -2,19 +2,25 @@ import express from 'express';
 import reservationRouter from './routers/reservation-router.js';
 import path from 'path';
 import cors from 'cors';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 import userRouter from './routers/user-router.js';
 import ratingRouter from './routers/rating-router.js';
 import authRouter from './routers/auth-router.js';
 import menuRouter from './routers/menu-router.js';
 import orderRouter from './routers/order-router.js';
-import { errorHandler, notFoundHandler } from './middlewares/error-handlers.js';
+import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
 
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: '*', // Allow any origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 
@@ -34,15 +40,13 @@ app.use('/api/orders', orderRouter);
 
 // Serve the main index.html for the root route (no conflicts with the API)
 app.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, '../../FRONT-END/DIST', 'index.html'));
+  res.sendFile(path.join(__dirname, '../../FRONT-END/DIST', 'index.html'));
 });
-
 
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-
 // Start the server
 app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
