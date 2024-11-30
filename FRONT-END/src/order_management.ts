@@ -82,7 +82,7 @@ const displayOrders = (elementId: string, orders: Order[]): void => {
   container.appendChild(table);
 
   const orderLinks = container.querySelectorAll(".order-link");
-  orderLinks.forEach((link) => 
+  orderLinks.forEach((link) =>
     link.addEventListener("click", async (event) => handleOrderClick(event))
   );
 };
@@ -99,9 +99,12 @@ const handleOrderClick = async (event: Event): Promise<void> => {
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/orders/${orderId}`,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     if (!response.ok) {
       console.error("Failed to fetch order:", response.statusText);
@@ -144,31 +147,6 @@ const displayOrderDetails = (order: Order): void => {
     `;
   }
 
-  const orderItems = document.createElement("table");
-  orderItems.innerHTML = `
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  `;
-
-  const tbody = orderItems.querySelector("tbody") as HTMLTableSectionElement;
-
-  order.order_items.forEach((item) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${item.course_name}</td>
-      <td>${item.item_quantity}</td>
-    `;
-    tbody.appendChild(row);
-  });
-
-  orderDetails.appendChild(orderItems);
-
   const closeButton = document.createElement("button");
   closeButton.textContent = "Close";
   closeButton.addEventListener("click", () => {
@@ -178,8 +156,98 @@ const displayOrderDetails = (order: Order): void => {
   orderDetails.appendChild(closeButton);
 };
 
-// Load the order management page
+// display order history on user page
 
+const displayOrderHistory = async (user_id: number): Promise<void> => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/orders/user/${user_id}`,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch orders made by user: ${user_id},`,
+        response.statusText
+      );
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const orders: Order[] = await response.json();
+
+    const orderHistory = document.getElementById(
+      "order-history"
+    ) as HTMLElement;
+    if (!orderHistory) {
+      console.log("Element with id order-history not found");
+      return;
+    }
+
+    orderHistory.innerHTML = "<h3>Order History</h3>";
+
+    if (!orders || orders.length === 0) {
+      orderHistory.innerHTML += "<p>No orders found</p>";
+      console.log("No orders found");
+      return;
+    }
+
+    const table = document.createElement("table");
+    table.id = "order-history-table";
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Time</th>
+          <th>Type</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    `;
+
+    const tbody = table.querySelector("tbody") as HTMLTableSectionElement;
+
+    orders.forEach((order) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${order.order_id}</td>
+        <td>${new Date(order.created_at).toLocaleString()}</td>
+        <td>${order.order_type}</td>
+        <td>${order.order_items}</td>
+        <td>${order.total_price}€</td>
+        <td>${order.order_status}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    const orderItemsTable = document.createElement("table");
+    orderItemsTable.id = "order-items-table";
+    orderItemsTable.innerHTML = `
+    <thead>
+      <tr>
+        <th>Menu Name</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  `;
+
+    orderHistory.appendChild(table);
+  } catch (error) {
+    console.error("displayOrderHistory error:", error);
+    throw new Error("Failed to display order history");
+  }
+};
+
+// Load the order management page
 document.addEventListener("DOMContentLoaded", async () => {
   await fetchAndDisplayOrders();
 });
+
+export { displayOrderHistory };

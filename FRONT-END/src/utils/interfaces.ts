@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import { Request } from "express";
 
 interface Itinerary {
   duration: number;
@@ -82,7 +82,7 @@ interface Allergen {
 
 interface OrderStatus {
   status_id: number;
-  status_name: 'Pending' | 'In progress' | 'Completed';
+  status_name: "Pending" | "In progress" | "Completed";
 }
 
 interface Order {
@@ -139,28 +139,45 @@ interface RestaurantReview {
 interface AuthenticatedRequest extends Request {
   user?: string | object;
   headers: {
-      authorization?: string;
-      [key: string]: any;
+    authorization?: string;
+    [key: string]: any;
   };
 }
 
 interface Translation {
   [lang: string]: {
-      [key: string]: string;
-  }
+    [key: string]: string;
+  };
 }
 
 interface TimeSlot {
   time: string;
   availableSeats: number;
 }
-
-
-
 interface Times {
   availableTimes: [string];
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, OrderStatus, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation, TimeSlot, Times };
-
-
+export type {
+  Itinerary,
+  Leg,
+  Trip,
+  Location,
+  Stop,
+  UserLevel,
+  User,
+  ModifiedUser,
+  Menu,
+  Allergen,
+  OrderStatus,
+  Order,
+  OrderItem,
+  Reservation,
+  FoodReview,
+  RestaurantReview,
+  AuthenticatedRequest,
+  UserLoggedIn,
+  Translation,
+  TimeSlot,
+  Times,
+};

@@ -116,6 +116,7 @@ GROUP BY
     return null;
   }
 };
+
 /**
  * fetch orders by customer name
  * @param customer_name - customer name
@@ -126,17 +127,35 @@ const fetchOrderByCustomerName = async (customer_name, next) => {
   try {
     const sql = `
     SELECT 
-        Orders.*, 
-        GROUP_CONCAT(CONCAT(OrderItems.course_name, ':', OrderItems.item_quantity)) AS items,
-        OrderStatus.status_name AS order_status,
-        DeliveryDetails.delivery_address,
-        DeliveryDetails.postal_code
-    FROM Orders
-    LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
-    LEFT JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id
-    LEFT JOIN DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
-    WHERE Orders.customer_name = ?
-    GROUP BY Orders.order_id
+    Orders.order_id,
+    Orders.customer_name,
+    Orders.total_price,
+    Orders.order_type,
+    Orders.general_comment,
+    Orders.created_at,
+    Orders.is_delivery,
+    OrderStatus.status_name AS order_status,
+    GROUP_CONCAT(
+        CONCAT(OrderItems.course_name, ' (x', OrderItems.item_quantity, ')') 
+        SEPARATOR ', '
+    ) AS order_items,
+    DeliveryDetails.delivery_address,
+    DeliveryDetails.postal_code,
+    DeliveryDetails.delivery_instructions
+FROM 
+    Orders
+LEFT JOIN 
+    OrderStatus ON Orders.status_id = OrderStatus.status_id
+LEFT JOIN 
+    OrderItems ON Orders.order_id = OrderItems.order_id
+LEFT JOIN 
+    DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
+WHERE 
+    Orders.order_id = ?
+GROUP BY 
+    Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
+    Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
+    DeliveryDetails.postal_code, DeliveryDetails.delivery_instructions
     ORDER BY Orders.created_at DESC;
 `;
 
@@ -153,6 +172,62 @@ const fetchOrderByCustomerName = async (customer_name, next) => {
 };
 
 /**
+ * fetch orders by user id
+ * @param user_id - user id
+ * @returns all orders from the database associated with the user
+ * @returns - Array of orders 
+ * @returns - null if no orders found
+ */
+
+const fetchOrdersByUserId = async (user_id, next) => {
+  try {
+    const sql = `
+    SELECT 
+    Orders.order_id,
+    Orders.customer_name,
+    Orders.total_price,
+    Orders.order_type,
+    Orders.general_comment,
+    Orders.created_at,
+    Orders.is_delivery,
+    OrderStatus.status_name AS order_status,
+    GROUP_CONCAT(
+        CONCAT(OrderItems.course_name, ' (x', OrderItems.item_quantity, ')') 
+        SEPARATOR ', '
+    ) AS order_items,
+    DeliveryDetails.delivery_address,
+    DeliveryDetails.postal_code,
+    DeliveryDetails.delivery_instructions
+FROM 
+    Orders
+LEFT JOIN 
+    OrderStatus ON Orders.status_id = OrderStatus.status_id
+LEFT JOIN 
+    OrderItems ON Orders.order_id = OrderItems.order_id
+LEFT JOIN 
+    DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
+WHERE 
+    Orders.user_id = ?
+GROUP BY 
+    Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
+    Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
+    DeliveryDetails.postal_code, DeliveryDetails.delivery_instructions
+    ORDER BY Orders.created_at DESC;
+`;
+
+    const [rows] = await promisePool.query(sql, [user_id]);
+    if (rows && rows.length > 0) {
+      return rows;
+    }
+    return null;
+  } catch (e) {
+    console.error('fetchOrdersByUserId error:', e.message);
+    next(customError('Database error: ' + e.message));
+    return null;
+  }
+};
+
+/**
  * creates a new order and associates items with it.
  * @param customer_name - customer name
  * @param total_price - The total price
@@ -163,6 +238,7 @@ const fetchOrderByCustomerName = async (customer_name, next) => {
  */
 
 const createOrder = async (
+  user_id = null,
   customer_name,
   total_price,
   order_type,
@@ -198,11 +274,12 @@ const createOrder = async (
     const order_status_id = statusResult[0].status_id;
     // insert order into orders table
     const orderSql = `
-        INSERT INTO orders (customer_name, total_price, order_type, status_id, is_delivery, general_comment) 
-         VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO orders (user_id, customer_name, total_price, order_type, status_id, is_delivery, general_comment) 
+         VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
     console.log({
+      user_id,
       customer_name,
       total_price,
       order_type,
@@ -215,6 +292,7 @@ const createOrder = async (
     });
 
     const [orderResult] = await promisePool.query(orderSql, [
+      user_id || null,
       customer_name || 'Anonymous',
       total_price || 0,
       order_type || 'Pickup',
@@ -289,6 +367,7 @@ const createOrder = async (
 
     const order = {
       order_id: orderItemsResult[0].order_id,
+      user_id: orderItemsResult[0].user_id,
       customer_name: orderItemsResult[0].customer_name,
       total_price: orderItemsResult[0].total_price,
       order_type: orderItemsResult[0].order_type,
@@ -344,6 +423,7 @@ export {
   fetchOrders,
   createOrder,
   fetchOrderByCustomerName,
+  fetchOrdersByUserId,
   fetchOrdersByStatus,
   updateOrderStatus,
 };

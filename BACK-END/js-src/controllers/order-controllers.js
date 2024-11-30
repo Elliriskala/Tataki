@@ -2,6 +2,7 @@ import {
   fetchOrders,
   fetchOrderById,
   fetchOrderByCustomerName,
+  fetchOrdersByUserId,
   fetchOrdersByStatus,
   createOrder,
   updateOrderStatus,
@@ -84,6 +85,31 @@ const getOrdersByCustomerName = async (req, res, next) => {
 };
 
 /**
+ * Fetch orders by user id
+ * @param req
+ * @param res
+ * @returns orders by user id
+ * @throws Error
+ * @returns - Orders or null if not found
+ */
+
+const getOrdersByUserId = async (req, res, next) => {
+  const userId = req.params.user_id;
+  try {
+    // Fetch orders by user id
+    const orders = await fetchOrdersByUserId(userId, next);
+    if (!orders) {
+      return next(customError('Orders not found', 404));
+    }
+    // the orders
+    res.status(200).json(orders);
+  } catch (e) {
+    console.error('getOrdersByUserId error:', e.message);
+    return next(customError('getOrdersByUserId error: ' + e.message));
+  }
+};
+
+/**
  * Fetch orders by status
  * @param req
  * @param res
@@ -120,7 +146,7 @@ const postOrder = async (req, res) => {
   try {
     console.log('Incoming payload:', req.body);
 
-    const {customer_name, total_price, order_items, order_type, order_status, general_comment, delivery_address, postal_code, delivery_instructions} =
+    const {user_id, customer_name, total_price, order_items, order_type, order_status, general_comment, delivery_address, postal_code, delivery_instructions} =
       req.body;
 
     validateString(customer_name, 'customer_name');
@@ -138,6 +164,7 @@ const postOrder = async (req, res) => {
 
     // Create an order
     const newOrder = await createOrder(
+      user_id,
       customer_name,
       total_price,
       order_type,
@@ -198,6 +225,7 @@ export {
   getAllOrders,
   getOrderById,
   getOrdersByCustomerName,
+  getOrdersByUserId,
   getOrdersByStatus,
   postOrder,
   putOrderStatus,

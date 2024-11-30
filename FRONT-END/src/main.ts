@@ -1,7 +1,30 @@
-import {translations} from "./translations";
+import { translations } from "./translations";
 import { selectMenuToDisplay } from "./menu";
+import { displayOrderHistory } from "./order_management";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // check if user has logged in to display order history
+
+  const userToken = localStorage.getItem("authToken");
+
+  if (userToken) {
+    console.log("User is logged in.");
+
+    const user_id = localStorage.getItem("user_id");
+    console.log("user_id", user_id);
+    if (user_id) {
+      try {
+        await displayOrderHistory(Number(user_id));
+      } catch (error) {
+        console.error("Failed to display order history", error);
+      }
+    } else {
+      console.warn("User ID not found in localStorage");
+    }
+  } else {
+    console.log("User is not logged in.");
+  }
+
   const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
   const registerButton = document.getElementById(
     "register-btn"
@@ -88,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Toggle password visibility
   togglePassword?.forEach((iconContainer) => {
-    iconContainer.addEventListener("click", () => {
+    iconContainer.addEventListener("click", async () => {
       // Retrieve the target ID from the data-target attribute
       const targetId = iconContainer.getAttribute("data-target");
       if (!targetId) {

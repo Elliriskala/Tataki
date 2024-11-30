@@ -333,7 +333,7 @@ main {
   padding: 2rem;
   border-radius: 12px;
   width: 100%;
-  max-width: 600px;
+  max-width: 680px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -351,6 +351,46 @@ main {
   color: var(--sushi-graphite);
   text-align: center;
   margin-bottom: 2rem;
+}
+
+#order-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+#order-history h3 {
+  font-size: 1.5em;
+  color: var(--sushi-black);
+  margin-bottom: 1rem;
+}
+
+#order-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+  padding: 0.5em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#order-history-table th {
+  background-color: var(--sushi-grey2);
+  color: var(--sushi-graphite);
+  font-size: 1em;
+  padding: 1em;
+}
+
+#order-history-table td{
+  background-color: var(--sushi-grey3);
+  color: var(--sushi-graphite);
+  font-size: 0.9em;
+  padding: 1em;
+  border-bottom: #161a1d 1px dashed;
 }
 
 #user-main .logout-button {

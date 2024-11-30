@@ -288,6 +288,7 @@ const placeOrder = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        user_id: orderData.user_id,
         customer_name: orderData.customer_name,
         customer_email: orderData.customer_email,
         customer_phone: orderData.customer_phone,
@@ -366,6 +367,11 @@ const collectOrderData = () => {
     course_name: item.name,
     item_quantity: item.quantity,
   }));
+
+  // if user logged in get user id
+  const user_id = localStorage.getItem("user_id");
+
+  console.log("User ID:", user_id);
 
   // Get customer information
   const customer_name =
@@ -446,6 +452,7 @@ const collectOrderData = () => {
   // return the collected data
 
   return {
+    user_id,
     customer_name,
     customer_email,
     customer_phone,
