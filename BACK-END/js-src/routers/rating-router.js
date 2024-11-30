@@ -3,8 +3,8 @@ import { getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview, postR
 import authenticateToken from "../middlewares/authentication.js";
 const ratingRouter = express.Router();
 
-ratingRouter.get('/restaurant/ratings', getRestaurantReviews);
-ratingRouter.get('/restaurant/ratings/user/:user_id', authenticateToken, getRestaurantReviewsByUserId);
-ratingRouter.delete('/restaurant/ratings/:review_id', authenticateToken, deleteReview);
-ratingRouter.post('/restaurant/ratings', authenticateToken, postReview);    
+ratingRouter.get('/restaurant/', getRestaurantReviews);
+ratingRouter.get('/restaurant/user/:user_id', authenticateToken, getRestaurantReviewsByUserId);
+ratingRouter.delete('/restaurant/:review_id', authenticateToken, deleteReview);
+ratingRouter.post('/restaurant/', postReview);    
 export default ratingRouter;

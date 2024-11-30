@@ -18,24 +18,70 @@ app.use(cors());
 
 app.use(express.json());
 
-// Resolve __dirname for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-// Serve static files from the "public" directory (this should include your styles, JS, images)
-app.use(express.static(path.join(__dirname, '../../FRONT-END/dist')));
+const frontEndPath = '../../FRONT-END/dist';
 
-// API Routes (Make sure these are defined before the dynamic HTML route)
 app.use('/api/users', userRouter);
-app.use('/api/ratings', ratingRouter);
+app.use('/api/reviews', ratingRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/reservations', reservationRouter);
 app.use('/api/menus', menuRouter);
 app.use('/api/orders', orderRouter);
 
-// Serve the main index.html for the root route (no conflicts with the API)
+// Resolve __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// Serve static files from the "public" directory (this should include your styles, JS, images)
+app.use(express.static(path.join(__dirname, frontEndPath)));
+
 app.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, '../../FRONT-END/DIST', 'index.html'));
+    res.sendFile(path.join(__dirname, frontEndPath, 'index.html'));
 });
+
+app.get('/about', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'about.html'));
+});
+
+app.get('/admin', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'admin.html'));
+});
+
+app.get('/contact', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'contact.html'));
+});
+
+app.get('/menu', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'menu.html'));
+});
+
+app.get('/order', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'order.html'));
+});
+
+app.get('/order_management', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'order_management.html'));
+});
+
+app.get('/reservation', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'reservation.html'));
+});
+
+app.get('/user', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'user.html'));
+});
+
+app.get('review' , (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'review.html'));
+});
+
+app.get('*', (_req, res) => {
+    res.sendFile(path.join(__dirname, frontEndPath, 'index.html'));
+});
+
+// API Routes (Make sure these are defined before the dynamic HTML route)
+
+
+// Serve the main index.html for the root route (no conflicts with the API)
+
 
 
 app.use(notFoundHandler);
