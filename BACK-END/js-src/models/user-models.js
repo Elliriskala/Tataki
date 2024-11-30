@@ -26,13 +26,13 @@ const fetchUsers = async () => {
  */
 const fetchUserById = async (user_id) => {
     try {
-        const sql = 'SELECT * FROM Users WHERE user_id = ?';
+        const sql = 'SELECT username, email, phone_number FROM Users WHERE user_id = ?';
         const [rows] = await promisePool.query(sql, [user_id]);
         if (rows && rows.length > 0) {
             return rows[0];
         }
         else {
-            throw new Error('FetchUserById, User not found');
+            return null;
         }
     }
     catch (e) {

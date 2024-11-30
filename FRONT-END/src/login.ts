@@ -139,6 +139,44 @@ const handleRegister = async (event: Event) => {
 };
 
 
+const populateUserPage = async () => {
+    const usernameElement = document.getElementById('username-info') as HTMLSpanElement;
+    const usernameDisplay = document.getElementById('username-display') as HTMLSpanElement;
+    const emailElement = document.getElementById('email-info') as HTMLSpanElement;
+    const phoneElement = document.getElementById('phone-info') as HTMLSpanElement;
+
+    const user_id = localStorage.getItem('user_id');
+    const token = localStorage.getItem('authToken');
+    if (!token || !user_id) {
+        console.error('No token found');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/users/${user_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            }
+        });
+
+        if (!response.ok) {
+            console.error('Failed to get user info');
+            return;
+        }
+
+        const data = await response.json();
+        usernameElement.textContent = data.username;
+        usernameDisplay.textContent = data.username;
+        emailElement.textContent = data.email;
+        phoneElement.textContent = data.phone_number || 'N/A';
+    } catch (error) {
+        console.error('Failed to get user info', error);
+    }
+}
+
+
 const loadUserPage = () => {
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
@@ -150,7 +188,7 @@ const loadUserPage = () => {
             loginContent.style.display = 'none';
             userContent.style.display = 'flex';
         }
-        //loadUserProfile() fetch user data
+        populateUserPage();
     }
 }
 

@@ -89,16 +89,37 @@ CREATE TABLE DeliveryDetails (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE OrderStatus (
+    status_id INT AUTO_INCREMENT PRIMARY KEY,
+    status_name VARCHAR(50) UNIQUE
+);
+
+-- Timeslots for reservations
+CREATE TABLE TimeSlots (
+    timeslot_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_time TIME NOT NULL UNIQUE,
+    max_guests INT NOT NULL
+);
+
 -- Create table for reservations
 CREATE TABLE Reservations (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT NULL DEFAULT NULL,
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
-    guests VARCHAR(50) NOT NULL,
+    full_name VARCHAR(50) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    timeslot_id INT,
+    guests INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (timeslot_id) REFERENCES TimeSlots(timeslot_id)
+
 );
+
+
 
 -- Create table for food reviews
 CREATE TABLE FoodReview (
@@ -125,8 +146,10 @@ CREATE TABLE RestaurantReview (
 -- Insert user levels
 INSERT INTO UserLevels (level_name) VALUES ('Admin'), ('User');
 
--- Insert users
-INSERT INTO Users (username, password_hash, email, phone_number, user_level_id) VALUES ('ellinoora', 'popokissa', 'elli@metropolia.fi', '0452115710', 1), ('joel', 'joel123', 'joelii@integral.com', '0453006000', 2), ('popo', 'popo123', 'popodii@popokissa.fi', '0452006000', 2);
+INSERT INTO TimeSlots (reservation_time, max_guests) VALUES
+('10:00:00', 40), ('11:00:00', 40), ('12:00:00', 40), ('13:00:00', 40), ('14:00:00', 40), ('15:00:00', 40), ('16:00:00', 40), ('17:00:00', 40), ('18:00:00', 40), ('19:00:00', 40), ('20:00:00', 40), ('21:00:00', 40);
+
+INSERT INTO Users (username, password_hash, email, phone_number, user_level_id, customer_address) VALUES ( 'admin', '$2y$10$3', 'karriparrtannijd', '012345567889', 1, 'admin_address')
 
 -- Insert menus
 INSERT INTO Menus (course_name, course_description, price, menu_image, category, is_special) VALUES ('Kyoto Bliss', '{"en": "8-piece Spring Petal Roll, 4 pieces of tuna sashimi and wakame salad. Spring Petal Roll: Salmon, avocado and cream cheese wrapped in sushi rice and nori, garnished with sesame seeds.", "fi": "Kevätterälehti-rulla (8kpl), 4 kpl tonnikalasashimia ja wakamesalaattia. Kevätterälehti-rulla: Lohi ja avokado, käärittynä sushiriisiin ja noriin, viimeistelty seesaminsiemenillä."}', 16.90, '/img/menu-images/salmon-avocado-roll2.jpg', 'Lunch', FALSE), ('Hokkaido Harmony', '{"en": "8-piece California Roll, 4 pieces of yellowtail sashimi and edamame beans. California Roll: Creamy avocado, imitation crab, and cucumber rolled in rice and nori, topped with roe and vegan mayonnaise.", "fi": "California-rulla (8 kpl), 4 kpl hamachi-sashimia ja edamame-papuja. California-rulla: Kermainen avokado, surimi ja kurkku, käärittynä riisiin ja noriin, viimeisteltynä mädillä ja vegaanisella majoneesilla."}', 15.90, '/img/menu-images/california-roll2.jpg', 'Lunch', FALSE), ('Ocean Zen Platter', '{"en": "6-piece Flame Roll, 4 pieces of sake nigiri and edamame beans. Flame Roll: Spicy tuna with avocado, wrapped in rice and nori, topped with sesame seeds and spicy vegan mayonnaise.", "fi": "Liekki-rulla (6 kpl), 4 kpl lohi-nigiriä ja edamame-papuja. Liekki-rulla: Tulinen tonnikala ja avokado, käärittynä riisiin ja noriin, viimeisteltynä seesaminsiemenillä ja mausteisella vegaani majoneesilla."}', 18.90, '/img/menu-images/spicy-tuna-maki2.jpg', 'Lunch', TRUE), ('Golden Sun', '{"en": "8-piece Crunchy Shrimp Roll, 2 pieces of unagi nigiri and miso soup. Crunchy Shrimp Roll: Tempura shrimp, avocado, and cucumber wrapped in rice and nori, finished with a drizzle of eel sauce.", "fi": "Rapea katkarapu-rulla (8 kpl), 2 kpl ankerias-nigiriä ja miso keittoa. Rapea katkarapu-rulla: Tempurakatkarapu, avokado ja kurkku, käärittynä riisiin ja noriin, viimeisteltynä ankeriaskastikkeella."}', 19.90, '/img/menu-images/crunchy-shrimp-roll2.jpg', 'Lunch', FALSE), ('Sakura Delight', '{"en": "8-piece Garden Harmony Roll, 4 pieces of tofu nigiri and edamame beans. Garden Harmony Roll: A vibrant mix of red cabbage, wakame salad, carrot, paprika and tofu rolled in rice and nori, topped with sesame seeds.", "fi": "Puutarhan harmonia-rulla (8 kpl), 4 kpl tofu-nigiriä ja edamame-papuja. Värikäs sekoitus punakaalia, wakame-salaattia, porkkanaa, paprikaa ja tofua, käärittynä riisiin ja noriin, päälle ripoteltu seesaminsiemeniä."}', 15.90, '/img/menu-images/vegan-sushi2.jpg', 'Lunch', FALSE), ('Tokyo Trio', '{"en": "8-piece Golden Dragon roll, 2 pieces of maguro nigiri and miso soup. Golden Dragon Roll: White fish, cucumber, and carrot wrapped in sushi rice, topped with freshwater eel, herbs and eel sauce.", "fi": "Kultainen lohikäärme-rulla (8 kpl), 2 kpl tonnikala-nigiriä ja misokeittoa. Kultainen lohikäärme-rulla: Valkoinen kala, kurkku ja porkkana, käärittynä sushiriisiin, päällä makeanveden ankeriasta, yrttejä ja unagikastiketta."}', 19.90, '/img/menu-images/dragon-roll.jpg', 'Lunch', TRUE), ('Moonlight Ocean', '{"en": "6 pieces of unagi nigiri, 3 pieces of sake, ebi, hirame and maguro nigiris, 5 pieces of tako sashimi. Served with wakame salad and warm miso soup.", "fi": "6 kpl ankerias-nigiriä, 3 kpl lohi-, katkarapu-, hirame- ja tonnikala-nigiriä, 5 kpl tako-sashimia. Tarjoillaan wakame-salaatin ja lämpimän misokeiton kanssa."}', 28.90, '/img/menu-images/dinnerplate3.jpg', 'Dinner', TRUE), ('Imperial Feast', '{"en": "2 pieces of sake nigiri, 4 makis of Philadelphia Roll, 8 salmon makis, 5 pieces of salmon sashimi, a bowl of duck ramen soup. Philadelphia Roll: Avocado and cream cheese wrapped in sushi rice and nori, topped with salmon. Ramen soup: Roasted duck slices, ramen noodles, boiled egg, chili oil and herbs", "fi": "2 kpl lohi-nigiriä, 4 Philadelphia-rullan makia, 8 lohi-makia, 5 kpl lohi-sashimia, kulhollinen ankka-ramenkeittoa. Philadelphia-rulla: Avokado ja tuorejuusto, käärittynä sushiriisiin ja noriin, päällä lohta. Ramenkeitto: Paahdettuja ankanviipaleita, ramen-nuudelit, keitetty kananmuna, chilikastiketta ja yrttejä."}', 29.90, '/img/menu-images/dinnerplate7.jpg', 'dinner', FALSE), ('Emperor’s Delight', '{"en": "9 pieces of sake nigiri, 6 pieces of unagi nigiri, 3 pieces of ebi nigiri, 4 makis of Dragon Roll and 2 makis of Philadelphia Roll. Dragon Roll: Salmon, avocado and cream cheese, wrapped in sushi rice and nori, topped with freshwater eel and sesame seeds. Philadelphia Roll: Avocado and cream cheese wrapped in sushi rice and nori, topped with salmon.", "fi": "9 kpl lohi-nigiriä, 6 kpl ankerias-nigiriä, 3 kpl katkarapu-nigiriä,  4 makia lohikäärme-rullaa ja 2 makia Philadelphia-rulla. Lohikäärme-rulla: Lohi, avokado ja tuorejuusto, käärittynä sushiriisiin ja noriin, päällä makeanveden ankeriasta ja seesaminsiemeniä. Philadelphia-rulla: Avokado ja tuorejuusto, käärittynä sushiriisiin ja noriin, päällä lohta."}', 34.90, "/img/menu-images/dinnerplate1.jpg", 'dinner', FALSE), ('Dragon’s Elegance', '{"en": "Combination of freely chosen nigiris, 6 makis of California and Philadelphia roll. California Roll: Creamy avocado, imitation crab, and cucumber rolled in rice and nori, topped with roe and vegan mayonnaise. Philadelphia Roll: Avocado and cream cheese wrapped in sushi rice and nori, topped with salmon.", "fi": "Vapaasti valittavat nigirit, 6 makia Philadelphia- ja California-rullaa. Philadelphia-rulla: Avokado ja tuorejuusto, käärittynä sushiriisiin ja noriin, päällä lohta. California-rulla: Kermainen avokado, surimi ja kurkku, käärittynä riisiin ja noriin, päällä mätiä ja vegaanista majoneesia."}', 42.90, '/img/menu-images/dinnerplate2.jpg', 'dinner', FALSE), ('Harmony Bento', '{"en": "A perfect balance of flavors and textures: Fresh slices of salmon and tuna sashimi, crispy shrimp and vegetable tempura, sweet tamagoyaki, braised tofu, and a selection of simmered vegetables, miso soup, white rice topped with black sesame seeds and a traditional pickled plum.", "fi": "Täydellinen tasapaino makuja ja tekstuureita: Tuoretta lohi- ja tonnikalasashimia. Rapeita katkarapuja ja kasvistempuraa, makeaa tamagoyakia, haudutettua tofua ja vihanneksia. Misokeittoa, valkoista riisiä, jossa seesaminsiemeniä ja perinteinen suolattu luumu."}', 28.90, '/img/menu-images/bento-box.jpg', 'dinner', FALSE), ('Deluxe Fusion Bento', '{"en": "Combination of Japanese classics: Sake, unagi and ebi nigiris, cucumber and salmon makis, salmon and tuna sashimi. Sliced breaded chicken cutlet and prawns, garnished with green onions. Wakame salad, steamed white rice and edamame beans.", "fi": "Yhdistelmä japanilaisia klassikoita: Lohi-, ankerias- ja katkarapu-nigirit, kurkku- ja lohi-makit, lohi- ja tonnikalasashimi. Viipaloitua leivitettyä kananleikettä ja katkarapuja, koristeltu kevätsipulilla. Wakame-salaatti, höyrytettyä valkoista riisiä ja edamame-papuja."}', 32.90, '/img/menu-images/bento2.jpg', 'dinner', FALSE), ('Wakame Salad', 
@@ -142,13 +165,11 @@ INSERT INTO OrderStatus (status_name) VALUES
 ('Pending'), ('Inprogress'), ('Completed'), ('Cancelled');
 
 -- Insert reservations
-INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests) VALUES (2, '2021-12-24', '18:00:00', '2'), (3, '2021-12-25', '19:00:00', '4'), (1, '2021-12-26', '20:00:00', '6');
+---INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests) VALUES (2, '2021-12-24', '18:00:00', '2'), (3, '2021-12-25', '19:00:00', '4'), (1, '2021-12-26', '20:00:00', '6');
 
--- Insert food reviews
-INSERT INTO FoodReview (user_id, menu_id, review, star_rating) VALUES (2, 1, 'Best sushi in town!', 5), (3, 2, 'Fresh and delicious!', 4), (1, 3, 'Great value for money!', 5);
 
 -- Insert restaurant reviews
-INSERT INTO RestaurantReview (user_id, review, star_rating) VALUES (2, 'Great service!', 5), (3, 'Nice atmosphere!', 4), (1, 'Good location!', 4);
+---INSERT INTO RestaurantReview (user_id, review, star_rating) VALUES (2, 'Great service!', 5), (3, 'Nice atmosphere!', 4), (1, 'Good location!', 4);
 
 /*
 -- query to get orders

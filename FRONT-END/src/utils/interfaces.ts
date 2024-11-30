@@ -43,6 +43,7 @@ interface User {
   user_id?: number;
   username: string;
   email: string;
+  phone_number?: string;
   password_hash: string;
   user_level_id: number;
 }
@@ -51,6 +52,7 @@ interface UserLoggedIn {
   user_id: number;
   username: string;
   email: string;
+  phone_number?: string;
   user_level_id: number;
   token: string;
 }
@@ -148,6 +150,17 @@ interface Translation {
   }
 }
 
-export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, OrderStatus, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation };
+interface TimeSlot {
+  time: string;
+  availableSeats: number;
+}
+
+
+
+interface Times {
+  availableTimes: [string];
+}
+
+export type { Itinerary, Leg, Trip, Location, Stop, UserLevel, User, ModifiedUser, Menu, Allergen, OrderStatus, Order, OrderItem, Reservation, FoodReview, RestaurantReview, AuthenticatedRequest, UserLoggedIn, Translation, TimeSlot, Times };
 
 

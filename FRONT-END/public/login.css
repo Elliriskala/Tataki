@@ -342,13 +342,13 @@ main {
 
 #user-main .profile-container h2 {
   font-size: 1.8rem;
-  color: var(--sushi-white);
+  color: var(--sushi-graphite);
   margin-bottom: 1rem;
 }
 
 #user-main .profile-container p {
   font-size: 1rem;
-  color: var(--sushi-grey1);
+  color: var(--sushi-graphite);
   text-align: center;
   margin-bottom: 2rem;
 }
