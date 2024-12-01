@@ -15,4 +15,3 @@ dist/
 node_modules
 dist/
 dev-dist/
-BACK-END/database/create-db.sql/

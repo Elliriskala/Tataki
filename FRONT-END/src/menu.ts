@@ -40,10 +40,7 @@ const fetchMenuItemsByCategory = async (category: string): Promise<Menu[]> => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const responseText = await response.text();
-
-    const menudata: Menu[] = JSON.parse(responseText);
-    return menudata;
+    return await response.json();
   } catch (error) {
     console.error("fetchMenuItemsByCategory error:", error);
     throw new Error("Failed to fetch menu items by category");
@@ -63,10 +60,7 @@ const fetchSpecialMenus = async (): Promise<Menu[]> => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const responseText = await response.text();
-
-    const menudata: Menu[] = JSON.parse(responseText);
-    return menudata;
+    return await response.json();
   } catch (error) {
     console.error("fetchSpecialMenus error:", error);
     throw new Error("Failed to fetch special menu items");
@@ -75,17 +69,8 @@ const fetchSpecialMenus = async (): Promise<Menu[]> => {
 
 // Creating the menus to display
 
-const displayMenu = (menus: Menu[]): void => {
-  const menuContainer = document.querySelector(
-    ".menu-container"
-  ) as HTMLDivElement | null;
-
-  if (!menuContainer) {
-    console.log("Menu container not found");
-    return;
-  }
-
-  menuContainer.innerHTML = "";
+const displayMenu = (menus: Menu[], container: HTMLDivElement): void => {
+  container.innerHTML = "";
 
   menus.forEach((menu: Menu) => {
     const menuCard = document.createElement("div");
@@ -114,70 +99,91 @@ const displayMenu = (menus: Menu[]): void => {
                             </div>
                     </div>
                     `;
-    menuContainer.appendChild(menuCard);
+    container.appendChild(menuCard);
   });
 };
 
-// selecting the menus to display based on the button clicked
+// display the special menus in the carousel 
 
-const lunchButton = document.querySelector(".lunch-button");
-const dinnerButton = document.querySelector(".dinner-button");
-const sideButton = document.querySelector(".sides-button");
-const drinkButton = document.querySelector(".drinks-button");
-const dessertButton = document.querySelector(".desserts-button");
+const initializeCarousel = async (menuTracker: HTMLDivElement): Promise<void> => {
+  try {
+    const specialMenus = await fetchSpecialMenus();
+    displayMenu(specialMenus, menuTracker);
 
-const selectMenuToDisplay = () => {
-  fetchMenuItemsByCategory("lunch").then(displayMenu);
+    let menuPosition = 0; // initial position
+    const menuItems = document.querySelectorAll(".menu-card");
+    const menuWidth = menuItems[0]?.clientWidth || 0;
 
-  if (
-    !lunchButton ||
-    !dinnerButton ||
-    !sideButton ||
-    !drinkButton ||
-    !dessertButton
-  ) {
-    console.log("Buttons not found");
-    return;
+    const updateCarousel = () => {
+      menuTracker.style.transform = `translateX(-${menuPosition * menuWidth}px)`;
+      (document.querySelector("#carousel-left") as HTMLButtonElement)!.disabled = menuPosition === 0;
+      (document.querySelector("#carousel-right") as HTMLButtonElement)!.disabled =
+        menuPosition >= specialMenus.length - 1;
+    };
+
+    const leftArrow = document.querySelector(
+      "#carousel-left"
+    ) as HTMLButtonElement | null;
+    const rightArrow = document.querySelector(
+      "#carousel-right"
+    ) as HTMLButtonElement | null;
+
+    // scroll menu to the left
+    if (leftArrow) {
+      leftArrow.addEventListener("click", () => {
+        if (menuPosition > 0) {
+          menuPosition -= 1;
+          updateCarousel();
+        }
+      });
+    }
+
+    // scroll menu to the right
+    if (rightArrow) {
+      rightArrow.addEventListener("click", () => {
+        if (menuPosition < specialMenus.length - 1) menuPosition += 1;
+          updateCarousel();
+      });
+    }
+
+    updateCarousel();
+  } catch (error) {
+    console.error("initializeCarousel error:", error);
+    throw new Error("Failed to initialize carousel");
   }
+};
 
-  lunchButton.addEventListener("click", async () => {
-    const lunchMenus = await fetchMenuItemsByCategory("lunch");
-    displayMenu(lunchMenus);
-    console.log("lunch button clicked");
-  });
-
-  dinnerButton.addEventListener("click", async () => {
-    const dinnerMenus = await fetchMenuItemsByCategory("dinner");
-    displayMenu(dinnerMenus);
-  });
-
-  sideButton.addEventListener("click", async () => {
-    const sideMenus = await fetchMenuItemsByCategory("sides");
-    displayMenu(sideMenus);
-  });
-
-  drinkButton.addEventListener("click", async () => {
-    const drinkMenus = await fetchMenuItemsByCategory("drinks");
-    displayMenu(drinkMenus);
-  });
-
-  dessertButton.addEventListener("click", async () => {
-    const dessertMenus = await fetchMenuItemsByCategory("desserts");
-    displayMenu(dessertMenus);
+// initialize category buttons
+const initializeCategoryButtons = async (container: HTMLDivElement): Promise<void> => {
+  const categoryButtons = document.querySelectorAll(".select-category-button");
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const category = button.getAttribute("data-translate") || "";
+      if (category) {
+        const menus = await fetchMenuItemsByCategory(category);
+        displayMenu(menus, container);
+      }
+    });
   });
 };
 
-// select chef's specials to display
+// initialize menu page
+const initializeMenuPage = async (): Promise<void> => {
+  const menuTracker = document.querySelector(".menu-track") as HTMLDivElement | null;
+  const menuContainer = document.querySelector(".menu-container") as HTMLDivElement | null;
 
-const selectSpecialsToDisplay = () => {
-  fetchSpecialMenus().then(displayMenu);
+  if (menuTracker && menuContainer) {
+    await initializeCarousel(menuTracker);
+    await initializeCategoryButtons(menuContainer);
+  }
 };
+
+document.addEventListener("DOMContentLoaded", initializeMenuPage);
 
 export {
   displayMenu,
-  selectMenuToDisplay,
   fetchMenuItemsByCategory,
   fetchMenuItems,
   fetchSpecialMenus,
-  selectSpecialsToDisplay,
+  initializeMenuPage
 };

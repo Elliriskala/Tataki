@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/nav.css" />
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
     <script type="module" src="./src/main.ts"></script>
+    <script type="module" src="./src/menu.ts"></script>
   </head>
   <body class="menu-page-body">
     <header>
@@ -31,21 +32,34 @@
       </nav>
     </header>
     <main class="menu-page">
-      <div class="menus-header">
-        <h1 data-translate="menu">Menu</h1>
+      <div class="menus">
+        <div class="menus-header">
+          <h1 data-translate="our-menus">Menus</h1>
+          <p data-translate="explore-menus">Explore our delicious menus and find your favorite!</p>
+        </div>
+        <div class="menu-list">
+          <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
+          <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
+          <button class="select-category-button sides-button" data-translate="sides">Sides</button>
+          <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
+          <button class="select-category-button desserts-button" data-translate="desserts">Desserts</button>
+        </div>
+        <div class="menu-container"></div>
+        <div class="carousel">
+          <h2 data-translate="chef-recommendation">Chef's resommendations</h2>
+          <button id="carousel-left" class="carousel-button" aria-label="Scroll left">❮</button>
+          <div class="menu-carousel">
+            <div class="menu-track-container">
+              <div class= "menu-track"></div>
+            </div>
+          </div>
+          <button id="carousel-right" class="carousel-button" aria-label="Scroll right">❯</button>
+        </div>
       </div>
-      <div class="menu-list">
-        <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
-        <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
-        <button class="select-category-button sides-button" data-translate="sides">Sides</button>
-        <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
-        <button class="select-category-button desserts-button" data-translate="dessert">Dessert</button>
-      </div>
-      <div class="menu-container"></div>
       <div class="allergens">
         <h2 class="allergen-header" data-translate="allergen-header">Allergen information</h2>
         <p data-translate="allergen-info">
-          At our restaurant, we are committed to ensuring that all our customers can enjoy a safe and delicious dining experience. We strive to provide accurate and up-to-date allergen information for each of our menu items. 
+          We strive to provide accurate allergen details for our menu:
         </p>
         <ul class="allergen-list">
           <li data-translate="egg">E = contains egg</li>
@@ -54,8 +68,7 @@
           <li data-translate="milk">M = contains milk</li>
           <li data-translate="soy">S = contains soy</li>
         </ul>
-        <p data-translate="allergen-info2">We make every effort to prevent cross-contamination in our kitchen, but please note that we use shared cooking and preparation areas. If you or someone in your party has a food allergy or intolerance, please inform our staff before placing your order, and we will be happy to assist you with your selection.</p>
-        <p data-translate="allergen-info3">Your safety and satisfaction are our top priorities. If you have any questions about allergens or need more information, feel free to ask our staff.</p>
+        <p data-translate="allergen-info2">Our kitchen uses shared spaces, so cross-contamination may occur. Please inform our staff of any allergies before ordering—we’re happy to help you choose safely. Your safety is our priority; feel free to ask for more information.</p>
       </div>
     </main>
     <footer>
@@ -66,7 +79,6 @@
         <div class="footer-nav">
           <ul>
             <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
-            <li><a href="about.html" data-translate="about-link">About us</a></li>
             <li><a href="review.html" data-translate="review-link">Review us</a></li>
         </ul>
         </div>

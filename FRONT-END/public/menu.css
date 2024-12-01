@@ -14,14 +14,14 @@
 
 @font-face {
   font-family: "urbanist";
-  src: url('./fonts/Urbanist-Regular.ttf') format('truetype');
+  src: url("./fonts/Urbanist-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "urbanist bold";
-  src: url('./fonts/Urbanist-Bold.ttf') format('truetype');
+  src: url("./fonts/Urbanist-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -38,10 +38,6 @@ body {
   height: 100%;
   width: 100%;
   background-color: var(--soy-sauce);
-}
-
-.menu-page {
-  flex-grow: 1;
 }
 
 :root {
@@ -68,19 +64,154 @@ body {
 
 /* MENU.HTML tyylittely */
 
-.menu-page-body {
+.menu-page-body,
+.menus {
   background-color: var(--soy-sauce);
   color: var(--sushi-grey3);
+  padding-bottom: 0.5em;
 }
 
 .menus-header {
   display: flex;
-  text-align: center;
   justify-content: center;
-  font-family: "roboto bold";
-  font-size: 1.2em;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 1em;
 }
 
+.menus-header h1 {
+  margin-top: 1em;
+  color: var(--sushi-red3);
+}
+
+.menus-header p {
+  text-align: center;
+  width: 80%;
+}
+
+.carousel {
+  text-align: center;
+  position: relative;
+}
+
+.carousel h2 {
+  margin: auto;
+  padding: 1em;
+  border-bottom: 0.1em solid var(--sushi-red2);
+  border-bottom-style: groove;
+  width: 60%;
+  color: var(--sushi-red2);
+  text-shadow: #0b090a 0.1em 0.1em 0.1em;
+}
+
+.menu-carousel {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 70%;
+}
+
+.menu-track-container {
+  margin: 1em;
+}
+
+.menu-track {
+  display: flex;
+  gap: 0.5em;
+  transition: 0.5s ease-in-out;
+}
+
+.carousel-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2em;
+  color: var(--sushi-grey3);
+  transition: 0.2s;
+  padding: 1em;
+  margin: 0.5em;
+  transform: translateX(0.2em);
+  position: absolute;
+  top: 45%;
+  z-index: 10;
+}
+
+#carousel-left {
+  left: 5%;
+}
+
+#carousel-right {
+  right: 5%;
+}
+
+#carousel-left:hover,
+#carousel-right:hover {
+  color: var(--sushi-red2);
+  transform: scale(1.2);
+}
+
+.menu-container {
+  display: grid;
+  width: 70%;
+  margin: auto;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 2fr));
+  gap: 1em;
+  margin-bottom: 2em;
+}
+
+.menu-track > .menu-card {
+  flex: 0 0 250px;
+  max-width: 250px;
+}
+
+.menu-card {
+  background-color: var(--sushi-graphite);
+  border-radius: 1em;
+  border: solid 0.1em var(--sushi-black);
+  padding: 1em;
+  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+  text-align: center;
+  color: var(--sushi-grey3);
+  letter-spacing: -0.6px;
+}
+
+.menu-header {
+  font-family: "roboto bold";
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  color: var(--sushi-red2);
+  margin-bottom: 1em;
+}
+
+.image-placeholder {
+  height: 12em;
+  border-radius: 1em;
+}
+
+.menu-image {
+  border-radius: 0.5em;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.price,
+.allergen-info {
+  font-family: "roboto bold";
+  font-size: 1.2em;
+  padding: 0.5em;
+  margin: 0.3em;
+}
+
+.price {
+  color: var(--sushi-red2);
+}
+
+.allergen-info {
+  font-size: 1em;
+  color: var(--sushi-red4);
+}
 
 .menu-list {
   display: flex;
@@ -102,85 +233,18 @@ body {
 .select-category-button:hover {
   background-color: var(--soy-sauce);
   transform: scale(1.15);
-  color: var(--sushi-red4); 
-}
-
-.menu-page {
-  margin-bottom: 3em;
-}
-
-.menu-container {
-  display: grid;
-  width: 80%;
-  margin: auto;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 2fr));
-  gap: 1em;
-  margin-bottom: 3em;
-}
-
-.menu-placeholder {
-  background-color: var(--sushi-graphite);
-  border-radius: 1em;
-  border: solid 0.1em var(--sushi-black);
-  padding: 2em;
-  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-  text-align: center;
-  color: var(--sushi-grey3);
-}
-
-.menu-placeholder p {
-  font-family: "urbanist";
-  padding: 0.5em;
-  letter-spacing: 0.1em;
-}
-
-.menu-header {
-  font-family: "roboto bold";
-  font-size: 1.5em;
-  letter-spacing: 0.1em;
-  color: var(--sushi-red2);
-}
-
-.image-placeholder {
-  height: 12em;
-  width: 100%;
-}
-
-.menu-image {
-  border: 0.1em solid var(--sushi-black);
-  border-radius: 1em;
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 100%;
-}
-
-.price, .allergen-info {
-  font-family: "roboto bold";
-  font-size: 1.2em;
-  padding: 0;
-  margin: 0.3em;
-}
-
-.price {
-  color: var(--sushi-red2);
-}
-
-.allergen-info {
-  font-size: 1em;
   color: var(--sushi-red4);
 }
 
 .allergens {
-  width: 50%;
+  width: 30%;
   margin: auto;
+  margin-bottom: 1em;
   font-size: 0.9em;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--sushi-black);
-  padding: 3em;
-  border-radius: 1em;
+  padding: 1em;
   color: var(--sushi-grey3);
   text-align: center;
 }
@@ -193,6 +257,7 @@ body {
 }
 
 .allergen-list {
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -204,11 +269,26 @@ body {
   color: var(--sushi-red4);
 }
 
-
+@media screen and (max-width: 950px) {
+  .menu-container {
+    grid-template-columns: repeat(auto-fit, minmax(15em, 2fr));
+  }
+}
 
 @media screen and (max-width: 820px) {
-  .menu-placeholder {
-    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  #carousel-left {
+    left: 0;
+  }
+
+  #carousel-right {
+    right: 0;
+  }
+  .menu-container {
+    width: 90%;
+  }
+
+  .menu-card {
+    font-size: 0.9em;
   }
 
   .image-placeholder {
@@ -217,16 +297,33 @@ body {
 
   .allergens {
     width: 60%;
-}
+  }
 }
 
 @media screen and (max-width: 550px) {
+  .menu-carousel {
+    width: 80%;
+  }
+
+  .menu-track > .menu-card {
+    flex: 0 0 230px;
+    max-width: 230px;
+  }
+
+  #carousel-left {
+    left: -1em;
+  }
+
+  #carousel-right {
+    right: -1em;
+  }
+
   .menu-list {
-    flex-direction: column;
-    width: 50%;
-    margin: auto;
     margin-bottom: 1em;
     padding-top: 0;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
   }
 
   .select-category-button {
@@ -243,5 +340,26 @@ body {
 
   .image-placeholder {
     height: 14em;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .menus-header h3 {
+    font-size: 1em;
+  }
+
+  .carousel-button {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .menu-card {
+    font-size: 0.8em;
+  }
+
+  .menu-track > .menu-card {
+    flex: 0 0 225px;
+    max-width: 225px;
   }
 }

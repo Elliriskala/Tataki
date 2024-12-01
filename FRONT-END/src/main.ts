@@ -1,5 +1,4 @@
 import { translations } from "./translations";
-import { selectMenuToDisplay } from "./menu";
 import { displayOrderHistory } from "./order_management";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -263,5 +262,3 @@ fetchReservations?.addEventListener("click", async () => {
   const reservations = await response.json();
   console.log(reservations);
 });
-
-selectMenuToDisplay();

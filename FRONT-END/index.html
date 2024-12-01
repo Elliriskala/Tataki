@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/nav.css" />
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
     <script type="module" src="./src/main.ts"></script>
-    <script type="module" src="./src/index.ts"></script>
   </head>
   <body>
     <header>
@@ -33,62 +32,42 @@
     </header>
     <main>
       <section class="hero-container">
-        <div class="hero-image"></div>
+        <div class="hero-image" id="home-page-img"></div>
       </section>
-      <div class="menus">
-        <div class="menus-header">
-          <h1 data-translate="our-menus">Our menus</h1>
-          <p data-translate="explore-menus">Explore our delicious menus and find your favorite!</p>
-        </div>
-        <div class="carousel">
-          <h2 data-translate="chef-recommendation">Chef's resommendations</h2>
-          <button id="carousel-left" class="carousel-button" aria-label="Scroll left">❮</button>
-          <div class="menu-carousel">
-            <div class="menu-track-container">
-              <div class= "menu-track">
-                <div class="menu-container"></div>
-              </div>
-            </div>
-          </div>
-          <button id="carousel-right" class="carousel-button" aria-label="Scroll">❯</button>
-        </div>
-      </div>
-        <div>
-          <ul class="more-menus">
-            <li><a href="menu.html" data-translate="view-more">View more menus</a></li>
-          </ul>
-        </div>
-      </div>
       <div class="aboutus">
-        <div class="aboutus-header">
-          <h3 data-translate="our-story">This is us</h3>
-          <p data-translate="read-about-us">Learn more about our restaurant and our team!</p>
+        <div class="aboutus-placeholder">
+          <div class="about-us">
+            <h3 data-translate="this-is-us">This is us</h3>
+            <p data-translate="about-us">Welcome to Tataki, where tradition meets innovation in Helsinki’s vibrant city center. Our restaurant blends authentic Japanese techniques with a touch of Nordic flair to offer unforgettable dining experiences.</p>
+          </div>
+          <div class="image-placeholder" id="about-image"></div>
         </div>
         <div class="aboutus-placeholder">
-          <div class="aboutus-info">
+          <div class="image-placeholder" id="about-image2"></div>
+          <div class="about-us">
             <h3 data-translate="restaurant">Restaurant</h3>
             <p data-translate="our-restaurant">
-              Our restaurant is located in the heart of the city. We offer a
-              wide range of sushi and sashimi sets, as well as other Japanese
-              dishes. Our team of experienced chefs will make sure you have an unforgettable dining experience.
+              Tataki is known for its fresh, locally sourced ingredients and expertly crafted sushi, sashimi, and Japanese dishes. Inspired by Japanese minimalism, our cozy, modern space is perfect for enjoying award-winning signature dishes.
             </p>
           </div>
-          <div class="aboutus-info">
-            <h3 data-translate="team">Team</h3>
+        </div>
+        <div class="aboutus-placeholder">
+        <div class="image-placeholder" id="about-image3"></div>
+        <div class="about-us">
+          <h3 data-translate="team">Team</h3>
             <p data-translate="our-team">
-              Our team of experienced chefs assure that each customer's needs are met. We use only the freshest ingredients
-              to create delicious and authentic Japanese dishes. We warmly welcome you to visit us and learn more about our team!
+              Our skilled chefs, trained in Japan, create authentic flavors with a commitment to quality and sustainability. They ensure every dish meets the highest standards and warmly welcome you to experience our passion for Japanese cuisine.
             </p>
           </div>
         </div>
-        <div>
-          <ul class="more-button" id="read-more-button">
-            <li><a href="about.html" data-translate="read-more">Read more</a></li>
-          </ul>
-        </div>
-        <div class="bottom-image-placeholder">
-          <div class="image" id="home-page-img1"></div>
-          <div class="image" id="home-page-img2"></div>
+        <div class="aboutus-placeholder">
+          <div class="about-us">
+            <h3 data-translate="our-story">Our story</h3>
+            <p data-translate="about-us2">
+              Founded by a sushi enthusiast, Tataki combines expertise with a passion for fusion. Each dish showcases artistry, sustainability, and the joy of good food. Thank you for being part of our journey — we look forward to sharing more memorable meals with you!
+            </p>
+          </div>
+          <div class="image-placeholder" id="about-image4"></div>
         </div>
       </div>
     </main>
@@ -100,7 +79,6 @@
         <div class="footer-nav">
           <ul>
             <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
-            <li><a href="about.html" data-translate="about-link">About us</a></li>
             <li><a href="review.html" data-translate="review-link">Review us</a></li>
         </ul>
         </div>
