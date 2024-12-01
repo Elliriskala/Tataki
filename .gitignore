@@ -6,8 +6,6 @@ BACK-END/public/
 .history
 img/*.mp4
 .env
-/test-results/
-/playwright-report/
 /blob-report/
 /playwright/.cache/
 .vscode
