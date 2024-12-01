@@ -121,6 +121,10 @@ const handleRegister = async (event: Event) => {
             // Success - Registration was successful
             messageTarget.textContent = "Registration successful, you may now log in!";
             messageTarget.style.color = "green";
+            // empty the input fields
+            registerEmail.value = '';
+            registerPassword.value = '';
+            registerUsername.value = '';
         } else {
             // If the response is not OK, handle different status codes
             let errorMessage = registerErrorMessages[language][response.status] || registerErrorMessages[language].default;

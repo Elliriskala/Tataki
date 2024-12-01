@@ -13,7 +13,7 @@
 <body>
   <nav class="navigation">
     <div class="logo">
-        <button class="hamburger">☰</button>
+        <button data-testid="hamburger" class="hamburger">☰</button>
         <p>Tataki</p>
     </div>
     <ul class="nav-list">
@@ -33,13 +33,13 @@
         <div class="reservation-form">
             <h1 data-translate="reservationTitle">Table Reservation</h1>
             <p id="reservation-description" data-translate="reservationDescription">For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four.</p>
-            <button id="use-user-info" data-translate="useUserInfoButton">Use saved information</button>
+            <button id="use-user-info" data-testid="use-userinfo" data-translate="useUserInfoButton">Use saved information</button>
             <form id="reservationForm">
                 <label data-translate="reservationName" for="name">Full Name</label>
                 <input type="text" id="name" data-translate="placeholderName" name="name" autocomplete="name" placeholder="Enter your name" required>
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="email" data-translate="placeholderEmail" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" autocomplete="email" data-translate="placeholderEmail" placeholder="Enter your email" data-testid="reservation-email" required>
 
                 <label data-translate="reservationPhone" for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" autocomplete="tel" data-translate="placeholderPhone" placeholder="Enter your phone number" required>

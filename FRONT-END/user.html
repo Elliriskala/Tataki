@@ -13,7 +13,7 @@
 <body>
     <nav class="navigation">
         <div class="logo">
-            <button class="hamburger" data-translate="hamburger">☰</button>
+            <button data-testid="hamburger" class="hamburger" data-translate="hamburger">☰</button>
             <p data-translate="restaurant-name">Tataki</p>
         </div>
         <ul class="nav-list">
@@ -33,7 +33,7 @@
         <div class="form-toggle">
             <div id="toggle-slider" class="toggle-slider"></div>
             <button id="login-btn" class="toggle-btn active" data-translate="login-button">Login</button>
-            <button id="register-btn" class="toggle-btn" data-translate="register-button">Register</button>
+            <button id="register-btn" data-testid="register-button" class="toggle-btn" data-translate="register-button">Register</button>
         </div>
         <div class="login-background">
             <div class="form-image-container"></div>
@@ -74,12 +74,12 @@
                         <span class="toggle-password" data-target="register-password"><i data-target="register-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
                     </div>
                     <div class="form-buttons">
-                        <button id="submit-button-register" class="submit-button" type="submit" data-translate="submit-button">Submit</button>
+                        <button id="submit-button-register" class="submit-button" type="submit" data-testid="register-submit" data-translate="submit-button">Submit</button>
                         <button id="reset-button-register" class="reset-button" type="reset" data-translate="reset-button">Reset</button>
                     </div>
                 </form>
                 <div class="form-message">
-                    <span id="message-target" data-translate="message">This is a message box</span>
+                    <span id="message-target" data-testid="message-box"></span>
                 </div>
             </div>
         </div>
@@ -95,8 +95,12 @@
                     <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info">
                     <p><span class="info-label" data-translate="phone-label">Phone</span>: <span id="phone-info"></span></p>
                 </div>
+<<<<<<< HEAD
                 <div id="order-history"></div>
                 <button class="logout-button" id="logout-btn">Logout</button>
+=======
+                <button class="logout-button" data-testid="logout" id="logout-btn">Logout</button>
+>>>>>>> karri-dev2
             </div>
         </div>
     </main>
