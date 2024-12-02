@@ -70,6 +70,7 @@ const translations: Translation = {
         "price": "Price",
         "qty": "Qty",
         "total": "Total:",
+        "order": "Order",
         "additional-comment": "Leave additional comments here",
         "your-info": "Your information:",
         "use-existing-info": "Use existing delivery information",
@@ -82,6 +83,17 @@ const translations: Translation = {
         "terms": "Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We will do our best to resolve the issue. We appreciate your understanding and cooperation, thank you!",
         "agree-checkbox": "I agree to the terms and conditions",
         "order-now": "ORDER",
+        "placeholder-courier": "Add instructions for the courier here",
+        "placeholder-name": "Name",
+        "placeholder-email": "Email",
+        "placeholder-phone": "Phone number",
+        "placeholder-address": "Address",
+        "placeholder-po": "Postal code",
+        "lunch": "Lunch",
+        "dinner": "Dinner",
+        "sides": "Sides",
+        "drinks": "Drinks",
+        "dessert": "Desserts",
 
         // reservation page translations
         "navHome": "Home Page",
@@ -122,6 +134,7 @@ const translations: Translation = {
         "timeOption11": "8:00 PM",
         "timeOption12": "9:00 PM",
         "timeOptionDefault": "Select Time",
+        "reservationDescription": "For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four.",
 
         //Review page translations
         
@@ -220,8 +233,9 @@ const translations: Translation = {
         "menu": "Annos",
         "price": "Hinta",
         "qty": "Määrä",
+        "order": "Tilaa",
         "total": "Yhteensä:",
-        "additional-comment": "Jätä lisäkommentti tähän",
+        "additional-comment": "Jätä lisäohjeita tai toiveita tähän",
         "your-info": "Tietosi:",
         "use-existing-info": "Käytä olemassa olevaa toimitusosoitetta",
         "select-delivery": "Valitse toimitustapa:",
@@ -233,6 +247,18 @@ const translations: Translation = {
         "terms": "Toimitusaikamme ovat 20-50 minuuttia ja toimitamme 15 km säteellä. Emme hyväksy käteismaksuja tai puhelimitse tehtyjä tilauksia. Emme hyväksy palautuksia tai peruutuksia. Jos sinulla on ongelmia tilauksesi kanssa, ota meihin yhteyttä välittömästi. Teemme parhaamme ratkaistaksemme ongelman. Arvostamme ymmärrystäsi ja yhteistyötä, kiitos!",
         "agree-checkbox": "Hyväksyn käyttöehdot",
         "order-now": "TILAA",
+        "placeholder-courier": "Lisää kuriirille ohjeita tähän",
+        "placeholder-name": "Nimi",
+        "placeholder-email": "Sähköposti",
+        "placeholder-phone": "Puhelinnumero",
+        "placeholder-address": "Osoite",
+        "placeholder-po": "Postinumero",
+        "lunch": "Lounas",
+        "dinner": "Päivällinen",
+        "sides": "Lisukkeet",
+        "drinks": "Juomat",
+        "dessert": "Jälkiruoat",
+        
 
         // reservation page translations
         "navHome": "Etusivu",
@@ -273,6 +299,7 @@ const translations: Translation = {
         "timeOption11": "20:00",
         "timeOption12": "21:00",
         "timeOptionDefault": "Valitse Aika",
+        "reservationDescription": "Suuremmille seurueille suosittelemme soittamista asiakaspalveluumme. Huomioithan, että emme ota vastaan alle neljän hengen pöytävarauksia.",
 
         //Review page translations
         "your-name": "Nimesi",
