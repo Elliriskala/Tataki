@@ -93,10 +93,6 @@ const translations: Translation = {
         "placeholder-phone": "Phone number",
         "placeholder-address": "Address",
         "placeholder-po": "Postal code",
-        "lunch": "Lunch",
-        "dinner": "Dinner",
-        "sides": "Sides",
-        "drinks": "Drinks",
         "dessert": "Desserts",
 
         // reservation page translations
@@ -261,10 +257,6 @@ const translations: Translation = {
         "placeholder-phone": "Puhelinnumero",
         "placeholder-address": "Osoite",
         "placeholder-po": "Postinumero",
-        "lunch": "Lounas",
-        "dinner": "Päivällinen",
-        "sides": "Lisukkeet",
-        "drinks": "Juomat",
         "dessert": "Jälkiruoat",
         
 
