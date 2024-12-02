@@ -6,9 +6,15 @@
     <title>Contact Us - Sushi Restaurant</title>
     <link rel="stylesheet" href="/contact.css">
     <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
     <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
     <script src="./src/main.ts" type="module"></script>
-    <script src="./src/itinerary.js" type="module"></script>
+    <script src="./src/itinerary.ts" type="module"></script>
 </head>
 <body>
   <nav class="navigation">
@@ -40,7 +46,7 @@
           </section>
           <section class="map-section">
               <h1 data-translate="find-us">Find Us</h1>
-              <div id="contactMap" class="map"><h2 data-translate="map-placeholder">Map comes here</h2></div>
+              <div id="map" class="map"><h2 data-translate="map-placeholder">Map comes here</h2></div>
           </section>
           <section class="itinerary-section">
             <h1 data-translate="itinerary-title">Your itinerary to Tataki</h1>

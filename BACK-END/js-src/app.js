@@ -9,6 +9,7 @@ import authRouter from './routers/auth-router.js';
 import menuRouter from './routers/menu-router.js';
 import orderRouter from './routers/order-router.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
+import itineraryRouter from './routers/itineray-router.js';
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -32,6 +33,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/reservations', reservationRouter);
 app.use('/api/menus', menuRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/digitransit', itineraryRouter);
 
 // Resolve __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);

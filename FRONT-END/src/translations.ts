@@ -160,7 +160,20 @@ const translations: Translation = {
         "welcome-header": "Welcome to Your Profile",
         "heres-your-profile": "Hi, Here's your profile information.",
         "your-information": "Your Information",
-        "logout-button": "Logout"
+        "logout-button": "Logout",
+
+
+        // itinerary page translations
+        "itinerary_title": "Itinerary",
+        "duration_label": "Duration",
+        "mode_label": "Mode",
+        "from_label": "From",
+        "stop_name_label": "Stop Name",
+        "stop_code_label": "Stop Code",
+        "to_label": "To",
+        "start_time_label": "Start Time",
+        "end_time_label": "End Time",
+        "distance_label": "Distance"
 
 
 
@@ -324,7 +337,19 @@ const translations: Translation = {
         "welcome-header": "Tervetuloa Profiiliisi",
         "heres-your-profile": "Hei, tässä on profiilitietosi.",
         "your-information": "Tietosi",
-        "logout-button": "Kirjaudu ulos"
+        "logout-button": "Kirjaudu ulos",
+
+        // itinerary page translations
+        "itinerary_title": "Reittiohje",
+        "duration_label": "Kesto",
+        "mode_label": "Kulkuväline",
+        "from_label": "Mistä",
+        "stop_name_label": "Pysäkin nimi",
+        "stop_code_label": "Pysäkin koodi",
+        "to_label": "Mihin",
+        "start_time_label": "Lähtöaika",
+        "end_time_label": "Saapumisaika",
+        "distance_label": "Etäisyys"
 
     }
 };
