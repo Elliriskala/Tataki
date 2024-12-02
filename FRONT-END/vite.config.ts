@@ -32,6 +32,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       devOptions: { enabled: true },
       workbox: {
+        navigateFallback: "/404.html",
         maximumFileSizeToCacheInBytes: 5000000, // 5MB
         globPatterns: ["**/*.{js,css,html,ico,png,jpg,jpeg,svg,ttf,json}"], // Match all assets
       },
