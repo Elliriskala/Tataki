@@ -21,7 +21,8 @@ export default defineConfig({
         order: path.resolve(__dirname, "order.html"),
         review: path.resolve(__dirname, "review.html"),
         reservation: path.resolve(__dirname, "reservation.html"),
-        user: path.resolve(__dirname, "user.html")
+        user: path.resolve(__dirname, "user.html"),
+        not_found: path.resolve(__dirname, "404.html"),
       },
     },
   },

@@ -41,10 +41,9 @@ const __dirname = path.dirname(__filename);
 // Serve static files from the "public" directory (this should include your styles, JS, images)
 app.use(express.static(path.join(__dirname, frontEndPath)));
 
-app.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, frontEndPath, 'index.html'));
-});
+app.use(express.static(path.join(__dirname, frontEndPath)));
 
+// Define routes for known pages
 app.get('/about', (_req, res) => {
     res.sendFile(path.join(__dirname, frontEndPath, 'about.html'));
 });
@@ -77,18 +76,17 @@ app.get('/user', (_req, res) => {
     res.sendFile(path.join(__dirname, frontEndPath, 'user.html'));
 });
 
-app.get('review' , (_req, res) => {
+app.get('/review', (_req, res) => {
     res.sendFile(path.join(__dirname, frontEndPath, 'review.html'));
 });
 
 app.get('*', (_req, res) => {
-    res.sendFile(path.join(__dirname, frontEndPath, 'index.html'));
+    res.status(404).send('Page not found');
 });
 
-// API Routes (Make sure these are defined before the dynamic HTML route)
-
-
-// Serve the main index.html for the root route (no conflicts with the API)
+app.get('/api/*', (_req, res) => {
+    res.status(404).send('API endpoint not found');
+});
 
 
 
