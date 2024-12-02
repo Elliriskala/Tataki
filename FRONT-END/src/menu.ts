@@ -92,10 +92,13 @@ const displayMenu = (menus: Menu[], container: HTMLDivElement): void => {
                                     <div class="menu-image" style="background-image: url('${menu.menu_image}')"></div>
                             </div>
                             <div>
-                                    <h3 class="menu-header">${menu.course_name}</h3>
-                                    <p>${menu.course_description}</p>
-                                    <p class="price">${menu.price}€</p>
-                                    <p class="allergen-info">Allergens: ${allergens}</p>
+                              <h3 class="menu-header">${menu.course_name}</h3>
+                              <p>${menu.course_description}</p>
+                              <p class="price">${menu.price}€</p>
+                              <p class="allergen-info">Allergens: ${allergens}</p>
+                              <button class="add-to-order-button" value="${menu.menu_id}"><i class="fa-solid fa-cart-plus"></i>
+                                <span class="tooltip">Add to cart</span>
+                              </button>
                             </div>
                     </div>
                     `;
@@ -103,9 +106,11 @@ const displayMenu = (menus: Menu[], container: HTMLDivElement): void => {
   });
 };
 
-// display the special menus in the carousel 
+// display the special menus in the carousel
 
-const initializeCarousel = async (menuTracker: HTMLDivElement): Promise<void> => {
+const initializeCarousel = async (
+  menuTracker: HTMLDivElement
+): Promise<void> => {
   try {
     const specialMenus = await fetchSpecialMenus();
     displayMenu(specialMenus, menuTracker);
@@ -116,8 +121,12 @@ const initializeCarousel = async (menuTracker: HTMLDivElement): Promise<void> =>
 
     const updateCarousel = () => {
       menuTracker.style.transform = `translateX(-${menuPosition * menuWidth}px)`;
-      (document.querySelector("#carousel-left") as HTMLButtonElement)!.disabled = menuPosition === 0;
-      (document.querySelector("#carousel-right") as HTMLButtonElement)!.disabled =
+      (document.querySelector(
+        "#carousel-left"
+      ) as HTMLButtonElement)!.disabled = menuPosition === 0;
+      (document.querySelector(
+        "#carousel-right"
+      ) as HTMLButtonElement)!.disabled =
         menuPosition >= specialMenus.length - 1;
     };
 
@@ -142,7 +151,7 @@ const initializeCarousel = async (menuTracker: HTMLDivElement): Promise<void> =>
     if (rightArrow) {
       rightArrow.addEventListener("click", () => {
         if (menuPosition < specialMenus.length - 1) menuPosition += 1;
-          updateCarousel();
+        updateCarousel();
       });
     }
 
@@ -154,7 +163,9 @@ const initializeCarousel = async (menuTracker: HTMLDivElement): Promise<void> =>
 };
 
 // initialize category buttons
-const initializeCategoryButtons = async (container: HTMLDivElement): Promise<void> => {
+const initializeCategoryButtons = async (
+  container: HTMLDivElement
+): Promise<void> => {
   const categoryButtons = document.querySelectorAll(".select-category-button");
   categoryButtons.forEach((button) => {
     button.addEventListener("click", async () => {
@@ -169,8 +180,12 @@ const initializeCategoryButtons = async (container: HTMLDivElement): Promise<voi
 
 // initialize menu page
 const initializeMenuPage = async (): Promise<void> => {
-  const menuTracker = document.querySelector(".menu-track") as HTMLDivElement | null;
-  const menuContainer = document.querySelector(".menu-container") as HTMLDivElement | null;
+  const menuTracker = document.querySelector(
+    ".menu-track"
+  ) as HTMLDivElement | null;
+  const menuContainer = document.querySelector(
+    ".menu-container"
+  ) as HTMLDivElement | null;
 
   if (menuTracker && menuContainer) {
     await initializeCarousel(menuTracker);
@@ -185,5 +200,5 @@ export {
   fetchMenuItemsByCategory,
   fetchMenuItems,
   fetchSpecialMenus,
-  initializeMenuPage
+  initializeMenuPage,
 };

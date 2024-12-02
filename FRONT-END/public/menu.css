@@ -150,6 +150,34 @@ body {
   transform: scale(1.2);
 }
 
+.menu-track > .menu-card {
+  flex: 0 0 250px;
+  max-width: 250px;
+}
+
+.menu-list {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.select-category-button {
+  padding: 1em;
+  margin: 0.5em;
+  border: 0.1em solid var(--sushi-black);
+  background-color: var(--sushi-graphite);
+  color: var(--sushi-grey3);
+  border-radius: 0.5em;
+  transition: 0.3s;
+  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+}
+
+.select-category-button:hover {
+  background-color: var(--soy-sauce);
+  transform: scale(1.15);
+  color: var(--sushi-red4);
+}
+
 .menu-container {
   display: grid;
   width: 70%;
@@ -157,11 +185,6 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(20em, 2fr));
   gap: 1em;
   margin-bottom: 2em;
-}
-
-.menu-track > .menu-card {
-  flex: 0 0 250px;
-  max-width: 250px;
 }
 
 .menu-card {
@@ -213,27 +236,55 @@ body {
   color: var(--sushi-red4);
 }
 
-.menu-list {
-  display: flex;
-  justify-content: center;
-  padding: 1em;
-}
 
-.select-category-button {
-  padding: 1em;
-  margin: 0.5em;
+.add-to-order-button {
+  padding: 0.5em;
   border: 0.1em solid var(--sushi-black);
   background-color: var(--sushi-graphite);
   color: var(--sushi-grey3);
   border-radius: 0.5em;
-  transition: 0.3s;
+  transition: 0.2s;
   box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+  cursor: pointer;
+  height: 3em;
+  width: 3em;
 }
 
-.select-category-button:hover {
-  background-color: var(--soy-sauce);
-  transform: scale(1.15);
-  color: var(--sushi-red4);
+.add-to-order-button:hover {
+  background-color: var(--sushi-red3);
+  transform: scale(1.1);
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color : var(--sushi-red2);
+  color: var(--sushi-grey3);
+  text-align: center;
+  border-radius: 0.5em; 
+  border: solid 0.1em var(--sushi-black);
+  padding: 0.4em;
+  position: absolute; 
+  bottom: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.7em;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.add-to-order-button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-1em);
+}
+
+.fa-cart-plus {
+  color: var(--sushi-grey3);
+  font-size: 1.1em;
+  padding: 0.3em;
+  transition: all 0.3s;
 }
 
 .allergens {

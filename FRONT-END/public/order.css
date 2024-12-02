@@ -14,14 +14,14 @@
 
 @font-face {
   font-family: "urbanist";
-  src: url('./fonts/Urbanist-Regular.ttf') format('truetype');
+  src: url("./fonts/Urbanist-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "urbanist bold";
-  src: url('./fonts/Urbanist-Bold.ttf') format('truetype');
+  src: url("./fonts/Urbanist-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -163,7 +163,8 @@ body {
   height: 100%;
 }
 
-.price, .allergen-info {
+.price,
+.allergen-info {
   font-family: "roboto bold";
   font-size: 1.2em;
   padding: 0;
@@ -205,13 +206,13 @@ body {
 
 .tooltip {
   visibility: hidden;
-  background-color : var(--sushi-red2);
+  background-color: var(--sushi-red2);
   color: var(--sushi-grey3);
   text-align: center;
-  border-radius: 0.5em; 
+  border-radius: 0.5em;
   border: solid 0.1em var(--sushi-black);
   padding: 0.4em;
-  position: absolute; 
+  position: absolute;
   bottom: 95%;
   left: 50%;
   transform: translateX(-50%);
@@ -219,7 +220,9 @@ body {
   font-size: 0.7em;
   z-index: 999;
   opacity: 0;
-  transition: opacity 0.2s ease-in-out, transform 0.5s ease-in-out;
+  transition:
+    opacity 0.2s ease-in-out,
+    transform 0.5s ease-in-out;
 }
 
 .add-to-order-button:hover .tooltip {
@@ -233,13 +236,6 @@ body {
   font-size: 1.1em;
   padding: 0.3em;
   transition: all 0.3s;
-}
-
-.your-order-header {
-  text-align: center;
-  font-family: "roboto bold";
-  font-size: 1.5em;
-  margin-top: 3em;
 }
 
 .order-info {
@@ -272,6 +268,10 @@ body {
   text-align: left;
   padding: 0.3em;
   padding-bottom: 0.5em;
+}
+
+.order-table > th:nth-child(3) {
+  text-align: center;
 }
 
 .order-table td {
@@ -507,7 +507,7 @@ input[type="checkbox"]:checked {
   .menu-container {
     width: 100%;
   }
-  
+
   .menu-placeholder {
     margin: auto;
     width: 80%;
@@ -517,7 +517,8 @@ input[type="checkbox"]:checked {
     font-size: 1.2em;
   }
 
-  .price, .allergen-info {
+  .price,
+  .allergen-info {
     font-size: 1em;
   }
 
@@ -525,8 +526,8 @@ input[type="checkbox"]:checked {
     font-size: 0.9em;
   }
 
-  .order-content {
-    font-size: 0.9em;
+  .order-table th {
+    text-align: center;
   }
 }
 

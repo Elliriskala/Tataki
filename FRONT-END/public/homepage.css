@@ -12,6 +12,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "urbanist";
+  src: url("./fonts/Urbanist-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   font-family: "roboto", sans-serif;
   font-style: normal;
@@ -66,6 +73,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0 auto;
+  transition: all 1s ease-in-out;
 }
 
 main {
@@ -101,12 +109,16 @@ main {
 
 .about-us {
   width: 45%;
-  padding: 1em;
+  padding: 0.5em;
+  letter-spacing: 0.1em;
 }
 
 .about-us p {
   padding-left: 0.5em;
   padding-right: 0.5em;
+  font-family: "urbanist";
+  line-height: 1.3em;
+  letter-spacing: 0.1em;
 }
 
 .image-placeholder {
