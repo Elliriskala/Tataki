@@ -147,7 +147,12 @@ const translations: Translation = {
         "username-label": "Username",
         "email-label": "Email",
         "message": "This is a message box",
-        "phone-label": "Phone Number"
+        "phone-label": "Phone Number",
+        "welcome-header": "Welcome to Your Profile",
+        "heres-your-profile": "Hi, Here's your profile information.",
+        "your-information": "Your Information",
+        "logout-button": "Logout"
+
 
 
     },
@@ -296,7 +301,11 @@ const translations: Translation = {
         "username-label": "Käyttäjänimi",
         "email-label": "Sähköposti",
         "message": "Tämä on viestilaatikko",
-        "phone-label": "Puhelinnumero"
+        "phone-label": "Puhelinnumero",
+        "welcome-header": "Tervetuloa Profiiliisi",
+        "heres-your-profile": "Hei, tässä on profiilitietosi.",
+        "your-information": "Tietosi",
+        "logout-button": "Kirjaudu ulos"
 
     }
 };
