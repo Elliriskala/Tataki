@@ -50,9 +50,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const guestButtons = document.querySelectorAll(
     ".guest-btn"
   ) as NodeListOf<HTMLButtonElement>;
-  const guestInput = document.getElementById(
-    "guests-input"
-  ) as HTMLInputElement;
 
   // Set the initial active form to login
   if (loginForm) {
@@ -193,7 +190,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     button.addEventListener("click", () => {
       guestButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
-      guestInput.value = button.getAttribute("guests-input") || "";
+      //guestInput.value = button.getAttribute("guests-input") || "";
     });
   });
 });

@@ -410,6 +410,14 @@ main {
   transform: translateY(-2px);
 }
 
+#user-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin: auto;
+}
+
 
 .popup {
   position: fixed;
@@ -456,6 +464,23 @@ main {
   background-color: #45a049;
 }
 
+ul#reservation-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  color: var(--sushi-graphite);
+  list-style-type: none;
+  margin: auto;
+}
+
+ul#reservation-list li {
+  margin: auto;
+
+}
 
 @keyframes fade-in {
   from {
