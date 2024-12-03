@@ -73,7 +73,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0 auto;
-  transition: all 1s ease-in-out;
 }
 
 main {

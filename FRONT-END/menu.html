@@ -10,9 +10,8 @@
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
     <script type="module" src="./src/main.ts"></script>
     <script type="module" src="./src/menu.ts"></script>
-    <script type="module" src="./src/order.ts"></script>
   </head>
-  <body class="menu-page-body">
+  <body class="menu-page">
     <header>
       <nav class="navigation">
         <div class="logo">
@@ -36,7 +35,7 @@
       <div class="menus">
         <div class="menus-header">
           <h1 data-translate="our-menus">Menus</h1>
-          <p data-translate="explore-menus">Explore our delicious menus and find your favorite!</p>
+          <a href="order.html" class="shopping-cart" aria-label="Shopping cart"><i class="fa-solid fa-shopping-cart"></i><span class="tooltip2">Go to cart</span></a>
         </div>
         <div class="menu-list">
           <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
@@ -57,6 +56,9 @@
           <button id="carousel-right" class="carousel-button" aria-label="Scroll right">❯</button>
         </div>
       </div>
+      <dialog class="item-added-to-cart">
+        <p data-translate="item-added">Item added to cart!</p>
+      </dialog>
       <div class="allergens">
         <h2 class="allergen-header" data-translate="allergen-header">Allergen information</h2>
         <p data-translate="allergen-info">

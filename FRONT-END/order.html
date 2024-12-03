@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="/order.css" />
     <link rel="stylesheet" href="/nav.css" />
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
-    <script src="./src/order.ts" type="module"></script>
-    <script src="./src/main.ts" type="module"></script>
+    <script type="module" src="./src/main.ts"></script>
+    <script type="module" src="./src/order.ts"></script>
   </head>
-  <body class="menu-page-body">
+  <body class="order-page">
     <header>
       <nav class="navigation">
         <div class="logo">
@@ -43,13 +43,13 @@
                 <tr>
                   <th data-translate="item">Menu</th>
                   <th data-translate="price">Price</th>
-                  <th data-translate="quantity">Qty</th>
+                  <th data-translate="quantity" id="quantity">Qty</th>
                 </tr>
               </thead>
               <tbody id="cart-items"></tbody>
             </table>
             <div class="order-total">
-              <p data-translate="total" id="total-price">Total:</p>
+              <p data-translate="total">Total: <span id="total-price"></span></p>
             </div>
             <div class="additional-comment">
               <textarea
@@ -58,23 +58,21 @@
                 cols="30"
                 rows="4"
                 placeholder="Leave additional comments here"
+                style="max-width: 100%; max-height: 100px; resize: none;"
               ></textarea>
             </div>
           </div>
           <div>
             <div class="order-user-info">
               <h3 data-translate="your-info">Your information:</h3>
-              <input type="text" placeholder="Name" />
-              <input type="text" placeholder="Phone number" />
-              <input type="text" placeholder="Email" />
-              <input type="text" placeholder="Address" />
-              <input type="text" placeholder="Postal code" />
+              <input type="text" placeholder="Name" minlength="3" maxlength="25" required/>
+              <input type="text" placeholder="Phone number" minlength="4" maxlength="15"/>
+              <input type="email" placeholder="Email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required/>
+              <input type="text" placeholder="Address" maxlength="25"/>
+              <input type="text" placeholder="Postal code" maxlength="6"/>
             </div>
             <div class="use-existing-info">
-              <checkbox>
-                <input type="checkbox" class="checkbox" id="existing-info-checkbox" />
-                <label for="existing-info-checkbox" data-translate="use-existing-info">Use existing delivery information</label>
-              </checkbox>
+                <button id="use-existing-info-button" data-translate="use-existing-info">Use saved information</button>
             </div>
           </div>
           <div class="right-column">
@@ -97,6 +95,7 @@
                 cols="25"
                 rows="4"
                 placeholder="Add instructions for courier here"
+                style="max-width: 400px; max-height: 100px; resize: none;"
               ></textarea>
             </div>
             <div class="terms-and-conditions-placeholder">
@@ -105,7 +104,7 @@
                 <div class="content" style="max-height: 200px;">
                 <p data-translate="agree">To order you need to agree to our Terms & Conditions.</p>
                 <p data-translate="terms">
-                  Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We will do our best to resolve the issue. We appreciate your understanding and cooperation, thank you!
+                  Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We appreciate your understanding and cooperation, thank you!
                 </p>
                 </div>
             </details>
@@ -126,9 +125,12 @@
         <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
         <button class="select-category-button sides-button" data-translate="sides">Sides</button>
         <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
-        <button class="select-category-button desserts-button" data-translate="dessert">Dessert</button>
+        <button class="select-category-button desserts-button" data-translate="desserts">Desserts</button>
       </div>
       <div class="menu-container"></div>
+      <dialog class="item-added-to-cart">
+        <p data-translate="item-added">Item added to cart!</p>
+      </dialog>
       <div> 
         <ul>
           <li><a href="order_management.html">order management (for testing)</a></li>

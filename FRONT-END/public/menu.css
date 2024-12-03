@@ -1,416 +1,501 @@
 @font-face {
-  font-family: "roboto";
-  src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "roboto";
+    src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "roboto bold";
-  src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
+    font-family: "roboto bold";
+    src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "urbanist";
-  src: url("./fonts/Urbanist-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "urbanist";
+    src: url("./fonts/Urbanist-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "urbanist bold";
-  src: url("./fonts/Urbanist-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
+    font-family: "urbanist bold";
+    src: url("./fonts/Urbanist-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
 }
 
 * {
-  font-family: "roboto", sans-serif;
-  font-style: normal;
-  color: var(--sushi-grey2);
+    font-family: "roboto", sans-serif;
+    font-style: normal;
+    color: var(--sushi-grey2);
 }
 
 body {
-  margin: 0;
-  overflow-x: hidden;
-  height: 100%;
-  width: 100%;
-  background-color: var(--soy-sauce);
+    margin: 0;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    background-color: var(--soy-sauce);
 }
 
 :root {
-  --sushi-black: #0b090a;
-  --sushi-graphite: #161a1d;
-  --wine-red: #390d0d;
-  --sushi-red1: #420506;
-  --sushi-red2: #a4161a;
-  --sushi-red3: #ba181b;
-  --sushi-red4: #e5383b;
-  --sushi-grey1: #b1a7a6;
-  --sushi-grey2: #d3d3d3;
-  --sushi-grey3: #f5f3f4;
-  --sushi-white: #ffffff;
-  --dust-pink: #c8a9a9;
-  --grey: #252525;
-  --soy-sauce: #191919;
-  --brown-grey: rgba(44, 33, 33, 0.9);
-  --intense-red: #bf4d4d;
-  --forest-green: rgba(3, 32, 3, 0.8);
-  --grey-green: rgba(54, 71, 63, 0.9);
-  --lotus-flower: rgba(245, 245, 245, 0.9);
+    --sushi-black: #0b090a;
+    --sushi-graphite: #161a1d;
+    --wine-red: #390d0d;
+    --sushi-red1: #420506;
+    --sushi-red2: #a4161a;
+    --sushi-red3: #ba181b;
+    --sushi-red4: #e5383b;
+    --sushi-grey1: #b1a7a6;
+    --sushi-grey2: #d3d3d3;
+    --sushi-grey3: #f5f3f4;
+    --sushi-white: #ffffff;
+    --dust-pink: #c8a9a9;
+    --grey: #252525;
+    --soy-sauce: #191919;
+    --brown-grey: rgba(44, 33, 33, 0.9);
+    --intense-red: #bf4d4d;
+    --forest-green: rgba(3, 32, 3, 0.8);
+    --grey-green: rgba(54, 71, 63, 0.9);
+    --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
 /* MENU.HTML tyylittely */
 
+/* item added to cart modal */
+
+body:has(dialog[open]) {
+    overflow-y: hidden;
+}
+
+dialog:not([open]) {
+    display: none;
+}
+
+dialog::backdrop {
+    background-color: var(--grey);
+    opacity: 0.75;
+}
+
+.item-added-to-cart {
+    position: fixed;
+    top: 30%;
+    transform: ease-in-out 2s translateY(-50%);
+    background-color: var(--sushi-red2);
+    color: var(--sushi-grey3);
+    padding: 2em;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    z-index: 999;
+    border-radius: 1em;
+    border: none;
+}
+
 .menu-page-body,
 .menus {
-  background-color: var(--soy-sauce);
-  color: var(--sushi-grey3);
-  padding-bottom: 0.5em;
+    background-color: var(--soy-sauce);
+    color: var(--sushi-grey3);
+    padding-bottom: 0.5em;
 }
 
 .menus-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    font-family: "roboto bold";
 }
 
 .menus-header h1 {
-  margin-top: 1em;
-  color: var(--sushi-red3);
+    margin-top: 1em;
+    color: var(--sushi-red3);
 }
 
-.menus-header p {
-  text-align: center;
-  width: 80%;
+a.shopping-cart {
+    position: fixed;
+    top: 7em;
+    right: 2em;
+    background-color: var(--sushi-red1);
+    color: var(--sushi-grey1);
+    padding: 1em;
+    border-radius: 50%;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    z-index: 999;
+    transition: transform 0.2s ease-in-out;
+}
+
+a.shopping-cart:hover {
+    background-color: var(--sushi-red2);
+    color: var(--sushi-grey3);
+    transform: scale(1.1);
+}
+
+.tooltip2 {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    visibility: hidden;
+    opacity: 0;
+    background-color: var(--sushi-red2);
+    color: var(--sushi-grey3);
+    text-align: center;
+    border-radius: 0.5em;
+    border: solid 0.1em var(--sushi-black);
+    transform: translateX(20%);
+    white-space: nowrap;
+    font-size: 0.7em;
+    z-index: 50;
+    transition: opacity 0.3s ease-in-out;
+    padding: 0.3em;
+}
+
+a.shopping-cart:hover .tooltip2 {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-1em);
 }
 
 .carousel {
-  text-align: center;
-  position: relative;
+    text-align: center;
+    position: relative;
 }
 
 .carousel h2 {
-  margin: auto;
-  padding: 1em;
-  border-bottom: 0.1em solid var(--sushi-red2);
-  border-bottom-style: groove;
-  width: 60%;
-  color: var(--sushi-red2);
-  text-shadow: #0b090a 0.1em 0.1em 0.1em;
+    margin: auto;
+    padding: 1em;
+    border-bottom: 0.1em solid var(--sushi-red2);
+    border-bottom-style: groove;
+    width: 60%;
+    color: var(--sushi-red2);
+    text-shadow: #0b090a 0.1em 0.1em 0.1em;
 }
 
 .menu-carousel {
-  position: relative;
-  margin: auto;
-  overflow: hidden;
-  width: 70%;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    width: 70%;
 }
 
 .menu-track-container {
-  margin: 1em;
+    margin: 1em;
 }
 
 .menu-track {
-  display: flex;
-  gap: 0.5em;
-  transition: 0.5s ease-in-out;
+    display: flex;
+    gap: 0.5em;
+    transition: 0.5s ease-in-out;
 }
 
 .carousel-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 2em;
-  color: var(--sushi-grey3);
-  transition: 0.2s;
-  padding: 1em;
-  margin: 0.5em;
-  transform: translateX(0.2em);
-  position: absolute;
-  top: 45%;
-  z-index: 10;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2em;
+    color: var(--sushi-grey3);
+    transition: 0.2s;
+    padding: 1em;
+    margin: 0.5em;
+    transform: translateX(0.2em);
+    position: absolute;
+    top: 45%;
+    z-index: 10;
 }
 
 #carousel-left {
-  left: 5%;
+    left: 5%;
 }
 
 #carousel-right {
-  right: 5%;
+    right: 5%;
 }
 
 #carousel-left:hover,
 #carousel-right:hover {
-  color: var(--sushi-red2);
-  transform: scale(1.2);
+    color: var(--sushi-red2);
+    transform: scale(1.2);
 }
 
 .menu-track > .menu-card {
-  flex: 0 0 250px;
-  max-width: 250px;
+    flex: 0 0 250px;
+    max-width: 250px;
 }
 
 .menu-list {
-  display: flex;
-  justify-content: center;
-  padding: 1em;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
 }
 
 .select-category-button {
-  padding: 1em;
-  margin: 0.5em;
-  border: 0.1em solid var(--sushi-black);
-  background-color: var(--sushi-graphite);
-  color: var(--sushi-grey3);
-  border-radius: 0.5em;
-  transition: 0.3s;
-  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    padding: 1em;
+    margin: 0.5em;
+    border: 0.1em solid var(--sushi-black);
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey3);
+    border-radius: 0.5em;
+    transition: 0.3s;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    cursor: pointer;
 }
 
 .select-category-button:hover {
-  background-color: var(--soy-sauce);
-  transform: scale(1.15);
-  color: var(--sushi-red4);
+    background-color: var(--soy-sauce);
+    transform: scale(1.15);
+    color: var(--sushi-red4);
 }
 
 .menu-container {
-  display: grid;
-  width: 70%;
-  margin: auto;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 2fr));
-  gap: 1em;
-  margin-bottom: 2em;
+    display: grid;
+    width: 70%;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(20em, 2fr));
+    gap: 1em;
+    margin-bottom: 2em;
 }
 
 .menu-card {
-  background-color: var(--sushi-graphite);
-  border-radius: 1em;
-  border: solid 0.1em var(--sushi-black);
-  padding: 1em;
-  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-  text-align: center;
-  color: var(--sushi-grey3);
-  letter-spacing: -0.6px;
+    background-color: var(--sushi-graphite);
+    border-radius: 1em;
+    border: solid 0.1em var(--sushi-black);
+    padding: 1em;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    text-align: center;
+    color: var(--sushi-grey3);
+    letter-spacing: -0.6px;
+    position: relative;
 }
 
 .menu-header {
-  font-family: "roboto bold";
-  font-size: 1.5em;
-  letter-spacing: 0.1em;
-  color: var(--sushi-red2);
-  margin-bottom: 1em;
+    font-family: "roboto bold";
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    color: var(--sushi-red2);
+    margin-bottom: 1em;
 }
 
 .image-placeholder {
-  height: 12em;
-  border-radius: 1em;
+    height: 12em;
+    border-radius: 1em;
 }
 
 .menu-image {
-  border-radius: 0.5em;
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 100%;
+    border-radius: 0.5em;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .price,
 .allergen-info {
-  font-family: "roboto bold";
-  font-size: 1.2em;
-  padding: 0.5em;
-  margin: 0.3em;
+    font-family: "roboto bold";
+    font-size: 1.3em;
+    padding: 0.5em;
+    margin: 0.3em;
 }
 
 .price {
-  color: var(--sushi-red2);
+    color: var(--sushi-red2);
 }
 
 .allergen-info {
-  font-size: 1em;
-  color: var(--sushi-red4);
+    font-size: 1em;
+    color: var(--sushi-red4);
+    margin-bottom: 2em;
 }
 
-
 .add-to-order-button {
-  padding: 0.5em;
-  border: 0.1em solid var(--sushi-black);
-  background-color: var(--sushi-graphite);
-  color: var(--sushi-grey3);
-  border-radius: 0.5em;
-  transition: 0.2s;
-  box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-  cursor: pointer;
-  height: 3em;
-  width: 3em;
+    padding: 0.5em;
+    border: 0.1em solid var(--sushi-black);
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey3);
+    border-radius: 0.5em;
+    transition: 0.2s;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    cursor: pointer;
+    height: 3em;
+    width: 3em;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 1em;
+    z-index: 15;
 }
 
 .add-to-order-button:hover {
-  background-color: var(--sushi-red3);
-  transform: scale(1.1);
+    background-color: var(--sushi-red3);
+    transform: scale(1.1);
 }
 
 .tooltip {
-  visibility: hidden;
-  background-color : var(--sushi-red2);
-  color: var(--sushi-grey3);
-  text-align: center;
-  border-radius: 0.5em; 
-  border: solid 0.1em var(--sushi-black);
-  padding: 0.4em;
-  position: absolute; 
-  bottom: 95%;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 0.7em;
-  z-index: 999;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out, transform 0.5s ease-in-out;
+    visibility: hidden;
+    background-color: var(--sushi-red2);
+    color: var(--sushi-grey3);
+    text-align: center;
+    border-radius: 0.5em;
+    border: solid 0.1em var(--sushi-black);
+    padding: 0.4em;
+    position: absolute;
+    bottom: 0;
+    right: -300%;
+    transform: translateX(20%);
+    white-space: nowrap;
+    font-size: 0.7em;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .add-to-order-button:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-  transform: translateX(-50%) translateY(-1em);
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-1em);
 }
 
 .fa-cart-plus {
-  color: var(--sushi-grey3);
-  font-size: 1.1em;
-  padding: 0.3em;
-  transition: all 0.3s;
+    color: var(--sushi-grey3);
+    font-size: 1.1em;
+    padding: 0.3em;
+    transition: all 0.3s;
 }
 
 .allergens {
-  width: 30%;
-  margin: auto;
-  margin-bottom: 1em;
-  font-size: 0.9em;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1em;
-  color: var(--sushi-grey3);
-  text-align: center;
+    width: 30%;
+    margin: auto;
+    margin-bottom: 1em;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em;
+    color: var(--sushi-grey3);
+    text-align: center;
 }
 
 .allergen-header {
-  text-align: center;
-  font-family: "roboto bold";
-  color: var(--sushi-red3);
-  font-size: 1.6em;
+    text-align: center;
+    font-family: "roboto bold";
+    color: var(--sushi-red3);
+    font-size: 1.6em;
 }
 
 .allergen-list {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  list-style-type: none;
-  text-align: left;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style-type: none;
+    text-align: left;
 }
 
 .allergen-list li {
-  color: var(--sushi-red4);
+    color: var(--sushi-red4);
 }
 
 @media screen and (max-width: 950px) {
-  .menu-container {
-    grid-template-columns: repeat(auto-fit, minmax(15em, 2fr));
-  }
+    .menu-container {
+        grid-template-columns: repeat(auto-fit, minmax(15em, 2fr));
+    }
 }
 
 @media screen and (max-width: 820px) {
-  #carousel-left {
-    left: 0;
-  }
+    #carousel-left {
+        left: 0;
+    }
 
-  #carousel-right {
-    right: 0;
-  }
-  .menu-container {
-    width: 90%;
-  }
+    #carousel-right {
+        right: 0;
+    }
+    .menu-container {
+        width: 90%;
+    }
 
-  .menu-card {
-    font-size: 0.9em;
-  }
+    .menu-card {
+        font-size: 0.9em;
+    }
 
-  .image-placeholder {
-    height: 17em;
-  }
+    .image-placeholder {
+        height: 17em;
+    }
 
-  .allergens {
-    width: 60%;
-  }
+    .allergens {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    a.shopping-cart {
+        padding: 0.5em;
+    }
 }
 
 @media screen and (max-width: 550px) {
-  .menu-carousel {
-    width: 80%;
-  }
+    .menu-carousel {
+        width: 80%;
+    }
 
-  .menu-track > .menu-card {
-    flex: 0 0 230px;
-    max-width: 230px;
-  }
+    .menu-track > .menu-card {
+        flex: 0 0 230px;
+        max-width: 230px;
+    }
 
-  #carousel-left {
-    left: -1em;
-  }
+    #carousel-left {
+        left: -1em;
+    }
 
-  #carousel-right {
-    right: -1em;
-  }
+    #carousel-right {
+        right: -1em;
+    }
 
-  .menu-list {
-    margin-bottom: 1em;
-    padding-top: 0;
-    flex-direction: column;
-    width: 60%;
-    margin: auto;
-  }
+    .menu-list {
+        margin-bottom: 1em;
+        padding-top: 0;
+        flex-direction: column;
+        width: 60%;
+        margin: auto;
+    }
 
-  .select-category-button {
-    padding: 0.5em;
-    margin: 0.5em;
-    font-size: 0.8em;
-    transition: 0.2s;
-  }
+    .select-category-button {
+        padding: 0.5em;
+        margin: 0.5em;
+        font-size: 0.8em;
+        transition: 0.2s;
+    }
 
-  .select-category-button:hover {
-    transition: all 0.3s ease;
-    transform: scale(1.1);
-  }
+    .select-category-button:hover {
+        transition: all 0.3s ease;
+        transform: scale(1.1);
+    }
 
-  .image-placeholder {
-    height: 14em;
-  }
+    .add-to-order-button:hover .tooltip {
+        visibility: hidden;
+    }
+
+    .image-placeholder {
+        height: 14em;
+    }
 }
 
 @media screen and (max-width: 450px) {
-  .menus-header h3 {
-    font-size: 1em;
-  }
+    .menus-header h3 {
+        font-size: 1em;
+    }
 
-  .carousel-button {
-    font-size: 1.5em;
-  }
+    .carousel-button {
+        font-size: 1.5em;
+    }
 }
 
 @media screen and (max-width: 380px) {
-  .menu-card {
-    font-size: 0.8em;
-  }
+    .menu-card {
+        font-size: 0.8em;
+    }
 
-  .menu-track > .menu-card {
-    flex: 0 0 225px;
-    max-width: 225px;
-  }
+    .menu-track > .menu-card {
+        flex: 0 0 225px;
+        max-width: 225px;
+    }
 }

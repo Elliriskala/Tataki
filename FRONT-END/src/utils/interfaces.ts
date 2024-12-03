@@ -72,6 +72,7 @@ interface Menu {
   allergens?: Allergen[];
   menu_image: string;
   category: string;
+  quantity: number;
 }
 
 interface Allergen {
