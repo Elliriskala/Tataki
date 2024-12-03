@@ -28,9 +28,12 @@ const getReservationById = async (req, res) => {
     const reservation_id = Number(req.params.reservation_id);
     try {
         const reservation = await fetchReservationById(reservation_id);
+        if (reservation) {
         res.json(reservation);
-    }
-    catch (e) {
+        } else {
+        res.status(404).json({ message: 'Reservation not found' });
+        }
+    }catch (e) {
         console.error('getReservationById error:', e.message);
         throw new Error('getReservationById error: ' + e.message);
     }
@@ -47,7 +50,12 @@ const getReservationsByUserId = async (req, res, next) => {
     const user_id = Number(req.params.user_id);
     try {
         const reservations = await fetchReservationsByUserId(user_id);
-        res.json(reservations);
+        if (reservations) {
+            res.json(reservations);
+        }
+        else {
+            return next(customError('No reservations found', 404));
+        }
     }
     catch (e) {
         console.error('getReservationsByUserId error:', e.message);
@@ -154,7 +162,7 @@ const validateAvailability = async (req, res, next) => {
 
     // Ensure both date and guests are provided in the query
     if (!date || !guests) {
-        return next(customError('Missing date or number of guests', 400));
+        return new next(customError('Missing date or number of guests', 400));
     }
 
     try {

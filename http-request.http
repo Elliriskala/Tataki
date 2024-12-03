@@ -75,3 +75,10 @@ Content-Type: application/json
 ### get user by id
 
 GET http://localhost:3000/api/users/2
+
+
+### get reservation by id
+
+GET http://localhost:3000/api/reservations/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MzMyMDk2NzAsImV4cCI6MTczMzI5NjA3MH0.uSLnivGufTNRDFpLi2rONKd-bqXatTKGAhiZelxbQj4

@@ -80,13 +80,7 @@ app.get('/review', (_req, res) => {
     res.sendFile(path.join(__dirname, frontEndPath, 'review.html'));
 });
 
-app.get('*', (_req, res) => {
-    res.status(404).send('Page not found');
-});
 
-app.get('/api/*', (_req, res) => {
-    res.status(404).send('API endpoint not found');
-});
 
 
 

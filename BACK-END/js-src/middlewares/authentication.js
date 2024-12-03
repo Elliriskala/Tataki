@@ -16,7 +16,7 @@ const authenticateToken = (req, res, next) => {
       next();
     } catch (e) {
       console.error('authenticateToken', e.message);
-      return next(customError('Invalid token', 401));
+      throw new next(customError('Invalid token', 401));
     }
   };
 

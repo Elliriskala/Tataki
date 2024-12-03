@@ -1,5 +1,5 @@
 import {promisePool} from '../database.js';
-import {customError} from '../middlewares/error-handlers.js';
+
 
 /**
  *
@@ -15,7 +15,7 @@ const fetchReservations = async () => {
     }
   } catch (e) {
     console.error('fetchReservations error:', e.message);
-    return customError('Database error: ' + e.message, 500);
+    throw new Error('Database error: ' + e.message);
   }
 };
 /**
@@ -32,7 +32,7 @@ const fetchReservationById = async (reservation_id) => {
     if (rows && rows.length > 0) {
       return rows[0];
     } else {
-      throw new Error('FetchReservationById, Reservation not found');
+      return null;
     }
   } catch (e) {
     console.error('fetchReservationById error:', e.message);
@@ -53,7 +53,7 @@ const fetchReservationsByUserId = async (user_id) => {
     if (rows && rows.length > 0) {
       return rows[0];
     } else {
-      throw new Error('FetchReservationById, Reservation not found');
+      return null;
     }
   } catch (e) {
     console.error('fetchReservationById error:', e.message);
@@ -147,7 +147,7 @@ const deleteReservation = async (reservation_id) => {
     if (result.affectedRows === 1) {
       return reservation_id;
     } else {
-      throw new Error('DeleteReservation, Reservation not deleted');
+      return null;
     }
   } catch (e) {
     console.error('deleteReservation error:', e.message);

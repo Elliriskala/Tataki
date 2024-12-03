@@ -16,6 +16,20 @@ const phoneInput = document.getElementById('phone') as HTMLInputElement;
 const guestsInput = document.getElementById(
   "guests-input"
 ) as HTMLInputElement;
+const popup = document.getElementById('success-popup') as HTMLDivElement;
+const popupMessage = document.getElementById('popup-message') as HTMLParagraphElement;
+const closePopup = document.getElementById('close-popup') as HTMLButtonElement;
+
+// Function to show the popup
+const showPopup = (message: string) => {
+    popupMessage.textContent = message;
+    popup.classList.remove('hidden');
+};
+
+// Function to hide the popup
+closePopup.addEventListener('click', () => {
+    popup.classList.add('hidden');
+});
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
           guestsInput.value = guests ?? "";
         }
       }
-
       dateInput.disabled = false;
     });
   });
@@ -45,7 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const guests = guestsInput?.value;
     const date = dateInput?.value;
     const name = nameInput?.value;
-    
+    console.log(document.getElementById('guests-input'));
+    console.log(guests);
+    console.log(name);
     // application/json
     if (!date || !guests || !name) {
       timeSelect.disabled = true;
@@ -56,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(
         `http://localhost:3000/api/reservations/times?date=${date}&guests=${guests}`,
         {
-          method: "GET", // Use POST or GET as appropriate for your endpoint
+          method: "GET", 
           headers: {
             "Content-Type": "application/json", // Ensure the content is in JSON format
           },
@@ -111,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${token}`
         }
       });
 
@@ -184,13 +199,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        messageBox.textContent = errorData.message || 'Failed to make reservation';
+        messageBox.textContent = errorData.message || 'Failed to make a reservation';
         return;
       }
 
       const data = await response.json();
       console.log(data);
-      messageBox.textContent = 'Reservation successful!';
+      popupMessage.style.color = 'green';
+      showPopup('Reservation created successfully!');
+      nameInput.value = '';
+      dateInput.value = '';
+      timeSelect.value = '';
+      phoneInput.value = '';
+      guestsInput.value = '';
+      emailInput.value = '';
     } catch (error) {
       console.error('Failed to make reservation', error);
       messageBox.textContent = 'Failed to make reservation';

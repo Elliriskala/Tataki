@@ -18,7 +18,7 @@ const getUserLocation = async () => {
         return [position.coords.latitude, position.coords.longitude];
     }
     catch (error) {
-        throw new Error('Unable to retrieve your location');
+        throw new Error('Unable to retrieve your location', error);
     }
 };
 const calculateDistance = (// Calculate distance between two coordinates on a sphere/globe
@@ -34,28 +34,8 @@ lat1, lon1, lat2, lon2) => {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c; // Distance in km
 };
-const showPassword = () => {
-    const input = document.getElementById('password');
-    if (input.type === 'password') {
-        input.type = 'text';
-    }
-    else {
-        input.type = 'password';
-    }
-};
-const isLoggedIn = () => {
-    const token = localStorage.getItem('token');
-    return token ? true : false;
-};
-// Replace HTML content of an element (most likely body for single page applications)
-const replaceHTML = (element, content) => {
-    element.innerHTML = "";
-    element.insertAdjacentHTML('beforeend', content);
-};
-// Add content to the end of an element
-const addBeforeEnd = (element, content) => {
-    element.insertAdjacentHTML('beforeend', content);
-};
+
+
 // format a date string to a more readable format
 function formatDate(date) {
     const options = {
@@ -65,14 +45,6 @@ function formatDate(date) {
     };
     return date.toLocaleDateString('fi-FI', options);
 }
-const updateLoginButton = (isLoggedIn) => {
-    const loginButton = document.querySelector('.login');
-    if (loginButton) {
-        loginButton.innerText = isLoggedIn ? 'Logout' : 'Login';
-    }
-};
-const showAdminContent = (isAdmin) => {
-    const adminContent = document.querySelector('.admin-content');
-    adminContent.style.display = isAdmin ? 'block' : 'none';
-};
-export { fetchData, getUserLocation, calculateDistance, showPassword, isLoggedIn, replaceHTML, addBeforeEnd, formatDate, updateLoginButton, showAdminContent };
+
+
+export { fetchData, getUserLocation, calculateDistance, formatDate};

@@ -4,7 +4,6 @@ import path from "path";
 // import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
-  base: "./",
   envDir: "./",
   publicDir: "./public",
   build: {

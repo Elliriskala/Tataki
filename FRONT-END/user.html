@@ -29,6 +29,12 @@
         </div>
     </nav>
     <main>
+        <div id="success-popup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popup-message"></p>
+                <button id="close-popup">OK</button>
+            </div>
+        </div>
         <div id="login-main">
         <div class="form-toggle">
             <div id="toggle-slider" class="toggle-slider"></div>
@@ -94,6 +100,10 @@
                     <p><span class="info-label" data-translate="username-label">Username</span>: <span id="username-info"></span></p>
                     <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info">
                     <p><span class="info-label" data-translate="phone-label">Phone</span>: <span id="phone-info"></span></p>
+                    <div class="user-reservations" id="user-reservations">
+                        <h2 data-translate="your-reservations">Your Reservations</h2>
+                        <ul id="reservation-list">
+                        </ul>
                 </div>
                 <div id="order-history"></div>
                 <button class="logout-button" data-translate="logout-button" data-testid="logout" id="logout-btn">Logout</button>

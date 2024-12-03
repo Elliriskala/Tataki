@@ -344,6 +344,7 @@ main {
   font-size: 1.8rem;
   color: var(--sushi-graphite);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 #user-main .profile-container p {
@@ -407,6 +408,52 @@ main {
 #user-main .logout-button:hover {
   background-color: var(--sushi-red4);
   transform: translateY(-2px);
+}
+
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popup-content p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.popup-content button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.popup-content button:hover {
+  background-color: #45a049;
 }
 
 

@@ -46,8 +46,8 @@ const validationErrorHandler = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-const notFoundHandler = (req, next) => {
-    const error = new customError(`Not Found - ${req.originalUrl}`, 404);
+const notFoundHandler = (req, res, next) => {
+    const error = customError(`Not Found - ${req.originalUrl}`, 404);
     next(error); // forward error to error handler
 };
 /**
