@@ -75,14 +75,14 @@ const addBeforeEnd = (element: HTMLElement, content: string) => {
 
 
 // format a date string to a more readable format
-function formatDate(date: Date): string {
+function formatDate(date: Date, lang: string): string {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   }
 
-  return date.toLocaleDateString('fi-FI', options);
+  return date.toLocaleDateString(lang, options);
 }
 
 

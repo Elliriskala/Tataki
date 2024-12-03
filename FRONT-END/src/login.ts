@@ -1,5 +1,5 @@
-
-import { Reservation, UserLoggedIn } from "./utils/interfaces";
+import { formatDate } from "./utils/functions";
+import { UserLoggedIn } from "./utils/interfaces";
 import { loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
 
@@ -226,28 +226,36 @@ const populateUserPage = async () => {
     // Check if there are any reservations
     if (response.ok) {
         reservations.forEach(reservation => {
-            // Create a <li> for each property of the reservation
-            const reservationDateItem = document.createElement('li');
-            reservationDateItem.textContent = `Reservation Date: ${reservation.reservation_date}`;
-            reservationsList.appendChild(reservationDateItem);
+            // Create a container <ul> for each reservation
+        const reservationGroup = document.createElement('ul');
+        reservationGroup.classList.add('reservation-group');
 
-            const reservationTimeItem = document.createElement('li');
-            reservationTimeItem.textContent = `Reservation Time: ${reservation.reservation_time}`;
-            reservationsList.appendChild(reservationTimeItem);
+        // Format the reservation date
+        const formattedDate = formatDate(new Date(reservation.reservation_date), 'fi-FI');
 
-            const fullNameItem = document.createElement('li');
-            fullNameItem.textContent = `Full Name: ${reservation.full_name}`;
-            reservationsList.appendChild(fullNameItem);
+        // Create <li> elements for each property
+        const reservationDateItem = document.createElement('li');
+        reservationDateItem.textContent = `Reservation Date: ${formattedDate}`;
+        reservationGroup.appendChild(reservationDateItem);
 
-            // Add more properties as needed
-            // Example: for guests, reservation_id, etc.
-            const guestsItem = document.createElement('li');
-            guestsItem.textContent = `Guests: ${reservation.guests}`;
-            reservationsList.appendChild(guestsItem);
+        const reservationTimeItem = document.createElement('li');
+        reservationTimeItem.textContent = `Reservation Time: ${reservation.reservation_time}`;
+        reservationGroup.appendChild(reservationTimeItem);
 
-            const reservationIdItem = document.createElement('li');
-            reservationIdItem.textContent = `Reservation ID: ${reservation.reservation_id}`;
-            reservationsList.appendChild(reservationIdItem);
+        const fullNameItem = document.createElement('li');
+        fullNameItem.textContent = `Full Name: ${reservation.full_name}`;
+        reservationGroup.appendChild(fullNameItem);
+
+        const guestsItem = document.createElement('li');
+        guestsItem.textContent = `Guests: ${reservation.guests}`;
+        reservationGroup.appendChild(guestsItem);
+
+        const reservationIdItem = document.createElement('li');
+        reservationIdItem.textContent = `Reservation ID: ${reservation.reservation_id}`;
+        reservationGroup.appendChild(reservationIdItem);
+
+        // Append the reservation group to the main list
+        reservationsList.appendChild(reservationGroup);
         });
     } else {
         // If no reservations, show a "No reservations found" message
