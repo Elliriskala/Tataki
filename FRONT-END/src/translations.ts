@@ -73,7 +73,6 @@ const translations: Translation = {
         "price": "Price",
         "quantity": "Qty",
         "total": "Total:",
-        "order": "Order",
         "additional-comment": "Leave additional comments here",
         "your-info": "Your information:",
         "use-existing-info": "Use saved information",
