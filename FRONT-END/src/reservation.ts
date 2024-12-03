@@ -13,12 +13,12 @@ const messageBox = document.getElementById(
 const useMyInfoButton = document.getElementById('use-user-info') as HTMLButtonElement;
 const emailInput = document.getElementById('email') as HTMLInputElement;
 const phoneInput = document.getElementById('phone') as HTMLInputElement;
-const guestsInput = document.getElementById(
-  "guests-input"
-) as HTMLInputElement;
 const popup = document.getElementById('success-popup') as HTMLDivElement;
 const popupMessage = document.getElementById('popup-message') as HTMLParagraphElement;
 const closePopup = document.getElementById('close-popup') as HTMLButtonElement;
+const guestsInput = document.getElementById(
+  "guests-input"
+) as HTMLInputElement;
 
 // Function to show the popup
 const showPopup = (message: string) => {
@@ -40,12 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", (e) => {
       const target = e.target as HTMLElement;
       if (target) {
+        console.log(target.getAttribute("data-value"));
         const guests = target.getAttribute("data-value");
-        const guestsInput = document.getElementById(
-          "guests-input"
-        ) as HTMLInputElement;
+        const guestsInput = document.getElementById("guests-input") as HTMLInputElement;
         if (guestsInput) {
           guestsInput.value = guests ?? "";
+          console.log(guestsInput.value);
         }
       }
       dateInput.disabled = false;
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const guests = guestsInput?.value;
     const date = dateInput?.value;
     const name = nameInput?.value;
-    console.log(document.getElementById('guests-input'));
+    console.log(guestsInput);
     console.log(guests);
     console.log(name);
     // application/json
@@ -211,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
       dateInput.value = '';
       timeSelect.value = '';
       phoneInput.value = '';
-      guestsInput.value = '';
       emailInput.value = '';
     } catch (error) {
       console.error('Failed to make reservation', error);
