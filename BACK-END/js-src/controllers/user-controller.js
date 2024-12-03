@@ -70,11 +70,16 @@ const postUser = async (req, res, next) => {
 
 const modifyUserById = async (req, res) => {
     const id = parseInt(req.params.id);
+    const existingData = await fetchUserById(id);
+    if (!existingData) {
+        res.status(404).json({ message: 'User not found' });
+        return;
+    }
+
     const moddedUser = {
-        username: req.body.username,
-        email: req.body.email,
-        password_hash: req.body.password_hash,
-        user_level_id: req.body.user_level_id
+        username: req.body.username || existingData.username,
+        email: req.body.email || existingData.email,
+        phone_number: req.body.phone_number || existingData.phone_number,
     };
     try {
         // Fetch the user to validate ownership

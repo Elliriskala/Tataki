@@ -54,7 +54,7 @@ const getReservationsByUserId = async (req, res, next) => {
             res.json(reservations);
         }
         else {
-            return next(customError('No reservations found', 404));
+            return null;
         }
     }
     catch (e) {

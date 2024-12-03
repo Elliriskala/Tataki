@@ -83,13 +83,11 @@ const registerUser = async (newUser) => {
  * @returns {Promise<number>} - number of affected rows
  */
 const modifyUser = async (user_id, modifiedUser) => {
-    const sql = 'UPDATE Users SET username = ?, password_hash = ?, email = ?, phone_number = ?, user_level_id = ? WHERE user_id = ?';
+    const sql = 'UPDATE Users SET username = ?, email = ?, phone_number = ? WHERE user_id = ?';
     const params = [
         modifiedUser.username,
-        modifiedUser.password_hash,
         modifiedUser.email,
         modifiedUser.phone_number,
-        modifiedUser.user_level_id,
         user_id
     ];
     try {

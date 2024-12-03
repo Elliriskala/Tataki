@@ -177,19 +177,32 @@ const populateUserPage = async () => {
                 'Authorization': `Bearer ${localStorage.getItem('authToken')}`
             }
         });
-
+    
         if (!response.ok) {
-            console.error('Failed to get user info');
+            console.error('Failed to get user info:', response.statusText);
             return;
         }
-
+    
         const data = await response.json();
-        usernameElement.textContent = data.username;
-        usernameDisplay.textContent = data.username;
-        emailElement.textContent = data.email || 'N/A';
-        phoneElement.textContent = data.phone_number || 'N/A';
+        if (data) {
+            // Safely update elements if they exist in the DOM
+            if (usernameElement) {
+                usernameElement.innerHTML = data.username || 'Unknown';
+            }
+            if (usernameDisplay) {
+                usernameDisplay.innerHTML = data.username || 'Unknown';
+            }
+            if (emailElement) {
+                emailElement.innerHTML = data.email || 'No email provided';
+            }
+            if (phoneElement) {
+                phoneElement.innerHTML = data.phone_number || 'N/A';
+            }
+        } else {
+            console.error('No data found for the user');
+        }
     } catch (error) {
-        console.error('Failed to get user info', error);
+        console.error('Error while fetching user info:', error);
     }
 
 
@@ -203,26 +216,48 @@ const populateUserPage = async () => {
             }
         });
 
-        if (!response.ok) {
-            console.error('Failed to get reservations');
-            return;
-        }
 
         const data = await response.json();
-        if (data) {
-        data.forEach((reservation: Reservation) => {
-            const reservationItem = document.createElement('li');
-            reservationItem.textContent = `${reservation.reservation_date} - ${reservation.reservation_time}, ${reservation.guests} people`;
-            reservationsList.appendChild(reservationItem);
+    console.log(data);
+
+    // Wrap data in an array if it's not already an array
+    const reservations = Array.isArray(data) ? data : [data];
+
+    // Check if there are any reservations
+    if (response.ok) {
+        reservations.forEach(reservation => {
+            // Create a <li> for each property of the reservation
+            const reservationDateItem = document.createElement('li');
+            reservationDateItem.textContent = `Reservation Date: ${reservation.reservation_date}`;
+            reservationsList.appendChild(reservationDateItem);
+
+            const reservationTimeItem = document.createElement('li');
+            reservationTimeItem.textContent = `Reservation Time: ${reservation.reservation_time}`;
+            reservationsList.appendChild(reservationTimeItem);
+
+            const fullNameItem = document.createElement('li');
+            fullNameItem.textContent = `Full Name: ${reservation.full_name}`;
+            reservationsList.appendChild(fullNameItem);
+
+            // Add more properties as needed
+            // Example: for guests, reservation_id, etc.
+            const guestsItem = document.createElement('li');
+            guestsItem.textContent = `Guests: ${reservation.guests}`;
+            reservationsList.appendChild(guestsItem);
+
+            const reservationIdItem = document.createElement('li');
+            reservationIdItem.textContent = `Reservation ID: ${reservation.reservation_id}`;
+            reservationsList.appendChild(reservationIdItem);
         });
     } else {
+        // If no reservations, show a "No reservations found" message
         const noReservations = document.createElement('li');
         noReservations.textContent = 'No reservations found';
         reservationsList.appendChild(noReservations);
     }
-    } catch (error) {
-        console.error('Failed to get reservations', error);
-    }
+} catch (error) {
+    console.error('Failed to get reservations', error);
+}
 }
 
 
