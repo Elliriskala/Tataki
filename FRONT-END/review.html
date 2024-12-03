@@ -30,6 +30,12 @@
     </div>
     </nav>
     <main>
+        <div id="success-popup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popup-message"></p>
+                <button id="close-popup">OK</button>
+            </div>
+        </div>
       <div class="review-container">
           <h1 data-translate="leave-review">Leave a Review</h1>
           <form class="review-form">
@@ -39,7 +45,7 @@
   
               <label data-translate="rate-us">Rate Us</label>
               <div class="star-rating">
-                  <input type="radio" id="star5" name="rating" value="5"><label for="star5">5</label>
+                  <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
                   <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
                   <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
                   <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>

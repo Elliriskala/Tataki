@@ -73,6 +73,7 @@ const translations: Translation = {
         "price": "Price",
         "quantity": "Qty",
         "total": "Total:",
+        "order": "Order",
         "additional-comment": "Leave additional comments here",
         "your-info": "Your information:",
         "use-existing-info": "Use saved information",
@@ -85,6 +86,13 @@ const translations: Translation = {
         "terms": "Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We appreciate your understanding and cooperation, thank you!",
         "agree-checkbox": "I agree to the terms and conditions",
         "order-now": "ORDER",
+        "placeholder-courier": "Add instructions for the courier here",
+        "placeholder-name": "Name",
+        "placeholder-email": "Email",
+        "placeholder-phone": "Phone number",
+        "placeholder-address": "Address",
+        "placeholder-po": "Postal code",
+        "dessert": "Desserts",
 
         // reservation page translations
         "navHome": "Home Page",
@@ -125,6 +133,7 @@ const translations: Translation = {
         "timeOption11": "8:00 PM",
         "timeOption12": "9:00 PM",
         "timeOptionDefault": "Select Time",
+        "reservationDescription": "For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four.",
 
         //Review page translations
         
@@ -150,7 +159,20 @@ const translations: Translation = {
         "welcome-header": "Welcome to Your Profile",
         "heres-your-profile": "Hi, Here's your profile information.",
         "your-information": "Your Information",
-        "logout-button": "Logout"
+        "logout-button": "Logout",
+
+
+        // itinerary page translations
+        "itinerary_title": "Itinerary",
+        "duration_label": "Duration",
+        "mode_label": "Mode",
+        "from_label": "From",
+        "stop_name_label": "Stop Name",
+        "stop_code_label": "Stop Code",
+        "to_label": "To",
+        "start_time_label": "Start Time",
+        "end_time_label": "End Time",
+        "distance_label": "Distance"
 
 
 
@@ -227,7 +249,7 @@ const translations: Translation = {
         "price": "Hinta",
         "quantity": "Määrä",
         "total": "Yhteensä:",
-        "additional-comment": "Jätä lisäkommentti tähän",
+        "additional-comment": "Jätä lisäohjeita tai toiveita tähän",
         "your-info": "Tietosi:",
         "use-existing-info": "Käytä tallennettuja tietoja",
         "select-delivery": "Valitse toimitustapa:",
@@ -239,6 +261,14 @@ const translations: Translation = {
         "terms": "Toimitusaikamme ovat 20-50 minuuttia ja toimitamme 15 km säteellä. Emme hyväksy käteismaksuja tai puhelimitse tehtyjä tilauksia. Emme hyväksy palautuksia tai peruutuksia. Jos sinulla on ongelmia tilauksesi kanssa, ota meihin yhteyttä välittömästi. Arvostamme ymmärrystäsi ja yhteistyötä, kiitos!",
         "agree-checkbox": "Hyväksyn käyttöehdot",
         "order-now": "TILAA",
+        "placeholder-courier": "Lisää kuriirille ohjeita tähän",
+        "placeholder-name": "Nimi",
+        "placeholder-email": "Sähköposti",
+        "placeholder-phone": "Puhelinnumero",
+        "placeholder-address": "Osoite",
+        "placeholder-po": "Postinumero",
+        "dessert": "Jälkiruoat",
+        
 
         // reservation page translations
         "navHome": "Etusivu",
@@ -279,6 +309,7 @@ const translations: Translation = {
         "timeOption11": "20:00",
         "timeOption12": "21:00",
         "timeOptionDefault": "Valitse Aika",
+        "reservationDescription": "Suuremmille seurueille suosittelemme soittamista asiakaspalveluumme. Huomioithan, että emme ota vastaan alle neljän hengen pöytävarauksia.",
 
         //Review page translations
         "your-name": "Nimesi",
@@ -303,7 +334,19 @@ const translations: Translation = {
         "welcome-header": "Tervetuloa Profiiliisi",
         "heres-your-profile": "Hei, tässä on profiilitietosi.",
         "your-information": "Tietosi",
-        "logout-button": "Kirjaudu ulos"
+        "logout-button": "Kirjaudu ulos",
+
+        // itinerary page translations
+        "itinerary_title": "Reittiohje",
+        "duration_label": "Kesto",
+        "mode_label": "Kulkuväline",
+        "from_label": "Mistä",
+        "stop_name_label": "Pysäkin nimi",
+        "stop_code_label": "Pysäkin koodi",
+        "to_label": "Mihin",
+        "start_time_label": "Lähtöaika",
+        "end_time_label": "Saapumisaika",
+        "distance_label": "Etäisyys"
 
     }
 };

@@ -17,10 +17,10 @@
         <p>Tataki</p>
     </div>
     <ul class="nav-list">
-        <li><a data-translate="navHome" href="index.html">Home Page</a></li>
-        <li><a data-translate="navHome" href="menu.html">Menu</a></li>
-        <li><a data-translate="navOrder" href="order.html">Order</a></li>
-        <li><a data-translate="navReservation" href="reservation.html">Reserve a table</a></li>
+        <li><a data-translate="home-link" href="index.html">Home Page</a></li>
+        <li><a data-translate="menu-link" href="menu.html">Menu</a></li>
+        <li><a data-translate="order-link" href="order.html">Order</a></li>
+        <li><a data-translate="reservation-link" href="reservation.html">Reserve a table</a></li>
     </ul>
     <div class="control-buttons">
         <button class="language" id="flag-en">🇬🇧</button>
@@ -30,6 +30,12 @@
   </nav>
 
     <main>
+      <div id="success-popup" class="popup hidden">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button id="close-popup">OK</button>
+        </div>
+    </div>
         <div class="reservation-form">
             <h1 data-translate="reservationTitle">Table Reservation</h1>
             <p id="reservation-description" data-translate="reservationDescription">For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four.</p>

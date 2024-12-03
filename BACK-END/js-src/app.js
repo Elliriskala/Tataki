@@ -9,6 +9,7 @@ import authRouter from './routers/auth-router.js';
 import menuRouter from './routers/menu-router.js';
 import orderRouter from './routers/order-router.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
+import itineraryRouter from './routers/itineray-router.js';
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -32,6 +33,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/reservations', reservationRouter);
 app.use('/api/menus', menuRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/digitransit', itineraryRouter);
 
 // Resolve __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -39,10 +41,9 @@ const __dirname = path.dirname(__filename);
 // Serve static files from the "public" directory (this should include your styles, JS, images)
 app.use(express.static(path.join(__dirname, frontEndPath)));
 
-app.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, frontEndPath, 'index.html'));
-});
+app.use(express.static(path.join(__dirname, frontEndPath)));
 
+// Define routes for known pages
 app.get('/about', (_req, res) => {
     res.sendFile(path.join(__dirname, frontEndPath, 'about.html'));
 });
@@ -75,18 +76,11 @@ app.get('/user', (_req, res) => {
     res.sendFile(path.join(__dirname, frontEndPath, 'user.html'));
 });
 
-app.get('review' , (_req, res) => {
+app.get('/review', (_req, res) => {
     res.sendFile(path.join(__dirname, frontEndPath, 'review.html'));
 });
 
-app.get('*', (_req, res) => {
-    res.sendFile(path.join(__dirname, frontEndPath, 'index.html'));
-});
 
-// API Routes (Make sure these are defined before the dynamic HTML route)
-
-
-// Serve the main index.html for the root route (no conflicts with the API)
 
 
 

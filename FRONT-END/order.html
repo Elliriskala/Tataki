@@ -57,6 +57,7 @@
                 id="leave-comment"
                 cols="30"
                 rows="4"
+                data-translate="additional-comment"
                 placeholder="Leave additional comments here"
                 style="max-width: 100%; max-height: 100px; resize: none;"
               ></textarea>
@@ -65,11 +66,11 @@
           <div>
             <div class="order-user-info">
               <h3 data-translate="your-info">Your information:</h3>
-              <input type="text" placeholder="Name" minlength="3" maxlength="25" required/>
-              <input type="text" placeholder="Phone number" minlength="4" maxlength="15"/>
-              <input type="email" placeholder="Email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required/>
-              <input type="text" placeholder="Address" maxlength="25"/>
-              <input type="text" placeholder="Postal code" maxlength="6"/>
+              <input type="text" data-translate="placeholder-name" placeholder="Name" minlength="3" maxlength="25" required/>
+              <input type="text" data-translate="placeholder-phone" placeholder="Phone number" minlength="4" maxlength="15"/>
+              <input type="email" data-translate="placeholder-email" placeholder="Email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required/>
+              <input type="text" data-translate="placeholder-address" placeholder="Address" maxlength="25"/>
+              <input type="text" data-translate="placeholder-po" placeholder="Postal code" maxlength="6"/>
             </div>
             <div class="use-existing-info">
                 <button id="use-existing-info-button" data-translate="use-existing-info">Use saved information</button>
@@ -94,6 +95,8 @@
                 id="instructions"
                 cols="25"
                 rows="4"
+                data-translate="placeholder-courier"
+
                 placeholder="Add instructions for courier here"
                 style="max-width: 400px; max-height: 100px; resize: none;"
               ></textarea>

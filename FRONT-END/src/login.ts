@@ -1,5 +1,5 @@
 
-import { UserLoggedIn } from "./utils/interfaces";
+import { Reservation, UserLoggedIn } from "./utils/interfaces";
 import { loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
 
@@ -19,6 +19,20 @@ const registerUsername = document.getElementById('register-username') as HTMLInp
 const loginEmail = document.getElementById('login-email') as HTMLInputElement;
 const loginPassword = document.getElementById('login-password') as HTMLInputElement;
 const messageTarget = document.getElementById('message-target') as HTMLSpanElement;
+const popup = document.getElementById('success-popup') as HTMLDivElement;
+const popupMessage = document.getElementById('popup-message') as HTMLParagraphElement;
+const closePopup = document.getElementById('close-popup') as HTMLButtonElement;
+
+// Function to show the popup
+const showPopup = (message: string) => {
+    popupMessage.textContent = message;
+    popup.classList.remove('hidden');
+};
+
+// Function to hide the popup
+closePopup.addEventListener('click', () => {
+    popup.classList.add('hidden');
+});
 
 
 const getLanguage = () => {
@@ -68,8 +82,7 @@ const handleLogin = async (event: Event) => {
     }
 
         const data: UserLoggedIn = await response.json();
-        messageTarget.textContent = "Login successful!";
-        messageTarget.style.color = "green";
+        showPopup("Login successful! Redirecting to user page...");
 
         // Store the token in local storage or a cookie
         localStorage.setItem('authToken', data.token);
@@ -119,8 +132,7 @@ const handleRegister = async (event: Event) => {
         // Check if the response is OK (status code 200-299)
         if (response.ok) {
             // Success - Registration was successful
-            messageTarget.textContent = "Registration successful, you may now log in!";
-            messageTarget.style.color = "green";
+            showPopup("Registration successful! You may now log in.");
             // empty the input fields
             registerEmail.value = '';
             registerPassword.value = '';
@@ -148,6 +160,7 @@ const populateUserPage = async () => {
     const usernameDisplay = document.getElementById('username-display') as HTMLSpanElement;
     const emailElement = document.getElementById('email-info') as HTMLSpanElement;
     const phoneElement = document.getElementById('phone-info') as HTMLSpanElement;
+    const reservationsList = document.getElementById('reservation-list') as HTMLUListElement;
 
     const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem('authToken');
@@ -164,20 +177,87 @@ const populateUserPage = async () => {
                 'Authorization': `Bearer ${localStorage.getItem('authToken')}`
             }
         });
-
+    
         if (!response.ok) {
-            console.error('Failed to get user info');
+            console.error('Failed to get user info:', response.statusText);
             return;
         }
+    
+        const data = await response.json();
+        if (data) {
+            // Safely update elements if they exist in the DOM
+            if (usernameElement) {
+                usernameElement.innerHTML = data.username || 'Unknown';
+            }
+            if (usernameDisplay) {
+                usernameDisplay.innerHTML = data.username || 'Unknown';
+            }
+            if (emailElement) {
+                emailElement.innerHTML = data.email || 'No email provided';
+            }
+            if (phoneElement) {
+                phoneElement.innerHTML = data.phone_number || 'N/A';
+            }
+        } else {
+            console.error('No data found for the user');
+        }
+    } catch (error) {
+        console.error('Error while fetching user info:', error);
+    }
+
+
+    try {
+
+        const response = await fetch(`${BASE_URL}/api/reservations/${user_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
 
         const data = await response.json();
-        usernameElement.textContent = data.username;
-        usernameDisplay.textContent = data.username;
-        emailElement.textContent = data.email;
-        phoneElement.textContent = data.phone_number || 'N/A';
-    } catch (error) {
-        console.error('Failed to get user info', error);
+    console.log(data);
+
+    // Wrap data in an array if it's not already an array
+    const reservations = Array.isArray(data) ? data : [data];
+
+    // Check if there are any reservations
+    if (response.ok) {
+        reservations.forEach(reservation => {
+            // Create a <li> for each property of the reservation
+            const reservationDateItem = document.createElement('li');
+            reservationDateItem.textContent = `Reservation Date: ${reservation.reservation_date}`;
+            reservationsList.appendChild(reservationDateItem);
+
+            const reservationTimeItem = document.createElement('li');
+            reservationTimeItem.textContent = `Reservation Time: ${reservation.reservation_time}`;
+            reservationsList.appendChild(reservationTimeItem);
+
+            const fullNameItem = document.createElement('li');
+            fullNameItem.textContent = `Full Name: ${reservation.full_name}`;
+            reservationsList.appendChild(fullNameItem);
+
+            // Add more properties as needed
+            // Example: for guests, reservation_id, etc.
+            const guestsItem = document.createElement('li');
+            guestsItem.textContent = `Guests: ${reservation.guests}`;
+            reservationsList.appendChild(guestsItem);
+
+            const reservationIdItem = document.createElement('li');
+            reservationIdItem.textContent = `Reservation ID: ${reservation.reservation_id}`;
+            reservationsList.appendChild(reservationIdItem);
+        });
+    } else {
+        // If no reservations, show a "No reservations found" message
+        const noReservations = document.createElement('li');
+        noReservations.textContent = 'No reservations found';
+        reservationsList.appendChild(noReservations);
     }
+} catch (error) {
+    console.error('Failed to get reservations', error);
+}
 }
 
 

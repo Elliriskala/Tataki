@@ -4,7 +4,6 @@ import path from "path";
 // import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
-  base: "./",
   envDir: "./",
   publicDir: "./public",
   build: {
@@ -21,7 +20,8 @@ export default defineConfig({
         order: path.resolve(__dirname, "order.html"),
         review: path.resolve(__dirname, "review.html"),
         reservation: path.resolve(__dirname, "reservation.html"),
-        user: path.resolve(__dirname, "user.html")
+        user: path.resolve(__dirname, "user.html"),
+        not_found: path.resolve(__dirname, "404.html"),
       },
     },
   },
@@ -31,6 +31,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       devOptions: { enabled: true },
       workbox: {
+        navigateFallback: "/404.html",
         maximumFileSizeToCacheInBytes: 5000000, // 5MB
         globPatterns: ["**/*.{js,css,html,ico,png,jpg,jpeg,svg,ttf,json}"], // Match all assets
       },

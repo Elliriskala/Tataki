@@ -1,6 +1,20 @@
 const reviewForm = document.querySelector('.review-form') as HTMLFormElement;
 const nameInput = document.querySelector('#name') as HTMLInputElement;
 const commentInput = document.querySelector('#comments') as HTMLTextAreaElement
+const popup = document.getElementById('success-popup') as HTMLDivElement;
+const popupMessage = document.getElementById('popup-message') as HTMLParagraphElement;
+const closePopup = document.getElementById('close-popup') as HTMLButtonElement;
+
+// Function to show the popup
+const showPopup = (message: string) => {
+    popupMessage.textContent = message;
+    popup.classList.remove('hidden');
+};
+
+// Function to hide the popup
+closePopup.addEventListener('click', () => {
+    popup.classList.add('hidden');
+});
 
 reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -20,7 +34,6 @@ reviewForm.addEventListener('submit', async (e) => {
     const ratingValue = rating.value;
 
     if (!name) {
-        alert('Please enter your name');
         return;
     }
 
@@ -43,10 +56,14 @@ reviewForm.addEventListener('submit', async (e) => {
 
     if (response) {
         console.log('Review submitted');
+        popupMessage.style.color = 'green';
+        showPopup('Review submitted successfully');
         nameInput.value = '';
         commentInput.value = '';
         rating.checked = false;
     } else {
-        console.log('Review failed to submit');
+        console.log('Review failed');
+        popupMessage.style.color = 'red';
+        showPopup('Review failed to submit');
     }
 });
