@@ -155,12 +155,21 @@ function displayItineraryResults(itineraries: Itinerary[]) {
         const formattedDuration = formatDuration(itinerary.duration);
 
         // Map transport modes to Finnish
-        const modeTranslation: { [key: string]: string } = {
-            WALK: 'Kävely',
-            RAIL: 'Rautatie',
-            BUS: 'Bussi',
-            TRAM: 'Ratikka',
-            FERRY: 'Laiva'
+        const modeTranslation: { [key: string]: { [key: string]: string } } = {
+            en : {
+                "WALK": 'Walk',
+                "RAIL": 'Train',
+                "BUS": 'Bus',
+                "TRAM": 'Tram',
+                "FERRY": 'Ferry'
+            },
+            fi : {
+                "WALK": 'Kävely',
+                "RAIL": 'Juna',
+                "BUS": 'Bussi',
+                "TRAM": 'Raitiovaunu',
+                "FERRY": 'Laiva'
+            }
         };
         
         itineraryItem.innerHTML = `
@@ -169,7 +178,7 @@ function displayItineraryResults(itineraries: Itinerary[]) {
             <ul>
                 ${itinerary.legs.map(leg => `
                     <li>
-                        ${leg.mode ? `<strong>${translations[language]["mode"]}:</strong> ${modeTranslation[leg.mode] || leg.mode} ${leg.trip?.tripHeadsign ? `(${translations[language]["line"]}: ${leg.trip.tripHeadsign}${leg.trip.routeShortName ? ` ${leg.trip.routeShortName}` : ''})` : ''} <br>` : ''}
+                        ${leg.mode ? `<strong>${translations[language]["mode"]}:</strong> ${modeTranslation[language][leg.mode] || leg.mode} ${leg.trip?.tripHeadsign ? `(${translations[language]["line"]}: ${leg.trip.tripHeadsign}${leg.trip.routeShortName ? ` ${leg.trip.routeShortName}` : ''})` : ''} <br>` : ''}
                         ${leg.from?.name ? `<strong>${translations[language]["from"]}:</strong> ${leg.from.name} (${leg.from.lat}, ${leg.from.lon})<br>` : ''}
                         ${leg.from?.stop?.name ? `<strong>${translations[language]["stop-name"]}:</strong> ${leg.from.stop.name} <br>` : ''}
                         ${leg.from?.stop?.code ? `<strong>${translations[language]["stop-code"]}:</strong> ${leg.from.stop.code} <br>` : ''}<br>

@@ -466,7 +466,6 @@ main {
 
 ul#reservation-list {
   display: flex;
-  flex-direction: column;
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -475,6 +474,8 @@ ul#reservation-list {
   color: var(--sushi-graphite);
   list-style-type: none;
   margin: auto;
+  padding: 0;
+  
 }
 
 ul#reservation-list li {
@@ -489,6 +490,22 @@ ul#reservation-list li {
   to {
     opacity: 1;
   }
+}
+
+.reservation-group {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reservation-group li {
+  list-style-type: none;
+  margin: 5px 0;
 }
 
 
