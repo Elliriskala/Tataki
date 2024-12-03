@@ -48,13 +48,16 @@ const getReservationById = async (req, res) => {
  */
 const getReservationsByUserId = async (req, res, next) => {
     const user_id = Number(req.params.user_id);
+    if (!user_id) {
+        return next(customError('Missing user_id', 400));
+    }
     try {
         const reservations = await fetchReservationsByUserId(user_id);
         if (reservations) {
             res.json(reservations);
         }
         else {
-            return null;
+            res.status(404).json({ message: 'No reservations found' });
         }
     }
     catch (e) {
@@ -71,35 +74,44 @@ const getReservationsByUserId = async (req, res, next) => {
  * @returns {Promise<void>} - reservation_id of the newly created reservation
  */
 const validateAndAddReservation = async (req, res, next) => {
-    const { user_id, reservation_date, email, reservation_time, full_name, phone_number, guests } = req.body;  // Get the data from the request body
+    const { user_id, reservation_date, email, reservation_time, full_name, phone_number, guests } = req.body;
 
+    // Validate required fields
     if (!reservation_date || !reservation_time || !guests || !full_name || !phone_number || !email) {
         console.log('Missing required fields');
-        return next(customError('Missing required fields', 400));
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Validate data types
+    if (typeof guests !== 'number' || guests <= 0) {
+        console.log('Invalid number of guests');
+        return res.status(400).json({ error: 'Guests must be a positive number' });
     }
 
     try {
-        // First, check if the requested time and date are available
+        // Check availability for the given date and time
         const available = await checkAvailability(reservation_date, guests);
 
         if (available && available.length > 0) {
-            // If availability is found, add the reservation
+            // If availability exists, proceed to add the reservation
             const newReservation = { user_id, reservation_date, reservation_time, full_name, phone_number, email, guests };
             const result = await addReservation(newReservation);
+
             if (result.success) {
-                res.status(200).json({ message: 'Reservation successfully added' });
+                res.status(201).json({ message: 'Reservation successfully added' });
             } else {
-                console.log('Error adding reservation:', result.message);
-                res.status(500).json({ message: result.message });
+                console.error('Error adding reservation:', result.message);
+                res.status(500).json({ error: 'Failed to add reservation', details: result.message });
             }
         } else {
-            res.status(404).json({ message: 'No availability' });
+            res.status(404).json({ error: 'No availability for the selected time and date' });
         }
     } catch (error) {
         console.error('Error processing reservation:', error.message);
-        return next(customError('Error processing reservation', 500));
+        next(customError('Error processing reservation', 500));
     }
 };
+
 
 /**
  *

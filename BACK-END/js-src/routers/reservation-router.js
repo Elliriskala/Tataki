@@ -12,8 +12,7 @@ reservationRouter
 reservationRouter.get('/:reservation_id', authenticateToken, getReservationById);
 
 
-reservationRouter
-.get('/:user_id', authenticateToken, getReservationsByUserId);
+reservationRouter.get('/user/:user_id', authenticateToken, getReservationsByUserId);
 
 
 reservationRouter
