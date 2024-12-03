@@ -218,7 +218,7 @@ const populateUserPage = async () => {
 
 
         const data = await response.json();
-    console.log(data);
+        console.log(data);
 
     // Wrap data in an array if it's not already an array
     const reservations = Array.isArray(data) ? data : [data];
