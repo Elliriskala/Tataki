@@ -207,8 +207,8 @@ const populateUserPage = async () => {
 
 
     try {
-
-        const response = await fetch(`${BASE_URL}/api/reservations/${user_id}`, {
+        console.log(user_id);
+        const response = await fetch(`${BASE_URL}/api/reservations/user/${user_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -218,13 +218,13 @@ const populateUserPage = async () => {
 
 
         const data = await response.json();
-    console.log(data);
+        console.log(data);
 
     // Wrap data in an array if it's not already an array
     const reservations = Array.isArray(data) ? data : [data];
 
     // Check if there are any reservations
-    if (response.ok) {
+    if (response.ok && reservations.length > 0) {
         reservations.forEach(reservation => {
             // Create a container <ul> for each reservation
         const reservationGroup = document.createElement('ul');
