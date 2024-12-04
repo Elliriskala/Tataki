@@ -2,6 +2,7 @@ import { customError } from "../middlewares/error-handlers.js";
 import { fetchUsers, fetchUserById, modifyUser, deleteUser, registerUser, checkUsernameOrEmailExists } from "../models/user-models.js";
 import { checkUserExists } from "../models/user-models.js";
 import bcrypt from 'bcryptjs';
+import { decodeToken } from "./auth-controller.js";
 
 const getUsers = async (_req, res) => {
     try {
@@ -13,8 +14,19 @@ const getUsers = async (_req, res) => {
         throw new Error('getUsers error: ' + e.message);
     }
 };
-const getUserById = async (req, res) => {
-    const user_id = Number(req.params.user_id);
+const getUserById = async (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    let user_id;
+    if (!token) {
+        return next(customError('Missing token', 400));
+    } else {
+        const decoded = decodeToken(token);
+        if (!decoded) {
+            return next(customError('Invalid token', 401));
+        }
+        user_id = decoded.user_id;
+        console.log('user_id in getUserById:', user_id);
+    }
     try {
         const user = await fetchUserById(user_id);
         res.json(user);

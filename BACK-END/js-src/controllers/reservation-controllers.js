@@ -1,5 +1,6 @@
 import { fetchReservations, fetchReservationById, fetchReservationsByUserId, addReservation, deleteReservation, modifyReservation, checkAvailability } from '../models/reservation-models.js';
 import { customError } from '../middlewares/error-handlers.js';
+import { decodeToken } from './auth-controller.js';
 /**
  *
  * @returns all reservations from the database
@@ -47,7 +48,18 @@ const getReservationById = async (req, res) => {
  * @returns {Promise<void>} - Reservation object or null if not found
  */
 const getReservationsByUserId = async (req, res, next) => {
-    const user_id = Number(req.params.user_id);
+    const token = req.headers.authorization.split(' ')[1];
+    let user_id;
+    if (!token) {
+        return next(customError('Missing token', 400));
+    } else {
+        const decoded = decodeToken(token);
+        if (!decoded) {
+            return next(customError('Invalid token', 401));
+        }
+        user_id = decoded.user_id;
+        console.log('user_id in getReservationsByUserID:', user_id);
+    }
     if (!user_id) {
         return next(customError('Missing user_id', 400));
     }

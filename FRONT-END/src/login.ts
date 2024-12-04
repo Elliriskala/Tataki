@@ -180,7 +180,7 @@ const populateUserPage = async () => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/${user_id}`, {
+        const response = await fetch(`${BASE_URL}/api/users/user`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -219,7 +219,7 @@ const populateUserPage = async () => {
 
     try {
         console.log(user_id);
-        const response = await fetch(`${BASE_URL}/api/reservations/user/${user_id}`, {
+        const response = await fetch(`${BASE_URL}/api/reservations/user`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
