@@ -144,7 +144,7 @@ const displayOrderDetails = (order: Order): void => {
     if (order.is_delivery) {
         orderDetails.innerHTML += `
       <p><strong>Delivery Address:</strong> ${order.delivery_address}</p>
-      <p><strong>Postal Code:</strong> ${order.postal_code}</p>
+      <p><strong>City:</strong> ${order.city}</p>
       <p><strong>Delivery Instructions:</strong> ${order.delivery_instructions || "No instructions"}</p>
     `;
     }

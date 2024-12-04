@@ -43,9 +43,6 @@ export const updateCartDisplay = (): void => {
         if (totalPriceElement)
             totalPriceElement.textContent = `${totalPrice.toFixed(2)}€`;
         console.log(totalPrice.toFixed(2));
-        console.log("Script Loaded");
-        console.log("Total Price:", totalPrice);
-        console.log("Total Price Element:", totalPriceElement);
     });
 };
 
@@ -135,13 +132,13 @@ const checkDeliveryMethod = async (): Promise<void> => {
         const addressInput = document.querySelector(
             ".order-user-info input[placeholder='Address']",
         ) as HTMLInputElement;
-        const postalCodeInput = document.querySelector(
+        const cityInput = document.querySelector(
             ".order-user-info input[placeholder='Postal code']",
         ) as HTMLInputElement;
 
-        if (addressInput && postalCodeInput) {
+        if (addressInput && cityInput) {
             addressInput.required = true;
-            postalCodeInput.required = true;
+            cityInput.required = true;
 
             if (!addressInput.value.trim()) {
                 throw new Error(
@@ -149,7 +146,7 @@ const checkDeliveryMethod = async (): Promise<void> => {
                 );
             }
 
-            if (!postalCodeInput.value.trim()) {
+            if (!cityInput.value.trim()) {
                 throw new Error("Postal code is required for delivery orders.");
             }
         }
@@ -157,13 +154,13 @@ const checkDeliveryMethod = async (): Promise<void> => {
         const addressInput = document.querySelector(
             ".order-user-info input[placeholder='Address']",
         ) as HTMLInputElement;
-        const postalCodeInput = document.querySelector(
+        const cityInput = document.querySelector(
             ".order-user-info input[placeholder='Postal code']",
         ) as HTMLInputElement;
 
-        if (addressInput && postalCodeInput) {
+        if (addressInput && cityInput) {
             addressInput.required = false;
-            postalCodeInput.required = false;
+            cityInput.required = false;
         }
     }
 };

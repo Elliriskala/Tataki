@@ -3,8 +3,15 @@ import { displayOrderMenu } from "./components/orderDisplay";
 import { updateCartDisplay } from "./components/cart";
 import { placeOrder } from "./orderProcessing";
 
+// set the default language
+const getLanguage = (): string => {
+    // Default to 'en' if no language is set
+    return localStorage.getItem('language') || 'en';
+};
+
 // initialize category buttons
 const initializeCategoryButtons = async (): Promise<void> => {
+    const lang = getLanguage();
     const categoryButtons = document.querySelectorAll(
         ".select-category-button",
     );
@@ -13,7 +20,7 @@ const initializeCategoryButtons = async (): Promise<void> => {
             const category = button.getAttribute("data-translate") || "";
             if (category) {
                 const menus = await fetchMenuItemsByCategory(category);
-                displayOrderMenu(menus);
+                displayOrderMenu(menus, lang);
             }
         });
     });
@@ -22,6 +29,7 @@ const initializeCategoryButtons = async (): Promise<void> => {
 // initialize order page
 const initializeOrderPage = async (): Promise<void> => {
     try {
+        const lang = getLanguage();
         // update cart display
         updateCartDisplay();
 
@@ -32,7 +40,7 @@ const initializeOrderPage = async (): Promise<void> => {
         // fetch initial menus and display them
         const initialMenus = await fetchMenuItemsByCategory("lunch");
         if (menuContainer) {
-            displayOrderMenu(initialMenus);
+            displayOrderMenu(initialMenus, lang);
             await initializeCategoryButtons();
         }
     } catch (error) {

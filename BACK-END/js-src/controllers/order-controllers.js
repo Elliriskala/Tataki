@@ -146,7 +146,7 @@ const postOrder = async (req, res) => {
   try {
     console.log('Incoming payload:', req.body);
 
-    const {user_id, customer_name, total_price, order_items, order_type, order_status, general_comment, delivery_address, postal_code, delivery_instructions} =
+    const {user_id, customer_name, total_price, order_items, order_type, order_status, general_comment, delivery_address, city, delivery_instructions} =
       req.body;
 
     validateString(customer_name, 'customer_name');
@@ -172,7 +172,7 @@ const postOrder = async (req, res) => {
       order_items,
       general_comment,
       delivery_address,
-      postal_code,
+      city,
       delivery_instructions
     );
 

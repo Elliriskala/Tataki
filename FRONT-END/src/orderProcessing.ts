@@ -24,7 +24,7 @@ const placeOrder = async () => {
         order_type: orderData.order_type,
         order_status: orderData.order_status,
         delivery_address: orderData.delivery_address,
-        postal_code: orderData.postal_code,
+        city: orderData.city,
         delivery_instructions: orderData.delivery_instructions,
       }),
     });
@@ -156,10 +156,10 @@ const collectOrderData = () => {
           ) as HTMLInputElement
         )?.value.trim() || ""
       : null,
-    postal_code: isDelivery
+    city: isDelivery
       ? (
           document.querySelector(
-            ".order-user-info input[placeholder='Postal code']"
+            ".order-user-info input[placeholder='City']"
           ) as HTMLInputElement
         )?.value.trim() || ""
       : null,
@@ -175,7 +175,7 @@ const resetFormFields = () => {
     ".order-user-info input[placeholder='Email']",
     ".order-user-info input[placeholder='Phone number']",
     ".order-user-info input[placeholder='Address']",
-    ".order-user-info input[placeholder='Postal code']",
+    ".order-user-info input[placeholder='City']",
     "#leave-comment",
     "#instructions",
   ];

@@ -90,7 +90,7 @@ const translations: Translation = {
         "placeholder-email": "Email",
         "placeholder-phone": "Phone number",
         "placeholder-address": "Address",
-        "placeholder-po": "Postal code",
+        "placeholder-city": "City",
         "dessert": "Desserts",
 
         // reservation page translations
@@ -265,7 +265,7 @@ const translations: Translation = {
         "placeholder-email": "Sähköposti",
         "placeholder-phone": "Puhelinnumero",
         "placeholder-address": "Osoite",
-        "placeholder-po": "Postinumero",
+        "placeholder-city": "Kaupunki",
         "dessert": "Jälkiruoat",
         
 

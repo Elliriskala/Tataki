@@ -92,7 +92,7 @@ interface Order {
   customer_name: string;
   total_price: number;
   delivery_address?: string;
-  postal_code?: string;
+  city?: string;
   delivery_instructions?: string;
   order_type: string;
   status_id: number;
