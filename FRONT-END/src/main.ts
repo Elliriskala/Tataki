@@ -1,6 +1,8 @@
 import { translations } from "./translations";
 import { displayOrderHistory } from "./order_management";
 
+const baseURL = "http://localhost:3000";
+
 document.addEventListener("DOMContentLoaded", async () => {
   // check if user has logged in to display order history
 
@@ -253,11 +255,61 @@ if (!(savedLang in translations)) {
   changeLanguage(savedLang);
 }
 
-const fetchReservations = document.getElementById(
-  "fetchReservations"
-) as HTMLButtonElement;
-fetchReservations?.addEventListener("click", async () => {
-  const response = await fetch("/api/reservations");
-  const reservations = await response.json();
-  console.log(reservations);
+const isTokenExpired = async (token: string) => {
+  if (!token) {
+    console.log("No token found");
+    return true;
+  }
+
+  // Check sessionStorage for cached token expiration status
+  const cachedStatus = sessionStorage.getItem("tokenExpired");
+  if (cachedStatus !== null) {
+    return cachedStatus === "true"; // Return cached result if available
+  }
+
+  try {
+    const response = await fetch(`${baseURL}/api/auth/token-validation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.log("Token is expired or invalid");
+        sessionStorage.setItem("tokenExpired", "true"); // Cache expired status
+        return true;
+      }
+      throw new Error(`Server error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const expired = data.expired;
+    sessionStorage.setItem("tokenExpired", expired.toString()); // Cache status
+    return expired;
+  } catch (error) {
+    console.error("Error during token verification:", error);
+    sessionStorage.setItem("tokenExpired", "true"); // Assume token expired on error
+    return true;
+  }
+};
+
+window.addEventListener("load", async () => {
+  const token = localStorage.getItem("authToken");
+
+  if (token) {
+    const expired = await isTokenExpired(token);
+    if (expired) {
+      alert("Your session has expired. Please log in again.");
+      localStorage.removeItem("authToken");
+      sessionStorage.removeItem("tokenExpired"); // Clear cached result
+      window.location.href = "/user.html";
+    } else {
+      console.log("Token is still valid");
+    }
+  } else {
+    console.log("No token found in localStorage");
+  }
 });

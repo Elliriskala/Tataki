@@ -112,22 +112,29 @@ main {
 .nav-list li a:hover {
     color: var(--dust-pink);
     transform: translateY(-2px);
-}
+  }
+  
+  /* Language and Login buttons */
 
-/* Language and Login buttons */
+  .control-buttons {
+    display: flex;
+    gap: 1em;
+  }
 
-.login a {
+
+  .login a {
     text-decoration: none;
-}
-
-.language,
-.login {
+    padding: 1em;
+  }
+  
+  .language,
+  .login {
     margin-right: 1em;
     background-color: var(--soy-sauce);
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 0.8em 1.5em;
+    padding: 1em 2em;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -279,13 +286,14 @@ button.login:hover {
     transition: all 0.5s;
     transform: scale(1.2);
     cursor: pointer;
-}
-
-/*#endregion footer*/
-
-/*#region Responsive design */
-
-@media (max-width: 950px) {
+  }
+  
+  /*#endregion footer*/
+  
+  
+  /*#region Responsive design */
+  
+  @media (max-width:1000px) {
     nav ul {
         flex-direction: column;
         align-items: center;
@@ -466,9 +474,9 @@ button.login:hover {
     .nav-list li a {
         color: var(--lotus-flower);
     }
-}
-
-@media (max-width: 500px) {
+  }
+  
+  @media (max-width: 595px) {
     .logo p {
         display: none;
     }

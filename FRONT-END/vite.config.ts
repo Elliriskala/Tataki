@@ -26,7 +26,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    // nodePolyfills(),
     VitePWA({
       registerType: "autoUpdate",
       devOptions: { enabled: true },
