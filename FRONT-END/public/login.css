@@ -503,6 +503,9 @@ ul#reservation-list li {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: var(--sushi-red4);
+  color: var(--sushi-white);
+  width: 100%;
 }
 
 .reservation-group li {

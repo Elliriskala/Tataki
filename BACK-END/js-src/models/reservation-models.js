@@ -168,14 +168,14 @@ const deleteReservation = async (reservation_id) => {
 const checkAvailability = async (date, guests) => {
   // SQL query to find available timeslots
   const sql = `
-    SELECT t.reservation_time, t.max_guests
+    SELECT t.reservation_time, t.max_guests,
+           IFNULL(SUM(r.guests), 0) AS guests_reserved
     FROM TimeSlots t
     LEFT JOIN Reservations r
         ON t.reservation_time = r.reservation_time
         AND r.reservation_date = ?
-    WHERE t.max_guests >= ?
     GROUP BY t.timeslot_id, t.reservation_time, t.max_guests
-    HAVING COUNT(r.reservation_id) < t.max_guests`;
+    HAVING (t.max_guests - guests_reserved) >= ?`;
   try {
     const [rows] = await promisePool.query(sql, [date, guests]);
     return rows; // Return the available timeslots (array of objects)
