@@ -111,9 +111,16 @@
   }
   
   /* Language and Login buttons */
-  
+
+  .control-buttons {
+    display: flex;
+    gap: 1em;
+  }
+
+
   .login a {
     text-decoration: none;
+    padding: 1em;
   }
   
   .language,
@@ -123,7 +130,7 @@
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 0.8em 1.5em;
+    padding: 1em 2em;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   }
@@ -276,7 +283,7 @@
   
   /*#region Responsive design */
   
-  @media (max-width:950px) {
+  @media (max-width:1000px) {
     nav ul {
         flex-direction: column;
         align-items: center;
@@ -453,7 +460,7 @@
     }
   }
   
-  @media (max-width: 500px) {
+  @media (max-width: 595px) {
     .logo p {
       display: none;
     }

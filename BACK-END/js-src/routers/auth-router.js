@@ -19,7 +19,7 @@ authRouter
 .route('/register')
 .post(
     body('email').isEmail(),
-    body('password').isLength({ min: 8 }),
+    body('password').isLength({ min: 8, max : 30 }),
     body('username').trim().isAlphanumeric().isLength({min: 3, max: 30}),
     validationErrorHandler,
     postUser

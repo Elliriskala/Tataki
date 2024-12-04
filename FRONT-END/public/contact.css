@@ -195,6 +195,84 @@ main {
   color: var(--sushi-red4);
 }
 
+/* General Popup Card Styles */
+.popup-card {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #ffffff;
+  width: 150px;
+  overflow: hidden;
+}
+
+/* Header Styling */
+.popup-header {
+  background-color: #ff4b4b; /* Sushi red */
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+/* Address Styling */
+.popup-address {
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: #333;
+}
+
+/* Opening Hours Section */
+.popup-hours {
+  padding: 10px;
+}
+
+.popup-hours h4 {
+  margin: 5px 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.popup-hours ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.popup-hours ul li {
+  margin: 5px 0;
+}
+
+/* Hover Effect (Optional) */
+.popup-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.02);
+  transition: 0.3s ease;
+}
+
+/* Google Maps Link */
+.popup-link {
+  margin-top: 10px;
+}
+
+.popup-link a {
+  color: #007bff; /* Bootstrap blue for links */
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.popup-link a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .reservation-form {
     padding: 1.5rem;

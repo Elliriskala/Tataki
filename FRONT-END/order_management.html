@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Order management</title>
+    <meta name="description" content="Tataki restaurant order management" />
     <link rel="stylesheet" href="/order_management.css" />
     <link rel="stylesheet" href="/nav.css" />
     <script
@@ -27,12 +28,10 @@
           <li><a href="index.html">Home page</a></li>
         </ul>
         <div class="control-buttons">
-          <button class="language" id="flag-en">🇬🇧</button>
-          <button class="language" id="flag-fi">🇫🇮</button>
-          <button class="login">
-            <a href="user.html"><i class="fa-regular fa-user"></i></a>
-          </button>
-        </div>
+          <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
+          <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
+          <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
+      </div>
       </nav>
     </header>
     <main>

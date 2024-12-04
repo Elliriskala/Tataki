@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Register Form</title>
+    <title>Users page</title>
+    <meta name="description" content="Tataki restaurant login and user page">
     <link rel="stylesheet" href="/login.css">
     <link rel="stylesheet" href="/nav.css">
     <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
@@ -25,7 +26,7 @@
         <div class="control-buttons">
             <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
             <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
-            <button class="login" id="login-register-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
+            <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
         </div>
     </nav>
     <main>
@@ -54,7 +55,7 @@
                     </div>
                     <div class="input-container">
                         <label for="login-password" data-translate="password-label">Password</label>
-                        <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." minlength="10" maxlength="25" required>
+                        <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." minlength="8" maxlength="30" required>
                         <span class="toggle-password" data-target="login-password"><i data-target="login-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
                     </div>
                     <div class="form-buttons">
@@ -68,15 +69,15 @@
                     <h2 data-translate="register-form-title">Register</h2>
                     <div class="input-container">
                         <label for="register-username" data-translate="username-label">Username</label>
-                        <input type="text" id="register-username" name="register-username" autocomplete="off" minlength="5" required>
+                        <input type="text" id="register-username" name="register-username" autocomplete="off" minlength="5" maxlength="15" required>
                     </div>
                     <div class="input-container">
                         <label for="register-email" data-translate="email-label">Email</label>
-                        <input type="email" id="register-email" name="register-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
+                        <input type="email" id="register-email" minlength="5" name="register-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
                     </div>
                     <div class="input-container">
                         <label for="register-password" data-translate="password-label">Password</label>
-                        <input type="password" id="register-password" name="register-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." required>
+                        <input type="password" id="register-password" name="register-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." minlength="8" maxlength="30" required>
                         <span class="toggle-password" data-target="register-password"><i data-target="register-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
                     </div>
                     <div class="form-buttons">
@@ -125,15 +126,14 @@
             </div>
             <div class="social-medias">
                 <ul>
-                    <li id="facebook"><a href=""></a></li>
+                    <li id="facebook"><a href="" aria-label="link-to-facebook"></a></li>
                     <label for="facebook">
-                        <i class="fa-brands fa-square-facebook" aria-hidden="true" data-translate="facebook-icon"></i>
-                    </label>
-                    <li id="instagram"><a href=""></a></li>
+                      <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                    <li id="instagram"><a href="" aria-label="link-to-instagram"></a></li>
                     <label for="instagram">
-                        <i class="fa-brands fa-square-instagram" aria-hidden="true" data-translate="instagram-icon"></i>
+                      <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
                     </label>
-                </ul>
+                  </ul>
             </div>
         </div>
     </footer>
