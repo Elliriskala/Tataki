@@ -1,7 +1,7 @@
 import express from 'express';
 import { getMe } from '../controllers/auth-controller.js';
 import authenticateToken from '../middlewares/authentication.js';
-import { postLogin } from '../controllers/auth-controller.js';
+import { postLogin, isTokenExpired } from '../controllers/auth-controller.js';
 import { postUser } from '../controllers/user-controller.js';
 import { body } from 'express-validator';
 import { validationErrorHandler } from '../middlewares/error-handlers.js';
@@ -24,6 +24,10 @@ authRouter
     validationErrorHandler,
     postUser
 );
+
+authRouter
+.route('/token-validation')
+.post(isTokenExpired)
 
 authRouter.route('/me').get(authenticateToken, getMe);
 
