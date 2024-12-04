@@ -153,43 +153,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   reservationSubmit.addEventListener("click", async (event) => {
     event.preventDefault();
+    
     const fullName = nameInput.value;
     const reservation_date = dateInput.value;
     const reservation_time = timeSelect.value;
-    const reservation_guests = guestsInput.value;
+    const reservation_guests = Number(guestsInput.value); // Ensure this is a number
     const reservation_email = emailInput.value;
     const reservation_phone = phoneInput.value;
-    const user_id = localStorage.getItem("user_id");
     const token = localStorage.getItem("authToken");
-
-    // allow user to make a reservation both as a guest and as a logged in user
+  
+    // Allow user to make a reservation both as a guest and as a logged-in user
     if (!reservation_date || !reservation_time || !reservation_guests) {
       messageBox.textContent = "Please fill out all fields";
       return;
     }
-
+  
     if (!reservation_email || !validateEmail(reservation_email)) {
       messageBox.textContent = "Please provide a valid email";
       return;
     }
-
+  
     if (!reservation_phone || !validatePhone(reservation_phone)) {
       messageBox.textContent = "Please provide a valid phone number";
       return;
     }
-
-    if (!user_id || !token) {
+  
+    if (!token) {
       console.log("User is not logged in");
     }
-
+  
     const requestBody = {
-      reservation_date: reservation_date,
-      reservation_time: reservation_time,
+      reservation_date,
+      reservation_time,
       guests: reservation_guests,
       email: reservation_email,
       phone_number: reservation_phone,
       full_name: fullName,
-      user_id: user_id || null,
+      user_id: null,
     };
 
     try {
@@ -201,16 +201,25 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify(requestBody),
       });
-
+  
+      const responseData = await response.json();
+  
       if (!response.ok) {
-        const errorData = await response.json();
-        messageBox.textContent =
-          errorData.message || "Failed to make a reservation";
+        // Handle specific error for reservation limit
+        console.log(responseData);
+        if (responseData.details === "Maximum reservation limit (5) reached for this user.") {
+          messageBox.textContent = "You have already reached the maximum of 5 reservations.";
+          messageBox.style.color = "red";
+          return;
+        }
+  
+        // Handle other errors
+        messageBox.textContent = responseData.message || "Failed to make a reservation. Please try again.";
+        messageBox.style.color = "red";
         return;
       }
-
-      const data = await response.json();
-      console.log(data);
+  
+      // Success case
       popupMessage.style.color = "green";
       showPopup("Reservation created successfully!");
       nameInput.value = "";
@@ -221,10 +230,11 @@ document.addEventListener("DOMContentLoaded", () => {
       emailInput.value = "";
     } catch (error) {
       console.error("Failed to make reservation", error);
-      messageBox.textContent = "Failed to make reservation";
+      messageBox.textContent = "Failed to make reservation. Please try again.";
+      messageBox.style.color = "red";
     }
   });
-});
+});  
 
 const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

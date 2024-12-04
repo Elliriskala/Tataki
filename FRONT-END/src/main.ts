@@ -231,6 +231,7 @@ if (flagEn) {
   flagEn.addEventListener("click", () => {
     changeLanguage("en");
     console.log("English selected");
+    window.location.reload();
   });
 }
 
@@ -239,6 +240,7 @@ if (flagFi) {
   flagFi.addEventListener("click", () => {
     changeLanguage("fi");
     console.log("Finnish selected");
+    window.location.reload();
   });
 }
 

@@ -46,7 +46,8 @@ export default defineConfig({
         "order_management.css",
         "order.css",
         "reservation.css",
-        "review.css"
+        "review.css",
+        "404.css"
       ],
       manifest: {
         name: "Tataki Sushi",
