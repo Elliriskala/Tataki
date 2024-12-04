@@ -430,7 +430,7 @@ input:invalid {
     display: flex;
     justify-content: center;
     transition: all 0.5s ease-in-out;
-    max-width: 15em;
+    max-width: 13em;
     text-align: center;
     margin: auto;
     margin-top: 1em;

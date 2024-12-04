@@ -391,7 +391,7 @@ main {
   color: var(--sushi-graphite);
   font-size: 0.9em;
   padding: 1em;
-  border-bottom: #161a1d 1px dashed;
+  border-top: #161a1d 1px dashed;
 }
 
 #user-main .logout-button {

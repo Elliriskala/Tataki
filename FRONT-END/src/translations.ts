@@ -50,7 +50,7 @@ const translations: Translation = {
         "about-us2": "Founded by a sushi enthusiast, Tataki combines expertise with a passion for fusion. Each dish showcases artistry, sustainability, and the joy of good food. Thank you for being part of our journey — we look forward to sharing more memorable meals with you!",
 
         //menu page translations
-        "our-menus": "Our menus",
+        "our-menus": "Menus",
         "lunch": "Lunch",
         "dinner": "Dinner",
         "sides": "Sides",
@@ -73,7 +73,6 @@ const translations: Translation = {
         "price": "Price",
         "quantity": "Qty",
         "total": "Total:",
-        "order": "Order",
         "additional-comment": "Leave additional comments here",
         "your-info": "Your information:",
         "use-existing-info": "Use saved information",

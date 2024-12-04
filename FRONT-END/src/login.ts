@@ -1,5 +1,5 @@
 
-import { Reservation, UserLoggedIn } from "./utils/interfaces";
+import { UserLoggedIn } from "./utils/interfaces";
 import { loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
 

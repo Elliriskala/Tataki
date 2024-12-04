@@ -41,7 +41,7 @@ export const updateCartDisplay = (): void => {
         );
 
         if (totalPriceElement)
-            totalPriceElement.innerText = `${totalPrice.toFixed(2)}€`;
+            totalPriceElement.textContent = `${totalPrice.toFixed(2)}€`;
         console.log(totalPrice.toFixed(2));
         console.log("Script Loaded");
         console.log("Total Price:", totalPrice);
