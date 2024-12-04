@@ -1,8 +1,8 @@
-
+import { formatDate } from "./utils/functions";
 import { UserLoggedIn } from "./utils/interfaces";
-import { loginErrorMessages, registerErrorMessages } from "./translations";
+import {translations, loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
-
+const reservationsList = document.getElementById('reservation-list') as HTMLUListElement;
 
 const registerSubmit = document.getElementById('submit-button-register') as HTMLButtonElement;
 //const loginForm = document.getElementById('login-form') as HTMLFormElement;
@@ -63,6 +63,12 @@ const handleLogin = async (event: Event) => {
     loginSubmit.disabled = true;
 
     try {
+        // Clear old state before logging in
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('user_id');
+        if (reservationsList) {
+            reservationsList.innerHTML = '';
+        }
         const response = await fetch(`${BASE_URL}${LOGIN_URL}`, {
             method: 'POST',
             headers: {
@@ -160,7 +166,7 @@ const populateUserPage = async () => {
     const usernameDisplay = document.getElementById('username-display') as HTMLSpanElement;
     const emailElement = document.getElementById('email-info') as HTMLSpanElement;
     const phoneElement = document.getElementById('phone-info') as HTMLSpanElement;
-    const reservationsList = document.getElementById('reservation-list') as HTMLUListElement;
+    const language = getLanguage();
 
     const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem('authToken');
@@ -169,8 +175,12 @@ const populateUserPage = async () => {
         return;
     }
 
+    if (reservationsList) {
+        reservationsList.innerHTML = '';
+    }
+
     try {
-        const response = await fetch(`${BASE_URL}/api/users/${user_id}`, {
+        const response = await fetch(`${BASE_URL}/api/users/user`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -185,12 +195,13 @@ const populateUserPage = async () => {
     
         const data = await response.json();
         if (data) {
+             console.log(data);
             // Safely update elements if they exist in the DOM
             if (usernameElement) {
                 usernameElement.innerHTML = data.username || 'Unknown';
             }
             if (usernameDisplay) {
-                usernameDisplay.innerHTML = data.username || 'Unknown';
+                usernameDisplay.textContent = `${data.username || 'Unknown'}!`;
             }
             if (emailElement) {
                 emailElement.innerHTML = data.email || 'No email provided';
@@ -207,8 +218,8 @@ const populateUserPage = async () => {
 
 
     try {
-
-        const response = await fetch(`${BASE_URL}/api/reservations/${user_id}`, {
+        console.log(user_id);
+        const response = await fetch(`${BASE_URL}/api/reservations/user`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -218,36 +229,45 @@ const populateUserPage = async () => {
 
 
         const data = await response.json();
-    console.log(data);
+        console.log(data);
 
     // Wrap data in an array if it's not already an array
     const reservations = Array.isArray(data) ? data : [data];
-
+    const locale = language === 'fi' ? 'fi-FI' : 'en-US';
     // Check if there are any reservations
-    if (response.ok) {
+    if (response.ok && reservations.length > 0) {
         reservations.forEach(reservation => {
-            // Create a <li> for each property of the reservation
-            const reservationDateItem = document.createElement('li');
-            reservationDateItem.textContent = `Reservation Date: ${reservation.reservation_date}`;
-            reservationsList.appendChild(reservationDateItem);
+        const reservationGroup = document.createElement('ul');
 
-            const reservationTimeItem = document.createElement('li');
-            reservationTimeItem.textContent = `Reservation Time: ${reservation.reservation_time}`;
-            reservationsList.appendChild(reservationTimeItem);
 
-            const fullNameItem = document.createElement('li');
-            fullNameItem.textContent = `Full Name: ${reservation.full_name}`;
-            reservationsList.appendChild(fullNameItem);
+        reservationGroup.classList.add('reservation-group');
 
-            // Add more properties as needed
-            // Example: for guests, reservation_id, etc.
-            const guestsItem = document.createElement('li');
-            guestsItem.textContent = `Guests: ${reservation.guests}`;
-            reservationsList.appendChild(guestsItem);
+        // Format the reservation date
+        const formattedDate = formatDate(new Date(reservation.reservation_date), locale);
 
-            const reservationIdItem = document.createElement('li');
-            reservationIdItem.textContent = `Reservation ID: ${reservation.reservation_id}`;
-            reservationsList.appendChild(reservationIdItem);
+        // Create <li> elements for each property
+        const reservationDateItem = document.createElement('li');
+        reservationDateItem.textContent = `${translations[language]["your-date"]}: ${formattedDate}`;
+        reservationGroup.appendChild(reservationDateItem);
+
+        const reservationTimeItem = document.createElement('li');
+        reservationTimeItem.textContent = `${translations[language]["your-time"]}: ${reservation.reservation_time}`;
+        reservationGroup.appendChild(reservationTimeItem);
+
+        const fullNameItem = document.createElement('li');
+        fullNameItem.textContent = `${translations[language]["your-full-name"]}: ${reservation.full_name}`;
+        reservationGroup.appendChild(fullNameItem);
+
+        const guestsItem = document.createElement('li');
+        guestsItem.textContent = `${translations[language]["your-guests"]}: ${reservation.guests}`;
+        reservationGroup.appendChild(guestsItem);
+
+        const reservationIdItem = document.createElement('li');
+        reservationIdItem.textContent = `${translations[language]["your-reservation-id"]}: ${reservation.reservation_id}`;
+        reservationGroup.appendChild(reservationIdItem);
+
+        // Append the reservation group to the main list
+        reservationsList.appendChild(reservationGroup);
         });
     } else {
         // If no reservations, show a "No reservations found" message
@@ -285,6 +305,10 @@ logOutButton.addEventListener('click', () => {
     if (loginContent && userContent) {
         loginContent.style.display = 'block';
         userContent.style.display = 'none';
+    }
+
+    if (reservationsList) {
+        reservationsList.innerHTML = '';
     }
 });
 
