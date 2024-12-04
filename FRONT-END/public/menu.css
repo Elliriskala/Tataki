@@ -177,7 +177,7 @@ a.shopping-cart:hover .tooltip2 {
     margin: auto;
     overflow: hidden;
     width: 50%;
-    height: 650px;
+    height: 700px;
 }
 
 .menu-track-container {
@@ -297,6 +297,7 @@ a.shopping-cart:hover .tooltip2 {
     text-align: center;
     color: var(--sushi-grey3);
     position: relative;
+    z-index: 10;
     opacity: 0;
     transform: translateX(20px);
     transition:
@@ -353,7 +354,7 @@ a.shopping-cart:hover .tooltip2 {
 .allergen-info {
     font-size: 1em;
     color: var(--sushi-red4);
-    margin-bottom: 2em;
+    margin-bottom: 3em;
 }
 
 .add-to-order-button {
@@ -389,11 +390,11 @@ a.shopping-cart:hover .tooltip2 {
     padding: 0.4em;
     position: absolute;
     bottom: 0;
-    right: -300%;
+    left: -120%;
     transform: translateX(20%);
     white-space: nowrap;
     font-size: 0.7em;
-    z-index: 50;
+    z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
@@ -403,7 +404,7 @@ a.shopping-cart:hover .tooltip2 {
     opacity: 1;
     transform: translateX(-50%) translateY(-1em);
     position: absolute;
-    z-index: 800;
+    z-index: 999;
 }
 
 .fa-cart-plus {
