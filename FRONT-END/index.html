@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home page</title>
+    <meta name="description" content="Tataki restaurant home page" />
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="/homepage.css" />
     <link rel="stylesheet" href="/nav.css" />
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
@@ -24,10 +29,10 @@
           <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
         </ul>
         <div class="control-buttons">
-          <button class="language" id="flag-en">🇬🇧</button>
-          <button class="language" id="flag-fi">🇫🇮</button>
-          <button class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
-        </div>
+          <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
+          <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
+          <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
+      </div>
       </nav>
     </header>
     <main>
@@ -84,10 +89,10 @@
         </div>
         <div class="social-medias">
           <ul>
-            <li id="facebook"><a href=""></a></li>
+            <li id="facebook"><a href="" aria-label="link-to-facebook"></a></li>
             <label for="facebook">
               <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-            <li id="instagram"><a href=""></a></li>
+            <li id="instagram"><a href="" aria-label="link-to-instagram"></a></li>
             <label for="instagram">
               <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
             </label>

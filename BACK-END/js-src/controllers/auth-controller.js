@@ -1,29 +1,45 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { fetchUserById, selectUserByEmail } from '../models/user-models.js';
+import {fetchUserById, selectUserByEmail} from '../models/user-models.js';
 import 'dotenv/config';
 import {customError} from '../middlewares/error-handlers.js';
 
-
 const postLogin = async (req, res, next) => {
-    console.log('postLogin', req.body);
-    const {email, password} = req.body;
+  try {
+    const { email, password } = req.body;
+
+    // Validate required fields
+    if (!email || !password) {
+      return next(customError('Email and password are required.', 400));
+    }
+
+    // Fetch user by email
     const user = await selectUserByEmail(email);
     if (!user) {
-      return next(customError(`Username not found.`, 401));
+      return next(customError('Username not found.', 401));
     }
+
+    // Compare provided password with stored hash
     const pwMatch = await bcrypt.compare(password, user.password_hash);
-    if (pwMatch) {
-      const token = jwt.sign({user_id: user.user_id}, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-      });
-      // DO not include password hash into response
-      delete user.password_hash;
-      return res.json({...user, token});
-    } else {
-      return next(customError(`Password invalid.`, 401));
+    if (!pwMatch) {
+      return next(customError('Password invalid.', 401));
     }
-  };
+
+    // Generate JWT token with expiry time
+    const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN || '1h',  // Default expiry set to 1 hour
+    });
+
+    // Remove sensitive data (password_hash) before responding
+    delete user.password_hash;
+
+    // Respond with user data and token
+    return res.status(200).json({ ...user, token });
+  } catch (error) {
+    console.error('postLogin error:', error);
+    next(customError('Internal server error.', 500));  // Handle server errors with a 500 status
+  }
+};
 
 
 const decodeToken = (token) => {
@@ -35,22 +51,54 @@ const decodeToken = (token) => {
   }
 };
 
-
-const getMe = async (req, res) => {
-    const id = req.body.user_id;
-    try {
-        const user = await fetchUserById(req.body.user_id);
-        if (user) {
-            res.json({ user_id: id, ...user });
-        }
-        else {
-            res.sendStatus(401);
-        }
+const getMe = async (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1];
+  if (!token) {
+    return next(customError('No token provided', 401));
+  }
+  const {user_id: id} = decodeToken(token);
+  if (!id) {
+    return next(customError('Invalid token', 401));
+  }
+  try {
+    const user = await fetchUserById(id);
+    if (user) {
+      res.json({user_id: id, ...user});
+    } else {
+      res.sendStatus(401);
     }
-    catch (e) {
-        console.error('getMe', +e.message);
-        res.status(503).json({ message: 'Error in getMe' });
-    }
-    ;
+  } catch (e) {
+    console.error('getMe', +e.message);
+    res.status(503).json({message: 'Error in getMe'});
+  }
 };
-export { postLogin, getMe, decodeToken};
+
+
+const isTokenExpired = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return next(customError('No token provided', 401));
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    // If token is expired, the verification will throw an error
+    const currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
+    const isExpired = decoded.exp < currentTime;
+
+    if (isExpired) {
+      return res.status(401).json({ expired: true });
+    }
+
+    // Token is valid
+    return res.status(200).json({ expired: false });
+  } catch (e) {
+    console.error('Token verification error:', e.message);
+    return next(customError('Invalid token', 401));
+  }
+};
+
+
+
+export {postLogin, getMe, decodeToken, isTokenExpired};

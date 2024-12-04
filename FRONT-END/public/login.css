@@ -216,7 +216,7 @@ main {
 }
 
 .reset-button {
-  background-color: var(--sushi-grey1);
+  background-color: var(--sushi-graphite);
 }
 
 .submit-button:hover {
@@ -265,7 +265,7 @@ main {
   animation: validAnimation 0.4s ease-in-out;
 }
 
-.login-form input.interacted:invalid {
+.login-form input.interacted:user-invalid {
   border-color: #f44336;
   box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
   animation: invalidAnimation 0.4s ease-in-out;
@@ -277,7 +277,7 @@ main {
   animation: validAnimation 0.4s ease-in-out;
 }
 
-.register-form input.interacted:invalid {
+.register-form input.interacted:user-invalid {
   border-color: #f44336;
   box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
   animation: invalidAnimation 0.4s ease-in-out;

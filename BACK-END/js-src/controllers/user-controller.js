@@ -80,8 +80,15 @@ const postUser = async (req, res, next) => {
     }
 };
 
-const modifyUserById = async (req, res) => {
-    const id = parseInt(req.params.id);
+const modifyUserById = async (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+        return next(customError('No token provided', 401));
+    }
+    const { user_id: id } = decodeToken(token);
+    if (!id) {
+        return next(customError('Invalid token', 401));
+    }
     const existingData = await fetchUserById(id);
     if (!existingData) {
         res.status(404).json({ message: 'User not found' });
@@ -122,8 +129,15 @@ const modifyUserById = async (req, res) => {
         res.status(500).json({ message: 'Error in modifyUserById database query' });
     }
 };
-const deleteUserById = async (req, res) => {
-    const user_id = Number(req.params.user_id);
+const deleteUserById = async (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+        return next(customError('No token provided', 401));
+    }
+    const { user_id } = decodeToken(token);
+    if (!user_id) {
+        return next(customError('Invalid token', 401));
+    }
     try {
         const result = await deleteUser(user_id);
         if (result) {
