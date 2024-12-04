@@ -158,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const reservation_guests = Number(guestsInput.value); // Ensure this is a number
     const reservation_email = emailInput.value;
     const reservation_phone = phoneInput.value;
-    const user_id = localStorage.getItem("user_id");
     const token = localStorage.getItem("authToken");
   
     // Allow user to make a reservation both as a guest and as a logged-in user
@@ -177,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
   
-    if (!user_id || !token) {
+    if (!token) {
       console.log("User is not logged in");
     }
   
@@ -188,9 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
       email: reservation_email,
       phone_number: reservation_phone,
       full_name: fullName,
-      user_id: user_id || null,
+      user_id: null,
     };
-  
+
     try {
       const response = await fetch("http://localhost:3000/api/reservations", {
         method: "POST",
