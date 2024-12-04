@@ -26,6 +26,16 @@ const postLogin = async (req, res, next) => {
   };
 
 
+const decodeToken = (token) => {
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (e) {
+    console.error('decodeToken', e.message);
+    return null;
+  }
+};
+
+
 const getMe = async (req, res) => {
     const id = req.body.user_id;
     try {
@@ -43,4 +53,4 @@ const getMe = async (req, res) => {
     }
     ;
 };
-export { postLogin, getMe };
+export { postLogin, getMe, decodeToken};

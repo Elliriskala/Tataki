@@ -11,7 +11,7 @@ const options = {
     maximumAge: 0,
 };
 
-let map = L.map('map').setView([60.1699, 24.9384], 13);
+let map = L.map('map').setView([60.16366628688539, 24.94161492221418], 13); // Set the view to Tataki's location
 L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
     {
@@ -22,7 +22,7 @@ L.tileLayer(
     }
   ).addTo(map);
 L.control.scale().addTo(map);
-let marker = L.marker([60.1699, 24.9384]).addTo(map);
+let marker = L.marker([60.16366628688539, 24.94161492221418]).addTo(map);
 marker.bindPopup("<b>Welcome to Tataki!").openPopup();
 
 
@@ -75,14 +75,14 @@ getLocationButton?.addEventListener('click', () => {
             async function (position) {
                 // Get user's location (latitude and longitude)
                 const userLat = position.coords.latitude;
-                const userLon = position.coords.longitude;
+                const userLon = position.coords.longitude; // Get user's longitude
 
                 // Set latitude and longitude in hidden fields
                 const fromLatElement = document.getElementById('fromLat') as HTMLInputElement;
                 const fromLonElement = document.getElementById('fromLon') as HTMLInputElement;
                 if (fromLatElement && fromLonElement) {
                     (fromLatElement as HTMLInputElement).value = userLat.toString();
-                    (fromLonElement as HTMLInputElement).value = userLon.toString();
+                    (fromLonElement as HTMLInputElement).value = userLon.toString(); // Set user's longitude in hidden field
                 }
 
                 // Show the form and hide the "Use My Location" button
@@ -109,8 +109,8 @@ itineraryForm?.addEventListener('submit', async (event) => {
     const fromLat = fromLatElement ? (fromLatElement as HTMLInputElement).value : '';
     const fromLonElement = document.getElementById('fromLon') as HTMLInputElement;
     const fromLon = fromLonElement ? (fromLonElement as HTMLInputElement).value : '';
-    const toLat: number = 60.1699; // Fixed latitude of Tataki
-    const toLon: number = 24.9384; // Fixed longitude of Tataki
+    const toLat: number = 60.16366628688539; // Fixed latitude of Tataki
+    const toLon: number = 24.94161492221418; // Fixed longitude of Tataki
     const walkSpeedElement = document.getElementById('walkSpeed') as HTMLInputElement;
     const walkSpeed = walkSpeedElement ? (walkSpeedElement as HTMLInputElement).value : '';
 
@@ -172,10 +172,11 @@ function displayItineraryResults(itineraries: Itinerary[]) {
             }
         };
         
+        // Display itinerary details, including mode of transport, start and end times, and distance from origin to destination.
         itineraryItem.innerHTML = `
             <h3>${translations[language]["itinerary"]} ${index + 1}</h3>
             <p><strong>${translations[language]["duration"]}:</strong> ${formattedDuration}</p>
-            <ul>
+            <ul> 
                 ${itinerary.legs.map(leg => `
                     <li>
                         ${leg.mode ? `<strong>${translations[language]["mode"]}:</strong> ${modeTranslation[language][leg.mode] || leg.mode} ${leg.trip?.tripHeadsign ? `(${translations[language]["line"]}: ${leg.trip.tripHeadsign}${leg.trip.routeShortName ? ` ${leg.trip.routeShortName}` : ''})` : ''} <br>` : ''}
@@ -213,7 +214,7 @@ function formatDuration(durationInSeconds: number) {
 }
 
 
-function formatDate(timestamp: number) {
+function formatDate(timestamp: number) { // Format timestamp to human-readable date and time
     const date = new Date(timestamp);
 
     if (language === 'fi') {

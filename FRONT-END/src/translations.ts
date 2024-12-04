@@ -24,7 +24,7 @@ const translations: Translation = {
         "reservation-link": "Reserve a table",
         "english-flag": "🇬🇧",
         "finnish-flag": "🇫🇮",
-        "address": "Address: 123 Street, Helsinki, Finland",
+        "address": "Address: Annankatu 18, 00120 Helsinki, Finland",
         "phone": "Phone: 123456789",
         "email": "Email: ravintolatataki@gmail.com",
         "find-us": "Find Us",
@@ -134,7 +134,14 @@ const translations: Translation = {
         "timeOption11": "8:00 PM",
         "timeOption12": "9:00 PM",
         "timeOptionDefault": "Select Time",
-        "reservationDescription": "For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four.",
+        "reservationDescription": "For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four. Reservations are binding, excluding reasons beyond the clients reach.",
+        "your-reservations": "Your Reservations",
+        "your-date": "Reservation Date",
+        "your-time": "Reservation Time",
+        "your-guests": "Number of Guests",
+        "your-full-name": "Full Name",
+        "your-reservation-id": "Reservation ID",
+
 
         //Review page translations
         
@@ -158,7 +165,7 @@ const translations: Translation = {
         "message": "This is a message box",
         "phone-label": "Phone Number",
         "welcome-header": "Welcome to Your Profile",
-        "heres-your-profile": "Hi, Here's your profile information.",
+        "heres-your-profile": "Hi, Here's your user information.",
         "your-information": "Your Information",
         "logout-button": "Logout",
 
@@ -200,7 +207,7 @@ const translations: Translation = {
         "reservation-link": "Varaa pöytä",
         "english-flag": "🇬🇧",
         "finnish-flag": "🇫🇮",
-        "address": "Osoite: 123 Street, Helsinki, Suomi",
+        "address": "Osoite: Annankatu 18, 00120 Helsinki, Suomi",
         "phone": "Puhelin: 123456789",
         "email": "Sähköposti: ravintolatataki@gmail.com",
         "find-us": "Löydä Meidät",
@@ -312,7 +319,13 @@ const translations: Translation = {
         "timeOption11": "20:00",
         "timeOption12": "21:00",
         "timeOptionDefault": "Valitse Aika",
-        "reservationDescription": "Suuremmille seurueille suosittelemme soittamista asiakaspalveluumme. Huomioithan, että emme ota vastaan alle neljän hengen pöytävarauksia.",
+        "reservationDescription": "Suuremmille seurueille suosittelemme soittamista asiakaspalveluumme. Huomioithan, että emme ota vastaan alle neljän hengen pöytävarauksia. Varaukset ovat sitovia, pois lukien asiakkaan ulottumattomissa olevat syyt.",
+        "your-reservations": "Pöytävarauksesi",
+        "your-date": "Varauspäivämäärä",
+        "your-time": "Varausaika",
+        "your-guests": "Vieraiden lukumäärä",
+        "your-full-name": "Koko Nimi",
+        "your-reservation-id": "Varaustunnus",
 
         //Review page translations
         "your-name": "Nimesi",
@@ -335,7 +348,7 @@ const translations: Translation = {
         "message": "Tämä on viestilaatikko",
         "phone-label": "Puhelinnumero",
         "welcome-header": "Tervetuloa Profiiliisi",
-        "heres-your-profile": "Hei, tässä on profiilitietosi.",
+        "heres-your-profile": "Hei, tässä on käyttäjätietosi.",
         "your-information": "Tietosi",
         "logout-button": "Kirjaudu ulos",
 
