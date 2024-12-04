@@ -57,12 +57,23 @@ main {
     max-width: 100%;
 }
 
+.logo-placeholder {
+    background-image: url("./img/logo5.png");
+    background-size: cover;
+    background-position: center;
+    width: 60px;
+    height: 40px;
+    border-radius: 1em;
+}
+
 .logo {
     display: flex;
     align-items: center;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.3em;
+    width: 60px;
+    height: 40px;
 }
 
 .logo p {

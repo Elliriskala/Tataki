@@ -50,7 +50,7 @@ const translations: Translation = {
         "about-us2": "Founded by a sushi enthusiast, Tataki combines expertise with a passion for fusion. Each dish showcases artistry, sustainability, and the joy of good food. Thank you for being part of our journey — we look forward to sharing more memorable meals with you!",
 
         //menu page translations
-        "our-menus": "Our menus",
+        "our-menus": "Menus",
         "lunch": "Lunch",
         "dinner": "Dinner",
         "sides": "Sides",
@@ -90,7 +90,7 @@ const translations: Translation = {
         "placeholder-email": "Email",
         "placeholder-phone": "Phone number",
         "placeholder-address": "Address",
-        "placeholder-po": "Postal code",
+        "placeholder-city": "City",
         "dessert": "Desserts",
 
         // reservation page translations
@@ -272,7 +272,7 @@ const translations: Translation = {
         "placeholder-email": "Sähköposti",
         "placeholder-phone": "Puhelinnumero",
         "placeholder-address": "Osoite",
-        "placeholder-po": "Postinumero",
+        "placeholder-city": "Kaupunki",
         "dessert": "Jälkiruoat",
         
 

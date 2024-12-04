@@ -9,15 +9,16 @@ const fetchOrders = async (next) => {
   try {
     const sql = `
             SELECT 
-        Orders.*, 
-        GROUP_CONCAT(CONCAT(OrderItems.course_name, ':', OrderItems.item_quantity)) AS items,
-        OrderStatus.status_name AS order_status
-    FROM Orders
-    LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
-    LEFT JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id
-    GROUP BY Orders.order_id
-    ORDER BY Orders.created_at DESC;
-`;
+                Orders.*, 
+                GROUP_CONCAT(CONCAT(Menus.course_name, ':', OrderItems.item_quantity)) AS order_items,
+                OrderStatus.status_name AS order_status
+            FROM Orders
+            LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
+            LEFT JOIN Menus ON OrderItems.menu_id = Menus.menu_id
+            LEFT JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id
+            GROUP BY Orders.order_id
+            ORDER BY Orders.created_at DESC;
+          `;
     const [rows] = await promisePool.query(sql);
     if (rows && rows.length > 0) {
       return rows;
@@ -46,10 +47,11 @@ const fetchOrdersByStatus = async (order_status, next) => {
     const sql = `
           SELECT 
               Orders.*, 
-              GROUP_CONCAT(CONCAT(OrderItems.course_name, ':', OrderItems.item_quantity)) AS items,
+              GROUP_CONCAT(CONCAT(Menus.course_name, ':', OrderItems.item_quantity)) AS order_items,
               OrderStatus.status_name AS order_status
           FROM Orders
           LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
+          LEFT JOIN Menus ON OrderItems.menu_id = Menus.menu_id
           LEFT JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id
           WHERE OrderStatus.status_name = ?
           GROUP BY Orders.order_id
@@ -65,7 +67,7 @@ const fetchOrdersByStatus = async (order_status, next) => {
 };
 
 /**
- *
+ * fetch order by order id
  * @param order_id - order id
  * @returns order from the database
  * @returns - order object with items
@@ -74,37 +76,35 @@ const fetchOrderById = async (order_id, next) => {
   try {
     const sql = `
         SELECT 
-    Orders.order_id,
-    Orders.customer_name,
-    Orders.total_price,
-    Orders.order_type,
-    Orders.general_comment,
-    Orders.created_at,
-    Orders.is_delivery,
-    OrderStatus.status_name AS order_status,
-    GROUP_CONCAT(
-        CONCAT(OrderItems.course_name, ' (x', OrderItems.item_quantity, ')') 
-        SEPARATOR ', '
-    ) AS order_items,
-    DeliveryDetails.delivery_address,
-    DeliveryDetails.postal_code,
-    DeliveryDetails.delivery_instructions
-FROM 
-    Orders
-LEFT JOIN 
-    OrderStatus ON Orders.status_id = OrderStatus.status_id
-LEFT JOIN 
-    OrderItems ON Orders.order_id = OrderItems.order_id
-LEFT JOIN 
-    DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
-WHERE 
-    Orders.order_id = ?
-GROUP BY 
-    Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
-    Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
-    DeliveryDetails.postal_code, DeliveryDetails.delivery_instructions
-    ORDER BY Orders.created_at DESC;
-`;
+            Orders.order_id,
+            Orders.customer_name,
+            Orders.total_price,
+            Orders.order_type,
+            Orders.general_comment,
+            Orders.created_at,
+            Orders.is_delivery,
+            OrderStatus.status_name AS order_status,
+            GROUP_CONCAT(
+                CONCAT(Menus.course_name, ' (x', OrderItems.item_quantity, ')') 
+                SEPARATOR ', '
+            ) AS order_items,
+            DeliveryDetails.delivery_address,
+            DeliveryDetails.city,
+            DeliveryDetails.delivery_instructions
+        FROM 
+            Orders
+        LEFT JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id
+        LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
+        LEFT JOIN Menus ON OrderItems.menu_id = Menus.menu_id
+        LEFT JOIN DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
+        WHERE 
+            Orders.order_id = ?
+        GROUP BY 
+            Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
+            Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
+            DeliveryDetails.city, DeliveryDetails.delivery_instructions
+            ORDER BY Orders.created_at DESC;
+        `;
     const [rows] = await promisePool.query(sql, [order_id]);
     if (rows && rows.length > 0) {
       return rows[0];
@@ -127,37 +127,31 @@ const fetchOrderByCustomerName = async (customer_name, next) => {
   try {
     const sql = `
     SELECT 
-    Orders.order_id,
-    Orders.customer_name,
-    Orders.total_price,
-    Orders.order_type,
-    Orders.general_comment,
-    Orders.created_at,
-    Orders.is_delivery,
-    OrderStatus.status_name AS order_status,
-    GROUP_CONCAT(
-        CONCAT(OrderItems.course_name, ' (x', OrderItems.item_quantity, ')') 
-        SEPARATOR ', '
-    ) AS order_items,
-    DeliveryDetails.delivery_address,
-    DeliveryDetails.postal_code,
-    DeliveryDetails.delivery_instructions
-FROM 
-    Orders
-LEFT JOIN 
-    OrderStatus ON Orders.status_id = OrderStatus.status_id
-LEFT JOIN 
-    OrderItems ON Orders.order_id = OrderItems.order_id
-LEFT JOIN 
-    DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
-WHERE 
-    Orders.order_id = ?
-GROUP BY 
-    Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
-    Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
-    DeliveryDetails.postal_code, DeliveryDetails.delivery_instructions
+        Orders.*,
+        GROUP_CONCAT(
+            CONCAT(Menus.course_name, ' (x', OrderItems.item_quantity, ')') 
+            SEPARATOR ', '
+        ) AS order_items,
+        OrderStatus.status_name AS order_status,
+        DeliveryDetails.delivery_address,
+        DeliveryDetails.city,
+        DeliveryDetails.delivery_instructions
+    FROM 
+        Orders
+    LEFT JOIN 
+        OrderItems ON Orders.order_id = OrderItems.order_id
+    LEFT JOIN 
+        Menus ON OrderItems.menu_id = Menus.menu_id
+    LEFT JOIN 
+        OrderStatus ON Orders.status_id = OrderStatus.status_id
+    LEFT JOIN 
+        DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
+    WHERE 
+        Orders.order_id = ?
+    GROUP BY 
+        Orders.order_id
     ORDER BY Orders.created_at DESC;
-`;
+    `;
 
     const [rows] = await promisePool.query(sql, [customer_name]);
     if (rows && rows.length > 0) {
@@ -175,7 +169,7 @@ GROUP BY
  * fetch orders by user id
  * @param user_id - user id
  * @returns all orders from the database associated with the user
- * @returns - Array of orders 
+ * @returns - Array of orders
  * @returns - null if no orders found
  */
 
@@ -183,37 +177,39 @@ const fetchOrdersByUserId = async (user_id, next) => {
   try {
     const sql = `
     SELECT 
-    Orders.order_id,
-    Orders.customer_name,
-    Orders.total_price,
-    Orders.order_type,
-    Orders.general_comment,
-    Orders.created_at,
-    Orders.is_delivery,
-    OrderStatus.status_name AS order_status,
-    GROUP_CONCAT(
-        CONCAT(OrderItems.course_name, ' (x', OrderItems.item_quantity, ')') 
-        SEPARATOR ', '
-    ) AS order_items,
-    DeliveryDetails.delivery_address,
-    DeliveryDetails.postal_code,
-    DeliveryDetails.delivery_instructions
-FROM 
-    Orders
-LEFT JOIN 
-    OrderStatus ON Orders.status_id = OrderStatus.status_id
-LEFT JOIN 
-    OrderItems ON Orders.order_id = OrderItems.order_id
-LEFT JOIN 
-    DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
-WHERE 
-    Orders.user_id = ?
-GROUP BY 
-    Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
-    Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
-    DeliveryDetails.postal_code, DeliveryDetails.delivery_instructions
-    ORDER BY Orders.created_at DESC;
-`;
+        Orders.order_id,
+        Orders.customer_name,
+        Orders.total_price,
+        Orders.order_type,
+        Orders.general_comment,
+        Orders.created_at,
+        Orders.is_delivery,
+        OrderStatus.status_name AS order_status,
+        GROUP_CONCAT(
+            CONCAT(Menus.course_name, ' (x', OrderItems.item_quantity, ')') 
+            SEPARATOR ', '
+        ) AS order_items,
+        DeliveryDetails.delivery_address,
+        DeliveryDetails.city,
+        DeliveryDetails.delivery_instructions
+    FROM 
+        Orders
+    LEFT JOIN 
+        OrderStatus ON Orders.status_id = OrderStatus.status_id
+    LEFT JOIN 
+        OrderItems ON Orders.order_id = OrderItems.order_id
+    LEFT JOIN 
+        Menus ON OrderItems.menu_id = Menus.menu_id
+    LEFT JOIN 
+        DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
+    WHERE 
+        Orders.user_id = ?
+    GROUP BY 
+        Orders.order_id, Orders.customer_name, Orders.total_price, Orders.order_type, 
+        Orders.general_comment, OrderStatus.status_name, DeliveryDetails.delivery_address, 
+        DeliveryDetails.city, DeliveryDetails.delivery_instructions
+        ORDER BY Orders.created_at DESC;
+    `;
 
     const [rows] = await promisePool.query(sql, [user_id]);
     if (rows && rows.length > 0) {
@@ -246,7 +242,7 @@ const createOrder = async (
   order_items,
   general_comment = null,
   delivery_address = null,
-  postal_code = null,
+  city = null,
   delivery_instructions = null,
 ) => {
   try {
@@ -264,9 +260,6 @@ const createOrder = async (
     // Fetch status_id from OrderStatus table
     const statusSql = `SELECT status_id FROM OrderStatus WHERE status_name = ?`;
     const [statusResult] = await promisePool.query(statusSql, [order_status]);
-
-    console.log('Order status:', order_status);
-    console.log('Status result:', statusResult);
 
     if (!statusResult || statusResult.length === 0) {
       throw new Error(`Invalid order_status: ${order_status}`);
@@ -287,7 +280,7 @@ const createOrder = async (
       is_delivery: order_type.toLowerCase() === 'delivery',
       general_comment: general_comment || null,
       delivery_address: delivery_address,
-      postal_code: postal_code,
+      city: city,
       delivery_instructions: delivery_instructions || null,
     });
 
@@ -306,29 +299,26 @@ const createOrder = async (
 
     if (order_type.toLowerCase() === 'delivery') {
       const deliverySql = `
-          INSERT INTO DeliveryDetails (order_id, delivery_address, postal_code, delivery_instructions)
+          INSERT INTO DeliveryDetails (order_id, delivery_address, city, delivery_instructions)
           VALUES (?, ?, ?, ?)
       `;
       await promisePool.query(deliverySql, [
         orderId,
         delivery_address,
-        postal_code,
+        city,
         delivery_instructions || null,
       ]);
     }
 
     // insert order items into order_items table
     const orderItemsSql =
-      'INSERT INTO orderitems (order_id, menu_id, course_name, item_quantity) VALUES ?';
+      'INSERT INTO orderitems (order_id, menu_id, item_quantity) VALUES ?';
 
     const orderItemsValues = order_items.map((item) => [
       orderId,
       item.menu_id,
-      item.course_name,
       item.item_quantity,
     ]);
-
-    console.log('Order items values:', orderItemsValues);
 
     // insert order items at once
 
@@ -343,14 +333,15 @@ const createOrder = async (
       SELECT 
         Orders.*,
         OrderItems.menu_id,
-        OrderItems.course_name,
         OrderItems.item_quantity,
+        Menus.course_name,
         OrderStatus.status_name AS order_status,
         DeliveryDetails.delivery_address,
-        DeliveryDetails.postal_code,
+        DeliveryDetails.city,
         DeliveryDetails.delivery_instructions
       FROM Orders
       LEFT JOIN OrderItems ON Orders.order_id = OrderItems.order_id
+      LEFT JOIN Menus ON OrderItems.menu_id = Menus.menu_id
       LEFT JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id
       LEFT JOIN DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
       WHERE Orders.order_id = ?
@@ -376,7 +367,7 @@ const createOrder = async (
         order_type === 'Delivery'
           ? {
               address: orderItemsResult[0].delivery_address,
-              postal_code: orderItemsResult[0].postal_code,
+              city: orderItemsResult[0].city,
               instructions: orderItemsResult[0].delivery_instructions || null,
             }
           : null,

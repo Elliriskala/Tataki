@@ -153,10 +153,11 @@ dialog::backdrop {
     transition: 0.3s scale(1.1);
 }
 
-.menu-placeholder p {
+.content {
     font-family: "urbanist";
-    padding: 0.5em;
+    font-size: 1.1em;
     letter-spacing: 0.1em;
+    padding: 0.5em;
 }
 
 .menu-item {
@@ -201,7 +202,7 @@ dialog::backdrop {
 .allergen-info {
     font-family: "roboto bold";
     font-size: 1.2em;
-    padding: 0;
+    padding: 0.5em;
     margin: 0.2em;
 }
 
@@ -430,7 +431,7 @@ input:invalid {
     display: flex;
     justify-content: center;
     transition: all 0.5s ease-in-out;
-    max-width: 15em;
+    max-width: 13em;
     text-align: center;
     margin: auto;
     margin-top: 1em;

@@ -1,78 +1,103 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order management</title>
-    <meta name="description" content="Tataki restaurant order management" />
-    <link rel="stylesheet" href="/order_management.css" />
-    <link rel="stylesheet" href="/nav.css" />
-    <script
-      src="https://kit.fontawesome.com/ce58f4085c.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./src/main.ts" type="module"></script>
-    <script src="./src/order_management.ts" type="module"></script>
-  </head>
-  <body class="order-management-body">
-    <header>
-      <nav class="navigation">
-        <div class="logo">
-          <button class="hamburger">☰</button>
-          <p>Tataki</p>
-        </div>
-        <ul class="nav-list">
-          <li><a href="admin.html">Admin page</a></li>
-          <li><a href="order_management.html">Order management</a></li>
-          <li><a href="index.html">Home page</a></li>
-        </ul>
-        <div class="control-buttons">
-          <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
-          <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
-          <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
-      </div>
-      </nav>
-    </header>
-    <main>
-      <div class="order-management-header">
-        <h1>Order management</h1>
-      </div>
-      <div class="search">
-        <div class="search-bar">
-          <input type="text" placeholder="Search orders with order number" />
-          <button onclick="searchOrdersById()">Search</button>
-        </div>
-        <div class="search-bar">
-          <input type="text" placeholder="Search orders with customer name" />
-          <button onclick="searchOrdersByCustomer()">Search</button>
-        </div>
-      </div>
-      <div class="order-management">
-        <div class="pending-orders">
-          <h3>Pending orders</h3>
-          <div class="order-list">
-            <div class="pending-table" id="pending-orders-table"></div>
-          </div>
-        </div>
-        <div class="inprogress-orders">
-          <h3>In progress orders</h3>
-          <div class="order-list">
-            <div class="inprogress-table" id="inprogress-orders-table"></div>
-          </div>
-        </div>
-        <div class="completed-orders">
-          <h3>Completed orders</h3>
-          <div class="order-list">
-            <div class="completed-table" id="completed-orders-table"></div>
-          </div>
-        </div>
-      </div>
-      <div class="order-details">
-        <div id="order-details" class="order-details-section">
-          <h2>Order Details</h2>
-        </div>
-      </div>
-    </main>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Order management</title>
+        <meta name="description" content="Tataki restaurant order management" />
+        <link rel="stylesheet" href="/order_management.css" />
+        <link rel="stylesheet" href="/nav.css" />
+        <script
+            src="https://kit.fontawesome.com/ce58f4085c.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="./src/main.ts" type="module"></script>
+        <script src="./src/order_management.ts" type="module"></script>
+    </head>
+    <body class="order-management-body">
+        <header>
+            <nav class="navigation">
+                <div class="logo">
+                    <button class="hamburger">☰</button>
+                    <p>Tataki</p>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="admin.html">Admin page</a></li>
+                    <li>
+                        <a href="order_management.html">Order management</a>
+                    </li>
+                    <li><a href="index.html">Home page</a></li>
+                </ul>
+                <div class="control-buttons">
+                    <button class="language" id="flag-en">🇬🇧</button>
+                    <button class="language" id="flag-fi">🇫🇮</button>
+                    <button class="login">
+                        <a href="user.html"
+                            ><i class="fa-regular fa-user"></i
+                        ></a>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="order-management-header">
+                <h1>Order management</h1>
+            </div>
+            <div class="order-management">
+                <div class="pending-orders">
+                    <h3>Pending</h3>
+                    <div class="order-list">
+                        <div
+                            class="pending-table"
+                            id="pending-orders-table"
+                        ></div>
+                    </div>
+                </div>
+                <div class="inprogress-orders">
+                    <h3>In progress</h3>
+                    <div class="order-list">
+                        <div
+                            class="inprogress-table"
+                            id="inprogress-orders-table"
+                        ></div>
+                    </div>
+                </div>
+                <div class="completed-orders">
+                    <h3>Completed</h3>
+                    <div class="order-list">
+                        <div
+                            class="completed-table"
+                            id="completed-orders-table"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-bottom">
+                <div class="search">
+                    <div class="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search by order number"
+                        />
+                        <button onclick="searchOrdersById()">Search</button>
+                    </div>
+                    <div class="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search by customer name"
+                        />
+                        <button onclick="searchOrdersByCustomer()">
+                            Search
+                        </button>
+                    </div>
+                </div>
+                <div class="order-details">
+                    <div id="order-details" class="order-details-section">
+                        <h2>Order Details</h2>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
