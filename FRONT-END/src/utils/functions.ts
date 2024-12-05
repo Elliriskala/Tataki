@@ -99,6 +99,10 @@ const showAdminContent = (isAdmin: boolean) => {
   adminContent.style.display = isAdmin ? 'block' : 'none';
 }
 
+const getLanguage = () => {
+    return localStorage.getItem('language') || 'en';
+}
 
 
-export { fetchData, getUserLocation, calculateDistance, showPassword, isLoggedIn, replaceHTML, addBeforeEnd, formatDate, updateLoginButton, showAdminContent };
+
+export { fetchData, getUserLocation, calculateDistance, showPassword, isLoggedIn, replaceHTML, addBeforeEnd, formatDate, updateLoginButton, showAdminContent, getLanguage};

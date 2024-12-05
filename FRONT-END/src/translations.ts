@@ -138,6 +138,14 @@ const translations: Translation = {
         "your-guests": "Number of Guests",
         "your-full-name": "Full Name",
         "your-reservation-id": "Reservation ID",
+        "fill-all-fields": "Please fill in all fields.",
+        "invalid-email": "Please provide a valid email.",
+        "invalid-phone": "Please provide a valid phone number.",
+        "max-reservations": "You have reached the maximum number of reservations.",
+        "reservation-failed": "Reservation failed. Please try again.",
+        "reservation-success": "Reservation successful!",
+        "select-date-and-guests": "Please select a date and number of guests.",
+        "reservation-saved-info": "Use saved information",
 
 
         //Review page translations
@@ -154,7 +162,8 @@ const translations: Translation = {
         "register-button": "Register",
         "login-form-title": "Login",
         "password-label": "Password",
-        "submit-button": "Submit",
+        "register-submit-button": "Register",
+        "login-submit-button": "Login",
         "reset-button": "Reset",
         "register-form-title": "Register",
         "username-label": "Username",
@@ -172,6 +181,16 @@ const translations: Translation = {
         "new-password": "New Password",
         "confirm-password": "Confirm Password",
         "show-password": "Show Password",
+        "close-button": "Close",
+        "edit-profile": "Edit Profile",
+        "password-change-success": "Password change successful!",
+        "password-change-fail": "Password change failed. Check your inputs.",
+        "password-mismatch": "Passwords do not match.",
+        "password-format": "Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.",
+        "phone-update-success": "Phone number update successful!",
+        "phone-update-fail": "Phone number update failed. Check your inputs.",
+        "phone-format": "Phone number must be in a format containing only numbers.",
+        "phone-same": "Phone number is the same as the current one. Try again.",
 
 
         // itinerary page translations
@@ -327,6 +346,14 @@ const translations: Translation = {
         "your-guests": "Vieraiden lukumäärä",
         "your-full-name": "Koko Nimi",
         "your-reservation-id": "Varaustunnus",
+        "fill-all-fields": "Täytä kaikki kentät.",
+        "invalid-email": "Sähköpostiosoite ei ole vaaditussa muodossa.",
+        "invalid-phone": "Puhelinnumero ei ole vaaditussa muodossa.",
+        "max-reservations": "Olet saavuttanut maksimimäärän varauksia.",
+        "reservation-failed": "Varaus epäonnistui. Yritä uudelleen.",
+        "reservation-success": "Varaus onnistui!",
+        "select-date-and-guests": "Valitse päivämäärä ja vieraiden lukumäärä.",
+        "reservation-saved-info": "Käytä tallennettuja tietoja",
 
         //Review page translations
         "your-name": "Nimesi",
@@ -341,7 +368,8 @@ const translations: Translation = {
         "register-button": "Rekisteröidy",
         "login-form-title": "Kirjaudu sisään",
         "password-label": "Salasana",
-        "submit-button": "Lähetä",
+        "register-submit-button": "Rekisteröidy",
+        "login-submit-button": "Kirjaudu",
         "reset-button": "Tyhjennä kentät",
         "register-form-title": "Rekisteröidy",
         "username-label": "Käyttäjänimi",
@@ -359,6 +387,16 @@ const translations: Translation = {
         "new-password": "Uusi Salasana",
         "confirm-password": "Vahvista Salasana",
         "show-password": "Näytä Salasana",
+        "close-button": "Sulje",
+        "edit-profile": "Muokkaa profiilia",
+        "password-change-success": "Salasanan vaihto onnistui!",
+        "password-change-fail": "Salasanan vaihto epäonnistui. Tarkista syötteet.",
+        "password-mismatch": "Salasanat eivät täsmää.",
+        "password-format": "Salasanan tulee olla vähintään 8 merkkiä pitkä ja sisältää vähintään yhden ison kirjaimen, yhden numeron ja yhden erikoismerkin.",
+        "phone-update-success": "Puhelinnumeron päivitys onnistui!",
+        "phone-update-fail": "Puhelinnumeron päivitys epäonnistui. Tarkista syötteet.",
+        "phone-format": "Puhelinnumeron tulee käyttää muotoa joka sisältää vain numeroita.",
+        "phone-same": "Puhelinnumero on sama kuin nykyinen. Kokeile uudelleen.",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",
@@ -381,13 +419,13 @@ const loginErrorMessages: Translation = {
       400: "Invalid input, please check your input.",
       401: "Invalid username or password.",
       500: "Server error, please try again later.",
-      default: "Login failed. User does not exist."
+      default: "Login failed. Please check your username and password."
   },
   fi : {
       400: "Virheellinen syöte, tarkista syötteet.",
       401: "Virheellinen käyttäjätunnus tai salasana.",
       500: "Palvelinvirhe, yritä myöhemmin uudelleen.",
-      default: "Kirjautuminen epäonnistui."
+      default: "Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana."
   }
 }
 

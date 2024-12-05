@@ -439,9 +439,16 @@ if (phoneNumberInput) {
 
 phoneSubmit?.addEventListener('click', async (e) => {
     e.preventDefault();
+    const phoneElement = document.getElementById('phone-info') as HTMLSpanElement;
+    const language = getLanguage();
     const phone = phoneInput.value.trim();
     if (!phone) {
-        console.log('Phone number is required');
+        showPopup(translations[language]['phone-format']);
+        return;
+    }
+
+    if (phone === phoneElement.textContent) {
+        showPopup(translations[language]['phone-same']);
         return;
     }
 
@@ -464,11 +471,11 @@ phoneSubmit?.addEventListener('click', async (e) => {
         if (response.ok) {
             modal.style.display = 'none';
             overlay.style.display = 'none';
-            showPopup('Phone number updated successfully');
+            showPopup(translations[language]['phone-update-success']);
             phoneInput.value = '';
             populateUserPage();
         } else {
-            showPopup('Failed to update phone number');
+            showPopup(translations[language]['phone-update-fail']);
         }
     } catch (error) {
         console.error('Error updating phone number:', error);
@@ -478,6 +485,7 @@ phoneSubmit?.addEventListener('click', async (e) => {
 const changePasswordForm = document.getElementById('change-password-form') as HTMLFormElement;
 
 changePasswordForm?.addEventListener('submit', async (e) => {
+    const language = getLanguage();
     e.preventDefault();
     const currentPassword = document.getElementById('current-password') as HTMLInputElement;
     const newPassword = document.getElementById('new-password') as HTMLInputElement;
@@ -493,12 +501,12 @@ changePasswordForm?.addEventListener('submit', async (e) => {
     } 
 
     if (newPasswordValue !== confirmPasswordValue) {
-        showPopup('New passwords do not match');
+        showPopup(translations[language]['password-mismatch']);
         return
     }
 
     if (!/^(?=.*\d)(?=.*[A-ZÄÖÅ]).{8,30}$/.test(newPasswordValue)) {
-        showPopup('New password must contain at least one digit, one uppercase letter, and be 8-30 characters long');
+        showPopup(translations[language]['password-format']);
         return;
     }
 
@@ -520,13 +528,13 @@ changePasswordForm?.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
-            showPopup('Password changed successfully');
+            showPopup(translations[language]['password-change-success']);
             currentPassword.value = '';
             newPassword.value = '';
             confirmPassword.value = '';
             console.log('Password changed successfully');
         } else {
-            showPopup('Failed to change password, Check your current password');
+            showPopup(translations[language]['password-change-fail']);
         }
     } catch (error) {
         console.error('Error changing password:', error);

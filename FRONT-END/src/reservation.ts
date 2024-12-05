@@ -1,5 +1,6 @@
 import { Times, User } from "./utils/interfaces";
-
+import { getLanguage } from "./utils/functions";
+import { translations } from "./translations";
 const guestButtons = document.querySelectorAll(
   ".guest-btn"
 ) as NodeListOf<HTMLButtonElement>;
@@ -38,6 +39,7 @@ closePopup.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   dateInput.disabled = true;
   timeSelect.disabled = true;
+  const language = getLanguage();
 
   console.log("guest buttons", guestButtons);
   guestButtons.forEach((button) => {
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // application/json
     if (!date || !guests || !name) {
       timeSelect.disabled = true;
-      messageBox.textContent = "Please select a date and number of guests";
+      messageBox.textContent = translations[language]["select-date-and-guests"];
       return;
     }
     try {
@@ -118,16 +120,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   useMyInfoButton.addEventListener("click", async () => {
-    const user_id = localStorage.getItem("user_id");
     const token = localStorage.getItem("authToken"); // 'Bearer token'
-    if (!token || !user_id) {
+    if (!token) {
       console.error("No token found");
       alert("Please log in to use this feature");
       return;
     }
     try {
       const response = await fetch(
-        `http://localhost:3000/api/users/${user_id}`,
+        `http://localhost:3000/api/users/user`,
         {
           method: "GET",
           headers: {
@@ -153,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   reservationSubmit.addEventListener("click", async (event) => {
     event.preventDefault();
-    
+    const language = getLanguage();
     const fullName = nameInput.value;
     const reservation_date = dateInput.value;
     const reservation_time = timeSelect.value;
@@ -164,17 +165,17 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Allow user to make a reservation both as a guest and as a logged-in user
     if (!reservation_date || !reservation_time || !reservation_guests) {
-      messageBox.textContent = "Please fill out all fields";
+      messageBox.textContent = translations[language]["fill-all-fields"];
       return;
     }
   
     if (!reservation_email || !validateEmail(reservation_email)) {
-      messageBox.textContent = "Please provide a valid email";
+      messageBox.textContent = translations[language]["invalid-email"];
       return;
     }
   
     if (!reservation_phone || !validatePhone(reservation_phone)) {
-      messageBox.textContent = "Please provide a valid phone number";
+      messageBox.textContent = translations[language]["invalid-phone"];
       return;
     }
   
@@ -208,20 +209,20 @@ document.addEventListener("DOMContentLoaded", () => {
         // Handle specific error for reservation limit
         console.log(responseData);
         if (responseData.details === "Maximum reservation limit (5) reached for this user.") {
-          messageBox.textContent = "You have already reached the maximum of 5 reservations.";
+          messageBox.textContent = translations[language]["max-reservations"];
           messageBox.style.color = "red";
           return;
         }
   
         // Handle other errors
-        messageBox.textContent = responseData.message || "Failed to make a reservation. Please try again.";
+        messageBox.textContent = translations[language]["reservation-failed"];
         messageBox.style.color = "red";
         return;
       }
   
       // Success case
       popupMessage.style.color = "green";
-      showPopup("Reservation created successfully!");
+      showPopup(translations[language]["reservation-success"]);
       nameInput.value = "";
       dateInput.value = "";
       timeSelect.value = "";
@@ -230,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
       emailInput.value = "";
     } catch (error) {
       console.error("Failed to make reservation", error);
-      messageBox.textContent = "Failed to make reservation. Please try again.";
+      messageBox.textContent = translations[language]["reservation-failed"];
       messageBox.style.color = "red";
     }
   });
