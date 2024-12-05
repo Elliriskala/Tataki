@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const guestButtons = document.querySelectorAll(
     ".guest-btn"
   ) as NodeListOf<HTMLButtonElement>;
+  const messageTarget = document.getElementById("message-target") as HTMLDivElement;
 
   // Set the initial active form to login
   if (loginForm) {
@@ -77,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginBackground.classList.toggle("toggle-view", !isLogin);
     loginImage.classList.toggle("register-image", !isLogin);
     resetForm(isLogin ? registerForm : loginForm);
+    messageTarget.innerHTML = ""; // Clear any previous messages
 
     // Remove 'no-animate' class after a short delay
     setTimeout(() => {
