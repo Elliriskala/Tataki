@@ -1,5 +1,5 @@
 import { getCart, saveToCart } from "../services/cartService";
-import { fetchItemDetails } from "../services/apiService";
+import { fetchItemDetails, fetchUserInfo } from "../services/apiService";
 
 export const updateCartDisplay = (): void => {
     const cart = getCart();
@@ -47,6 +47,62 @@ const createCartItemRow = (item: any, index: number): HTMLTableRowElement => {
         ?.addEventListener("click", () => increaseQuantity(index));
 
     return row;
+};
+
+// function to add user info on button click if the user is logged in
+export const existingInfoButton = (): void => {
+    const useExistingInfoButton = document.getElementById(
+        "use-existing-info-button",
+    ) as HTMLButtonElement;
+
+    if (!useExistingInfoButton) {
+        console.error("Button with ID 'use-existing-info-button' not found!");
+    }
+
+    useExistingInfoButton.addEventListener("click", async () => {
+        try {
+            const userInfo = await fetchUserInfo();
+            if (userInfo) {
+                populateUserInfo(userInfo);
+            } else {
+                console.log(
+                    "No saved information found. Please fill in your details manually.",
+                );
+            }
+        } catch (error) {
+            console.error("Error fetching user info:", error);
+            console.log("Failed to load saved information.");
+        }
+    });
+};
+
+// function to populate user info in the form
+const populateUserInfo = (userInfo: any): void => {
+    const nameInput = document.querySelector(
+        'input[data-translate="placeholder-name"]',
+    ) as HTMLInputElement;
+    const emailInput = document.querySelector(
+        'input[data-translate="placeholder-email"]',
+    ) as HTMLInputElement;
+    const phoneInput = document.querySelector(
+        'input[data-translate="placeholder-phone"]',
+    ) as HTMLInputElement;
+
+    const addressInput = document.querySelector(
+        'input[data-translate="placeholder-address"]',
+    ) as HTMLInputElement;
+
+    const cityInput = document.querySelector(
+        'input[data-translate="placeholder-city"]',
+    ) as HTMLInputElement;
+
+    if (nameInput && emailInput && phoneInput) {
+        nameInput.value = userInfo.name || "";
+        emailInput.value = userInfo.email || "";
+        phoneInput.value = userInfo.phone || "";
+        addressInput.value = userInfo.address || "";
+        cityInput.value = userInfo.city || "";
+    }
 };
 
 // update the total price of the cart

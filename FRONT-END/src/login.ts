@@ -1,5 +1,6 @@
 import { formatDate } from "./utils/functions";
 import { UserLoggedIn } from "./utils/interfaces";
+import { clearCart } from "./services/cartService";
 import {translations, loginErrorMessages, registerErrorMessages } from "./translations";
 const loginSubmit = document.getElementById('submit-button-login') as HTMLButtonElement;
 const reservationsList = document.getElementById('reservation-list') as HTMLUListElement;
@@ -64,6 +65,7 @@ const handleLogin = async (event: Event) => {
 
     try {
         // Clear old state before logging in
+        clearCart();
         localStorage.removeItem('authToken');
         localStorage.removeItem('user_id');
         if (reservationsList) {
@@ -300,6 +302,7 @@ const logOutButton = document.getElementById('logout-btn') as HTMLButtonElement;
 logOutButton.addEventListener('click', () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user_id');
+    clearCart();
     const loginContent = document.getElementById('login-main');
     const userContent = document.getElementById('user-main');
     if (loginContent && userContent) {

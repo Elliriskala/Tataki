@@ -17,4 +17,8 @@ const addItemToCart = (item: Menu): void => {
   saveToCart(cart);
 };
 
-export { addItemToCart, getCart, saveToCart };
+function clearCart() {
+    localStorage.removeItem('cart');
+}
+
+export { addItemToCart, getCart, saveToCart, clearCart };

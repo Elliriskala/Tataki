@@ -1,5 +1,6 @@
 import { translations } from "./translations";
 import { displayOrderHistory } from "./order_management";
+import { clearCart } from "./services/cartService";
 
 const baseURL = "http://localhost:3000";
 
@@ -303,6 +304,7 @@ window.addEventListener("load", async () => {
     const expired = await isTokenExpired(token);
     if (expired) {
       alert("Your session has expired. Please log in again.");
+      clearCart();
       localStorage.removeItem("authToken");
       sessionStorage.removeItem("tokenExpired"); // Clear cached result
       window.location.href = "/user.html";

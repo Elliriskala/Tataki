@@ -1,6 +1,7 @@
 import { apiBaseUrl } from "./services/apiService";
 import { updateCartDisplay } from "./components/cart";
 import { getCart } from "./services/cartService";
+import { showProcessingModal, showOrderPlacedModal } from "./components/modal";
 
 // place the order
 const placeOrder = async () => {
@@ -35,7 +36,15 @@ const placeOrder = async () => {
         }
 
         const result = await response.json();
-        console.log(`Order placed successfully! Order ID: ${result.orderId}`);
+        console.log("Order placed successfully!", result);
+
+        // show the processing order modal
+        showProcessingModal();
+
+        // show the order placed modal
+        setTimeout(() => {
+            showOrderPlacedModal();
+        }, 5000);
 
         // clearing the cart after placing the order
         localStorage.removeItem("cart");
@@ -113,9 +122,7 @@ const collectOrderData = () => {
     } else if (!isDelivery && isPickup) {
         order_type = "pickup";
     } else {
-        throw new Error(
-            "Please select either Delivery or Pickup",
-        );
+        throw new Error("Please select either Delivery or Pickup");
     }
 
     const delivery_address = isDelivery

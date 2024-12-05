@@ -1,8 +1,7 @@
 import { fetchMenuItemsByCategory } from "./services/apiService";
 import { displayOrderMenu } from "./components/orderDisplay";
-import { updateCartDisplay } from "./components/cart";
+import { updateCartDisplay, checkDeliveryMethod, existingInfoButton } from "./components/cart";
 import { placeOrder } from "./orderProcessing";
-import { checkDeliveryMethod } from "./components/cart";
 
 // set the default language
 const getLanguage = (): string => {
@@ -34,7 +33,11 @@ const initializeOrderPage = async (): Promise<void> => {
         // update cart display
         updateCartDisplay();
 
+        // check if delivery method is set
         checkDeliveryMethod()
+
+        // check if existing info button is clicked
+        existingInfoButton();
 
         const menuContainer = document.querySelector(
             ".menu-container",

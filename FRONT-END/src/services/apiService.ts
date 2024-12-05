@@ -65,10 +65,39 @@ export const fetchItemDetails = async (itemId: number) => {
       }
   
       const item = itemArray[0];
-      console.log("Parsed item:", item);
       return item;
     } catch (error) {
       console.error("fetchItemDetails error:", error);
       throw new Error("Failed to fetch item details");
     }
   };
+
+
+// fetch user info to fill in the order fields if user is logged in
+export const fetchUserInfo = async () => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      console.log("No auth token found. User not logged in");
+      return null;
+    }
+    
+    try {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
+            method: "GET",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            },
+        });
+    
+        if (!response.ok) {
+            throw new Error(`Error fetching user info: ${response.statusText}`);
+        }
+
+        const userInfo = await response.json();
+        return userInfo;
+    } catch (error) {
+        console.error("fetchUserInfo error:", error);
+        throw new Error("Failed to fetch user info");
+    }
+};

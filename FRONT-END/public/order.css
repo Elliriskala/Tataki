@@ -63,34 +63,63 @@ body {
     --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
-/* order.html tyylittely */
-
 /* item added to cart modal */
 
 body:has(dialog[open]) {
     overflow-y: hidden;
 }
 
-dialog:not([open]) {
-    display: none;
-}
+/* processing order modal & order confirmation modal */
 
-dialog::backdrop {
-    background-color: var(--grey);
-    opacity: 0.75;
-}
-
-.item-added-to-cart {
+.item-added-to-cart, .processing-order, .order-placed {
     position: fixed;
     top: 30%;
-    background-color: var(--sushi-red2);
+    background-color: var(--sushi-red1);
     color: var(--sushi-grey3);
     padding: 2em;
     box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
     z-index: 999;
     border-radius: 1em;
     border: none;
+    display: none;
+    text-align: center;
+    max-width: 300px;
 }
+
+.item-added-to-cart {
+    background-color: var(--sushi-red2);
+}
+
+
+dialog::backdrop {
+    background-color: var(--sushi-graphite);
+    opacity: 0.75;
+}
+
+#order-placed-button {
+    padding: 0.5em;
+    font-size: 0.8em;
+    background-color: var(--sushi-red2);
+    color: var(--sushi-grey3);
+    border: none;
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    max-width: 13em;
+    text-align: center;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+#order-placed-button:hover {
+    background-color: var(--sushi-red3);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/* order.html tyylittely */
 
 .menu-page {
     flex-grow: 1;
@@ -428,6 +457,10 @@ dialog::backdrop {
     flex-direction: column;
     margin: 0.2em;
     padding-top: 1em;
+}
+
+.additional-comment textarea:focus, .add-instructions textarea:focus {
+    outline: none;
 }
 
 #leave-comment {

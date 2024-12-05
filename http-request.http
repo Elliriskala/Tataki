@@ -74,7 +74,7 @@ Content-Type: application/json
 
 ### get user by id
 
-GET http://localhost:3000/api/users/2
+GET http://localhost:3000/users/3
 
 
 ### get reservation by id

@@ -132,13 +132,23 @@
       </div>
       <div class="menu-container"></div>
       <dialog class="item-added-to-cart">
-        <p data-translate="item-added">Item added to cart!</p>
+        <p data-translate="item-added">Item added to cart</p>
       </dialog>
       <div> 
         <ul>
           <li><a href="order_management.html">order management (for testing)</a></li>
         </ul>
       </div>
+      <dialog class="processing-order">
+        <p data-translate="processing-order">Processing your order...</p>
+        <p data-translate="please-wait">Please wait for confirmation</p>
+      </dialog>
+      <dialog class="order-placed">
+        <p data-translate="order-placed">Your order has been placed successfully!</p>
+        <p data-translate="order-confirmation">The restaurant has received your order and is currently preparing it.</p>
+        <p data-translate="thank-you">Thank you for choosing Tataki!</p>
+        <button id="order-placed-button" data-translate="close-dialog">Close</button>
+    </dialog>
     </main>
     <footer>
       <div class="footer-container">
@@ -162,7 +172,7 @@
             </label>
           </ul>
         </div>
-      </div>
+        </div>
     </footer>
   </body>
 </html>

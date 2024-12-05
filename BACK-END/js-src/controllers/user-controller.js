@@ -14,6 +14,7 @@ const getUsers = async (_req, res) => {
         throw new Error('getUsers error: ' + e.message);
     }
 };
+
 const getUserById = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     let user_id;
