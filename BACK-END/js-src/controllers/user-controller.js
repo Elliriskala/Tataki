@@ -82,54 +82,55 @@ const postUser = async (req, res, next) => {
 };
 
 const modifyUserById = async (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
         return next(customError('No token provided', 401));
     }
+
     const { user_id: id } = decodeToken(token);
     if (!id) {
         return next(customError('Invalid token', 401));
     }
-    const existingData = await fetchUserById(id);
-    if (!existingData) {
-        res.status(404).json({ message: 'User not found' });
-        return;
-    }
 
-    const moddedUser = {
-        username: req.body.username || existingData.username,
-        email: req.body.email || existingData.email,
-        phone_number: req.body.phone_number || existingData.phone_number,
-    };
     try {
-        // Fetch the user to validate ownership
+        // Fetch existing data to check if user exists
+        const existingData = await fetchUserById(id);
+        if (!existingData) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Construct modified user data
+        const moddedUser = {
+            username: req.body.username || existingData.username,
+            email: req.body.email || existingData.email,
+            phone_number: req.body.phone_number || existingData.phone_number,
+        };
+
+        // Fetch the user again to validate ownership
         const item = await fetchUserById(id);
         if (!item) {
-            res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found' });
         }
-        // Check if the requesting user is allowed to modify this user
-        if (!req.user || item?.user_id !== req.user.user_id && req.user.user_level_id !== 1) {
-            res.status(403).json({ message: 'Only admins can modify other users.' });
-        }
-        // Check if the new username or email already exists for another user
+
+        // Check for username or email conflicts
         const isConflict = await checkUsernameOrEmailExists(moddedUser.username, moddedUser.email, id);
         if (isConflict) {
-            res.status(409).json({ message: 'Username or email is already taken' });
+            return res.status(409).json({ message: 'Username or email is already taken' });
         }
+
         // Update the user
         const result = await modifyUser(id, moddedUser);
         if (result > 0) {
-            res.status(200).json({ message: 'User modified', id });
+            return res.status(200).json({ message: 'User modified', id });
+        } else {
+            return res.status(500).json({ message: 'Failed to modify user' });
         }
-        else {
-            res.status(500).json({ message: 'Failed to modify user' });
-        }
-    }
-    catch (e) {
-        console.error('modifyUserById', e.message);
-        res.status(500).json({ message: 'Error in modifyUserById database query' });
+    } catch (e) {
+        console.error('Error in modifyUserById:', e.message);
+        return res.status(500).json({ message: 'Error in modifyUserById database query' });
     }
 };
+
 const deleteUserById = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     if (!token) {

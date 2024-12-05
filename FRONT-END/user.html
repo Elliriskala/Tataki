@@ -107,9 +107,52 @@
                         </ul>
                 </div>
                 <div id="order-history"></div>
-                <div id="user-buttons">
+                <div class="user-buttons" id="user-buttons">
                 <button class="logout-button" data-translate="logout-button" data-testid="logout" id="logout-btn">Logout</button>
+                <button class="modal-trigger" data-translate="edit-profile" id="edit-profile-button">Edit Profile</button>
                 </div>
+            </div>
+        </div>
+        <div id="profile-modal" class="modal">
+            <div class="modal-content">
+                <h4 data-translate="edit-profile-h4">Edit Profile</h4>
+                <div class="tabs">
+                    <button class="tab-button" data-translate="change-password" data-tab="change-password-tab">Change Password</button>
+                    <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
+                </div>
+        
+                <!-- Change Password Tab -->
+                <div id="change-password-tab" class="tab-content">
+                    <form id="change-password-form">
+                        <label data-translate="current-password" for="current-password">Current Password</label>
+                        <input type="password" id="current-password" name="currentPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+        
+                        <label data-translate="new-password" for="new-password">New Password</label>
+                        <input type="password" id="new-password" name="newPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+        
+                        <label data-translate="confirm-password" for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+        
+                        <div class="show-password">
+                            <input type="checkbox" id="show-password" name="showPassword">
+                            <label for="show-password" data-translate="show-password">Show Password</label>
+                        </div>
+        
+                        <button class="password-change-button" data-translate="change-password" type="submit">Change Password</button>
+                    </form>
+                </div>
+        
+                <!-- Update Phone Tab -->
+                <div id="update-phone-tab" class="tab-content" style="display: none;">
+                    <form id="update-phone-form">
+                        <label data-translate="phone-label" for="phone-number">Phone Number</label>
+                        <input placeholder="04012345678" type="tel" id="phone-number-input" name="phoneNumber" pattern="^[0-9]{10,11}$" minlength="5" maxlength="15" required>
+                        <button class="phone-update-button" id="phone-submit" type="submit">Update Phone</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="close-modal-button">Close</button>
             </div>
         </div>
     </main>

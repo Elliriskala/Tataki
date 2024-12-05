@@ -1,5 +1,5 @@
 import express from 'express';
-import { getMe } from '../controllers/auth-controller.js';
+import { changePassword, getMe } from '../controllers/auth-controller.js';
 import authenticateToken from '../middlewares/authentication.js';
 import { postLogin, isTokenExpired } from '../controllers/auth-controller.js';
 import { postUser } from '../controllers/user-controller.js';
@@ -28,6 +28,14 @@ authRouter
 authRouter
 .route('/token-validation')
 .post(isTokenExpired)
+
+authRouter.route('/change-password').put(
+    body('currentPassword').trim().isLength({ min: 8, max: 30 }),
+    body('newPassword').trim().isLength({ min: 8, max: 30 }),
+    validationErrorHandler,
+    authenticateToken,
+    changePassword
+);
 
 authRouter.route('/me').get(authenticateToken, getMe);
 
