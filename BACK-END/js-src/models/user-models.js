@@ -144,6 +144,26 @@ const selectUserByEmail = async (email) => {
         throw new Error('Database error: ' + e.message);
     }
 };
+
+
+const selectPasswordHash = async (id) => {
+    const sql = 'SELECT password_hash FROM Users WHERE user_id = ?';
+    try {
+        const [rows] = await promisePool.query(sql, [id]);
+        if (rows && rows.length > 0) {
+            return rows[0].password_hash;
+        }
+        else {
+            return null;
+        }
+    }
+    catch (e) {
+        console.error('selectPasswordHash error:', e.message);
+        throw new Error('Database error: ' + e.message);
+    }
+};
+
+
 const checkUsernameOrEmailExists = async (username, email, user_id) => {
     const sql = 'SELECT user_id FROM Users WHERE (username = ? OR email = ?) AND user_id != ?';
     try {
@@ -168,4 +188,16 @@ const checkUserExists = async (email, username) => {
     }
 }
 
-export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUserByEmail, checkUsernameOrEmailExists, checkUserExists };
+const updatePassword = async (user_id, newPassword) => {
+    const sql = 'UPDATE Users SET password_hash = ? WHERE user_id = ?';
+    try {
+        const [result] = await promisePool.query(sql, [newPassword, user_id]);
+        return result.affectedRows > 0;
+    }
+    catch (e) {
+        console.error('updatePassword error:', e.message);
+        throw new Error('Database error: ' + e.message);
+    }
+};
+
+export { fetchUsers, fetchUserById, registerUser, modifyUser, deleteUser, selectUserByEmail, checkUsernameOrEmailExists, checkUserExists, selectPasswordHash, updatePassword};

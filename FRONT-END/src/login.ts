@@ -5,11 +5,6 @@ const loginSubmit = document.getElementById('submit-button-login') as HTMLButton
 const reservationsList = document.getElementById('reservation-list') as HTMLUListElement;
 
 const registerSubmit = document.getElementById('submit-button-register') as HTMLButtonElement;
-//const loginForm = document.getElementById('login-form') as HTMLFormElement;
-//const registerForm = document.getElementById('register-form') as HTMLFormElement;
-//const loginToggle = document.getElementById('login-btn') as HTMLButtonElement;
-//const registerToggle = document.getElementById('register-btn') as HTMLButtonElement;
-//const userPageButton = document.getElementById('login-register-user') as HTMLButtonElement;
 
 const registerEmail = document.getElementById('register-email') as HTMLInputElement;
 const registerPassword = document.getElementById('register-password') as HTMLInputElement;
@@ -22,6 +17,16 @@ const messageTarget = document.getElementById('message-target') as HTMLSpanEleme
 const popup = document.getElementById('success-popup') as HTMLDivElement;
 const popupMessage = document.getElementById('popup-message') as HTMLParagraphElement;
 const closePopup = document.getElementById('close-popup') as HTMLButtonElement;
+
+const modal = document.getElementById('profile-modal') as HTMLDivElement;
+const overlay = document.createElement('div') as HTMLDivElement;
+overlay.classList.add('modal-overlay') ;
+document.body.appendChild(overlay);
+
+const editProfileBtn = document.getElementById('edit-profile-button') as HTMLButtonElement;
+const closeModalBtn = document.getElementById('close-modal-button') as HTMLButtonElement; 
+const tabButtons = document.querySelectorAll('.tab-button') as NodeListOf<HTMLButtonElement>;
+const tabContents = document.querySelectorAll('.tab-content') as NodeListOf<HTMLDivElement>;
 
 // Function to show the popup
 const showPopup = (message: string) => {
@@ -168,9 +173,8 @@ const populateUserPage = async () => {
     const phoneElement = document.getElementById('phone-info') as HTMLSpanElement;
     const language = getLanguage();
 
-    const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem('authToken');
-    if (!token || !user_id) {
+    if (!token) {
         console.error('No token found');
         return;
     }
@@ -218,7 +222,6 @@ const populateUserPage = async () => {
 
 
     try {
-        console.log(user_id);
         const response = await fetch(`${BASE_URL}/api/reservations/user`, {
             method: 'GET',
             headers: {
@@ -319,3 +322,213 @@ loginSubmit.addEventListener('click', handleLogin);
 
 // Attach the event listener to the register button
 registerSubmit.addEventListener('click', handleRegister);
+
+
+/*Edit profile - Modal functionality */
+
+editProfileBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+    // Default to the first tab
+    showTab(tabButtons[0].getAttribute('data-tab'));
+});
+
+// Close modal
+closeModalBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
+
+function closeModal() {
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+// Show tab content
+interface TabButton extends HTMLButtonElement {
+    getAttribute(qualifiedName: 'data-tab'): string | null;
+}
+
+interface TabContent extends HTMLDivElement {
+    classList: DOMTokenList;
+}
+
+function showTab(tabId: string | null) {
+    tabContents.forEach((tab: TabContent) => tab.classList.remove('active'));
+    if (tabId) {
+        const activeTab = document.getElementById(tabId) as TabContent;
+        if (activeTab) {
+            activeTab.classList.add('active');
+        }
+    }
+
+    tabButtons.forEach((button: TabButton) => button.classList.remove('active'));
+    const activeButton = document.querySelector(`[data-tab="${tabId}"]`) as TabButton;
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+}
+
+// Tab switching
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const tabId = button.getAttribute('data-tab');
+        showTab(tabId);
+    });
+});
+const showPasswordCheckbox = document.getElementById('show-password');
+if (showPasswordCheckbox) {
+showPasswordCheckbox.addEventListener('change', () => {
+    const showPasswordElement = document.getElementById('show-password');
+    if (showPasswordElement) {
+        showPasswordElement.addEventListener('change', function() {
+            const passwordFields = document.querySelectorAll('#current-password, #new-password, #confirm-password');
+            passwordFields.forEach(field => {
+                (field as HTMLInputElement).type = (this as HTMLInputElement).checked ? 'text' : 'password';
+            });
+        });
+    }
+});
+
+// Tab Switching Logic
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+
+        tabContents.forEach(tab => {
+            (tab as HTMLElement).style.display = tab.id === targetTab ? 'block' : 'none';
+        });
+
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    });
+});
+
+// Close Modal
+
+const closeModalBtn = document.getElementById('close-modal-button');
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+        const passwordFields = document.querySelectorAll('#current-password, #new-password, #confirm-password') as NodeListOf<HTMLInputElement>;
+        passwordFields.forEach(field => {
+            field.value = '';
+            field.type = 'password';
+        });
+
+    });
+} else {
+    console.error('Close modal button not found');
+}   
+}
+
+// update phone number 
+
+const phoneSubmit = document.getElementById('phone-submit') as HTMLButtonElement;
+const phoneInput = document.getElementById('phone-number-input') as HTMLInputElement;
+
+const phoneNumberInput = document.getElementById('phone-number-input') as HTMLInputElement;
+if (phoneNumberInput) {
+    phoneNumberInput.addEventListener('input', (event) => {
+        // Remove any non-numeric characters
+        (event.target as HTMLInputElement).value = (event.target as HTMLInputElement).value.replace(/\D/g, '');
+    });
+}
+
+phoneSubmit?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const phone = phoneInput.value.trim();
+    if (!phone) {
+        console.log('Phone number is required');
+        return;
+    }
+
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        console.error('No token found');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/users/user`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ phone_number: phone })
+        });
+
+        if (response.ok) {
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+            showPopup('Phone number updated successfully');
+            phoneInput.value = '';
+            populateUserPage();
+        } else {
+            showPopup('Failed to update phone number');
+        }
+    } catch (error) {
+        console.error('Error updating phone number:', error);
+    }
+});
+
+const changePasswordForm = document.getElementById('change-password-form') as HTMLFormElement;
+
+changePasswordForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const currentPassword = document.getElementById('current-password') as HTMLInputElement;
+    const newPassword = document.getElementById('new-password') as HTMLInputElement;
+    const confirmPassword = document.getElementById('confirm-password') as HTMLInputElement;
+
+    const currentPasswordValue = currentPassword.value.trim();
+    const newPasswordValue = newPassword.value.trim();
+    const confirmPasswordValue = confirmPassword.value.trim();
+
+    if (!currentPasswordValue || !newPasswordValue || !confirmPasswordValue) {
+        console.log('Please fill in all fields');
+        return;
+    } 
+
+    if (newPasswordValue !== confirmPasswordValue) {
+        showPopup('New passwords do not match');
+        return
+    }
+
+    if (!/^(?=.*\d)(?=.*[A-ZÄÖÅ]).{8,30}$/.test(newPasswordValue)) {
+        showPopup('New password must contain at least one digit, one uppercase letter, and be 8-30 characters long');
+        return;
+    }
+
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+        console.error('No token found');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/auth/change-password`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ currentPassword: currentPasswordValue, newPassword: newPasswordValue })
+        });
+
+        if (response.ok) {
+            showPopup('Password changed successfully');
+            currentPassword.value = '';
+            newPassword.value = '';
+            confirmPassword.value = '';
+            console.log('Password changed successfully');
+        } else {
+            showPopup('Failed to change password, Check your current password');
+        }
+    } catch (error) {
+        console.error('Error changing password:', error);
+    }
+});

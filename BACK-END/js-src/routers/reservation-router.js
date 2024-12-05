@@ -10,7 +10,6 @@ reservationRouter
     .get('/', getReservations)
     .get('/times', validateAvailability)
     .post('/',
-        body('user_id').isNumeric(),
         body('reservation_date').isString(),
         body('reservation_time').isString(),
         body('guests').isNumeric(),

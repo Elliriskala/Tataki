@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import {fetchUserById, selectUserByEmail} from '../models/user-models.js';
+import {fetchUserById, selectUserByEmail, selectPasswordHash, updatePassword} from '../models/user-models.js';
 import 'dotenv/config';
 import {customError} from '../middlewares/error-handlers.js';
 
@@ -100,5 +100,42 @@ const isTokenExpired = (req, res, next) => {
 };
 
 
+const changePassword = async (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1];
+  if (!token) {
+    return next(customError('No token provided', 401));
+  }
+  const {user_id: id} = decodeToken(token);
+  if (!id) {
+    return next(customError('Invalid token', 401));
+  }
+  const {currentPassword, newPassword} = req.body;
+  if (!currentPassword || !newPassword) {
+    console.log('Missing required fields');
+    return next(customError('Missing required fields', 400));
+  }
+  try {
+    const oldPassword = await selectPasswordHash(id);
+    const pwMatch =  bcrypt.compare(currentPassword, oldPassword);
+    if (!pwMatch) {
+      return next(customError('Password invalid.', 401));
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const success = await updatePassword(id, hashedPassword);
+    if (success) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(503);
+    }
+  }
+  catch (e) {
+    console.error('changePassword', +e.message);
+    res.status(503).json({message: 'Error in changePassword'});
+  }
+};
 
-export {postLogin, getMe, decodeToken, isTokenExpired};
+
+
+
+export {postLogin, getMe, decodeToken, isTokenExpired, changePassword};
