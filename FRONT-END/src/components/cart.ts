@@ -3,75 +3,91 @@ import { fetchItemDetails } from "../services/apiService";
 
 export const updateCartDisplay = (): void => {
     const cart = getCart();
+    console.log("Cart:", cart);
     const cartContainer = document.getElementById("cart-items");
-    if (!cartContainer) return;
+    const totalPriceElement = document.getElementById(
+        "total-price",
+    ) as HTMLSpanElement;
+
+    if (!cartContainer || !totalPriceElement) return;
 
     cartContainer.innerHTML = ""; // Clear the cart
 
+    // Create a row for each item in the cart
     cart.forEach((item, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-      <td>${item.course_name}</td>
-      <td>${item.price}€</td>
-      <td>
-        <div class="quantity">
-          <button class="decrease" data-index="${index}">-</button>
-          <span>${item.quantity}</span>
-          <button class="increase" data-index="${index}">+</button>
-        </div>
-      </td>
+        const row = createCartItemRow(item, index);
+        cartContainer.appendChild(row);
+    });
+
+    // Update the total price
+    updateTotalPrice(cart, totalPriceElement);
+};
+
+// create a row for a cart item
+const createCartItemRow = (item: any, index: number): HTMLTableRowElement => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${item.course_name}</td>
+        <td>${item.price}€</td>
+        <td>
+            <div class="quantity">
+                <button class="decrease" data-index="${index}">-</button>
+                <span>${item.quantity}</span>
+                <button class="increase" data-index="${index}">+</button>
+            </div>
+        </td>
     `;
 
-        // Decrease quantity event listener
-        row.querySelector(".decrease")?.addEventListener("click", () => {
-            decreaseQuantity(index);
-        });
+    // add event listeners for quantity change
+    row
+        .querySelector(".decrease")
+        ?.addEventListener("click", () => decreaseQuantity(index));
+    row
+        .querySelector(".increase")
+        ?.addEventListener("click", () => increaseQuantity(index));
 
-        // Increase quantity event listener
-        row.querySelector(".increase")?.addEventListener("click", () => {
-            increaseQuantity(index);
-        });
+    return row;
+};
 
-        cartContainer.appendChild(row);
-
-        const totalPriceElement = document.getElementById("total-price") as HTMLSpanElement;
-        const totalPrice = cart.reduce(
-            (sum, item) => sum + item.price * item.quantity,
-            0,
-        );
-
-        if (totalPriceElement)
-            totalPriceElement.textContent = `${totalPrice.toFixed(2)}€`;
-        console.log(totalPrice.toFixed(2));
-    });
+// update the total price of the cart
+const updateTotalPrice = (
+    cart: any[],
+    totalPriceElement: HTMLSpanElement,
+): void => {
+    const totalPrice = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+    );
+    totalPriceElement.textContent =
+        cart.length === 0 ? "0€" : `${totalPrice.toFixed(2)}€`;
 };
 
 // add an item to cart
-export const addToCart = (menuId: number): void => {
+export const addToCart = (menu_id: number): void => {
     const cart = getCart();
-    const existingItem = cart.find((item) => item.menu_id === menuId);
+    const existingItem = cart.find((item) => item.menu_id === menu_id);
+
     if (existingItem) {
         existingItem.quantity += 1;
         saveToCart(cart);
         updateCartDisplay();
     } else {
         // fetch item details
-        fetchItemDetails(menuId).then((itemDetails) => {
-            if (!itemDetails) return;
+        fetchItemDetails(menu_id).then((itemDetails) => {
+            if (itemDetails) {
+                cart.push({
+                    menu_id: itemDetails.menu_id,
+                    course_name: itemDetails.course_name,
+                    price: itemDetails.price,
+                    quantity: 1,
+                    course_description: itemDetails.course_description,
+                    menu_image: itemDetails.menu_image,
+                    category: itemDetails.category,
+                });
 
-            cart.push({
-                menu_id: itemDetails.menu_id,
-                course_name: itemDetails.course_name,
-                price: itemDetails.price,
-                quantity: 1,
-                course_description: itemDetails.course_description,
-                menu_image: itemDetails.menu_image,
-                category: itemDetails.category,
-            });
-
-            console.log(cart);
-            saveToCart(cart);
-            updateCartDisplay();
+                saveToCart(cart);
+                updateCartDisplay();
+            }
         });
     }
 };
@@ -84,7 +100,7 @@ const decreaseQuantity = (index: number): void => {
     if (item.quantity > 1) {
         item.quantity -= 1;
     } else {
-        cart.splice(index, 1); // Remove the item completely
+        cart.splice(index, 1); // remove the item completely
     }
 
     saveToCart(cart);
@@ -109,59 +125,86 @@ const checkDeliveryMethod = async (): Promise<void> => {
         "pickup-checkbox",
     ) as HTMLInputElement;
 
-    const handleCheckboxChange = (
-        checkboxChanged: HTMLInputElement,
-        otherCheckbox: HTMLInputElement,
-    ) => {
-        if (checkboxChanged.checked) {
-            otherCheckbox.checked = false;
-        }
+    const addressInput = document.querySelector(
+        'input[data-translate="placeholder-address"]',
+    ) as HTMLInputElement;
+    const cityInput = document.querySelector(
+        'input[data-translate="placeholder-city"]',
+    ) as HTMLInputElement;
+
+    const handleDeliveryChecked = () => {
+        toggleInputFields(true, addressInput, cityInput);
+        if (deliveryCheckbox.checked) pickupCheckbox.checked = false;
     };
 
-    deliveryCheckbox?.addEventListener("change", () => {
-        handleCheckboxChange(deliveryCheckbox, pickupCheckbox);
-    });
+    const handlePickupChecked = () => {
+        toggleInputFields(false, addressInput, cityInput);
+        if (pickupCheckbox.checked) deliveryCheckbox.checked = false;
+    };
 
-    pickupCheckbox?.addEventListener("change", () => {
-        handleCheckboxChange(pickupCheckbox, deliveryCheckbox);
-    });
+    deliveryCheckbox.addEventListener("change", handleDeliveryChecked);
+    pickupCheckbox.addEventListener("change", handlePickupChecked);
 
-    const isDelivery = deliveryCheckbox ? deliveryCheckbox.checked : false;
+    // initialize the delivery method
+    handleDeliveryChecked();
+    handlePickupChecked();
+};
 
+// function to toggle input fields
+
+const toggleInputFields = (
+    isDelivery: boolean,
+    addressInput: HTMLInputElement,
+    cityInput: HTMLInputElement,
+): void => {
     if (isDelivery) {
-        const addressInput = document.querySelector(
-            ".order-user-info input[placeholder='Address']",
-        ) as HTMLInputElement;
-        const cityInput = document.querySelector(
-            ".order-user-info input[placeholder='Postal code']",
-        ) as HTMLInputElement;
-
-        if (addressInput && cityInput) {
-            addressInput.required = true;
-            cityInput.required = true;
-
-            if (!addressInput.value.trim()) {
-                throw new Error(
-                    "Delivery address is required for delivery orders.",
-                );
-            }
-
-            if (!cityInput.value.trim()) {
-                throw new Error("Postal code is required for delivery orders.");
-            }
-        }
+        addressInput.setAttribute("required", "true");
+        cityInput.setAttribute("required", "true");
+        addInputValidationListeners(addressInput, cityInput);
     } else {
-        const addressInput = document.querySelector(
-            ".order-user-info input[placeholder='Address']",
-        ) as HTMLInputElement;
-        const cityInput = document.querySelector(
-            ".order-user-info input[placeholder='Postal code']",
-        ) as HTMLInputElement;
+        addressInput.removeAttribute("required");
+        cityInput.removeAttribute("required");
+        resetInputFields(addressInput, cityInput);
+    }
+};
 
-        if (addressInput && cityInput) {
-            addressInput.required = false;
-            cityInput.required = false;
-        }
+// reset the imput fields validation state
+const resetInputFields = (
+    addressInput: HTMLInputElement,
+    cityInput: HTMLInputElement,
+): void => {
+    addressInput.classList.remove("invalid");
+    cityInput.classList.remove("invalid");
+};
+
+// add input validation listeners
+const addInputValidationListeners = (
+    addressInput: HTMLInputElement,
+    cityInput: HTMLInputElement,
+): void => {
+    addressInput.addEventListener("input", validateFields);
+    cityInput.addEventListener("input", validateFields);
+};
+
+// validate the input fields
+const validateFields = (): void => {
+    const addressInput = document.querySelector(
+        'input[data-translate="placeholder-address"]',
+    ) as HTMLInputElement;
+    const cityInput = document.querySelector(
+        'input[data-translate="placeholder-city"]',
+    ) as HTMLInputElement;
+
+    toggleInputValidation(addressInput);
+    toggleInputValidation(cityInput);
+};
+
+// toggle input validation
+const toggleInputValidation = (input: HTMLInputElement): void => {
+    if (input.value.trim() === "") {
+        input.classList.add("invalid");
+    } else {
+        input.classList.remove("invalid");
     }
 };
 

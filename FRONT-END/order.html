@@ -50,7 +50,7 @@
               <tbody id="cart-items"></tbody>
             </table>
             <div class="order-total">
-              <p data-translate="total">Total:</p><span id="total-price"></span>
+              <p data-translate="total" class="total">Total: </p><span id="total-price">0€</span>
             </div>
             <div class="additional-comment">
               <textarea
@@ -64,20 +64,16 @@
               ></textarea>
             </div>
           </div>
-          <div>
-            <div class="order-user-info">
+          <div class="right-column">
+            <form class="order-user-info">
               <h3 data-translate="your-info">Your information:</h3>
               <input type="text" data-translate="placeholder-name" placeholder="Name" minlength="3" maxlength="25" required/>
-              <input type="text" data-translate="placeholder-phone" placeholder="Phone number" minlength="4" maxlength="15"/>
               <input type="email" data-translate="placeholder-email" placeholder="Email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required/>
-              <input type="text" data-translate="placeholder-address" placeholder="Address" maxlength="25"/>
-              <input type="text" data-translate="placeholder-city" placeholder="City" maxlength="15"/>
-            </div>
+              <input type="text" data-translate="placeholder-phone" placeholder="Phone number" minlength="4" maxlength="15"/>
+            </form>
             <div class="use-existing-info">
                 <button id="use-existing-info-button" data-translate="use-existing-info">Use saved information</button>
             </div>
-          </div>
-          <div class="right-column">
             <div class="delivery-method">
               <div>
                 <h4 data-translate="select-delivery">Select delivery method:</h4>
@@ -90,6 +86,10 @@
                 <input type="checkbox" class="checkbox" id="pickup-checkbox" />
                 <label for="pickup-checkbox" data-translate="pickup">Pickup</label>
             </div>
+            <form class="delivery-address">
+                <input type="text" data-translate="placeholder-address" placeholder="Address" minlength="4" maxlength="25"/>
+                <input type="text" data-translate="placeholder-city" placeholder="City" minlength="4" maxlength="15"/>
+            </form>
             <div class="add-instructions">
               <textarea
                 name="instructions"
@@ -99,16 +99,15 @@
                 data-translate="placeholder-courier"
 
                 placeholder="Add instructions for courier here"
-                style="max-width: 400px; max-height: 100px; resize: none;"
+                style="max-width: 95%; max-height: 100px; resize: none;"
               ></textarea>
             </div>
             <div class="terms-and-conditions-placeholder">
               <details>
                 <summary data-translate="terms-summary">Terms & Conditions</summary>
-                <div class="content" style="max-height: 200px;">
-                <p data-translate="agree">To order you need to agree to our Terms & Conditions.</p>
+                <div class="content" style="max-height: 300px; max-width: 90%;">
                 <p data-translate="terms">
-                  Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept cash or orders over the phone. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We appreciate your understanding and cooperation, thank you!
+                  Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We appreciate your understanding and cooperation, thank you!
                 </p>
                 </div>
             </details>

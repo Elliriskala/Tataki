@@ -2,6 +2,7 @@ import { fetchMenuItemsByCategory } from "./services/apiService";
 import { displayOrderMenu } from "./components/orderDisplay";
 import { updateCartDisplay } from "./components/cart";
 import { placeOrder } from "./orderProcessing";
+import { checkDeliveryMethod } from "./components/cart";
 
 // set the default language
 const getLanguage = (): string => {
@@ -32,6 +33,8 @@ const initializeOrderPage = async (): Promise<void> => {
         const lang = getLanguage();
         // update cart display
         updateCartDisplay();
+
+        checkDeliveryMethod()
 
         const menuContainer = document.querySelector(
             ".menu-container",
