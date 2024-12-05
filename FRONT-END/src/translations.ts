@@ -165,6 +165,13 @@ const translations: Translation = {
         "heres-your-profile": "Hi, Here's your user information.",
         "your-information": "Your Information",
         "logout-button": "Logout",
+        "change-password": "Change Password",
+        "update-phone": "Update Phone",
+        "edit-profile-h4": "Edit Profile",
+        "current-password": "Current Password",
+        "new-password": "New Password",
+        "confirm-password": "Confirm Password",
+        "show-password": "Show Password",
 
 
         // itinerary page translations
@@ -345,6 +352,13 @@ const translations: Translation = {
         "heres-your-profile": "Hei, tässä on käyttäjätietosi.",
         "your-information": "Tietosi",
         "logout-button": "Kirjaudu ulos",
+        "change-password": "Vaihda Salasanasi",
+        "update-phone": "Päivitä Puhelinnumerosi",
+        "edit-profile-h4": "Muokkaa profiilia",
+        "current-password": "Nykyinen Salasana",
+        "new-password": "Uusi Salasana",
+        "confirm-password": "Vahvista Salasana",
+        "show-password": "Näytä Salasana",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",
