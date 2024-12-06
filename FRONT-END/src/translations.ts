@@ -191,6 +191,7 @@ const translations: Translation = {
         "phone-update-fail": "Phone number update failed. Check your inputs.",
         "phone-format": "Phone number must be in a format containing only numbers.",
         "phone-same": "Phone number is the same as the current one. Try again.",
+        "login-success": "Login successful! Redirecting...",
 
 
         // itinerary page translations
@@ -397,6 +398,7 @@ const translations: Translation = {
         "phone-update-fail": "Puhelinnumeron päivitys epäonnistui. Tarkista syötteet.",
         "phone-format": "Puhelinnumeron tulee käyttää muotoa joka sisältää vain numeroita.",
         "phone-same": "Puhelinnumero on sama kuin nykyinen. Kokeile uudelleen.",
+        "login-success": "Kirjautuminen onnistui! Uudelleenohjataan...",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",

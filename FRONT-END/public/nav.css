@@ -129,8 +129,51 @@ main {
 
   .control-buttons {
     display: flex;
-    gap: 1em;
+    align-items: center;
+    gap: 10px;
   }
+  
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--sushi-red1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .dropdown-content button {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .dropdown-content button:hover {
+    background-color: var(--sushi-red3);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
 
 
   .login a {

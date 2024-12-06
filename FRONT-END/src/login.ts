@@ -93,7 +93,7 @@ const handleLogin = async (event: Event) => {
     }
 
         const data: UserLoggedIn = await response.json();
-        showPopup("Login successful! Redirecting to user page...");
+        showPopup(translations[language]["login-success"]);
 
         // Store the token in local storage or a cookie
         localStorage.setItem('authToken', data.token);
