@@ -24,10 +24,25 @@
         <li><a data-translate="reservation-link" href="reservation.html">Reserve a table</a></li>
     </ul>
     <div class="control-buttons">
-      <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
-      <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
-      <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link" aria-label="link-to-user-page"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
-  </div>
+        <!-- Language Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-button" aria-label="Select language">
+            🌐
+          </button>
+          <div class="dropdown-content">
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
+            </button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
+          </div>
+        </div>
+      
+        <!-- Login/User Button -->
+        <button class="login" id="login-register-user" aria-label="Login-and-user">
+          <a href="user.html" data-translate="login-link">
+            <i class="fa-regular fa-user" aria-hidden="true"></i>
+          </a>
+        </button>
+      </div>
   </nav>
 
     <main>
