@@ -33,7 +33,9 @@ export const showOrderPlacedModal = (): void => {
         ".order-placed",
     ) as HTMLElement | null;
 
-    const orderConfirmationClose = document.querySelector("#order-placed-button") as HTMLButtonElement | null;
+    const orderConfirmationClose = document.querySelector(
+        "#order-placed-button",
+    ) as HTMLButtonElement | null;
 
     if (orderPlacedElement) {
         orderPlacedElement.style.display = "block";
@@ -44,10 +46,49 @@ export const showOrderPlacedModal = (): void => {
     if (orderConfirmationClose) {
         orderConfirmationClose.addEventListener("click", () => {
             if (orderPlacedElement) {
-                orderPlacedElement.style.display = "none";  
+                orderPlacedElement.style.display = "none";
             }
         });
     } else {
         console.error("Order placed modal close button not found!");
     }
+};
+
+/**
+ * Show the modal with the updated order status.
+ * @param {string} updatedStatus - The updated order status to display.
+ * @returns {void}
+ * @throws {Error} - If the modal element is not found.
+ */
+
+export const showOrderUpdatedModal = (updatedStatus: string): void => {
+    const orderUpdatedElement = document.querySelector(
+        ".update-order-dialog",
+    ) as HTMLElement | null;
+
+    if (!orderUpdatedElement) {
+        console.error("Order updated modal element not found!");
+        return;
+    }
+
+    const statusElement = document.querySelector("#updated-status") as HTMLElement | null;
+    
+    if (!statusElement) {
+        console.error("Status span element not found!");
+        return;
+    }
+
+    // set the updated status
+    statusElement.textContent = updatedStatus;
+
+    // display the modal
+    orderUpdatedElement.style.display = "block";
+
+    setTimeout(() => {
+        if (orderUpdatedElement) {
+            orderUpdatedElement.style.display = "none";
+        } else {
+            console.error("Order updated modal element not found!");
+        }
+    }, 2000);
 };

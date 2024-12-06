@@ -1,5 +1,5 @@
 import { translations } from "./translations";
-import { displayOrderHistory } from "./order_management";
+import { displayOrderHistory } from "./components/orderManagementDisplay";
 import { clearCart } from "./services/cartService";
 
 const baseURL = "http://localhost:3000";
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("user_id", user_id);
     if (user_id) {
       try {
-        await displayOrderHistory(Number(user_id));
+        await displayOrderHistory(user_id);
       } catch (error) {
         console.error("Failed to display order history", error);
       }

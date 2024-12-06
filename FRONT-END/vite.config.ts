@@ -12,7 +12,6 @@ export default defineConfig({
         external: [],
       input: {
         main: path.resolve(__dirname, "index.html"), 
-        about: path.resolve(__dirname, "about.html"),
         admin: path.resolve(__dirname, "admin.html"),
         contact: path.resolve(__dirname, "contact.html"),
         menu: path.resolve(__dirname, "menu.html"),

@@ -45,7 +45,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1em;
+    padding: 0.5em;
     background: linear-gradient(
         135deg,
         var(--grey) 0%,
@@ -58,11 +58,11 @@ main {
 }
 
 .logo-placeholder {
-    background-image: url("./img/logo5.png");
+    background-image: url("./img/logo.png");
     background-size: cover;
     background-position: center;
-    width: 60px;
-    height: 40px;
+    width: 80px;
+    height: 55px;
     border-radius: 1em;
 }
 
@@ -72,13 +72,8 @@ main {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.3em;
-    width: 60px;
-    height: 40px;
-}
-
-.logo p {
-    margin: 0;
-    padding-left: 0.5em;
+    width: 80px;
+    height: 55px;
 }
 
 .nav-list {
@@ -87,6 +82,8 @@ main {
     gap: 2em;
     margin: 0;
     padding: 0;
+    padding-left: 10em;
+    padding-right: 1em;
 }
 
 .nav-list li {
@@ -129,7 +126,6 @@ main {
 
   .control-buttons {
     display: flex;
-    gap: 1em;
   }
 
 
@@ -214,12 +210,10 @@ button.login:hover {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.3em;
-    padding-left: 0.5em;
 }
 
 .footer-nav ul {
     padding: 0;
-    padding-right: 7em;
 }
 
 .footer-nav li {
@@ -314,6 +308,13 @@ button.login:hover {
         margin: 10px 0;
     }
 
+    .logo {
+        width: 180px;
+        display: flex;
+        height: 40px;
+        padding: 0.5em;
+    }
+
     .footer-container {
         flex-direction: column;
         align-items: center;
@@ -327,15 +328,8 @@ button.login:hover {
     .navigation {
         flex-direction: column;
         align-items: flex-start;
-        padding: 20px 20px;
         position: relative;
         border-radius: 0;
-    }
-
-    .logo {
-        width: 20%;
-        display: flex;
-        justify-content: space-between;
     }
 
     .hamburger {
@@ -432,9 +426,8 @@ button.login:hover {
     }
 
     .logo {
-        width: 20%;
         display: flex;
-        justify-content: space-between;
+        padding: 0;
     }
 
     .hamburger {
@@ -488,8 +481,10 @@ button.login:hover {
   }
   
   @media (max-width: 595px) {
-    .logo p {
-        display: none;
+    .logo {
+        padding: 0;
+        width: 120px;
+        height: 40px;
     }
 
     .footer-nav ul li {

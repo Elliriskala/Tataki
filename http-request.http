@@ -65,7 +65,7 @@ Content-Type: application/json
 
 ### update an order
 
-PUT http://localhost:3000/api/orders/1
+PUT http://localhost:3000/api/orders/10
 Content-Type: application/json
 
 {

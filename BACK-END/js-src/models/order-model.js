@@ -401,8 +401,47 @@ const updateOrderStatus = async (order_id, order_status) => {
     SET status_id = (SELECT status_id FROM OrderStatus WHERE status_name = ?) 
     WHERE order_id = ?
 `;
-    const [result] = await promisePool.query(sql, [order_status, order_id]);
-    return result.affectedRows > 0;
+    const [result] = await promisePool.query(sql, [
+      order_status,
+      order_id,
+    ]);
+    if (result.affectedRows === 0) {
+      throw new Error('Order status update failed');
+    }
+
+    // fetch the updated order details
+    const updatedOrderSql = `
+                SELECT 
+                    orders.order_id, 
+                    orders.total_price, 
+                    OrderStatus.status_name AS order_status,
+                    orders.customer_name, 
+                    orders.created_at, 
+                    orders.general_comment, 
+                    GROUP_CONCAT(CONCAT(OrderItems.item_quantity, ' x ', Menus.course_name) ORDER BY OrderItems.order_item_id) AS order_items,
+                    orders.is_delivery, 
+                    DeliveryDetails.delivery_address, 
+                    DeliveryDetails.city, 
+                    DeliveryDetails.delivery_instructions
+                FROM orders
+                JOIN OrderStatus ON orders.status_id = OrderStatus.status_id
+                LEFT JOIN OrderItems ON orders.order_id = OrderItems.order_id
+                LEFT JOIN Menus ON OrderItems.menu_id = Menus.menu_id
+                LEFT JOIN DeliveryDetails ON orders.order_id = DeliveryDetails.order_id
+                WHERE orders.order_id = 10
+                GROUP BY orders.order_id
+                ORDER BY orders.created_at DESC;
+      `;
+    const [updatedOrderResult] = await promisePool.query(updatedOrderSql, [
+      order_id,
+    ]);
+
+    if (!updatedOrderResult || updatedOrderResult.length === 0) {
+      throw new Error('Failed to fetch the updated order.');
+    }
+
+    // return the updated order details
+    return updatedOrderResult[0];
   } catch (e) {
     console.error('updateOrderStatus error:', e.message);
     throw new Error('Database error: ' + e.message);

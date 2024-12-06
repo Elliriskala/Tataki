@@ -194,7 +194,6 @@ const postOrder = async (req, res) => {
  * @param res
  * @returns updated order status
  * @throws Error
- * @returns - Order status or null if not found
  */
 
 const putOrderStatus = async (req, res, next) => {
@@ -203,13 +202,12 @@ const putOrderStatus = async (req, res, next) => {
     const orderStatus = req.body.order_status;
 
     // Update order status
-    const updatedOrderStatus = await updateOrderStatus(
+    const updatedOrder = await updateOrderStatus(
       orderId,
       orderStatus,
-      next,
     );
 
-    if (!updatedOrderStatus) {
+    if (!updatedOrder) {
       return next(customError('Order status not updated', 404));
     }
 

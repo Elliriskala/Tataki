@@ -93,11 +93,20 @@
                     </div>
                 </div>
                 <div class="order-details">
+                    <div class="button-div">
+                        <button
+                            class="update-order update-status-button">Update status
+                        </button>
+                        <button class="close">Close</button>
+                    </div>
                     <div id="order-details" class="order-details-section">
                         <h2>Order Details</h2>
                     </div>
                 </div>
             </div>
+            <dialog class="update-order-dialog">
+                <p>Order status set to <span id="updated-status"></span></p>
+            </dialog>
         </main>
     </body>
 </html>
