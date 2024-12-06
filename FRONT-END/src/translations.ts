@@ -163,6 +163,9 @@ const translations: Translation = {
         "submit-review": "Submit Review",
         "placeHolderComments": "Write your review here. Maximum of 200 characters.",
         "placeholderReviewName": "Enter your name or use a nickname",
+        "select-rating": "Please select a rating.",
+        "review-submitted": "Review submitted successfully! Thank you for your feedback.",
+        "review-failed": "Failed to submit review. Please try again.",
 
         // login page translations
         "login-button": "Login",
@@ -377,6 +380,9 @@ const translations: Translation = {
         "submit-review": "Lähetä arvostelu",
         "placeHolderComments": "Kirjoita arvostelusi tähän. Maksimissaan 200 merkkiä.",
         "placeholderReviewName": "Kirjoita nimesi tai käytä nimimerkkiä.",
+        "select-rating": "Valitse arvosana",
+        "review-submitted": "Arvostelu on lähetetty onnistuneesti! Kiitos palautteestasi.",
+        "review-failed": "Arvostelun lähettäminen epäonnistui. Yritä uudelleen.",
 
         // login page translations
         "login-button": "Kirjaudu sisään",

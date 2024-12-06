@@ -99,7 +99,7 @@ const showAdminContent = (isAdmin: boolean) => {
   adminContent.style.display = isAdmin ? 'block' : 'none';
 }
 
-const getLanguage = () => {
+const getLanguage = (): string => {
     return localStorage.getItem('language') || 'en';
 }
 

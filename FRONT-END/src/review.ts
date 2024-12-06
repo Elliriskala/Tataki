@@ -1,3 +1,5 @@
+import { translations } from "./translations";
+import { getLanguage } from "./utils/functions";
 const reviewForm = document.querySelector('.review-form') as HTMLFormElement;
 const nameInput = document.querySelector('#name') as HTMLInputElement;
 const commentInput = document.querySelector('#comments') as HTMLTextAreaElement
@@ -5,6 +7,8 @@ const popup = document.getElementById('success-popup') as HTMLDivElement;
 const popupMessage = document.getElementById('popup-message') as HTMLParagraphElement;
 const closePopup = document.getElementById('close-popup') as HTMLButtonElement;
 
+
+const language = getLanguage();
 // Function to show the popup
 const showPopup = (message: string) => {
     popupMessage.textContent = message;
@@ -19,9 +23,10 @@ closePopup.addEventListener('click', () => {
 reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
+    // get the rating value
     const rating = document.querySelector('input[name="rating"]:checked') as HTMLInputElement;
     if (!rating) {
-        alert('Please select a rating');
+        showPopup(translations[language]['select-rating']);
         return;
     }
     const user_id = localStorage.getItem('user_id');
@@ -37,6 +42,7 @@ reviewForm.addEventListener('submit', async (e) => {
         return;
     }
 
+    // create the body of the request, if user is not logged in, user_id is null
     const ratingBody = {
         user_id: user_id || null,
         review: comment,
@@ -54,16 +60,17 @@ reviewForm.addEventListener('submit', async (e) => {
         body: JSON.stringify(ratingBody)
     });
 
+    // show the popup message based on the response
     if (response) {
         console.log('Review submitted');
         popupMessage.style.color = 'green';
-        showPopup('Review submitted successfully');
+        showPopup(translations[language]['review-submitted']);
         nameInput.value = '';
         commentInput.value = '';
         rating.checked = false;
     } else {
         console.log('Review failed');
         popupMessage.style.color = 'red';
-        showPopup('Review failed to submit');
+        showPopup(translations[language]['review-failed']);
     }
 });

@@ -3,6 +3,34 @@ import { displayOrderHistory } from "./components/orderManagementDisplay";
 import { clearCart } from "./services/cartService";
 
 const baseURL = "http://localhost:3000";
+const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
+const registerButton = document.getElementById(
+  "register-btn"
+) as HTMLButtonElement;
+const toggleSlider = document.getElementById(
+  "toggle-slider"
+) as HTMLDivElement;
+const loginForm = document.getElementById("login-form") as HTMLFormElement;
+const registerForm = document.getElementById(
+  "register-form"
+) as HTMLFormElement;
+const togglePassword = document.querySelectorAll(
+  ".toggle-password"
+) as NodeListOf<HTMLSpanElement>;
+const loginBackground = document.querySelector(
+  ".login-background"
+) as HTMLDivElement;
+const loginImage = document.querySelector(
+  ".form-image-container"
+) as HTMLDivElement;
+const navList = document.querySelector(".nav-list") as HTMLUListElement;
+const hamburgerMenu = document.querySelector(".hamburger") as HTMLDivElement;
+const dateInput = document.getElementById("date") as HTMLInputElement;
+const guestButtons = document.querySelectorAll(
+  ".guest-btn"
+) as NodeListOf<HTMLButtonElement>;
+const messageTarget = document.getElementById("message-target") as HTMLDivElement;
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   // check if user has logged in to display order history
@@ -27,33 +55,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("User is not logged in.");
   }
 
-  const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
-  const registerButton = document.getElementById(
-    "register-btn"
-  ) as HTMLButtonElement;
-  const toggleSlider = document.getElementById(
-    "toggle-slider"
-  ) as HTMLDivElement;
-  const loginForm = document.getElementById("login-form") as HTMLFormElement;
-  const registerForm = document.getElementById(
-    "register-form"
-  ) as HTMLFormElement;
-  const togglePassword = document.querySelectorAll(
-    ".toggle-password"
-  ) as NodeListOf<HTMLSpanElement>;
-  const loginBackground = document.querySelector(
-    ".login-background"
-  ) as HTMLDivElement;
-  const loginImage = document.querySelector(
-    ".form-image-container"
-  ) as HTMLDivElement;
-  const navList = document.querySelector(".nav-list") as HTMLUListElement;
-  const hamburgerMenu = document.querySelector(".hamburger") as HTMLDivElement;
-  const dateInput = document.getElementById("date") as HTMLInputElement;
-  const guestButtons = document.querySelectorAll(
-    ".guest-btn"
-  ) as NodeListOf<HTMLButtonElement>;
-  const messageTarget = document.getElementById("message-target") as HTMLDivElement;
 
   // Set the initial active form to login
   if (loginForm) {
@@ -105,6 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     toggleForm(true);
   });
 
+  // Register button event listener
   registerButton?.addEventListener("click", (event) => {
     event.preventDefault();
     toggleForm(false);
@@ -288,6 +290,7 @@ const isTokenExpired = async (token: string) => {
       throw new Error(`Server error: ${response.statusText}`);
     }
 
+    // Parse the JSON response and cache the result
     const data = await response.json();
     const expired = data.expired;
     sessionStorage.setItem("tokenExpired", expired.toString()); // Cache status
@@ -302,6 +305,7 @@ const isTokenExpired = async (token: string) => {
 window.addEventListener("load", async () => {
   const token = localStorage.getItem("authToken");
 
+  // Check if the token is expired and redirect to login if needed
   if (token) {
     const expired = await isTokenExpired(token);
     if (expired) {
