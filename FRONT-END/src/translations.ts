@@ -192,6 +192,7 @@ const translations: Translation = {
         "phone-format": "Phone number must be in a format containing only numbers.",
         "phone-same": "Phone number is the same as the current one. Try again.",
         "login-success": "Login successful! Redirecting...",
+        "no-reservations": "No reservations found",
 
 
         // itinerary page translations
@@ -399,6 +400,7 @@ const translations: Translation = {
         "phone-format": "Puhelinnumeron tulee käyttää muotoa joka sisältää vain numeroita.",
         "phone-same": "Puhelinnumero on sama kuin nykyinen. Kokeile uudelleen.",
         "login-success": "Kirjautuminen onnistui! Uudelleenohjataan...",
+        "no-reservations": "Ei tehtyjä varauksia",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",

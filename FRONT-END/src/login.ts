@@ -275,7 +275,7 @@ const populateUserPage = async () => {
     } else {
         // If no reservations, show a "No reservations found" message
         const noReservations = document.createElement('li');
-        noReservations.textContent = 'No reservations found';
+        noReservations.textContent = translations[language]["no-reservations"];
         reservationsList.appendChild(noReservations);
     }
 } catch (error) {

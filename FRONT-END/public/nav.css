@@ -130,7 +130,7 @@ main {
   .control-buttons {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
   }
   
   .dropdown {
@@ -152,23 +152,20 @@ main {
     background-color: var(--sushi-red1);
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 5px 0;
+    padding: 10px 3px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    z-index: 30;
   }
   
   .dropdown-content button {
     background: none;
     border: none;
-    padding: 5px 10px;
+    padding: 3px 7px;
     cursor: pointer;
     width: 100%;
-    text-align: left;
+    text-align: center;
   }
   
-  .dropdown-content button:hover {
-    background-color: var(--sushi-red3);
-  }
   
   .dropdown:hover .dropdown-content {
     display: block;
@@ -193,6 +190,21 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+#flag-en {
+    background-image: url(./img/gb.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 0.5em;
+}
+
+#flag-fi {
+    background-image: url(./img/fi.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 button.login {
     background-color: var(--sushi-red1);
     color: var(--lotus-flower);
@@ -209,7 +221,6 @@ button.login:hover {
 
 .language:hover,
 .login:hover {
-    background-color: var(--sushi-red3);
     transform: scale(1.05);
     cursor: pointer;
 }

@@ -24,10 +24,25 @@
             <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
         </ul>
         <div class="control-buttons">
-            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
-            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
-            <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
-        </div>
+            <!-- Language Dropdown -->
+            <div class="dropdown">
+              <button class="dropdown-button" aria-label="Select language">
+                🌐
+              </button>
+              <div class="dropdown-content">
+                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
+                </button>
+                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
+              </div>
+            </div>
+          
+            <!-- Login/User Button -->
+            <button class="login" id="login-register-user" aria-label="Login-and-user">
+              <a href="user.html" data-translate="login-link">
+                <i class="fa-regular fa-user" aria-hidden="true"></i>
+              </a>
+            </button>
+          </div>
     </nav>
     <main>
         <div id="success-popup" class="popup hidden">
@@ -128,7 +143,7 @@
                         <input type="password" id="current-password" name="currentPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
         
                         <label data-translate="new-password" for="new-password">New Password</label>
-                        <input type="password" id="new-password" name="newPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+                        <input type="password" id="new-password" name="newPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" title="Password must include at least one uppercase letter, one numeral and one special character." required>
         
                         <label data-translate="confirm-password" for="confirm-password">Confirm Password</label>
                         <input type="password" id="confirm-password" name="confirmPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>

@@ -557,7 +557,7 @@ button.modal-trigger:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--sushi-graphite);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   z-index: 10;
@@ -572,7 +572,7 @@ button.modal-trigger:hover {
 
 .modal-content h4 {
   padding-block: 20px;
-  color: var(--sushi-red1);
+  color: var(--sushi-white);
   margin: auto;
 }
 
@@ -585,7 +585,7 @@ div.tabs {
 #change-password-form label {
   display: block;
   margin-bottom: 2px;
-  color: var(--sushi-red2);
+  color: var(--sushi-white);
 }
 
 .modal-footer {
@@ -660,18 +660,19 @@ form#update-phone-form {
 
 .password-change-button {
   padding: 10px 20px;
-  background-color: var(--forest-green);
+  background: linear-gradient(-45deg, var(--sushi-red3), var(--sushi-red4));
   color: var(--sushi-white);
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .password-change-button:hover {
-  background-color: var(--sushi-red4);
+  background: linear-gradient(-45deg, var(--sushi-red4), var(--sushi-red3));
   transform: translateY(-2px);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #update-phone-form input {
@@ -712,7 +713,7 @@ form#update-phone-form {
 #update-phone-form label {
   display: block;
   margin-bottom: 2px;
-  color: var(--sushi-red2);
+  color: var(--sushi-white);
 }
 
 .show-password {
@@ -725,13 +726,19 @@ form#update-phone-form {
 
 .phone-update-button {
   padding: 10px 20px;
-  background-color: var(--sushi-red3);
+  background: linear-gradient(-45deg, var(--sushi-red3), var(--sushi-red4));
   color: var(--sushi-white);
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.phone-update-button:hover {
+  background: linear-gradient(-45deg, var(--sushi-red4), var(--sushi-red3));
+  transform: translateY(-2px);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .modal-footer button {
