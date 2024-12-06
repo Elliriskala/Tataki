@@ -90,62 +90,6 @@ dialog::backdrop {
     margin-bottom: 2em;
 }
 
-.search {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    flex-direction: column;
-    margin-right: 1em;
-    width: 400px;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    border-radius: 1em;
-    padding: 0.5em;
-    border: 0.1em solid var(--sushi-black);
-    background-color: var(--sushi-grey2);
-    color: var(--lotus-flower);
-    max-width: 280px;
-    margin: 0;
-    width: 100%;
-}
-
-.search-bar input {
-    border-radius: 1em;
-}
-
-.search-bar input[type="text"] {
-    flex-grow: 1;
-    padding: 0.5em;
-    border: none;
-    background-color: var(--sushi-grey2);
-    color: var(--sushi-black);
-    box-sizing: border-box;
-}
-
-.search-bar input[type="text"]::placeholder {
-    color: var(--sushi-black);
-    text-align: center;
-}
-
-.search-bar .search-button {
-    color: var(--sushi-graphite);
-    background-color: var(--sushi-grey3);
-    border: 0.1em solid var(--sushi-red1);
-    border-radius: 0.5em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    margin: 0;
-}
-
-.search-bar .search-button:hover {
-    background-color: var(--sushi-red1);
-    color: var(--sushi-grey2);
-    transition: all 0.5s;
-}
-
 .pending-orders,
 .inprogress-orders,
 .completed-orders {

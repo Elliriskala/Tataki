@@ -2,7 +2,7 @@ import express from "express";
 import { getAllOrders, getOrdersByCustomerName, getOrdersByUserId, getOrderById, getOrdersByStatus, postOrder, putOrderStatus } from "../controllers/order-controllers.js";
 const orderRouter = express.Router();
 
-
+// order routes
 orderRouter.get("/", getAllOrders);
 orderRouter.get("/status/:order_status", getOrdersByStatus);
 orderRouter.get("/:order_id", getOrderById);

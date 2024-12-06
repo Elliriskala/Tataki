@@ -17,17 +17,17 @@
     </head>
     <body class="order-management-body">
         <header>
-            <nav class="navigation">
+            <nav class="navigation" aria-label="Main navigation">
                 <div class="logo">
-                    <button class="hamburger">☰</button>
+                    <button class="hamburger" aria-label="Toggle menu">☰</button>
                     <p>Tataki</p>
                 </div>
                 <ul class="nav-list">
-                    <li><a href="admin.html">Admin page</a></li>
+                    <li><a href="admin.html" aria-label="Go to Admin page">Admin page</a></li>
                     <li>
-                        <a href="order_management.html">Order management</a>
+                        <a href="order_management.html" aria-label="Go to Order management page">Order management</a>
                     </li>
-                    <li><a href="index.html">Home page</a></li>
+                    <li><a href="index.html" aria-label="Go to Home page">Home page</a></li>
                 </ul>
                 <div class="control-buttons">
                     <!-- Language Dropdown -->
@@ -35,7 +35,7 @@
                       <button class="dropdown-button" aria-label="Select language">
                         🌐
                       </button>
-                      <div class="dropdown-content">
+                      <div class="dropdown-content" aria-label="Language options">
                         <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
                         </button>
                         <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
@@ -61,7 +61,7 @@
                     <div class="order-list">
                         <div
                             class="pending-table"
-                            id="pending-orders-table"
+                            id="pending-orders-table" aria-label="Table of pending orders"
                         ></div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                     <div class="order-list">
                         <div
                             class="inprogress-table"
-                            id="inprogress-orders-table"
+                            id="inprogress-orders-table" aria-label="Table of in-progress orders"
                         ></div>
                     </div>
                 </div>
@@ -79,43 +79,25 @@
                     <div class="order-list">
                         <div
                             class="completed-table"
-                            id="completed-orders-table"
+                            id="completed-orders-table" aria-label="Table of completed orders"
                         ></div>
                     </div>
                 </div>
             </div>
             <div class="page-bottom">
-                <div class="search">
-                    <div class="search-bar">
-                        <input
-                            type="text"
-                            placeholder="Search by order number"
-                        />
-                        <button onclick="searchOrdersById()">Search</button>
-                    </div>
-                    <div class="search-bar">
-                        <input
-                            type="text"
-                            placeholder="Search by customer name"
-                        />
-                        <button onclick="searchOrdersByCustomer()">
-                            Search
-                        </button>
-                    </div>
-                </div>
                 <div class="order-details">
                     <div class="button-div">
                         <button
-                            class="update-order update-status-button">Update status
+                            class="update-order update-status-button" aria-label="Update order status">Update status
                         </button>
-                        <button class="close">Close</button>
+                        <button class="close" aria-label="Close order details">Close</button>
                     </div>
-                    <div id="order-details" class="order-details-section">
+                    <div id="order-details" class="order-details-section" aria-label="Order details section">
                         <h2>Order Details</h2>
                     </div>
                 </div>
             </div>
-            <dialog class="update-order-dialog">
+            <dialog class="update-order-dialog" aria-label="Order status update confirmation">
                 <p>Order status set to <span id="updated-status"></span></p>
             </dialog>
         </main>

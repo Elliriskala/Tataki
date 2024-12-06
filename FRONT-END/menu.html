@@ -17,13 +17,13 @@
       <nav class="navigation">
         <div class="logo">
           <button class="hamburger">☰</button>
-          <div class="logo-placeholder"></div>
+          <div class="logo-placeholder" aria-label="Tataki Restaurant Logo"></div>
         </div>
         <ul class="nav-list">
-          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
-          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
-          <li><a href="order.html" data-translate="order-link">Order</a></li>
-          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a><li>
+          <li><a href="index.html" data-translate="home-link" aria-label="Navigate to Home Page">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link" aria-label="Navigate to Menu">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link" aria-label="Navigate to Order Page">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link" aria-label="Navigate to Reservation Page">Reserve a table</a><li>
         </ul>
         <div class="control-buttons">
             <!-- Language Dropdown -->
@@ -54,17 +54,17 @@
           <a href="order.html" class="shopping-cart" aria-label="Shopping cart"><i class="fa-solid fa-shopping-cart"></i><span class="tooltip2">Go to cart</span></a>
         </div>
         <div class="menu-list">
-          <button class="select-category-button lunch-button" data-translate="lunch">Lunch</button>
-          <button class="select-category-button dinner-button" data-translate="dinner">Dinner</button>
-          <button class="select-category-button sides-button" data-translate="sides">Sides</button>
-          <button class="select-category-button drinks-button" data-translate="drinks">Drinks</button>
-          <button class="select-category-button desserts-button" data-translate="desserts">Desserts</button>
-        </div>
+            <button class="select-category-button lunch-button" data-translate="lunch" aria-label="View Lunch menu">Lunch</button>
+            <button class="select-category-button dinner-button" data-translate="dinner" aria-label="View Dinner menu">Dinner</button>
+            <button class="select-category-button sides-button" data-translate="sides" aria-label="View Sides menu">Sides</button>
+            <button class="select-category-button drinks-button" data-translate="drinks" aria-label="View Drinks menu">Drinks</button>
+            <button class="select-category-button desserts-button" data-translate="desserts" aria-label="View Desserts menu">Desserts</button>
+          </div>
         <div class="menu-container"></div>
         <div class="carousel">
           <h2 data-translate="chef-recommendation">Chef's resommendations</h2>
           <button id="carousel-left" class="carousel-button" aria-label="Scroll left">❮</button>
-          <div class="menu-carousel">
+          <div class="menu-carousel" aria-label="Chef Recommendations Carousel">
             <div class="menu-track-container">
               <div class= "menu-track"></div>
             </div>
@@ -72,15 +72,15 @@
           <button id="carousel-right" class="carousel-button" aria-label="Scroll right">❯</button>
         </div>
       </div>
-      <dialog class="item-added-to-cart">
+      <dialog class="item-added-to-cart" aria-label="Item added confirmation">
         <p data-translate="item-added">Item added to cart!</p>
       </dialog>
-      <div class="allergens">
+      <div class="allergens" aria-label="Allergen Information Section">
         <h2 class="allergen-header" data-translate="allergen-header">Allergen information</h2>
         <p data-translate="allergen-info">
           We strive to provide accurate allergen details for our menu:
         </p>
-        <ul class="allergen-list">
+        <ul class="allergen-list" aria-label="List of allergen information">
           <li data-translate="egg">E = contains egg</li>
           <li data-translate="fish">F = contains fish</li>
           <li data-translate="gluten">G = contains gluten</li>
@@ -93,12 +93,12 @@
     <footer>
       <div class="footer-container">
         <div class="footer-logo">
-            <div class="logo-placeholder"></div>
+            <div class="logo-placeholder" aria-label="Tataki Logo"></div>
         </div>
         <div class="footer-nav">
           <ul>
-            <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
-            <li><a href="review.html" data-translate="review-link">Review us</a></li>
+            <li><a href="contact.html" data-translate="contact-link" aria-label="Navigate to Contact Page">Contact us</a></li>
+            <li><a href="review.html" data-translate="review-link" aria-label="Navigate to Review Page">Review us</a></li>
         </ul>
         </div>
         <div class="social-medias">

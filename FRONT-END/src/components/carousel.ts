@@ -1,8 +1,7 @@
 import { displayMenu } from "../components/menuDisplay";
 import { fetchSpecialMenus } from "../services/apiService";
 
-// update the carousel display
-
+// update the carousel display position based on the current menu position
 const updateCarouselposition = (
     menuTracker: HTMLDivElement,
     menuItems: NodeListOf<Element>,
@@ -20,7 +19,7 @@ const updateCarouselposition = (
         "#carousel-right",
     ) as HTMLButtonElement;
 
-    // disable the arrows
+    // enable/disable arrows based on the current position
     if (leftArrow) leftArrow.disabled = menuPosition === 0;
     if (rightArrow)
         rightArrow.disabled = menuPosition >= specialMenus.length - 1;
@@ -35,14 +34,13 @@ const updateCarouselposition = (
 };
 
 // function to handle the arrow click events
-
 const handleArrowClick = (
     leftArrow: HTMLButtonElement,
     rightArrow: HTMLButtonElement,
     specialMenus: any[],
     updateCarousel: (menuPosition: number) => void,
 ): void => {
-    let menuPosition = 0;
+    let menuPosition = 0; // current menu position
 
     // scroll menu to the left
     leftArrow.addEventListener("click", () => {
@@ -163,9 +161,10 @@ export const initializeCarousel = async (
                 );
             }
 
+            // initialize the carousel to display the first menu item
             updateCarousel(0);
 
-            // swipe functionality for mobile
+            // swipe functionality for mobile devices
             menuTrack.addEventListener("touchstart", (event) => handleMobileSwipe(event, menuTracker, menuItems, specialMenus)
         );
     }, 600);
