@@ -24,10 +24,25 @@
             <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
         </ul>
         <div class="control-buttons">
-            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
-            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
-            <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
-        </div>
+            <!-- Language Dropdown -->
+            <div class="dropdown">
+              <button class="dropdown-button" aria-label="Select language">
+                🌐
+              </button>
+              <div class="dropdown-content">
+                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
+                </button>
+                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
+              </div>
+            </div>
+          
+            <!-- Login/User Button -->
+            <button class="login" id="login-register-user" aria-label="Login-and-user">
+              <a href="user.html" data-translate="login-link">
+                <i class="fa-regular fa-user" aria-hidden="true"></i>
+              </a>
+            </button>
+          </div>
     </nav>
     <main>
         <div id="success-popup" class="popup hidden">
@@ -59,7 +74,7 @@
                         <span class="toggle-password" data-target="login-password"><i data-target="login-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
                     </div>
                     <div class="form-buttons">
-                        <button id="submit-button-login" class="submit-button" type="submit" data-translate="submit-button">Submit</button>
+                        <button id="submit-button-login" class="submit-button" type="submit" data-translate="login-submit-button">Submit</button>
                         <button id="reset-button-login" class="reset-button" type="reset" data-translate="reset-button">Reset</button>
                     </div>
                 </form>
@@ -81,7 +96,7 @@
                         <span class="toggle-password" data-target="register-password"><i data-target="register-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
                     </div>
                     <div class="form-buttons">
-                        <button id="submit-button-register" class="submit-button" type="submit" data-testid="register-submit" data-translate="submit-button">Submit</button>
+                        <button id="submit-button-register" class="submit-button" type="submit" data-testid="register-submit" data-translate="register-submit-button">Submit</button>
                         <button id="reset-button-register" class="reset-button" type="reset" data-translate="reset-button">Reset</button>
                     </div>
                 </form>
@@ -92,6 +107,10 @@
         </div>
         </div>
         <div id="user-main">
+            <div class="user-buttons" id="user-buttons">
+                <button class="logout-button" data-translate="logout-button" data-testid="logout" id="logout-btn">Logout</button>
+                <button class="modal-trigger" data-translate="edit-profile" id="edit-profile-button">Edit Profile</button>
+            </div>
             <h1 data-translate="welcome-header">Welcome to Your Profile</h1>
             <p data-translate="heres-your-profile" class="welcome-message">Hi, <span id="username-display"></span>Here’s your user information.</p>
             
@@ -107,10 +126,6 @@
                         </ul>
                 </div>
                 <div id="order-history"></div>
-                <div class="user-buttons" id="user-buttons">
-                <button class="logout-button" data-translate="logout-button" data-testid="logout" id="logout-btn">Logout</button>
-                <button class="modal-trigger" data-translate="edit-profile" id="edit-profile-button">Edit Profile</button>
-                </div>
             </div>
         </div>
         <div id="profile-modal" class="modal">
@@ -128,7 +143,7 @@
                         <input type="password" id="current-password" name="currentPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
         
                         <label data-translate="new-password" for="new-password">New Password</label>
-                        <input type="password" id="new-password" name="newPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+                        <input type="password" id="new-password" name="newPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" title="Password must include at least one uppercase letter, one numeral and one special character." required>
         
                         <label data-translate="confirm-password" for="confirm-password">Confirm Password</label>
                         <input type="password" id="confirm-password" name="confirmPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
@@ -147,12 +162,12 @@
                     <form id="update-phone-form">
                         <label data-translate="phone-label" for="phone-number">Phone Number</label>
                         <input placeholder="04012345678" type="tel" id="phone-number-input" name="phoneNumber" pattern="^[0-9]{10,11}$" minlength="5" maxlength="15" required>
-                        <button class="phone-update-button" id="phone-submit" type="submit">Update Phone</button>
+                        <button class="phone-update-button" id="phone-submit" type="submit" data-translate="update-phone">Update Phone</button>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="close-modal-button">Close</button>
+                <button data-translate="close-button" id="close-modal-button">Close</button>
             </div>
         </div>
     </main>

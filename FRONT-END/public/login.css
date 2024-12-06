@@ -338,6 +338,14 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+div.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
 }
 
 #user-main .profile-container h2 {
@@ -505,7 +513,8 @@ ul#reservation-list li {
   justify-content: center;
   background-color: var(--sushi-red4);
   color: var(--sushi-white);
-  width: 100%;
+  width: 90%;
+  align-self: center;
 }
 
 .reservation-group li {
@@ -525,7 +534,7 @@ ul#reservation-list li {
 
 button.modal-trigger {
   padding: 10px 20px;
-  background-color: var(--sushi-graphite);
+  background-color: var(--sushi-black);
   color: var(--sushi-white);
   border: none;
   border-radius: 5px;
@@ -535,8 +544,9 @@ button.modal-trigger {
 }
 
 button.modal-trigger:hover {
-  background: var(--sushi-red1);
+  background: var(--sushi-grey1);
   transition: background 0.3s ease, transform 0.2s ease;
+  color: var(--sushi-black);
   transform: translateY(-2px);
 }
 
@@ -547,7 +557,7 @@ button.modal-trigger:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--sushi-graphite);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   z-index: 10;
@@ -562,7 +572,7 @@ button.modal-trigger:hover {
 
 .modal-content h4 {
   padding-block: 20px;
-  color: var(--sushi-red1);
+  color: var(--sushi-white);
   margin: auto;
 }
 
@@ -575,7 +585,7 @@ div.tabs {
 #change-password-form label {
   display: block;
   margin-bottom: 2px;
-  color: var(--sushi-red2);
+  color: var(--sushi-white);
 }
 
 .modal-footer {
@@ -588,15 +598,15 @@ div.tabs {
   padding: 10px 20px;
   width: 150px;
   border: none;
-  background: var(--sushi-grey2);
+  background: var(--sushi-red2);
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
-  color: #333;
+  color: var(--sushi-grey3);
   transition: background 0.3s ease;
 }
 .tab-button:hover, .tab-button.active {
-  background: #bbb;
+  background: var(--grey);
 }
 .tab-content {
   display: none;
@@ -650,18 +660,19 @@ form#update-phone-form {
 
 .password-change-button {
   padding: 10px 20px;
-  background-color: var(--forest-green);
+  background: linear-gradient(-45deg, var(--sushi-red3), var(--sushi-red4));
   color: var(--sushi-white);
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .password-change-button:hover {
-  background-color: var(--sushi-red4);
+  background: linear-gradient(-45deg, var(--sushi-red4), var(--sushi-red3));
   transform: translateY(-2px);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #update-phone-form input {
@@ -702,7 +713,7 @@ form#update-phone-form {
 #update-phone-form label {
   display: block;
   margin-bottom: 2px;
-  color: var(--sushi-red2);
+  color: var(--sushi-white);
 }
 
 .show-password {
@@ -715,13 +726,19 @@ form#update-phone-form {
 
 .phone-update-button {
   padding: 10px 20px;
-  background-color: var(--sushi-red3);
+  background: linear-gradient(-45deg, var(--sushi-red3), var(--sushi-red4));
   color: var(--sushi-white);
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.phone-update-button:hover {
+  background: linear-gradient(-45deg, var(--sushi-red4), var(--sushi-red3));
+  transform: translateY(-2px);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .modal-footer button {
@@ -796,6 +813,13 @@ form#update-phone-form {
 
   .form-toggle {
     width: 80%;
+  }
+
+  div.tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
 

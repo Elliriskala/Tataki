@@ -4,6 +4,7 @@
     --wine-red: #390d0d;
     --sushi-red1: #420506;
     --sushi-red2: #a4161a;
+    --sushi-red-transparent:rgba(234, 48, 34, 0.7);
     --sushi-red3: #ba181b;
     --sushi-red4: #e5383b;
     --sushi-grey1: #b1a7a6;
@@ -82,7 +83,7 @@ main {
     gap: 2em;
     margin: 0;
     padding: 0;
-    padding-left: 10em;
+    padding-left: 5em;
     padding-right: 1em;
 }
 
@@ -126,12 +127,53 @@ main {
 
   .control-buttons {
     display: flex;
+    align-items: center;
+    gap: 15px;
   }
+  
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--sushi-red1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 3px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 30;
+  }
+  
+  .dropdown-content button {
+    background: none;
+    border: none;
+    padding: 3px 7px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+  
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
 
 
   .login a {
     text-decoration: none;
-    padding: 1em;
+    padding: 0.5em;
   }
   
   .language,
@@ -141,13 +183,28 @@ main {
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 1em 2em;
+    padding: 1em 1.5em;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+#flag-en {
+    background-image: url(./img/gb.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 0.5em;
+}
+
+#flag-fi {
+    background-image: url(./img/fi.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 button.login {
-    background-color: var(--sushi-red1);
+    background-color: var(--sushi-red-transparent);
     color: var(--lotus-flower);
 }
 
@@ -162,7 +219,6 @@ button.login:hover {
 
 .language:hover,
 .login:hover {
-    background-color: var(--sushi-red3);
     transform: scale(1.05);
     cursor: pointer;
 }

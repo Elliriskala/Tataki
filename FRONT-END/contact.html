@@ -7,9 +7,7 @@
     <meta name="description" content="Tataki restaurant contact page">
     <link rel="stylesheet" href="/contact.css">
     <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -30,10 +28,25 @@
           <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
       </ul>
       <div class="control-buttons">
-        <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">🇬🇧</button>
-        <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">🇫🇮</button>
-        <button class="login" id="login-register-user" aria-label="Login-and-user"><a href="user.html" data-translate="login-link"><i class="fa-regular fa-user" aria-hidden="true"></i></a></button>
-    </div>
+        <!-- Language Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-button" aria-label="Select language">
+            🌐
+          </button>
+          <div class="dropdown-content">
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
+            </button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
+          </div>
+        </div>
+      
+        <!-- Login/User Button -->
+        <button class="login" id="login-register-user" aria-label="Login-and-user">
+          <a href="user.html" data-translate="login-link">
+            <i class="fa-regular fa-user" aria-hidden="true"></i>
+          </a>
+        </button>
+      </div>
   </nav>
   <main>
       <div class="about-sections">

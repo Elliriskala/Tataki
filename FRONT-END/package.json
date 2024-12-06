@@ -35,6 +35,7 @@
     "@types/leaflet": "^1.9.14",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "flag-icons": "^7.2.3",
     "leaflet": "^1.9.4",
     "vite-plugin-node-polyfills": "^0.22.0"
   }
