@@ -57,7 +57,8 @@ const popupContent = `
 
 marker.bindPopup(popupContent).openPopup();
 
-const translations: { [key: string]: { [key: string]: string } } = {
+const translations: { [key: string]: { [key: string]: string } } = { 
+    // Finnish translations for itinerary details
   en: {
     itinerary: "Itinerary",
     duration: "Duration",
@@ -159,6 +160,8 @@ itineraryForm?.addEventListener("submit", async (event) => {
     return;
   }
 
+  // Fetch itinerary data from the server, passing the user's location and walk speed
+  // API-key hidden in the server-side code
   try {
     const response = await fetch(
       "http://localhost:3000/api/digitransit/itinerary",
