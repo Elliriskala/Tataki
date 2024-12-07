@@ -13,9 +13,9 @@
 </head>
 <body>
     <nav class="navigation">
-        <div class="logo">
+        <div class="logo" aria-label="Home Page">
             <button data-testid="hamburger-button" class="hamburger" data-translate="hamburger">☰</button>
-            <div class="logo-placeholder"></div>
+            <a href="index.html" class="logo-placeholder"></a>
         </div>
         <ul class="nav-list">
             <li><a href="index.html" data-translate="home-link">Home Page</a></li>
@@ -122,20 +122,23 @@
                     <p><span class="info-label" data-translate="username-label">Username</span>: <span id="username-info"></span></p>
                     <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info">
                     <p><span class="info-label" data-translate="phone-label">Phone</span>: <span id="phone-info"></span></p>
+                    <p><span class="info-label" data-translate="address-label">Address</span>: <span id="address-info"></span></p>
+                    <p><span class="info-label" data-translate="city-label">City</span>: <span id="city-info"></span></p>
                     <div class="user-reservations" id="user-reservations">
                         <h2 data-translate="your-reservations">Your Reservations</h2>
                         <ul id="reservation-list">
                         </ul>
                 </div>
-                <div id="order-history"></div>
             </div>
         </div>
+        <div id="order-history"></div>
         <div id="profile-modal" class="modal">
             <div class="modal-content">
                 <h4 data-translate="edit-profile-h4">Edit Profile</h4>
                 <div class="tabs">
                     <button class="tab-button" data-translate="change-password" data-tab="change-password-tab">Change Password</button>
                     <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
+                    <button class="tab-button" data-translate="update-address" data-tab="update-address-tab">Update Address</button>
                 </div>
         
                 <!-- Change Password Tab -->
@@ -167,6 +170,17 @@
                         <button class="phone-update-button" id="phone-submit" type="submit" data-translate="update-phone">Update Phone</button>
                     </form>
                 </div>
+
+                <!-- Update Address Tab -->
+                <div id="update-address-tab" class="tab-content" style="display: none;">
+                    <form id="update-address-form">
+                        <label data-translate="address-label" for="address-input">Address</label>
+                        <input type="text" id="address-input" name="address" placeholder="Your address" data-translate="your-address" minlength="5" maxlength="20" required>
+                        <label for="city-input" data-translate="your-city">City</label>
+                        <input type="text" id="city-input" name="city" placeholder="City" minlength="3" maxlength="15" required>
+                        <button class="address-update-button" id="address-submit" type="submit" data-translate="update-address">Update Address</button>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button data-translate="close-button" id="close-modal-button">Close</button>
@@ -185,9 +199,9 @@
     </main>
     <footer>
         <div class="footer-container">
-            <div class="footer-logo">
+            <a href="index.html" class="footer-logo">
                 <div class="logo-placeholder"></div>
-            </div>
+            </a>
             <div class="footer-nav">
                 <ul>
                     <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>

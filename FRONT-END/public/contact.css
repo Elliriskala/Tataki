@@ -16,7 +16,7 @@ body {
     font-family: "roboto", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--sushi-black);
+    background-color: var(--soy-sauce);
     color: var(--sushi-grey2);
     width: 100%;
     height: 100%;
@@ -63,11 +63,13 @@ main {
     display: flex;
     background-color: var(--sushi-graphite);
     flex-direction: row;
-    width: 80%;
+    width: 90%;
     margin: auto;
     margin-top: 2em;
     border-radius: 1em;
     justify-content: space-between;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+
 }
 
 .aboutus-placeholder h1 {
@@ -125,7 +127,7 @@ main {
     color: var(--sushi-grey2);
     padding: 2rem;
     border-radius: 12px;
-    max-width: 800px;
+    max-width: 850px;
     margin: 2rem auto;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
 }
@@ -315,10 +317,11 @@ main {
 @media (max-width: 900px) {
     .aboutus-placeholder {
         flex-direction: column;
+        width: 95%;
     }
 
     .contact-section {
-        width: 100%;
+        width: 85%;
         margin-left: 2em;
     }
 

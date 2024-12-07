@@ -64,6 +64,7 @@ export const existingInfoButton = (): void => {
             const userInfo = await fetchUserInfo();
             if (userInfo) {
                 populateUserInfo(userInfo);
+                console.log("User information loaded successfully", userInfo);
             } else {
                 console.log(
                     "No saved information found. Please fill in your details manually.",
@@ -97,10 +98,10 @@ const populateUserInfo = (userInfo: any): void => {
     ) as HTMLInputElement;
 
     if (nameInput && emailInput && phoneInput) {
-        nameInput.value = userInfo.name || "";
+        nameInput.value = userInfo.username || "";
         emailInput.value = userInfo.email || "";
-        phoneInput.value = userInfo.phone || "";
-        addressInput.value = userInfo.address || "";
+        phoneInput.value = userInfo.phone_number || "";
+        addressInput.value = userInfo.customer_address || "";
         cityInput.value = userInfo.city || "";
     }
 };

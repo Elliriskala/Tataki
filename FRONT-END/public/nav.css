@@ -58,6 +58,10 @@ main {
     max-width: 100%;
 }
 
+.navigation a {
+    text-decoration: none;
+}
+
 .logo-placeholder {
     background-image: url("./img/logo.png");
     background-size: cover;

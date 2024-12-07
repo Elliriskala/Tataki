@@ -22,6 +22,7 @@ CREATE TABLE Users (
     phone_number VARCHAR(15) DEFAULT NULL,
     user_level_id INT NOT NULL DEFAULT 2,
     customer_address TEXT,
+    city VARCHAR(50) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_level_id) REFERENCES UserLevels(level_id)
 );
@@ -145,7 +146,7 @@ INSERT INTO Allergens (menu_id, allergen_description) VALUES
 
 -- initial statuses for orders
 INSERT INTO OrderStatus (status_name) VALUES 
-('Pending'), ('Inprogress'), ('Completed'), ('Cancelled');
+('Pending'), ('Inprogress'), ('Completed');
 
 -- Insert reservations
 ---INSERT INTO Reservations (user_id, reservation_date, reservation_time, guests) VALUES (2, '2021-12-24', '18:00:00', '2'), (3, '2021-12-25', '19:00:00', '4'), (1, '2021-12-26', '20:00:00', '6');

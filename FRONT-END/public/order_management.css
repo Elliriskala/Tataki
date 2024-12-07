@@ -226,18 +226,10 @@ dialog::backdrop {
         align-items: center;
         justify-content: center;
     }
-
-    .search {
-        width: 100%;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin-right: 0;
-    }
-
     .order-details {
         margin-top: 1em;
-        width: 100%;
+        margin: auto;
+        width: 80%;
     }
 }
 
@@ -248,12 +240,9 @@ dialog::backdrop {
 }
 
 @media screen and (max-width: 650px) {
-    .search {
-        flex-direction: column;
-    }
-
     .order-details {
-        width: 100%;
+        width: 90%;
+        margin: auto;
     }
 
     .order-management {

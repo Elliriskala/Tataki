@@ -130,7 +130,7 @@ const modifyUserById = async (req, res, next) => {
         const moddedUser = {
             username: req.body.username || existingData.username,
             email: req.body.email || existingData.email,
-            phone_number: req.body.phone_number || existingData.phone_number,
+            phone_number: req.body.phone_number || existingData.phone_number, customer_address: req.body.customer_address || existingData.customer_address, city: req.body.city || existingData.city
         };
 
         // Fetch the user again to validate ownership

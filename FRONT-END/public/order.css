@@ -204,7 +204,7 @@ dialog::backdrop {
 }
 
 .menu-card:hover {
-    transform: scale(1.06);
+    transform: scale(1.04);
     transition: 0.4s;
 }
 
@@ -562,13 +562,17 @@ input[type="checkbox"]:checked {
 
 .delivery-method {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     font-size: 0.9em;
     margin-top: 1em;
     justify-content: center;
+    margin-left: 2em;
+    margin-bottom: 1em;
 }
 
-.delivery-method > checkbox {
+.delivery-method 
+
+.delivery-method h4 {
     margin-left: 1em;
 }
 

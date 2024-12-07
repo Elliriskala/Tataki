@@ -162,17 +162,6 @@ const collectOrderData = () => {
         ? (deliveryInstructionsElement as HTMLTextAreaElement).value.trim()
         : "";
 
-    // Check terms and conditions
-    const termsCheckbox = document.getElementById(
-        "terms-checkbox",
-    ) as HTMLInputElement | null;
-    const hasAgreedToTerms = termsCheckbox ? termsCheckbox.checked : false;
-    if (!hasAgreedToTerms) {
-        throw new Error(
-            "You must agree to the Terms and Conditions to place an order.",
-        );
-    }
-
     // return the collected data
     return {
         user_id,
@@ -216,7 +205,6 @@ const resetFormFields = () => {
     const checkboxes = [
         "#delivery-checkbox",
         "#pickup-checkbox",
-        "#terms-checkbox",
     ];
 
     checkboxes.forEach((checkbox) => {

@@ -29,23 +29,25 @@ export const displayOrderDetails = (order: Order): void => {
     orderDetails.innerHTML = generateOrderDetails(order);
 
     const closeButton = document.querySelector(".close") as HTMLButtonElement;
-    const updateStatusButton = document.querySelector(".update-order") as HTMLButtonElement;
-    
+    const updateStatusButton = document.querySelector(
+        ".update-order",
+    ) as HTMLButtonElement;
+
     updateStatusButton.setAttribute("data-id", order.order_id.toString());
     updateStatusButton.setAttribute(
         "data-status",
         order.order_status || "unknown",
     );
-    
+
     console.log("Button attributes:", {
         id: updateStatusButton.getAttribute("data-id"),
         status: updateStatusButton.getAttribute("data-status"),
     });
-    
+
     closeButton.addEventListener("click", () => {
         orderDetails.innerHTML = "";
     });
-    
+
     console.log("Order details HTML:", orderDetails.innerHTML);
 };
 
@@ -136,7 +138,15 @@ const generateOrderDetails = (order: Order): string => `
 `;
 
 // display order history on user page
-const generateOrderHistoryTable = (orders: Order[]): string => `
+const generateOrderHistoryTable = (orders: Order[]): string => {
+    if (orders.length === 0) {
+        return `
+          <h2>Order History</h2>
+          <p>No orders made</p>
+        `;
+    }
+    return `
+    <h2>Order History</h2>
     <table>
         <thead>
             <tr>
@@ -165,3 +175,4 @@ const generateOrderHistoryTable = (orders: Order[]): string => `
         </tbody>
     </table>
 `;
+};

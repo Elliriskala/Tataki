@@ -1,7 +1,11 @@
 import { formatDate } from "./utils/functions";
 import { UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
-import {translations, loginErrorMessages, registerErrorMessages } from "./translations";
+import {
+    translations,
+    loginErrorMessages,
+    registerErrorMessages,
+} from "./translations";
 
 const loginSubmit = document.getElementById(
     "submit-button-login",
@@ -95,8 +99,8 @@ const handleLogin = async (event: Event) => {
     try {
         // Clear old state before logging in
         clearCart();
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user_id');
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("user_id");
         if (reservationsList) {
             reservationsList.innerHTML = "";
         }
@@ -205,6 +209,11 @@ const populateUserPage = async () => {
     const phoneElement = document.getElementById(
         "phone-info",
     ) as HTMLSpanElement;
+    const addressElement = document.getElementById(
+        "address-info",
+    ) as HTMLSpanElement;
+    const cityElement = document.getElementById("city-info") as HTMLSpanElement;
+
     const language = getLanguage();
 
     const token = localStorage.getItem("authToken");
@@ -246,6 +255,12 @@ const populateUserPage = async () => {
             }
             if (phoneElement) {
                 phoneElement.innerHTML = data.phone_number || "N/A";
+            }
+            if (addressElement) {
+                addressElement.innerHTML = data.customer_address || "N/A";
+            }
+            if (cityElement) {
+                cityElement.innerHTML = data.city || "N/A";
             }
         } else {
             console.error("No data found for the user");
@@ -376,7 +391,7 @@ function closeModal() {
 }
 
 // Show tab content
-interface TabButton extends HTMLButtonElement { 
+interface TabButton extends HTMLButtonElement {
     getAttribute(qualifiedName: "data-tab"): string | null;
 }
 
@@ -384,7 +399,7 @@ interface TabContent extends HTMLDivElement {
     classList: DOMTokenList;
 }
 
-const showTab = (tabId: string | null) => { 
+const showTab = (tabId: string | null) => {
     tabContents.forEach((tab: TabContent) => tab.classList.remove("active"));
     if (tabId) {
         const activeTab = document.getElementById(tabId) as TabContent;
@@ -402,7 +417,7 @@ const showTab = (tabId: string | null) => {
     if (activeButton) {
         activeButton.classList.add("active");
     }
-}
+};
 
 // Tab switching
 tabButtons.forEach((button) => {
@@ -539,6 +554,65 @@ phoneSubmit?.addEventListener("click", async (e) => {
     }
 });
 
+// Update address
+const addressSubmit = document.getElementById(
+    "address-submit",
+) as HTMLButtonElement;
+const addressInput = document.getElementById(
+    "address-input",
+) as HTMLInputElement;
+const cityInput = document.getElementById("city-input") as HTMLInputElement;
+
+addressSubmit.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const language = getLanguage();
+    
+    const address = addressInput.value.trim();
+    const city = cityInput.value.trim();
+    
+    if (address === addressInput.textContent) {
+        showPopup(translations[language]["address-same"]);
+        return;
+    }
+
+    if (!address || !city) {
+        showPopup(translations[language]["address-format"]);
+        return;
+    }
+
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+        console.error("No token found.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/users/user`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ customer_address: address, city }),
+        });
+
+        if (response.ok) {
+            console.log("Address updated successfully.");
+            modal.style.display = "none";
+            overlay.style.display = "none";
+            showPopup(translations[language]["address-update-success"]);
+            addressInput.value = "";
+            cityInput.value = "";
+            populateUserPage();
+        } else {
+            showPopup(translations[language]["address-update-fail"]);
+        }
+    } catch (error) {
+        console.error("Error updating address:", error);
+    }
+});
+
 const changePasswordForm = document.getElementById(
     "change-password-form",
 ) as HTMLFormElement;
@@ -614,12 +688,18 @@ changePasswordForm?.addEventListener("submit", async (e) => {
     }
 });
 
-
-const deleteModal = document.getElementById("delete-profile-modal") as HTMLDivElement;
-const openModal = document.getElementById("delete-profile-button") as HTMLButtonElement;
-const closeDeleteModal = document.getElementById("close-delete-modal-button") as HTMLButtonElement;
-const deleteProfileButton = document.getElementById("confirm-delete-button") as HTMLButtonElement;
-
+const deleteModal = document.getElementById(
+    "delete-profile-modal",
+) as HTMLDivElement;
+const openModal = document.getElementById(
+    "delete-profile-button",
+) as HTMLButtonElement;
+const closeDeleteModal = document.getElementById(
+    "close-delete-modal-button",
+) as HTMLButtonElement;
+const deleteProfileButton = document.getElementById(
+    "confirm-delete-button",
+) as HTMLButtonElement;
 
 openModal.addEventListener("click", () => {
     deleteModal.style.display = "flex";

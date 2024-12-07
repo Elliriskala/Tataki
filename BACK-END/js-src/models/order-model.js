@@ -428,7 +428,7 @@ const updateOrderStatus = async (order_id, order_status) => {
                 LEFT JOIN OrderItems ON orders.order_id = OrderItems.order_id
                 LEFT JOIN Menus ON OrderItems.menu_id = Menus.menu_id
                 LEFT JOIN DeliveryDetails ON orders.order_id = DeliveryDetails.order_id
-                WHERE orders.order_id = 10
+                WHERE orders.order_id = ?
                 GROUP BY orders.order_id
                 ORDER BY orders.created_at DESC;
       `;

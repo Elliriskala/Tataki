@@ -26,7 +26,7 @@ const fetchUsers = async () => {
  */
 const fetchUserById = async (user_id) => {
     try {
-        const sql = 'SELECT username, email, phone_number FROM Users WHERE user_id = ?';
+        const sql = 'SELECT username, email, phone_number, customer_address, city FROM Users WHERE user_id = ?';
         const [rows] = await promisePool.query(sql, [user_id]);
         if (rows && rows.length > 0) {
             return rows[0];
@@ -74,7 +74,6 @@ const registerUser = async (newUser) => {
     }
 };
 /**
- *
  * Modifies a user in the database
  * @param user_id
  * @param modifiedUser
@@ -83,11 +82,13 @@ const registerUser = async (newUser) => {
  * @returns {Promise<number>} - number of affected rows
  */
 const modifyUser = async (user_id, modifiedUser) => {
-    const sql = 'UPDATE Users SET username = ?, email = ?, phone_number = ? WHERE user_id = ?';
+    const sql = 'UPDATE Users SET username = ?, email = ?, phone_number = ?, customer_address = ?, city = ? WHERE user_id = ?';
     const params = [
         modifiedUser.username,
         modifiedUser.email,
         modifiedUser.phone_number,
+        modifiedUser.customer_address,
+        modifiedUser.city,
         user_id
     ];
     try {
