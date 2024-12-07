@@ -113,10 +113,13 @@ interface OrderItem {
 
 interface Reservation {
   reservation_id?: number;
-  user_id: number;
+  user_id: number | null;
   reservation_date: string;
+  email: string;
+  phone_number: string;
+  full_name: string;
   reservation_time: string;
-  guests: string;
+  guests: string | number;
   created_at?: Date;
 }
 

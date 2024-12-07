@@ -1,7 +1,8 @@
-import { formatDate } from "./utils/functions";
+import { formatDate, getLanguage } from "./utils/functions";
 import { UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
 import {translations, loginErrorMessages, registerErrorMessages } from "./translations";
+
 
 const loginSubmit = document.getElementById(
     "submit-button-login",
@@ -66,9 +67,6 @@ closePopup.addEventListener("click", () => {
     popup.classList.add("hidden");
 });
 
-const getLanguage = () => {
-    return localStorage.getItem("language") || "en";
-};
 
 // URL for the login endpoint
 const BASE_URL = "http://localhost:3000";
@@ -366,14 +364,15 @@ editProfileBtn.addEventListener("click", () => {
     showTab(tabButtons[0].getAttribute("data-tab"));
 });
 
+const closeModal = () => {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+}
+
 // Close modal
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
-function closeModal() {
-    modal.style.display = "none";
-    overlay.style.display = "none";
-}
 
 // Show tab content
 interface TabButton extends HTMLButtonElement { 
