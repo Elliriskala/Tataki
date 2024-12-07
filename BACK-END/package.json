@@ -7,13 +7,35 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon js-src/app.js",
     "start": "node js-src/app.js",
-    "build": "tsc && node add-js-to-imports.js"
+    "build": "tsc && node add-js-to-imports.js",
+    "apidoc": "apidoc -i js-src/ -o apidoc/"
+  },
+  "apidocs": {
+    "name": "Tataki Sushi REST API",
+    "version": "1.0.0",
+    "Description": "REST API backend endpoints for Tataki Sushi",
+    "title": "Tataki Sushi ApiDoc",
+    "url": "http://localhost:3000",
+    "order": [
+      "Authentication",
+      "Users",
+      "Menus",
+      "Orders",
+      "Reservations",
+      "Ratings",
+      "Itineraries"
+    ],
+    "template": {
+      "withCompare": true,
+      "withGenerator": true
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "apidoc": "^1.2.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
