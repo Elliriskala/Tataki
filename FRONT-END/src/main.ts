@@ -1,8 +1,8 @@
 import { translations } from "./translations";
 import { displayOrderHistory } from "./components/orderManagementDisplay";
 import { clearCart } from "./services/cartService";
+import { apiBaseUrl } from "./services/apiService";
 
-const baseURL = "http://localhost:3000";
 const loginButton = document.getElementById("login-btn") as HTMLButtonElement;
 const registerButton = document.getElementById(
   "register-btn"
@@ -273,7 +273,7 @@ const isTokenExpired = async (token: string) => {
   }
 
   try {
-    const response = await fetch(`${baseURL}/api/auth/token-validation`, {
+    const response = await fetch(`${apiBaseUrl}/auth/token-validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -308,12 +308,12 @@ window.addEventListener("load", async () => {
   // Check if the token is expired and redirect to login if needed
   if (token) {
     const expired = await isTokenExpired(token);
-    if (expired) {
-      alert("Your session has expired. Please log in again.");
-      clearCart();
-      localStorage.removeItem("authToken");
-      sessionStorage.removeItem("tokenExpired"); // Clear cached result
-      window.location.href = "/user.html";
+    if (expired) { 
+        alert("Your session has expired. Please log in again.");
+        clearCart();
+        localStorage.removeItem("authToken");
+        sessionStorage.removeItem("tokenExpired"); // Clear cached result
+        window.location.href = "/user.html";
     } else {
       console.log("Token is still valid");
     }

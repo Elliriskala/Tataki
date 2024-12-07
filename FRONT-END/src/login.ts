@@ -2,7 +2,7 @@ import { formatDate, getLanguage } from "./utils/functions";
 import { UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
 import {translations, loginErrorMessages, registerErrorMessages } from "./translations";
-
+import { apiBaseUrl } from "./services/apiService";
 
 const loginSubmit = document.getElementById(
     "submit-button-login",
@@ -69,9 +69,9 @@ closePopup.addEventListener("click", () => {
 
 
 // URL for the login endpoint
-const BASE_URL = "http://localhost:3000";
-const LOGIN_URL = "/api/auth/login"; // Replace with your actual API endpoint
-const REGISTER_URL = "/api/auth/register"; // Replace with your actual API endpoint
+
+const LOGIN_URL = "/auth/login"; 
+const REGISTER_URL = "/auth/register"; 
 
 // Function to handle login logic
 const handleLogin = async (event: Event) => {
@@ -98,7 +98,7 @@ const handleLogin = async (event: Event) => {
         if (reservationsList) {
             reservationsList.innerHTML = "";
         }
-        const response = await fetch(`${BASE_URL}${LOGIN_URL}`, {
+        const response = await fetch(`${apiBaseUrl}${LOGIN_URL}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -156,7 +156,7 @@ const handleRegister = async (event: Event) => {
     registerSubmit.disabled = true;
 
     try {
-        const response = await fetch(`${BASE_URL}${REGISTER_URL}`, {
+        const response = await fetch(`${apiBaseUrl}${REGISTER_URL}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -216,7 +216,7 @@ const populateUserPage = async () => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -253,7 +253,7 @@ const populateUserPage = async () => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/reservations/user`, {
+        const response = await fetch(`${apiBaseUrl}/reservations/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -515,7 +515,7 @@ phoneSubmit?.addEventListener("click", async (e) => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -586,7 +586,7 @@ changePasswordForm?.addEventListener("submit", async (e) => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/auth/change-password`, {
+        const response = await fetch(`${apiBaseUrl}/auth/change-password`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -647,7 +647,7 @@ deleteProfileButton.addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

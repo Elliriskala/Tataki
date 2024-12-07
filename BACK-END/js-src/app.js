@@ -38,10 +38,13 @@ app.use('/api/digitransit', itineraryRouter);
 // Resolve __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// Serve static files from the "public" directory (this should include your styles, JS, images)
+// Serve static files from the "public" directory 
 app.use(express.static(path.join(__dirname, frontEndPath)));
 
-app.use(express.static(path.join(__dirname, frontEndPath)));
+// render api documentation:
+
+// render jsdoc documentation:
+
 
 // Define routes for known pages
 app.get('/about', (_req, res) => {
