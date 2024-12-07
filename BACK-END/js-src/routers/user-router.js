@@ -105,6 +105,37 @@ userRouter.put('/user',
      */
      authenticateToken, modifyUserById);
 
-userRouter.delete('/user', authenticateToken, deleteUserById);
+userRouter.delete('/user',
+    /**
+     * @api {delete} /user Delete a user
+     * @apiName DeleteUser
+     * @apiGroup token
+     * @apiDescription Delete a user
+     * @apiPermission token
+     * 
+     * @apiSuccess {String} message Success message
+     * 
+     * @apiSuccessExample Success-Response:
+     * HTTP/1.1 200 OK
+     * {
+     * "message": "User deleted successfully"
+     * }
+     *  
+     * @apiUse UnauthorizedError
+     * 
+     * @apiUse token
+     * 
+     * @apiError (Error 500) InternalServerError Internal server error
+     * @apiErrorExample Error-Response:
+     * HTTP/1.1 500 Internal Server Error
+     * {
+     * "error": {
+     * "message": "Internal server error",
+     * "status": 500
+     * }
+     * }
+     * 
+     */
+     authenticateToken, deleteUserById);
 
 export default userRouter;
