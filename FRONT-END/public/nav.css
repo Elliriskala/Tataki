@@ -193,7 +193,7 @@ main {
 }
 
 #flag-en {
-    background-image: url(./img/gb.svg);
+    background-image: url(./img/gb-flag.svg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -201,7 +201,7 @@ main {
 }
 
 #flag-fi {
-    background-image: url(./img/fi.svg);
+    background-image: url(./img/fin-flag.svg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

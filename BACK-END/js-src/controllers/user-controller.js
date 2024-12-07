@@ -4,6 +4,13 @@ import { checkUserExists } from "../models/user-models.js";
 import bcrypt from 'bcryptjs';
 import { decodeToken } from "./auth-controller.js";
 
+/**
+ * Get all users
+ * @param req
+ * @param res
+ * @returns {Promise<void>} - Array of user objects
+ * @throws Error - Database error
+ */
 const getUsers = async (_req, res) => {
     try {
         const users = await fetchUsers();
@@ -25,12 +32,12 @@ const getUsers = async (_req, res) => {
  * @returns {Promise<void>} - User object or null if not found
  */
 const getUserById = async (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization.split(' ')[1]; // Get token from header
     let user_id;
     if (!token) {
         return next(customError('Missing token', 400));
     } else {
-        const decoded = decodeToken(token);
+        const decoded = decodeToken(token); // Decode token to get user_id
         if (!decoded) {
             return next(customError('Invalid token', 401));
         }
@@ -126,7 +133,7 @@ const modifyUserById = async (req, res, next) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Construct modified user data
+        // Construct modified user data with existing data as default
         const moddedUser = {
             username: req.body.username || existingData.username,
             email: req.body.email || existingData.email,
@@ -177,7 +184,7 @@ const deleteUserById = async (req, res, next) => {
         return next(customError('Invalid token', 401));
     }
     try {
-        const result = await deleteUser(user_id);
+        const result = await deleteUser(user_id); // Delete user
         if (result) {
             res.json({ message: 'User deleted: ', id: user_id });
         }

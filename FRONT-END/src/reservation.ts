@@ -1,4 +1,4 @@
-import { Times, User } from "./utils/interfaces";
+import { Reservation, Times, User } from "./utils/interfaces";
 import { getLanguage } from "./utils/functions";
 import { translations } from "./translations";
 const guestButtons = document.querySelectorAll(
@@ -183,12 +183,12 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("User is not logged in");
     }
   
-    const requestBody = {
+    const requestBody: Reservation = {
       reservation_date,
       reservation_time,
       guests: reservation_guests,
       email: reservation_email,
-      phone_number: reservation_phone,
+      phone_number: String(reservation_phone),
       full_name: fullName,
       user_id: null,
     };
