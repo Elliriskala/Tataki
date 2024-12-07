@@ -2,7 +2,7 @@ import {promisePool} from '../database.js';
 
 
 /**
- *
+ * fetch all reservations
  * @returns all reservations from the database
  * @throws Error
  * @returns {Promise<Reservation[]>} - Array of reservations
@@ -19,7 +19,7 @@ const fetchReservations = async () => {
   }
 };
 /**
- *
+ * fetch reservation by reservation_id
  * @param reservation_id
  * @returns reservation with the given reservation_id
  * @throws Error
@@ -40,7 +40,7 @@ const fetchReservationById = async (reservation_id) => {
   }
 };
 /**
- *
+ * fetch reservations by user_id
  * @param user_id
  * @returns reservations with the given user_id
  * @throws Error
@@ -62,7 +62,7 @@ const fetchReservationsByUserId = async (user_id) => {
   }
 };
 /**
- *
+ * Add a new reservation
  * @param newReservation
  * @returns reservation_id of the newly created reservation
  * @throws Error
@@ -122,6 +122,16 @@ const addReservation = async (newReservation) => {
 };
 
 
+/**
+ * Modify an existing reservation
+ * @param {number} reservation_id - The reservation ID
+ * @param {Object} newReservation - The modified reservation data
+ * @param {string} newReservation.reservation_date - The new reservation date
+ * @param {string} newReservation.reservation_time - The new reservation time
+ * @param {number} newReservation.guests - The new number of guests
+ * @returns {Promise<number>} - The number of affected rows
+ * @throws Error
+ */
 const modifyReservation = async (reservation_id, newReservation) => {
   const sql =
     'UPDATE Reservations SET reservation_date = ?, reservation_time = ?, guests = ? WHERE reservation_id = ?';
@@ -165,6 +175,12 @@ const deleteReservation = async (reservation_id) => {
   }
 };
 
+/**
+ * Check the availability of a timeslot
+ * @param {string} date - The date of the reservation
+ * @param {number} guests - The number of guests
+ * @returns {Promise<TimeSlot[]>} - Array of available timeslots
+ */
 const checkAvailability = async (date, guests) => {
   // SQL query to find available timeslots
   const sql = `

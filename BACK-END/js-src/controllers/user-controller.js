@@ -14,6 +14,16 @@ const getUsers = async (_req, res) => {
         throw new Error('getUsers error: ' + e.message);
     }
 };
+
+/**
+ * Get user by user_id
+ * @param req
+ * @param res
+ * @param next
+ * @returns user with the given user_id
+ * @throws Error
+ * @returns {Promise<void>} - User object or null if not found
+ */
 const getUserById = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     let user_id;
@@ -37,6 +47,15 @@ const getUserById = async (req, res, next) => {
     }
 };
 
+/**
+ * Post a new user
+ * @param req
+ * @param res
+ * @param next
+ * @returns user_id of the newly created user
+ * @throws Error
+ * @returns {Promise<void>} - User object or null if not found
+ */
 const postUser = async (req, res, next) => {
     const newUser = {
         username: req.body.username,
@@ -80,6 +99,15 @@ const postUser = async (req, res, next) => {
     }
 };
 
+/**
+ * Modify user by user_id
+ * @param req
+ * @param res
+ * @param next
+ * @returns user_id of the modified user
+ * @throws Error - Database error or invalid token
+ * @returns {Promise<void>} - User object or null if not found
+ */
 const modifyUserById = async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
@@ -130,6 +158,15 @@ const modifyUserById = async (req, res, next) => {
     }
 };
 
+/**
+ * Delete user by user_id
+ * @param req
+ * @param res
+ * @param next
+ * @returns user_id of the deleted user
+ * @throws Error - Database error or invalid token
+ * @returns {Promise<void>} - User object or null if not found
+ */
 const deleteUserById = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     if (!token) {

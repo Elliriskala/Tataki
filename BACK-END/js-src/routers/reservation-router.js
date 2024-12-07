@@ -7,7 +7,57 @@ import { validationErrorHandler } from '../middlewares/error-handlers.js';
 
 const reservationRouter = express.Router();
 reservationRouter
-    .get('/', getReservations)
+    .get('/',
+        /**
+         * @api {get} /reservation Get all reservations
+         * @apiName GetReservations
+         * @apiGroup all
+         * @apiDescription Get all reservations
+         * @apiPermission none
+         *  
+         * @apiSuccess {Object[]} reservations List of reservations
+         * @apiSuccess {String} reservations.reservation_id ID of the reservation
+         * 
+         * @apiSuccessExample Success-Response:
+         * HTTP/1.1 200 OK
+         * {
+         * "reservations": [
+         * {
+         * "reservation_id": "1",
+         * "reservation_date": "2021-03-15",
+         * "reservation_time": "12:00",
+         * "guests": 2,
+         * "email": "user@gmail.com",
+         * "full_name": "User",
+         * "phone_number": "123456789"
+         * }
+         * 
+         * ]
+         * }
+         *  
+         * @apiError (Error 404) NotFound No reservations found
+         * @apiErrorExample Error-Response:
+         * HTTP/1.1 404 Not Found
+         * {
+         * "error": {
+         * "message": "No reservations found",
+         * "status": 404
+         * }
+         * }
+         * 
+         * @apiError (Error 500) InternalServerError Internal server error
+         * @apiErrorExample Error-Response:
+         * HTTP/1.1 500 Internal Server Error
+         * {
+         * "error": {
+         * "message": "Internal server error",
+         * "status": 500
+         * }
+         * 
+         * }
+         *
+         */
+         getReservations)
     .get('/times',
         /**
          * @api {get} /reservation/times Get available reservation times

@@ -1,26 +1,4 @@
-const fetchData = async (url, options = {}) => {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-        throw new Error(`Error ${response.status} occurred`);
-    }
-    const json = response.json();
-    return json;
-};
-const getUserLocation = async () => {
-    try {
-        const position = await new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject, {
-                enableHighAccuracy: true,
-                timeout: 5000,
-                maximumAge: 0
-            });
-        });
-        return [position.coords.latitude, position.coords.longitude];
-    }
-    catch (error) {
-        throw new Error('Unable to retrieve your location', error);
-    }
-};
+
 const calculateDistance = (// Calculate distance between two coordinates on a sphere/globe
 lat1, lon1, lat2, lon2) => {
     const R = 6371; // Radius of the Earth in km
@@ -47,4 +25,4 @@ function formatDate(date) {
 }
 
 
-export { fetchData, getUserLocation, calculateDistance, formatDate};
+export {calculateDistance, formatDate};

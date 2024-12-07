@@ -1,4 +1,4 @@
-import { getUsers, getUserById, modifyUserById, deleteUserById } from '../controllers/user-controller.js';
+import { getUsers, getUserById, modifyUserById} from '../controllers/user-controller.js';
 import express from 'express';
 import authenticateToken from '../middlewares/authentication.js';
 
@@ -45,7 +45,7 @@ userRouter.get(
      */
     '/user', getUserById);
 
-userRouter.delete('/user', authenticateToken, deleteUserById);
+//userRouter.delete('/user', authenticateToken, deleteUserById);
 
 userRouter.put('/user',
     /**

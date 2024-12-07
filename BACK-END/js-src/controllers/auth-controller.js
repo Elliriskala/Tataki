@@ -4,6 +4,19 @@ import {fetchUserById, selectUserByEmail, selectPasswordHash, updatePassword} fr
 import 'dotenv/config';
 import {customError} from '../middlewares/error-handlers.js';
 
+/**
+ * JSDoc Documentation
+ */
+
+/**
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {Function} next - Next function
+ * @returns {Promise<void>} - User data and token
+ * 
+ * @throws {Error} - Error handling
+ */
+
 const postLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -42,6 +55,11 @@ const postLogin = async (req, res, next) => {
 };
 
 
+/**
+ * Decode a token
+ * @param {String} token - The token to decode
+ * @returns {Object} - The decoded token
+ */
 const decodeToken = (token) => {
   try {
     return jwt.verify(token, process.env.JWT_SECRET);
@@ -51,6 +69,13 @@ const decodeToken = (token) => {
   }
 };
 
+/**
+ * Get the user data for the token
+ * @param {Object} req - The request object
+ * @param {Object} res - The response object
+ * @param {Function} next - The next function
+ * @returns {Promise<void>} - The user data
+ */
 const getMe = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
   if (!token) {
@@ -73,7 +98,13 @@ const getMe = async (req, res, next) => {
   }
 };
 
-
+/**
+ * Check if a token is expired
+ * @param {Object} req - The request object
+ * @param {Object} res - The response object
+ * @param {Function} next - The next function
+ * @returns {Promise<void>} - The response, indicating if the token is expired
+ */
 const isTokenExpired = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
@@ -100,6 +131,13 @@ const isTokenExpired = (req, res, next) => {
 };
 
 
+/**
+ * Change a user's password
+ * @param {Object} req - The request object
+ * @param {Object} res - The response object
+ * @param {Function} next - The next function
+ * @returns {Promise<void>} - The response, indicating if the password was changed
+ */
 const changePassword = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
   if (!token) {
