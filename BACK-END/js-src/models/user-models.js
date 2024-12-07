@@ -2,7 +2,7 @@ import { promisePool } from "../database.js";
 /**
  *
  * @returns all users from the database
- * @throws Error
+ * @throws Error - Database error
  * @returns {Promise<User[]>} - Array of users
  */
 const fetchUsers = async () => {
@@ -21,7 +21,7 @@ const fetchUsers = async () => {
  *
  * @param user_id
  * @returns user with the given user_id
- * @throws Error
+ * @throws Error - Database error
  * @returns {Promise<User | null>} - User object or null if not found
  */
 const fetchUserById = async (user_id) => {
@@ -44,7 +44,7 @@ const fetchUserById = async (user_id) => {
  *
  * @param newUser
  * @returns user_id of the newly created user
- * @throws Error
+ * @throws Error - Database error or duplicate entry
  * @returns {Promise<number>} - user_id of the newly created user
  */
 const registerUser = async (newUser) => {
@@ -79,7 +79,7 @@ const registerUser = async (newUser) => {
  * @param user_id
  * @param modifiedUser
  * @returns number of affected rows
- * @throws Error
+ * @throws Error - Database error or user not found
  * @returns {Promise<number>} - number of affected rows
  */
 const modifyUser = async (user_id, modifiedUser) => {
@@ -109,6 +109,7 @@ const modifyUser = async (user_id, modifiedUser) => {
  * Deletes a user from the database
  * @param user_id
  * @returns {Promise<{ success: boolean; error?: string }>} - Object with success and error properties
+ * @throws Error - Database error or user not found
  */
 const deleteUser = async (user_id) => {
     const sql = 'DELETE FROM Users WHERE user_id = ?';
@@ -128,6 +129,13 @@ const deleteUser = async (user_id) => {
         return { success: false, error: 'Database error: ' + e.message };
     }
 };
+
+/**
+ * Select a user by email
+ * @param email
+ * @returns {Promise<User | null>} - The user or null if not found
+ * @throws Error - Database error
+ */
 const selectUserByEmail = async (email) => {
     const sql = 'SELECT user_id, username, password_hash, email, user_level_id, created_at FROM Users WHERE email = ?';
     try {
@@ -146,6 +154,12 @@ const selectUserByEmail = async (email) => {
 };
 
 
+/**
+ * Select the password hash of a user
+ * @param id
+ * @returns {Promise<string | null>} - The password hash or null if not found
+ * @throws Error - Database error
+ */
 const selectPasswordHash = async (id) => {
     const sql = 'SELECT password_hash FROM Users WHERE user_id = ?';
     try {
@@ -164,6 +178,14 @@ const selectPasswordHash = async (id) => {
 };
 
 
+/**
+ * Check if a username or email exists in the database
+ * @param username
+ * @param email
+ * @param user_id
+ * @returns {Promise<boolean>} - True if the username or email exists
+ * @throws Error - Database error
+ */
 const checkUsernameOrEmailExists = async (username, email, user_id) => {
     const sql = 'SELECT user_id FROM Users WHERE (username = ? OR email = ?) AND user_id != ?';
     try {
@@ -176,6 +198,14 @@ const checkUsernameOrEmailExists = async (username, email, user_id) => {
     }
 };
 
+
+/**
+ * Check if a user exists in the database
+ * @param email
+ * @param username
+ * @returns {Promise<boolean>} - True if the user exists
+ * @throws Error - Database error
+ */
 const checkUserExists = async (email, username) => {
     const sql = 'SELECT user_id FROM Users WHERE email = ? OR username = ?';
     try {
@@ -188,6 +218,13 @@ const checkUserExists = async (email, username) => {
     }
 }
 
+/**
+ * Update the password of a user
+ * @param user_id
+ * @param newPassword
+ * @returns {Promise<boolean>} - True if the password was updated
+ * @throws Error - Database error
+ */
 const updatePassword = async (user_id, newPassword) => {
     const sql = 'UPDATE Users SET password_hash = ? WHERE user_id = ?';
     try {

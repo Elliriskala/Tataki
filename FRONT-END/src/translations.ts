@@ -203,6 +203,7 @@ const translations: Translation = {
         "phone-same": "Phone number is the same as the current one. Try again.",
         "login-success": "Login successful! Redirecting...",
         "no-reservations": "No reservations found",
+        "register-success": "Registration successful! You may now login.",
 
 
         // itinerary page translations
@@ -420,6 +421,7 @@ const translations: Translation = {
         "phone-same": "Puhelinnumero on sama kuin nykyinen. Kokeile uudelleen.",
         "login-success": "Kirjautuminen onnistui! Uudelleenohjataan...",
         "no-reservations": "Ei tehtyjä varauksia",
+        "register-success": "Rekisteröityminen onnistui! Voit nyt kirjautua sisään.",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",

@@ -169,7 +169,7 @@ const handleRegister = async (event: Event) => {
         // Check if the response is OK (status code 200-299)
         if (response.ok) {
             // Success - Registration was successful
-            showPopup("Registration successful! You may now log in.");
+            showPopup(translations[language]["register-success"]);
             // empty the input fields
             registerEmail.value = "";
             registerPassword.value = "";
@@ -376,7 +376,7 @@ function closeModal() {
 }
 
 // Show tab content
-interface TabButton extends HTMLButtonElement {
+interface TabButton extends HTMLButtonElement { 
     getAttribute(qualifiedName: "data-tab"): string | null;
 }
 
@@ -384,7 +384,7 @@ interface TabContent extends HTMLDivElement {
     classList: DOMTokenList;
 }
 
-function showTab(tabId: string | null) {
+const showTab = (tabId: string | null) => { 
     tabContents.forEach((tab: TabContent) => tab.classList.remove("active"));
     if (tabId) {
         const activeTab = document.getElementById(tabId) as TabContent;
