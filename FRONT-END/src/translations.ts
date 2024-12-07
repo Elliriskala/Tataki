@@ -414,7 +414,7 @@ const translations: Translation = {
         "new-password": "Uusi Salasana",
         "confirm-password": "Vahvista Salasana",
         "show-password": "Näytä Salasana",
-        "close-button": "Sulje",
+        "close-button": "Peruuta",
         "edit-profile": "Muokkaa profiilia",
         "password-change-success": "Salasanan vaihto onnistui!",
         "password-change-fail": "Salasanan vaihto epäonnistui. Tarkista syötteet.",

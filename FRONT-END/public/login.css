@@ -402,22 +402,6 @@ div.profile-info {
   border-top: #161a1d 1px dashed;
 }
 
-#user-main .logout-button {
-  padding: 12px 30px;
-  background-color: var(--sushi-red3);
-  color: var(--sushi-white);
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#user-main .logout-button:hover {
-  background-color: var(--sushi-red4);
-  transform: translateY(-2px);
-}
-
 #user-buttons {
   display: flex;
   justify-content: center;
@@ -526,28 +510,34 @@ ul#reservation-list li {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1em;
+  gap: 2em;
 }
 
-
-/* Modal Styles */
-
-button.modal-trigger {
-  padding: 10px 20px;
-  background-color: var(--sushi-black);
-  color: var(--sushi-white);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s ease;
+.user-buttons button {
+    padding: 12px 30px;
+    color: var(--sushi-white);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button.modal-trigger:hover {
-  background: var(--sushi-grey1);
-  transition: background 0.3s ease, transform 0.2s ease;
-  color: var(--sushi-black);
+.user-buttons button.logout-button {
+  background: linear-gradient(-45deg, var(--sushi-red3), var(--sushi-red4));
+}
+
+.user-buttons button.delete-profile-button {
+  background: linear-gradient(-45deg, var(--sushi-grey1), var(--sushi-graphite));
+}
+
+.user-buttons button.modal-trigger {
+  background: linear-gradient(-45deg, var(--forest-green), var(--sushi-red3));
+}
+
+.user-buttons button:hover {
   transform: translateY(-2px);
+  transition: transform 0.2s ease;
 }
 
 
@@ -814,22 +804,6 @@ button.confirm-delete-button {
     transition: background 0.3s ease;
 }
 
-button#delete-profile-button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease;
-}
-
-button#delete-profile-button:hover {
-    background: #f44336;
-    transform: translateY(-2px);
-    transition: background 0.3s ease, transform 0.2s ease;
-}
 
 
 @media screen and (max-width: 768px) {
