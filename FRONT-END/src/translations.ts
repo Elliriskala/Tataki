@@ -191,7 +191,7 @@ const translations: Translation = {
         "new-password": "New Password",
         "confirm-password": "Confirm Password",
         "show-password": "Show Password",
-        "close-button": "Close",
+        "close-button": "Cancel",
         "edit-profile": "Edit Profile",
         "password-change-success": "Password change successful!",
         "password-change-fail": "Password change failed. Check your inputs.",
@@ -204,6 +204,11 @@ const translations: Translation = {
         "login-success": "Login successful! Redirecting...",
         "no-reservations": "No reservations found",
         "register-success": "Registration successful! You may now login.",
+        "delete-profile-h4": "Delete Profile",
+        "delete-profile-p": "Are you sure you want to delete your profile? This will result in losing access to your made reservations and orders without contacting customer service. This action cannot be undone.",
+        "confirm-delete-button": "Delete Profile",
+        "profile-delete-success": "Profile deleted successfully!",
+        "profile-delete-fail": "Profile deletion failed. Please try again.",
 
 
         // itinerary page translations
@@ -422,6 +427,12 @@ const translations: Translation = {
         "login-success": "Kirjautuminen onnistui! Uudelleenohjataan...",
         "no-reservations": "Ei tehtyjä varauksia",
         "register-success": "Rekisteröityminen onnistui! Voit nyt kirjautua sisään.",
+        "delete-profile-h4": "Poista Käyttäjätili",
+        "delete-profile-p": "Oletko varma, että haluat poistaa käyttäjätilisi? Tämä johtaa pääsyn eväämiseen tekemisii varauksiin ja tilauksiin ilman yhteyden ottamista asiakaspalveluun. Tätä toimintoa ei voi peruuttaa.",
+        "confirm-delete-button": "Poista Käyttäjätili",
+        "delete-profile": "Poista Käyttäjätili",
+        "profile-delete-success": "Käyttäjätilin poisto onnistui!",
+        "profile-delete-fail": "Käyttäjätilin poisto epäonnistui. Yritä uudelleen.",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",

@@ -109,7 +109,9 @@
         <div id="user-main">
             <div class="user-buttons" id="user-buttons">
                 <button class="logout-button" data-translate="logout-button" data-testid="logout" id="logout-btn">Logout</button>
-                <button class="modal-trigger" data-translate="edit-profile" id="edit-profile-button">Edit Profile</button>
+                <button class="modal-trigger" data-translate="edit-profile" id="edit-profile-button">
+                    Edit Profile</button>
+                <button id="delete-profile-button" data-translate="delete-profile">Delete Profile</button>
             </div>
             <h1 data-translate="welcome-header">Welcome to Your Profile</h1>
             <p data-translate="heres-your-profile" class="welcome-message">Hi, <span id="username-display"></span>Here’s your user information.</p>
@@ -168,6 +170,16 @@
             </div>
             <div class="modal-footer">
                 <button data-translate="close-button" id="close-modal-button">Close</button>
+            </div>
+        </div>
+        <div id="delete-profile-modal" class="modal-delete">
+            <div class="modal-delete-content">
+                <h4 data-translate="delete-profile-h4">Delete Profile</h4>
+                <p data-translate="delete-profile-p">Are you sure you want to delete your profile? This will result in the deletion of all your user information and reservations. This action cannot be undone.</p>
+                <button class="confirm-delete-button" data-translate="confirm-delete-button" id="confirm-delete-button">Delete Profile</button>
+                <div class="modal-delete-footer">
+                    <button data-translate="close-button" id="close-delete-modal-button">Close</button>
+                </div>
             </div>
         </div>
     </main>

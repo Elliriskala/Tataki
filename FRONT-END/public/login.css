@@ -758,6 +758,79 @@ form#update-phone-form {
 
 
 
+.modal-delete {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dim background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-delete-content {
+    background-color: var(--sushi-graphite);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-delete-content h4 {
+    font-size: 1.5rem;
+    padding-block: 20px;
+    color: var(--sushi-white);
+    margin: auto;
+}
+
+.modal-delete-footer {
+    margin-top: 50px;
+}
+
+.modal-delete-footer button {
+    padding: 10px 20px;
+    background-color: var(--sushi-red3);
+    color: var(--sushi-white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button.confirm-delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button#delete-profile-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button#delete-profile-button:hover {
+    background: #f44336;
+    transform: translateY(-2px);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
 
 @media screen and (max-width: 768px) {
 
@@ -822,5 +895,11 @@ form#update-phone-form {
     align-items: center;
   }
 
+  .user-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
 }

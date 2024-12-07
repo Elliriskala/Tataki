@@ -63,8 +63,8 @@ CREATE TABLE Orders (
     general_comment TEXT,
     is_delivery BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (status_id) REFERENCES OrderStatus(status_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (status_id) REFERENCES OrderStatus(status_id) 
 );
 
 -- Create table for order items
@@ -106,22 +106,11 @@ CREATE TABLE Reservations (
     timeslot_id INT,
     guests INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE SET NULL,
     FOREIGN KEY (timeslot_id) REFERENCES TimeSlots(timeslot_id)
 
 );
 
--- Create table for food reviews
-CREATE TABLE FoodReview (
-    review_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    menu_id INT NOT NULL,
-    review TEXT NOT NULL,
-    star_rating TINYINT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (menu_id) REFERENCES Menus(menu_id)
-);
 
 -- Create table for restaurant reviews
 CREATE TABLE RestaurantReview (
@@ -131,7 +120,7 @@ CREATE TABLE RestaurantReview (
     username VARCHAR(50) NOT NULL,
     star_rating TINYINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE SET NULL
 );
 
 -- Insert user levels

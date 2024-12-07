@@ -613,3 +613,68 @@ changePasswordForm?.addEventListener("submit", async (e) => {
         console.error("Error changing password:", error);
     }
 });
+
+
+const deleteModal = document.getElementById("delete-profile-modal") as HTMLDivElement;
+const openModal = document.getElementById("delete-profile-button") as HTMLButtonElement;
+const closeDeleteModal = document.getElementById("close-delete-modal-button") as HTMLButtonElement;
+const deleteProfileButton = document.getElementById("confirm-delete-button") as HTMLButtonElement;
+
+
+openModal.addEventListener("click", () => {
+    deleteModal.style.display = "flex";
+    overlay.style.display = "block";
+});
+
+closeDeleteModal.addEventListener("click", () => {
+    deleteModal.style.display = "none";
+    overlay.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target === deleteModal) {
+        deleteModal.style.display = "none";
+        overlay.style.display = "none";
+    }
+});
+
+deleteProfileButton.addEventListener("click", async () => {
+    const language = getLanguage();
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        console.error("No token found");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/users/user`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (response.ok) {
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("user_id");
+            deleteModal.style.display = "none";
+            overlay.style.display = "none";
+            const loginContent = document.getElementById("login-main");
+            const userContent = document.getElementById("user-main");
+            if (loginContent && userContent) {
+                loginContent.style.display = "block";
+                userContent.style.display = "none";
+            }
+            if (reservationsList) {
+                reservationsList.innerHTML = "";
+            }
+            showPopup(translations[language]["profile-delete-success"]);
+        } else {
+            showPopup(translations[language]["profile-delete-fail"]);
+        }
+    } catch (error) {
+        console.error("Error deleting profile:", error);
+    }
+});
