@@ -45,14 +45,40 @@ export default defineConfig({
         "order.css",
         "reservation.css",
         "review.css",
-        "404.css"
+        "404.css",
+        "app-icon.png",
+        "app-icon.svg",
+        "RobotoMono-Bold.ttf",
+        "RobotoMono-Regular.ttf"
       ],
       manifest: {
-        name: "Tataki Sushi",
-        short_name: "Tataki Sushi",
+        name: "Tataki",
+        short_name: "Tataki",
         theme_color: "#ffffff",
         description:
           "Tataki Sushi web application built with TypeScript, Node.js, Express.js, and MySQL.",
+        icons: [
+            {
+                src: "icons/icon-192x192.png",
+                sizes: "192x192",
+                type: "image/png",
+            },
+            {
+                src: "icons/icon-256x256.png",
+                sizes: "256x256",
+                type: "image/png",
+            },
+            {
+                src: "icons/icon-384x384.png",
+                sizes: "384x384",
+                type: "image/png",
+            },
+            {
+                src: "icons/icon-512x512.png",
+                sizes: "512x512",
+                type: "image/png",
+            },
+        ]
       },
     }),
   ],
