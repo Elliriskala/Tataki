@@ -71,9 +71,8 @@ const deleteRestaurantReview = async (rest_review_id) => {
  */
 const addRestaurantReview = async (newReview) => {
   const sql =
-    'INSERT INTO RestaurantReview (user_id, username, star_rating, review) VALUES (?, ?, ?, ?)';
+    'INSERT INTO RestaurantReview (username, star_rating, review) VALUES (?, ?, ?)';
   const params = [
-    newReview.user_id || null,
     newReview.username,
     newReview.star_rating,
     newReview.review || null,
