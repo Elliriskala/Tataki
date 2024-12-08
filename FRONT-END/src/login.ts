@@ -372,14 +372,12 @@ registerSubmit.addEventListener("click", handleRegister);
 
 editProfileBtn.addEventListener("click", () => {
     modal.style.display = "block";
-    overlay.style.display = "block";
     // Default to the first tab
     showTab(tabButtons[0].getAttribute("data-tab"));
 });
 
 const closeModal = () => {
     modal.style.display = "none";
-    overlay.style.display = "none";
 }
 
 // Close modal
@@ -694,18 +692,16 @@ const deleteProfileButton = document.getElementById(
 
 openModal.addEventListener("click", () => {
     deleteModal.style.display = "flex";
-    overlay.style.display = "block";
+
 });
 
 closeDeleteModal.addEventListener("click", () => {
     deleteModal.style.display = "none";
-    overlay.style.display = "none";
 });
 
 window.addEventListener("click", (event) => {
     if (event.target === deleteModal) {
         deleteModal.style.display = "none";
-        overlay.style.display = "none";
     }
 });
 

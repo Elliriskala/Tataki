@@ -66,14 +66,13 @@ const deleteRestaurantReview = async (rest_review_id) => {
  * @param {string} newReview.review - The review
  * @returns {Promise<number>} - The new review ID
  * 
- * @throws Error
+ * @throws Error - Database error or missing required information
  * 
  */
 const addRestaurantReview = async (newReview) => {
   const sql =
-    'INSERT INTO RestaurantReview (user_id, username, star_rating, review) VALUES (?, ?, ?, ?)';
+    'INSERT INTO RestaurantReview (username, star_rating, review) VALUES (?, ?, ?)';
   const params = [
-    newReview.user_id || null,
     newReview.username,
     newReview.star_rating,
     newReview.review || null,
@@ -97,7 +96,7 @@ const addRestaurantReview = async (newReview) => {
  * Check if a rating exists
  * @param {number} user_id - The user ID
  * @returns {Promise<boolean>} - If the rating exists
- * @throws Error
+ * @throws Error - Database error or missing required information
  */
 const checkRatingExists = async (user_id) => {
   try {

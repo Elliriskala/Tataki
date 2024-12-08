@@ -14,7 +14,7 @@ import {customError} from '../middlewares/error-handlers.js';
  * @param {Function} next - Next function
  * @returns {Promise<void>} - User data and token
  * 
- * @throws {Error} - Error handling
+ * @throws {Error} - Error handling - Email and password are required, Username not found, Password invalid, Internal server error
  */
 
 const postLogin = async (req, res, next) => {
@@ -59,6 +59,7 @@ const postLogin = async (req, res, next) => {
  * Decode a token
  * @param {String} token - The token to decode
  * @returns {Object} - The decoded token
+ * @throws {Error} - Error handling - Invalid token
  */
 const decodeToken = (token) => {
   try {
@@ -75,6 +76,7 @@ const decodeToken = (token) => {
  * @param {Object} res - The response object
  * @param {Function} next - The next function
  * @returns {Promise<void>} - The user data
+ * @throws {Error} - Error handling - No token provided, Invalid token, Error in getMe
  */
 const getMe = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
@@ -104,6 +106,7 @@ const getMe = async (req, res, next) => {
  * @param {Object} res - The response object
  * @param {Function} next - The next function
  * @returns {Promise<void>} - The response, indicating if the token is expired
+ * @throws {Error} - Error handling - Invalid token
  */
 const isTokenExpired = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
@@ -137,6 +140,7 @@ const isTokenExpired = (req, res, next) => {
  * @param {Object} res - The response object
  * @param {Function} next - The next function
  * @returns {Promise<void>} - The response, indicating if the password was changed
+ * @throws {Error} - Error handling for changePassword
  */
 const changePassword = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];

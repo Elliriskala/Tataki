@@ -35,19 +35,13 @@ reviewForm.addEventListener('submit', async (e) => {
     const name = nameInput.value;
     const comment = commentInput.value;
     const ratingValue = rating.value;
-    const token = localStorage.getItem('authToken');
 
     if (!name) {
         return;
     }
 
-    if (!token) {
-        console.log('User is not logged in');
-    }
-
     // create the body of the request, if user is not logged in, user_id is null
     const ratingBody = {
-        user_id: null,
         review: comment,
         username: name,
         star_rating: ratingValue
@@ -58,8 +52,7 @@ reviewForm.addEventListener('submit', async (e) => {
     const response = await fetch(apiBaseUrl + '/reviews/restaurant', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(ratingBody)
     });

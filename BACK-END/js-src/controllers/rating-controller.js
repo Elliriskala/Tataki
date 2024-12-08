@@ -1,5 +1,4 @@
 import {customError} from '../middlewares/error-handlers.js';
-import { decodeToken } from './auth-controller.js';
 import {
   fetchRestaurantReviews,
   fetchRestaurantReviewsByUserId,
@@ -71,24 +70,11 @@ const deleteReview = async (req, res) => {
  * @param res
  * @param next
  * @returns restaurant review_id of the newly created restaurant review
- * @throws Error - Database error
- * @returns {Promise<void>} - RestaurantReview object or null if not found
+ * @throws Error - Database error or missing required information
+ * @returns {Promise<void>} - RestaurantReview object
  */
 const postReview = async (req, res, next) => {
-  let user_id = null;
-
-  // Attempt to extract user_id from token if provided
-  const token = req.headers.authorization?.split(' ')[1]; // Optional chaining for safety
-  if (token) {
-    const decoded = decodeToken(token); // Decode token to get user_id
-    if (!decoded) {
-      return next(customError('Invalid token', 401));
-    }
-    user_id = decoded.user_id;
-  }
-
   const newReview = {
-    user_id,
     username: req.body.username,
     star_rating: req.body.star_rating,
     review: req.body.review || null,

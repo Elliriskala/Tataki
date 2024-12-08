@@ -168,6 +168,8 @@ const translations: Translation = {
         "select-rating": "Please select a rating.",
         "review-submitted": "Review submitted successfully! Thank you for your feedback.",
         "review-failed": "Failed to submit review. Please try again.",
+        "review-guidelines": "Review Guidelines",
+        "review-guidelines-text": "Your review helps other customers. Please be kind and respectful. We do not publish reviews that contain offensive language or personal attacks. Reviews are used to improve our services and products, and we cannot respond to them directly. Thank you for your understanding. By not following the guidelines, you risk losing access to our services.",
 
         // login page translations
         "login-button": "Login",
@@ -402,6 +404,8 @@ const translations: Translation = {
         "select-rating": "Valitse arvosana",
         "review-submitted": "Arvostelu on lähetetty onnistuneesti! Kiitos palautteestasi.",
         "review-failed": "Arvostelun lähettäminen epäonnistui. Yritä uudelleen.",
+        "review-guidelines": "Arvostelun käytännöt",
+        "review-guidelines-text": "Arvostelusi auttaa muita asiakkaita. Ole ystävällinen ja kunnioittava. Emme julkaise arvosteluja, jotka sisältävät loukkaavaa kieltä tai henkilökohtaisia hyökkäyksiä. Arvosteluja käytetään parantamaan palveluitamme ja tuotteitamme, emmekä voi vastata niihin suoraan. Kiitos ymmärryksestäsi. Ohjeiden noudattamatta jättäminen voi johtaa palveluidemme käyttöoikeuden menettämiseen.",
 
         // login page translations
         "login-button": "Kirjaudu sisään",
