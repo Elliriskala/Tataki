@@ -22,10 +22,6 @@ export const displayMenu = (
             try {
                 descriptions = JSON.parse(menu.course_description);
             } catch (error) {
-                console.error(
-                    "Error parsing course_description for menu:",
-                    error,
-                );
                 descriptions = {};
             }
 
@@ -78,8 +74,7 @@ export const displayMenu = (
                     const itemId = button.value;
 
                     // add the item to the cart
-                    const itemToAdd = addToCart(Number(itemId));
-                    console.log(`Item added to cart with ID: ${itemToAdd}`);
+                    addToCart(Number(itemId));
                 });
             }
             container.appendChild(menuCard);

@@ -1,9 +1,9 @@
 import { getCart, saveToCart } from "../services/cartService";
 import { fetchItemDetails, fetchUserInfo } from "../services/apiService";
 
+// update the cart display with the current cart items
 export const updateCartDisplay = (): void => {
     const cart = getCart();
-    console.log("Cart:", cart);
     const cartContainer = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById(
         "total-price",
@@ -56,7 +56,7 @@ export const existingInfoButton = (): void => {
     ) as HTMLButtonElement;
 
     if (!useExistingInfoButton) {
-        console.error("Button with ID 'use-existing-info-button' not found!");
+        return; 
     }
 
     useExistingInfoButton.addEventListener("click", async () => {
@@ -64,15 +64,11 @@ export const existingInfoButton = (): void => {
             const userInfo = await fetchUserInfo();
             if (userInfo) {
                 populateUserInfo(userInfo);
-                console.log("User information loaded successfully", userInfo);
             } else {
-                console.log(
-                    "No saved information found. Please fill in your details manually.",
-                );
+                return;
             }
         } catch (error) {
-            console.error("Error fetching user info:", error);
-            console.log("Failed to load saved information.");
+            throw error;
         }
     });
 };

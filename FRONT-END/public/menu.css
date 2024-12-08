@@ -37,7 +37,7 @@ body {
     overflow-x: hidden;
     height: 100%;
     width: 100%;
-    background-color: var(--soy-sauce);
+    background-color: var(--sushi-graphite);
 }
 
 :root {
@@ -83,18 +83,21 @@ dialog::backdrop {
     position: fixed;
     top: 30%;
     transform: ease-in-out 2s translateY(-50%);
-    background-color: var(--sushi-red2);
+    background-color: white;
     color: var(--sushi-grey3);
     padding: 2em;
     box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
     z-index: 999;
     border-radius: 1em;
-    border: none;
+    border: 0.1em solid #61b764;
+}
+
+.item-added-to-cart p {
+    color: var(--sushi-graphite);
 }
 
 .menu-page-body,
 .menus {
-    background-color: var(--soy-sauce);
     color: var(--sushi-grey3);
     padding-bottom: 0.5em;
 }
@@ -115,14 +118,14 @@ dialog::backdrop {
 
 a.shopping-cart {
     position: fixed;
-    top: 7em;
+    top: 7.5em;
     right: 2em;
     background-color: var(--sushi-red1);
     color: var(--sushi-grey1);
     padding: 1em;
     border-radius: 50%;
     box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-    z-index: 999;
+    z-index: 20;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -424,7 +427,7 @@ a.shopping-cart:hover .tooltip2 {
     flex-direction: column;
     padding: 1em;
     color: var(--sushi-grey3);
-    text-align: center;
+    text-align: center;   
 }
 
 .allergen-header {

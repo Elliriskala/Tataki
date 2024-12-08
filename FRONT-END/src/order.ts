@@ -50,13 +50,13 @@ const initializeOrderPage = async (): Promise<void> => {
             await initializeCategoryButtons();
         }
     } catch (error) {
-        console.error("Failed to initialize order page", error);
+        throw new Error("Failed to initialize order page");
     }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeOrderPage().catch((error) => {
-        console.error("Failed to initialize order page", error);
+        return error;
     });
 
     const placeOrderButton = document.getElementById("place-order-button");

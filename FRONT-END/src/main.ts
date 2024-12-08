@@ -38,21 +38,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   const userToken = localStorage.getItem("authToken");
 
   if (userToken) {
-    console.log("User is logged in.");
 
     const user_id = localStorage.getItem("user_id");
-    console.log("user_id", user_id);
     if (user_id) {
       try {
         await displayOrderHistory(user_id);
       } catch (error) {
-        console.error("Failed to display order history", error);
+        throw error;
       }
     } else {
-      console.warn("User ID not found in localStorage");
+        return;
     }
   } else {
-    console.log("User is not logged in.");
   }
 
 
@@ -60,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (loginForm) {
     loginForm.classList.add("active");
   } else {
-    console.log("loginForm not found");
+    return;
   }
 
   // Toggle between login and register forms with animation control
@@ -118,10 +115,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Retrieve the target ID from the data-target attribute
       const targetId = iconContainer.getAttribute("data-target");
       if (!targetId) {
-        console.warn(
-          "data-target attribute not found on iconContainer:",
-          iconContainer
-        );
         return;
       }
 
@@ -130,7 +123,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         targetId
       ) as HTMLInputElement | null;
       if (!input) {
-        console.warn("Target input not found for targetId:", targetId);
         return;
       }
 
@@ -166,7 +158,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Handle navigation toggle for mobile
   hamburgerMenu.addEventListener("click", (event) => {
-    console.log("click");
     event.stopPropagation();
     navList.classList.toggle("active");
   });
@@ -206,7 +197,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 function changeLanguage(lang: string) {
   // Check if the language exists in the translations object
   if (!(lang in translations)) {
-    console.warn(`Invalid language key: ${lang}. Defaulting to 'en'.`);
     lang = "en"; // Default to 'en' if the key is invalid
   }
 
@@ -237,7 +227,6 @@ const flagEn = document.getElementById("flag-en");
 if (flagEn) {
   flagEn.addEventListener("click", () => {
     changeLanguage("en");
-    console.log("English selected");
     window.location.reload();
   });
 }
@@ -246,7 +235,6 @@ const flagFi = document.getElementById("flag-fi");
 if (flagFi) {
   flagFi.addEventListener("click", () => {
     changeLanguage("fi");
-    console.log("Finnish selected");
     window.location.reload();
   });
 }
@@ -254,7 +242,6 @@ if (flagFi) {
 // Load saved language from localStorage when the page loads
 const savedLang = localStorage.getItem("language") || "en";
 if (!(savedLang in translations)) {
-  console.warn(`Invalid saved language: ${savedLang}. Defaulting to 'en'.`);
   changeLanguage("en"); // Default to 'en' if the saved language is invalid
 } else {
   changeLanguage(savedLang);
@@ -262,7 +249,6 @@ if (!(savedLang in translations)) {
 
 const isTokenExpired = async (token: string) => {
   if (!token) {
-    console.log("No token found");
     return true;
   }
 
@@ -283,7 +269,6 @@ const isTokenExpired = async (token: string) => {
 
     if (!response.ok) {
       if (response.status === 401) {
-        console.log("Token is expired or invalid");
         sessionStorage.setItem("tokenExpired", "true"); // Cache expired status
         return true;
       }
@@ -296,7 +281,6 @@ const isTokenExpired = async (token: string) => {
     sessionStorage.setItem("tokenExpired", expired.toString()); // Cache status
     return expired;
   } catch (error) {
-    console.error("Error during token verification:", error);
     sessionStorage.setItem("tokenExpired", "true"); // Assume token expired on error
     return true;
   }
@@ -315,9 +299,9 @@ window.addEventListener("load", async () => {
       sessionStorage.removeItem("tokenExpired"); // Clear cached result
       window.location.href = "/user.html";
     } else {
-      console.log("Token is still valid");
+        return;
     }
   } else {
-    console.log("No token found in localStorage");
+    return;
   }
 });

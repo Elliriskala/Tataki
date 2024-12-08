@@ -95,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data: Times = await response.json();
       const times: string[] = data.availableTimes;
-      console.log(times);
 
       timeSelect.innerHTML = `<option value="">Select a time</option>`;
 

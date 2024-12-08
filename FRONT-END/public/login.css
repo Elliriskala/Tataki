@@ -394,7 +394,12 @@ th,
 td {
     padding: 1em;
     text-align: center;
-    border: 1px dashed var(--sushi-grey2);
+    border: 1px dashed rgb(117, 116, 116);
+}
+
+tr {
+    border: 1px dashed var(--sushi-grey1);
+    margin-bottom: 1em;
 }
 
 td {

@@ -8,10 +8,10 @@ const fetchAndDisplayOrders = async (): Promise<void> => {
         const orders = await fetchOrders();
 
         if (!orders || orders.length === 0) {
-            console.log("No orders found");
             return;
         }
 
+        // display orders in the order management page
         displayOrders(
             "pending-orders-table",
             orders.filter((o) => o.order_status === "Pending"),
@@ -25,7 +25,7 @@ const fetchAndDisplayOrders = async (): Promise<void> => {
             orders.filter((o) => o.order_status === "Completed"),
         );
     } catch (error) {
-        console.error("Failed to fetch and display orders", error);
+        throw new Error("Failed to fetch orders");
     }
 };
 
@@ -37,12 +37,10 @@ document.addEventListener("click", async (event) => {
         const orderId = target.getAttribute("data-id");
         const status = target.getAttribute("data-status");
 
-        console.log("Clicked button details:", { orderId, status });
-
         if (!orderId && !status) {
-            console.error("Order ID or status missing");
             return;
         }
+        // update the order status to "Inprogress" or "Completed"
         try {
             let newStatus: string;
             if (status === "Pending") {
@@ -50,24 +48,19 @@ document.addEventListener("click", async (event) => {
             } else if (status === "Inprogress") {
                 newStatus = "Completed";
             } else {
-                console.log("Invalid status: ", status);
                 return;
             }
-            console.log(`Updating order ID ${orderId} to new status: ${newStatus}`);
 
             const updatedOrder = await setNewOrderStatus(
                 Number(orderId),
                 newStatus,
             );
-            console.log(
-                `Order ${updatedOrder.order_id} status updated to ${updatedOrder.order_status}`,
-            );
-
+            
             showOrderUpdatedModal(updatedOrder.order_status || "");
 
+            // fetch and display the updated orders
             await fetchAndDisplayOrders();
         } catch (error) {
-            console.error("updateOrderStatus error:", error);
             throw new Error("Failed to update order status");
         }
     }

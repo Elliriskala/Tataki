@@ -7,6 +7,7 @@ import {
     registerErrorMessages,
 } from "./translations";
 
+// DOM elements for login and registration
 const loginSubmit = document.getElementById(
     "submit-button-login",
 ) as HTMLButtonElement;
@@ -70,6 +71,7 @@ closePopup.addEventListener("click", () => {
     popup.classList.add("hidden");
 });
 
+// Function to get the current language
 const getLanguage = () => {
     return localStorage.getItem("language") || "en";
 };
@@ -129,12 +131,9 @@ const handleLogin = async (event: Event) => {
 
         // Store the token in local storage or a cookie
         localStorage.setItem("authToken", data.token);
-        localStorage.setItem("user_id", data.user_id.toString());
-        console.log(data);
 
         loadUserPage();
     } catch (error) {
-        console.error("Login error:", error);
         messageTarget.textContent = "An error occurred. Please try again.";
         messageTarget.style.color = "red";
     } finally {
@@ -143,12 +142,10 @@ const handleLogin = async (event: Event) => {
 };
 
 // Function to handle registration logic
-// Function to handle registration logic
 const handleRegister = async (event: Event) => {
     event.preventDefault();
 
     const language = getLanguage();
-    console.log(language);
     const email = registerEmail.value.trim();
     const password = registerPassword.value.trim();
     const username = registerUsername.value.trim();
@@ -188,7 +185,6 @@ const handleRegister = async (event: Event) => {
             return;
         }
     } catch (error) {
-        console.error("Registration error:", error);
         messageTarget.textContent = "An error occurred. Please try again.";
         messageTarget.style.color = "red";
     } finally {
@@ -197,6 +193,7 @@ const handleRegister = async (event: Event) => {
 };
 
 const populateUserPage = async () => {
+    // Get the elements to update with user info
     const usernameElement = document.getElementById(
         "username-info",
     ) as HTMLSpanElement;
@@ -218,7 +215,6 @@ const populateUserPage = async () => {
 
     const token = localStorage.getItem("authToken");
     if (!token) {
-        console.error("No token found");
         return;
     }
 
@@ -242,7 +238,6 @@ const populateUserPage = async () => {
 
         const data = await response.json();
         if (data) {
-            console.log(data);
             // Safely update elements if they exist in the DOM
             if (usernameElement) {
                 usernameElement.innerHTML = data.username || "Unknown";
@@ -279,7 +274,6 @@ const populateUserPage = async () => {
         });
 
         const data = await response.json();
-        console.log(data);
 
         // Wrap data in an array if it's not already an array
         const reservations = Array.isArray(data) ? data : [data];
@@ -351,6 +345,7 @@ const loadUserPage = () => {
 //  Log out functionality
 const logOutButton = document.getElementById("logout-btn") as HTMLButtonElement;
 logOutButton.addEventListener("click", () => {
+    clearCart();
     localStorage.removeItem("authToken");
     const loginContent = document.getElementById("login-main");
     const userContent = document.getElementById("user-main");
@@ -526,7 +521,6 @@ phoneSubmit?.addEventListener("click", async (e) => {
     // Check if token exists
     const token = localStorage.getItem("authToken");
     if (!token) {
-        console.error("No token found");
         return;
     }
 
@@ -583,7 +577,6 @@ addressSubmit.addEventListener("click", async (e) => {
 
     const token = localStorage.getItem("authToken");
     if (!token) {
-        console.error("No token found.");
         return;
     }
 
@@ -598,7 +591,6 @@ addressSubmit.addEventListener("click", async (e) => {
         });
 
         if (response.ok) {
-            console.log("Address updated successfully.");
             modal.style.display = "none";
             overlay.style.display = "none";
             showPopup(translations[language]["address-update-success"]);
@@ -637,7 +629,6 @@ changePasswordForm?.addEventListener("submit", async (e) => {
 
     // Check if any field is empty
     if (!currentPasswordValue || !newPasswordValue || !confirmPasswordValue) {
-        console.log("Please fill in all fields");
         return;
     }
 
@@ -656,7 +647,6 @@ changePasswordForm?.addEventListener("submit", async (e) => {
     const token = localStorage.getItem("authToken");
 
     if (!token) {
-        console.error("No token found");
         return;
     }
 
@@ -679,7 +669,6 @@ changePasswordForm?.addEventListener("submit", async (e) => {
             currentPassword.value = "";
             newPassword.value = "";
             confirmPassword.value = "";
-            console.log("Password changed successfully");
         } else {
             showPopup(translations[language]["password-change-fail"]);
         }
@@ -723,7 +712,6 @@ deleteProfileButton.addEventListener("click", async () => {
     const token = localStorage.getItem("authToken");
 
     if (!token) {
-        console.error("No token found");
         return;
     }
 

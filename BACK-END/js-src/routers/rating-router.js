@@ -1,6 +1,6 @@
 import express from "express";
 import { getRestaurantReviews, getRestaurantReviewsByUserId, deleteReview, postReview} from "../controllers/rating-controller.js";
-import authenticateToken from "../middlewares/authentication.js";
+import {authenticateToken} from "../middlewares/authentication.js";
 import { body } from "express-validator";
 import { validationErrorHandler } from "../middlewares/error-handlers.js";
 const ratingRouter = express.Router();

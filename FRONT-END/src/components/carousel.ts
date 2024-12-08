@@ -124,13 +124,11 @@ export const initializeCarousel = async (
             ".menu-track",
         ) as HTMLDivElement;
         if (!menuTrack) {
-            console.error("Menu track container not found");
             return;
         }
         setTimeout(() => {
             const menuItems = menuTrack.querySelectorAll(".menu-card");
             if (menuItems.length === 0) {
-                console.error("Menu cards not found or not rendered");
                 return;
             }
 
@@ -165,10 +163,11 @@ export const initializeCarousel = async (
             updateCarousel(0);
 
             // swipe functionality for mobile devices
-            menuTrack.addEventListener("touchstart", (event) => handleMobileSwipe(event, menuTracker, menuItems, specialMenus)
-        );
-    }, 600);
+            menuTrack.addEventListener("touchstart", (event) =>
+                handleMobileSwipe(event, menuTracker, menuItems, specialMenus),
+            );
+        }, 600);
     } catch (error) {
-        console.error("Error initializing carousel:", error);
+        throw error;
     }
 };

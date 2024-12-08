@@ -35,8 +35,7 @@ const placeOrder = async () => {
             throw new Error(`Error placing order: ${response.statusText}`);
         }
 
-        const result = await response.json();
-        console.log("Order placed successfully!", result);
+        await response.json();
 
         // show the processing order modal
         showProcessingModal();
@@ -54,7 +53,6 @@ const placeOrder = async () => {
         resetFormFields();
     } catch (error) {
         console.error("Error placing order:", error);
-        console.log("There was an issue placing your order. Please try again.");
     }
 };
 
@@ -71,8 +69,6 @@ const collectOrderData = () => {
     // if user logged in get user id
     const user_id = localStorage.getItem("user_id");
 
-    console.log("User ID:", user_id);
-
     // Get customer information
     const customer_name =
         (
@@ -85,7 +81,7 @@ const collectOrderData = () => {
         throw new Error("Customer name is required.");
     }
 
-    // optionals email and phone number
+    // optional phone number
     const customer_email =
         (
             document.querySelector(

@@ -84,7 +84,7 @@
             <form class="order-user-info" aria-label="User information form">
               <h3 data-translate="your-info">Your information:</h3>
               <input type="text" data-translate="placeholder-name" placeholder="Name" aria-label="Enter your name" minlength="3" maxlength="25" required/>
-              <input type="email" data-translate="placeholder-email" placeholder="Email" aria-label="Enter your email address" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required/>
+              <input type="email" data-translate="placeholder-email" placeholder="Email" aria-label="Enter your email address" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off"/>
               <input type="text" data-translate="placeholder-phone" placeholder="Phone number" aria-label="Enter your phone number" minlength="4" maxlength="15"/>
             </form>
             <div class="use-existing-info">
@@ -122,9 +122,10 @@
               <details>
                 <summary data-translate="terms-summary" aria-label="View terms and conditions">Terms & Conditions</summary>
                 <div class="content" style="max-height: 300px; max-width: 90%;">
-                <p data-translate="terms">
-                  Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We appreciate your understanding and cooperation, thank you!
-                </p>
+                    <p data-translate="agree">By clicking the "ORDER" button, you agree to our Terms & Conditions:</p>
+                    <p data-translate="terms">
+                     Our delivery times are between 20-50 minutes and we deliver within a 15km radius. We do not accept returns or cancellations. If you have any issues with your order, please contact us immediately. We appreciate your understanding and cooperation, thank you!
+                    </p>
                 </div>
             </details>
             </div>
@@ -145,11 +146,6 @@
       <dialog class="item-added-to-cart" aria-label="Notification: Item added to cart">
         <p data-translate="item-added">Item added to cart</p>
       </dialog>
-      <div> 
-        <ul>
-          <li><a href="order_management.html">order management (for testing)</a></li>
-        </ul>
-      </div>
       <dialog class="processing-order">
         <p data-translate="processing-order" aria-label="Notification: Processing your order">Processing your order...</p>
         <p data-translate="please-wait">Please wait for confirmation</p>
