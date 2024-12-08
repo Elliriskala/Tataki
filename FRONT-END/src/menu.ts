@@ -1,6 +1,7 @@
 import { fetchMenuItemsByCategory } from "./services/apiService";
 import { displayMenu } from "./components/menuDisplay";
 import { initializeCarousel } from "./components/carousel";
+import { logError } from "./utils/functions";
 
 // get the language
 const getLanguage = (): string => {
@@ -54,6 +55,6 @@ const initializeMenuPage = async (): Promise<void> => {
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeMenuPage().catch((error) => {
-        throw error;    
+        logError(error, "initializeMenuPage");    
     });
 });

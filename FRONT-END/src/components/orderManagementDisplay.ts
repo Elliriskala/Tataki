@@ -1,5 +1,6 @@
 import { Order } from "../utils/interfaces";
 import { fetchOrdersById, fetchOrdersByUserId } from "../services/apiService";
+import { logError } from "../utils/functions";
 
 // display orders in the order management page
 export const displayOrders = (elementId: string, orders: Order[]): void => {
@@ -61,20 +62,32 @@ export const handleOrderClick = async (event: Event): Promise<void> => {
     const orderId = target.getAttribute("data-id");
 
     if (!orderId) {
+        logError(new Error("Order ID not found"), "handleOrderClick");
         return;
     }
 
     try {
         const order = await fetchOrdersById(Number(orderId));
+        if (!order || !order.order_id) {
+            logError(new Error("Failed to load order details"), "handleOrderClick");
+            return;
+        }
         displayOrderDetails(order);
     } catch (error) {
-        throw error;
+        logError(error, "handleOrderClick");
     }
 };
 
 // display order history on user page
-export const displayOrderHistory = async (user_id: string): Promise<void> => {
-    const orders = await fetchOrdersByUserId(Number(user_id));
+export const displayOrderHistory = async (): Promise<void> => {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        logError(new Error("No token found in local storage"), "displayOrderHistory");
+        return;
+    }
+
+    const orders = await fetchOrdersByUserId();
 
     const orderHistory = document.getElementById(
         "order-history",

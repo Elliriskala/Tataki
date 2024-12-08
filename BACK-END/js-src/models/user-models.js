@@ -26,7 +26,7 @@ const fetchUsers = async () => {
  */
 const fetchUserById = async (user_id) => {
     try {
-        const sql = 'SELECT username, email, phone_number, customer_address, city FROM Users WHERE user_id = ?';
+        const sql = 'SELECT user_id, username, email, phone_number, user_level_id, customer_address, city FROM Users WHERE user_id = ?';
         const [rows] = await promisePool.query(sql, [user_id]);
         if (rows && rows.length > 0) {
             return rows[0];

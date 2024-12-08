@@ -54,13 +54,7 @@ export const showOrderPlacedModal = (): void => {
     }
 };
 
-/**
- * Show the modal with the updated order status.
- * @param {string} updatedStatus - The updated order status to display.
- * @returns {void}
- * @throws {Error} - If the modal element is not found.
- */
-
+//Show the modal with the updated order status.
 export const showOrderUpdatedModal = (updatedStatus: string): void => {
     const orderUpdatedElement = document.querySelector(
         ".update-order-dialog",

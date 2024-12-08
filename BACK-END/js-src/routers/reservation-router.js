@@ -150,10 +150,10 @@ reservationRouter
          */
         body('reservation_date').isString(),
         body('reservation_time').isString(),
-        body('guests').isNumeric(),
-        body('email').isEmail(),
-        body('full_name').isString(),
-        body('phone_number').isString(),
+        body('guests').isNumeric({min: 1, max: 10}),
+        body('email').isEmail().isLength({min: 5, max: 50}),
+        body('full_name').isString().isLength({min: 5, max: 50}),
+        body('phone_number').isString().isLength({min: 5, max: 50}),
         validationErrorHandler,
         validateAndAddReservation);
 

@@ -1,4 +1,4 @@
-import { formatDate } from "./utils/functions";
+import { formatDate, getLanguage } from "./utils/functions";
 import { UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
 import {
@@ -6,6 +6,10 @@ import {
     loginErrorMessages,
     registerErrorMessages,
 } from "./translations";
+import { logError } from "./utils/functions";
+
+import { apiBaseUrl } from "./services/apiService";
+import { displayOrderHistory } from "./components/orderManagementDisplay";
 
 // DOM elements for login and registration
 const loginSubmit = document.getElementById(
@@ -71,15 +75,10 @@ closePopup.addEventListener("click", () => {
     popup.classList.add("hidden");
 });
 
-// Function to get the current language
-const getLanguage = () => {
-    return localStorage.getItem("language") || "en";
-};
-
 // URL for the login endpoint
-const BASE_URL = "http://localhost:3000";
-const LOGIN_URL = "/api/auth/login"; // Replace with your actual API endpoint
-const REGISTER_URL = "/api/auth/register"; // Replace with your actual API endpoint
+
+const LOGIN_URL = "/auth/login"; 
+const REGISTER_URL = "/auth/register"; 
 
 // Function to handle login logic
 const handleLogin = async (event: Event) => {
@@ -106,7 +105,7 @@ const handleLogin = async (event: Event) => {
         if (reservationsList) {
             reservationsList.innerHTML = "";
         }
-        const response = await fetch(`${BASE_URL}${LOGIN_URL}`, {
+        const response = await fetch(`${apiBaseUrl}${LOGIN_URL}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -159,7 +158,7 @@ const handleRegister = async (event: Event) => {
     registerSubmit.disabled = true;
 
     try {
-        const response = await fetch(`${BASE_URL}${REGISTER_URL}`, {
+        const response = await fetch(`${apiBaseUrl}${REGISTER_URL}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -215,6 +214,7 @@ const populateUserPage = async () => {
 
     const token = localStorage.getItem("authToken");
     if (!token) {
+        logError(new Error("No token found"), "populateUserPage");
         return;
     }
 
@@ -223,7 +223,7 @@ const populateUserPage = async () => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -232,7 +232,7 @@ const populateUserPage = async () => {
         });
 
         if (!response.ok) {
-            console.error("Failed to get user info:", response.statusText);
+            logError(new Error("Failed to fetch user info"), "populateUserPage");
             return;
         }
 
@@ -258,14 +258,14 @@ const populateUserPage = async () => {
                 cityElement.innerHTML = data.city || "N/A";
             }
         } else {
-            console.error("No data found for the user");
+            logError(new Error("No user data found"), "populateUserPage");
         }
     } catch (error) {
-        console.error("Error while fetching user info:", error);
+        logError(error, "populateUserPage");
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/reservations/user`, {
+        const response = await fetch(`${apiBaseUrl}/reservations/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -339,6 +339,7 @@ const loadUserPage = () => {
             userContent.style.display = "flex";
         }
         populateUserPage();
+        displayOrderHistory();
     }
 };
 
@@ -376,14 +377,15 @@ editProfileBtn.addEventListener("click", () => {
     showTab(tabButtons[0].getAttribute("data-tab"));
 });
 
+const closeModal = () => {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+}
+
 // Close modal
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
-function closeModal() {
-    modal.style.display = "none";
-    overlay.style.display = "none";
-}
 
 // Show tab content
 interface TabButton extends HTMLButtonElement {
@@ -521,11 +523,11 @@ phoneSubmit?.addEventListener("click", async (e) => {
     // Check if token exists
     const token = localStorage.getItem("authToken");
     if (!token) {
-        return;
+        logError(new Error("No token found"), "phoneSubmit");
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -577,11 +579,11 @@ addressSubmit.addEventListener("click", async (e) => {
 
     const token = localStorage.getItem("authToken");
     if (!token) {
-        return;
+        logError(new Error("No token found"), "addressSubmit");
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -601,7 +603,7 @@ addressSubmit.addEventListener("click", async (e) => {
             showPopup(translations[language]["address-update-fail"]);
         }
     } catch (error) {
-        console.error("Error updating address:", error);
+        logError(error, "addressSubmit");
     }
 });
 
@@ -651,7 +653,7 @@ changePasswordForm?.addEventListener("submit", async (e) => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/auth/change-password`, {
+        const response = await fetch(`${apiBaseUrl}/auth/change-password`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -716,7 +718,7 @@ deleteProfileButton.addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

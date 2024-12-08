@@ -1,6 +1,7 @@
 import { Menu } from "../utils/interfaces";
 import { showModal } from "./modal";
 import { addToCart } from "./cart";
+import { logError } from "../utils/functions";
 
 // display order page menus
 const displayOrderMenu = (menus: Menu[], lang: string): void => {
@@ -15,6 +16,7 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
     // Hide the menu container for smoother transition
     menuContainer.classList.add("hidden");
 
+    // Wait for the transition to finish
     setTimeout(() => {
         menuContainer.innerHTML = "";
 
@@ -36,6 +38,7 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
             try {
                 descriptions = JSON.parse(menu.course_description);
             } catch (error) {
+                logError(error, "displayOrderMenu");
                 descriptions = {};
             }
             const description = descriptions[lang] || descriptions["en"];

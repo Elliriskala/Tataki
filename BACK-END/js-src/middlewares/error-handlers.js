@@ -21,7 +21,17 @@ const customError = (message, status, errors) => {
  * @param {*} req
  * @param {*} res
  * @param {*} next
- * @returns
+ * @returns {object} error object
+ * @description Middleware to handle validation
+ * errors from express-validator
+ * @example
+ * app.post('/login', [
+ * body('email').isEmail(),
+ * body('password').isLength({ min: 5 }),
+ * validationErrorHandler,
+ * (req, res) => {
+ * // Handle request
+ * });
  */
 const validationErrorHandler = (req, res, next) => {
     // validation errors can be retrieved from the request object (added by express-validator middleware)
@@ -42,9 +52,13 @@ const validationErrorHandler = (req, res, next) => {
 
 /**
  * 404 error handler
- * @param {*} req
+ * @param {*} req 
  * @param {*} res
  * @param {*} next
+ * @returns {object} error object
+ * @description Middleware to handle 404 errors
+ * @example
+ * app.use(notFoundHandler);
  */
 const notFoundHandler = (req, res, next) => {
     const error = customError(`Not Found - ${req.originalUrl}`, 404);
@@ -52,6 +66,14 @@ const notFoundHandler = (req, res, next) => {
 };
 /**
  * Custom default middleware for handling errors
+ * @param {*} err
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {object} error object
+ * @description Middleware to handle errors
+ * @example
+ * app.use(errorHandler);
  */
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {

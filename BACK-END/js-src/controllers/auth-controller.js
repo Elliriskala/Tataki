@@ -149,7 +149,6 @@ const changePassword = async (req, res, next) => {
   }
   const {currentPassword, newPassword} = req.body;
   if (!currentPassword || !newPassword) {
-    console.log('Missing required fields');
     return next(customError('Missing required fields', 400));
   }
   try {

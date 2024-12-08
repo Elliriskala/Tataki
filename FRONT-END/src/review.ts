@@ -1,11 +1,13 @@
 import { translations } from "./translations";
 import { getLanguage } from "./utils/functions";
+import { apiBaseUrl } from "./services/apiService";
 const reviewForm = document.querySelector('.review-form') as HTMLFormElement;
 const nameInput = document.querySelector('#name') as HTMLInputElement;
 const commentInput = document.querySelector('#comments') as HTMLTextAreaElement
 const popup = document.getElementById('success-popup') as HTMLDivElement;
 const popupMessage = document.getElementById('popup-message') as HTMLParagraphElement;
 const closePopup = document.getElementById('close-popup') as HTMLButtonElement;
+
 
 
 const language = getLanguage();
@@ -29,22 +31,23 @@ reviewForm.addEventListener('submit', async (e) => {
         showPopup(translations[language]['select-rating']);
         return;
     }
-    const user_id = localStorage.getItem('user_id');
-    if (!user_id) {
-        console.log('User not logged in');
-    }
 
     const name = nameInput.value;
     const comment = commentInput.value;
     const ratingValue = rating.value;
+    const token = localStorage.getItem('authToken');
 
     if (!name) {
         return;
     }
 
+    if (!token) {
+        console.log('User is not logged in');
+    }
+
     // create the body of the request, if user is not logged in, user_id is null
     const ratingBody = {
-        user_id: user_id || null,
+        user_id: null,
         review: comment,
         username: name,
         star_rating: ratingValue
@@ -52,10 +55,11 @@ reviewForm.addEventListener('submit', async (e) => {
 
     console.log(ratingBody);
 
-    const response = await fetch('http://localhost:3000/api/reviews/restaurant', {
+    const response = await fetch(apiBaseUrl + '/reviews/restaurant', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(ratingBody)
     });

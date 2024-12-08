@@ -32,7 +32,9 @@ GET http://localhost:3000/api/orders/customer/Elli%20Riskala
 
 ### getting all orders based on user id
 
-GET http://localhost:3000/api/orders/user/2
+GET http://localhost:3000/api/orders/user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VyX2xldmVsX2lkIjoyLCJpYXQiOjE3MzM2Njc4MTUsImV4cCI6MTczMzc1NDIxNX0.yfaJ_w-n8IKUepJgyIXODCeJrJ30LyF-fRYVeOj1b_E
 
 ### getting all orders based on order status
 
@@ -40,8 +42,8 @@ GET http://localhost:3000/api/orders/status/Inprogress
 
 ### getting all orders based on a order id
 
-GET http://localhost:3000/api/orders/4
-
+GET http://localhost:3000/api/orders/11
+Content-Type: application/json
 
 ### create an order
 
@@ -74,11 +76,22 @@ Content-Type: application/json
 
 ### get user by id
 
-GET http://localhost:3000/users/2
+GET http://localhost:3000/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VyX2xldmVsX2lkIjoxLCJpYXQiOjE3MzM2ODI0NzIsImV4cCI6MTczMzc2ODg3Mn0.AUz8g_55HjXE-GJwabfsMiMiqVHyv-EL8BaqUAYWwVA
 
 
 ### get reservation by id
 
-GET http://localhost:3000/api/reservations/2
+GET http://localhost:3000/api/reservations/1
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MzMyMDk2NzAsImV4cCI6MTczMzI5NjA3MH0.uSLnivGufTNRDFpLi2rONKd-bqXatTKGAhiZelxbQj4
+
+### log in 
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ellinoora@metropolia.fi",
+  "password": "Ellinoora01"
+}

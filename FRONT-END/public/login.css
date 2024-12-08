@@ -377,6 +377,7 @@ div.profile-info {
     font-size: 0.8em;
     border: 0.1em solid var(--sushi-red1);
     max-width: 800px;
+    padding: 1em;
 }
 
 #order-history h2 {

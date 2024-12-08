@@ -221,10 +221,6 @@ authRouter.route('/admin').get(authenticateToken, isAdmin, (req, res) => {
     res.json({ message: 'Welcome to the admin dashboard' });
 });
 
-authRouter.route('/order_management').get(authenticateToken, isAdmin, (req, res) => {
-    res.json({ message: 'Manage orders here' });
-});
-
 authRouter.route('/me').get(authenticateToken, getMe);
 
 

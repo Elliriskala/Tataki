@@ -103,6 +103,9 @@ const getLanguage = (): string => {
     return localStorage.getItem('language') || 'en';
 }
 
+// utility function for error handling
+const logError = (error: unknown, context: string) => {
+    console.error(`[Error in ${context}]:`, error);
+};
 
-
-export { fetchData, getUserLocation, calculateDistance, showPassword, isLoggedIn, replaceHTML, addBeforeEnd, formatDate, updateLoginButton, showAdminContent, getLanguage};
+export { fetchData, getUserLocation, calculateDistance, showPassword, isLoggedIn, replaceHTML, addBeforeEnd, formatDate, updateLoginButton, showAdminContent, getLanguage, logError};

@@ -82,6 +82,7 @@ export const displayMenu = (
 
         container.classList.remove("hidden");
 
+        // show the menu cards
         const newMenuCards = container.querySelectorAll(".menu-card");
         newMenuCards.forEach((card) => {
             card.classList.add("visible");
