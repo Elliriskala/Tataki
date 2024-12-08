@@ -4,7 +4,7 @@ import {promisePool} from '../database.js';
 /**
  * fetch all reservations
  * @returns all reservations from the database
- * @throws Error
+ * @throws Error - Database error
  * @returns {Promise<Reservation[]>} - Array of reservations
  */
 const fetchReservations = async () => {
@@ -22,7 +22,7 @@ const fetchReservations = async () => {
  * fetch reservation by reservation_id
  * @param reservation_id
  * @returns reservation with the given reservation_id
- * @throws Error
+ * @throws Error - Database error
  * @returns {Promise<Reservation | null>} - Reservation object or null if not found
  */
 const fetchReservationById = async (reservation_id) => {
@@ -43,7 +43,7 @@ const fetchReservationById = async (reservation_id) => {
  * fetch reservations by user_id
  * @param user_id
  * @returns reservations with the given user_id
- * @throws Error
+ * @throws Error - Database error
  * @returns {Promise<Reservation | null>} - Reservation object or null if not found
  */
 const fetchReservationsByUserId = async (user_id) => {
@@ -65,7 +65,7 @@ const fetchReservationsByUserId = async (user_id) => {
  * Add a new reservation
  * @param newReservation
  * @returns reservation_id of the newly created reservation
- * @throws Error
+ * @throws Error - Database error or missing required information
  * @returns {Promise<number>} - reservation_id of the newly created reservation
  */
 
@@ -130,7 +130,7 @@ const addReservation = async (newReservation) => {
  * @param {string} newReservation.reservation_time - The new reservation time
  * @param {number} newReservation.guests - The new number of guests
  * @returns {Promise<number>} - The number of affected rows
- * @throws Error
+ * @throws Error - Database error or missing required information
  */
 const modifyReservation = async (reservation_id, newReservation) => {
   const sql =
@@ -157,7 +157,7 @@ const modifyReservation = async (reservation_id, newReservation) => {
  *
  * @param reservation_id
  * @returns reservation_id of the deleted reservation
- * @throws Error
+ * @throws Error - Database error
  * @returns {Promise<number>} - reservation_id of the deleted reservation
  */
 const deleteReservation = async (reservation_id) => {
@@ -180,6 +180,7 @@ const deleteReservation = async (reservation_id) => {
  * @param {string} date - The date of the reservation
  * @param {number} guests - The number of guests
  * @returns {Promise<TimeSlot[]>} - Array of available timeslots
+ * @throws Error - Database error
  */
 const checkAvailability = async (date, guests) => {
   // SQL query to find available timeslots
