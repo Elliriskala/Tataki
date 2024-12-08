@@ -109,7 +109,7 @@ const modifyUser = async (user_id, modifiedUser) => {
  *
  * Deletes a user from the database
  * @param user_id
- * @returns {Promise<{ success: boolean; error?: string }>} - Object with success and error properties
+ * @returns {Promise<boolean>} - True if the user was deleted
  * @throws Error - Database error or user not found
  */
 const deleteUser = async (user_id) => {

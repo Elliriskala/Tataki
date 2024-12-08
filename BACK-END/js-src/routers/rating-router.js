@@ -38,7 +38,6 @@ ratingRouter.get(
      * }
      * }
      * 
-     * @apiUse (Error 404) NotFound No reviews found
      * @apiErrorExample Error-Response:
      * HTTP/1.1 404 Not Found
      * {
