@@ -185,7 +185,7 @@ const selectPasswordHash = async (id) => {
  * @param email
  * @param user_id
  * @returns {Promise<boolean>} - True if the username or email exists
- * @throws Error - Database error
+ * @throws Error - Database error 
  */
 const checkUsernameOrEmailExists = async (username, email, user_id) => {
     const sql = 'SELECT user_id FROM Users WHERE (username = ? OR email = ?) AND user_id != ?';
@@ -224,7 +224,7 @@ const checkUserExists = async (email, username) => {
  * @param user_id
  * @param newPassword
  * @returns {Promise<boolean>} - True if the password was updated
- * @throws Error - Database error
+ * @throws Error - Database error or user not found
  */
 const updatePassword = async (user_id, newPassword) => {
     const sql = 'UPDATE Users SET password_hash = ? WHERE user_id = ?';

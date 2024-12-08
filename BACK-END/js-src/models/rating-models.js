@@ -66,7 +66,7 @@ const deleteRestaurantReview = async (rest_review_id) => {
  * @param {string} newReview.review - The review
  * @returns {Promise<number>} - The new review ID
  * 
- * @throws Error
+ * @throws Error - Database error or missing required information
  * 
  */
 const addRestaurantReview = async (newReview) => {
@@ -96,7 +96,7 @@ const addRestaurantReview = async (newReview) => {
  * Check if a rating exists
  * @param {number} user_id - The user ID
  * @returns {Promise<boolean>} - If the rating exists
- * @throws Error
+ * @throws Error - Database error or missing required information
  */
 const checkRatingExists = async (user_id) => {
   try {

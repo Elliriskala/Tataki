@@ -70,8 +70,8 @@ const deleteReview = async (req, res) => {
  * @param res
  * @param next
  * @returns restaurant review_id of the newly created restaurant review
- * @throws Error - Database error
- * @returns {Promise<void>} - RestaurantReview object or null if not found
+ * @throws Error - Database error or missing required information
+ * @returns {Promise<void>} - RestaurantReview object
  */
 const postReview = async (req, res, next) => {
   const newReview = {
