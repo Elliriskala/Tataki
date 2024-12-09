@@ -12,50 +12,53 @@ reservationRouter
          * @api {get} /reservation Get all reservations
          * @apiName GetReservations
          * @apiGroup all
-         * @apiDescription Get all reservations
+         * @apiDescription Retrieve a list of all reservations in the system.
          * @apiPermission none
          *  
-         * @apiSuccess {Object[]} reservations List of reservations
-         * @apiSuccess {String} reservations.reservation_id ID of the reservation
+         * @apiSuccess {Object[]} reservations List of all reservations.
+         * @apiSuccess {String} reservations.reservation_id ID of the reservation.
+         * @apiSuccess {String} reservations.reservation_date Date of the reservation.
+         * @apiSuccess {String} reservations.reservation_time Time of the reservation.
+         * @apiSuccess {Number} reservations.guests Number of guests for the reservation.
+         * @apiSuccess {String} reservations.email Email address of the person who made the reservation.
+         * @apiSuccess {String} reservations.full_name Full name of the person who made the reservation.
+         * @apiSuccess {String} reservations.phone_number Phone number of the person who made the reservation.
          * 
          * @apiSuccessExample Success-Response:
          * HTTP/1.1 200 OK
          * {
-         * "reservations": [
-         * {
-         * "reservation_id": "1",
-         * "reservation_date": "2021-03-15",
-         * "reservation_time": "12:00",
-         * "guests": 2,
-         * "email": "user@gmail.com",
-         * "full_name": "User",
-         * "phone_number": "123456789"
-         * }
-         * 
-         * ]
+         *   "reservations": [
+         *     {
+         *       "reservation_id": "1",
+         *       "reservation_date": "2021-03-15",
+         *       "reservation_time": "12:00",
+         *       "guests": 2,
+         *       "email": "user@gmail.com",
+         *       "full_name": "User Name",
+         *       "phone_number": "123456789"
+         *     }
+         *   ]
          * }
          *  
-         * @apiError (Error 404) NotFound No reservations found
+         * @apiError (Error 404) NotFound No reservations found in the system.
          * @apiErrorExample Error-Response:
          * HTTP/1.1 404 Not Found
          * {
-         * "error": {
-         * "message": "No reservations found",
-         * "status": 404
-         * }
+         *   "error": {
+         *     "message": "No reservations found",
+         *     "status": 404
+         *   }
          * }
          * 
-         * @apiError (Error 500) InternalServerError Internal server error
+         * @apiError (Error 500) InternalServerError Internal server error occurred.
          * @apiErrorExample Error-Response:
          * HTTP/1.1 500 Internal Server Error
          * {
-         * "error": {
-         * "message": "Internal server error",
-         * "status": 500
+         *   "error": {
+         *     "message": "Internal server error",
+         *     "status": 500
+         *   }
          * }
-         * 
-         * }
-         *
          */
          getReservations)
     .get('/times',
@@ -63,55 +66,55 @@ reservationRouter
          * @api {get} /reservation/times Get available reservation times
          * @apiName GetReservationTimes
          * @apiGroup all
-         * @apiDescription Get available reservation times for a restaurant on a specific date
+         * @apiDescription Retrieve available reservation times for a restaurant on a specific date.
          * @apiPermission none
          * 
-         * @apiParam {String} reservation_date Date of the reservation
+         * @apiParam {String} reservation_date Date of the reservation in YYYY-MM-DD format.
          * 
-         * @apiSuccess {Object[]} times List of available times
-         * @apiSuccess {String} times.time Time of the reservation
+         * @apiSuccess {Object[]} times List of available reservation times.
+         * @apiSuccess {String} times.time Available time for reservations.
          * 
          * @apiSuccessExample Success-Response:
          * HTTP/1.1 200 OK
          * {
-         * "times": [
-         * "10:00",
-         * "12:00",
-         * "13:00",
-         * "15:00",
-         * "17:00"
-         * ]
+         *   "times": [
+         *     "10:00",
+         *     "12:00",
+         *     "13:00",
+         *     "15:00",
+         *     "17:00"
+         *   ]
          * }
          * 
-         * @apiError (Error 400) BadRequest The request was invalid
+         * @apiError (Error 400) BadRequest Invalid date format provided.
          * @apiErrorExample Error-Response:
          * HTTP/1.1 400 Bad Request
          * {
-         * "error": {
-         * "message": "Invalid date",
-         * "status": 400
-         * }
+         *   "error": {
+         *     "message": "Invalid date format. Please use YYYY-MM-DD.",
+         *     "status": 400
+         *   }
          * }
          * 
-         * @apiError (Error 404) NotFound No available times
+         * @apiError (Error 404) NotFound No available times for the selected date.
          * @apiErrorExample Error-Response:
          * HTTP/1.1 404 Not Found
          * {
-         * "error": {
-         * "message": "No available times",
-         * "status": 404
-         * }
+         *   "error": {
+         *     "message": "No available times for the selected date.",
+         *     "status": 404
+         *   }
          * }
          * 
-         * @apiError (Error 500) InternalServerError Internal server error
+         * @apiError (Error 500) InternalServerError Internal server error occurred.
          * @apiErrorExample Error-Response:
          * HTTP/1.1 500 Internal Server Error
          * {
-         * "error": {
-         * "message": "Internal server error",
-         * "status": 500
+         *   "error": {
+         *     "message": "Internal server error",
+         *     "status": 500
+         *   }
          * }
-         * 
          */
          validateAvailability)
     .post('/',
@@ -119,33 +122,33 @@ reservationRouter
          * @api {post} /reservation Add a reservation
          * @apiName AddReservation
          * @apiGroup all
-         * @apiDescription Add a reservation, for both logged in and non-logged in users
+         * @apiDescription Add a reservation to the system, either for logged-in or non-logged-in users.
          * @apiPermission none
          * 
-         * @apiParam {String} restaurant_id ID of the restaurant
-         * @apiParam {String} reservation_date Date of the reservation
-         * @apiParam {String} reservation_time Time of the reservation
-         * @apiParam {Number} guests Number of guests
-         * @apiParam {String} email Email of the user
-         * @apiParam {String} full_name Full name of the user
-         * @apiParam {String} phone_number Phone number of the user
+         * @apiParam {String} restaurant_id ID of the restaurant.
+         * @apiParam {String} reservation_date Date of the reservation in YYYY-MM-DD format.
+         * @apiParam {String} reservation_time Time of the reservation (HH:MM).
+         * @apiParam {Number} guests Number of guests for the reservation (1 to 10).
+         * @apiParam {String} email Email address of the user making the reservation.
+         * @apiParam {String} full_name Full name of the user.
+         * @apiParam {String} phone_number Phone number of the user.
          * 
-         * @apiSuccess {String} message Success message
+         * @apiSuccess {String} message Success message indicating the reservation was added.
          * 
          * @apiSuccessExample Success-Response:
-         *  HTTP/1.1 200 OK
+         * HTTP/1.1 200 OK
          * {
-         * "message": "Reservation added successfully"
+         *   "message": "Reservation added successfully"
          * }
          * 
-         * @apiError (Error 400) BadRequest The request was invalid
+         * @apiError (Error 400) BadRequest Invalid reservation details, including exceeding the maximum number of guests or invalid input format.
          * @apiErrorExample Error-Response:
-         *  HTTP/1.1 400 Bad Request
+         * HTTP/1.1 400 Bad Request
          * {
-         * "error": {
-         * "message": "You have reached the maximum number of active reservations",
-         * "status": 400
-         * }
+         *   "error": {
+         *     "message": "You have reached the maximum number of active reservations",
+         *     "status": 400
+         *   }
          * }
          */
         body('reservation_date').isString(),
@@ -166,48 +169,47 @@ reservationRouter.get('/user',
      * @api {get} /reservation/user Get reservations by user ID
      * @apiName GetReservationsByUserId
      * @apiGroup token
-     * @apiDescription Get reservations by user ID
+     * @apiDescription Get all reservations for the authenticated user.
      * @apiPermission token
      * 
-     * @apiSuccess {Object[]} reservations List of reservations
-     * @apiSuccess {String} reservations.reservation_id ID of the reservation
+     * @apiSuccess {Object[]} reservations List of reservations associated with the user.
+     * @apiSuccess {String} reservations.reservation_id ID of the reservation.
      * 
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
      * {
-     * "reservations": [
-     * {
-     * "reservation_id": "1",
-     * "reservation_date": "2021-03-15",
-     * "reservation_time": "12:00",
-     * "guests": 2,
-     * "email": "person@gmail.com",
-     * "full_name": "Person",
-     * "phone_number": "123456789"
-     * }
-     * ]
+     *   "reservations": [
+     *     {
+     *       "reservation_id": "1",
+     *       "reservation_date": "2021-03-15",
+     *       "reservation_time": "12:00",
+     *       "guests": 2,
+     *       "email": "person@gmail.com",
+     *       "full_name": "Person Name",
+     *       "phone_number": "123456789"
+     *     }
+     *   ]
      * }
      * 
-     * @apiError (Error 404) NotFound No reservations found
+     * @apiError (Error 404) NotFound No reservations found for the authenticated user.
      * @apiErrorExample Error-Response:
      * HTTP/1.1 404 Not Found
      * {
-     * "error": {
-     * "message": "No reservations found",
-     * "status": 404
+     *   "error": {
+     *     "message": "No reservations found for this user",
+     *     "status": 404
+     *   }
      * }
      * 
-     * }
-     * 
-     * @apiError (Error 500) InternalServerError Internal server error
+     * @apiError (Error 500) InternalServerError Internal server error occurred.
      * @apiErrorExample Error-Response:
      * HTTP/1.1 500 Internal Server Error
      * {
-     * "error": {
-     * "message": "Internal server error",
-     * "status": 500
+     *   "error": {
+     *     "message": "Internal server error",
+     *     "status": 500
+     *   }
      * }
-     * 
      */
      authenticateToken, getReservationsByUserId);
 
