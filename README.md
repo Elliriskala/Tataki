@@ -27,7 +27,7 @@ Feel free to visit the restaurant at: [Tataki]()
 ### For Admins:
 - **Menu Management**: Add, edit, or delete menu items, including allergen information.
 - **Order Management**: View and update order statuses.
-- **Reservation Overview**: Manage reservations to optimize seating arrangements.
+- **Content Management**: For the restaurant content.
 
 ---
 

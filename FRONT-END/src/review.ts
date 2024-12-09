@@ -58,7 +58,7 @@ reviewForm.addEventListener('submit', async (e) => {
     });
 
     // show the popup message based on the response
-    if (response) {
+    if (response.ok) {
         console.log('Review submitted');
         popupMessage.style.color = 'green';
         showPopup(translations[language]['review-submitted']);
