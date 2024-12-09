@@ -233,7 +233,7 @@ dialog::backdrop {
     font-family: "roboto bold";
     font-size: 1.5em;
     letter-spacing: 0.1em;
-    color: var(--sushi-red2);
+    color: var(--sushi-red4);
     margin: 0.2em;
 }
 
@@ -257,7 +257,7 @@ dialog::backdrop {
     font-size: 1.2em;
     padding: 0.5em;
     margin: 0.2em;
-    color: var(--sushi-grey1);
+    color: var(--sushi-grey2);
 }
 
 .allergen-info {
@@ -484,7 +484,7 @@ dialog::backdrop {
     padding: 0 1em 0 1em;
 }
 
-.order-user-info h3 {
+.order-user-info h2 {
     font-size: 1.2em;
     font-family: "roboto bold";
     text-align: center;
@@ -523,7 +523,7 @@ input:required:invalid {
 }
 
 input:not(.invalid) {
-    border: 2px solid var(--forest-green);
+    border: 2px solid  rgb(63, 129, 63);
 }
 
 #use-existing-info-button {
@@ -549,14 +549,28 @@ input:not(.invalid) {
     transform: scale(1.1);
 }
 
+.delivery-method h2 {
+    font-size: 1em;
+
+}
+
+checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    margin-right: 1em;
+}
+
 input[type="checkbox"] {
-    width: 1.2em;
-    height: 1.2em;
+    width: 1.5em;
+    height: 1.5em;
     cursor: pointer;
 }
 
 input[type="checkbox"]:checked {
-    accent-color: var(--forest-green);
+    accent-color:  rgb(67, 152, 67);
 }
 
 .delivery-method {
@@ -568,8 +582,6 @@ input[type="checkbox"]:checked {
     margin-left: 2em;
     margin-bottom: 1em;
 }
-
-.delivery-method 
 
 .delivery-method h4 {
     margin-left: 1em;
@@ -633,12 +645,6 @@ input[type="checkbox"]:checked {
 
 .content {
     padding: 0.5em;
-}
-
-#terms-checkbox {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    margin-left: 0;
 }
 
 .order-button {

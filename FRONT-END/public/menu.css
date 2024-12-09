@@ -168,7 +168,7 @@ a.shopping-cart:hover .tooltip2 {
 .carousel h2 {
     margin: auto;
     padding: 1em;
-    border-bottom: 0.1em solid var(--sushi-red2);
+    border-bottom: 0.1em solid var(--sushi-red3);
     border-bottom-style: groove;
     width: 45%;
     color: var(--sushi-red2);
@@ -181,6 +181,11 @@ a.shopping-cart:hover .tooltip2 {
     overflow: hidden;
     width: 50%;
     height: 700px;
+    padding-top: 1em;
+}
+
+.menu-carousel h2 {
+    width: 70%;
 }
 
 .menu-track-container {
@@ -325,7 +330,7 @@ a.shopping-cart:hover .tooltip2 {
     font-family: "roboto bold";
     font-size: 1.5em;
     letter-spacing: 0.1em;
-    color: var(--sushi-red2);
+    color: var(--sushi-red4);
     margin-bottom: 1em;
 }
 
@@ -351,7 +356,7 @@ a.shopping-cart:hover .tooltip2 {
 }
 
 .price {
-    color: var(--sushi-red2);
+    color: var(--sushi-red4);
 }
 
 .allergen-info {

@@ -899,6 +899,208 @@ button.confirm-delete-button {
 }
 
 
+body:has(dialog[open]) {
+    overflow-y: hidden;
+}
+
+.update-order-dialog {
+    position: fixed;
+    top: 30%;
+    background-color: var(--sushi-white);
+    color: var(--sushi-grey3);
+    padding: 2em;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    z-index: 999;
+    border-radius: 1em;
+    border: 0.08em solid rgb(66, 173, 37);
+    color: var(--sushi-black);
+    display: none;
+    text-align: center;
+    max-width: 300px;
+}
+
+dialog::backdrop {
+    background-color: var(--sushi-graphite);
+    opacity: 0.75;
+}
+
+.order-management-header {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    color: var(--sushi-red2);
+}
+
+.order-management {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2em;
+}
+
+.pending-orders,
+.inprogress-orders,
+.completed-orders {
+    margin: 0.5em;
+    padding: 1em;
+    background-color: var(--sushi-graphite);
+    border-radius: 1em;
+    border: 0.07em dashed var(--sushi-red1);
+    box-shadow: 0.1em 0.1em 0.5em var(--sushi-black);
+}
+
+.pending-orders h3,
+.inprogress-orders h3,
+.completed-orders h3 {
+    color: var(--lotus-flower);
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.pending-table,
+.inprogress-table,
+.completed-table {
+    background-color: var(--sushi-grey2);
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.pending-table table,
+.inprogress-table table,
+.completed-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pending-table th,
+.inprogress-table th,
+.completed-table th {
+    font-family: "roboto bold";
+    padding: 0.3em;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+.pending-table td,
+.inprogress-table td,
+.completed-table td {
+    padding: 0.5em;
+    border-bottom: dashed 0.1em var(--sushi-black);
+}
+
+.page-bottom {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    flex-direction: row;
+    margin: auto;
+    width: 70%;
+    margin-bottom: 1em;
+}
+
+.order-details {
+    width: 90%;
+    text-align: center;
+    background-color: var(--sushi-graphite);
+    border-radius: 1em;
+    padding: 1em;
+    margin: auto;
+    box-shadow: 0.2em 0.3em 0.3em solid var(--sushi-black);
+}
+
+.order-details-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--sushi-grey2);
+    border-radius: 1em;
+    padding: 2em;
+    margin: auto;
+}
+
+.order-details-section h2 {
+    color: var(--sushi-red2);
+    font-size: 1.5em;
+    margin: 0.5em;
+}
+
+.order-details-section p {
+    margin: 0.3em;
+    padding: 0.3em;
+    text-align: center;
+    border-bottom: 0.1em dashed var(--sushi-red2);
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+.button-div button {
+    padding: 0.5em;
+    border-radius: 1em;
+    border: 0.1em solid var(--sushi-red2);
+    background-color: var(--sushi-grey3);
+    color: var(--sushi-red2);
+    cursor: pointer;
+    transition: background-color 0.5s;
+    margin: 0.5em;
+}
+
+.button-div button:hover {
+    background-color: var(--sushi-red2);
+    color: var(--sushi-grey2);
+    transition: all 0.5s;
+}
+
+@media screen and (max-width: 1150px) {
+    .order-management {
+        width: 90%;
+        margin: auto;
+        margin-bottom: 1em;
+    }
+}
+
+@media  screen and (max-width: 1100px) {
+    .admin-page-placeholder {
+        width: 50%;
+    }
+
+    .admin-options {
+        flex-direction: column;
+    }
+    
+}
+
+
+@media screen and (max-width: 900px) {
+    .order-management {
+        width: 80%;
+    }
+
+    .page-bottom {
+        flex-direction: column;
+        width: 90%;
+        align-items: center;
+        justify-content: center;
+    }
+    .order-details {
+        margin-top: 1em;
+        margin: auto;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .order-management {
+        flex-direction: column;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .form-image-container {
         display: none;
@@ -944,6 +1146,19 @@ button.confirm-delete-button {
         align-items: center;
     }
 }
+
+
+@media screen and (max-width: 650px) {
+    .order-details {
+        width: 90%;
+        margin: auto;
+    }
+
+    .order-management {
+        width: 80%;
+    }
+}
+
 
 @media (max-width: 600px) {
     tr {

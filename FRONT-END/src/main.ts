@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (loginForm) {
         loginForm.classList.add("active");
     } else {
-        logError(new Error("Login form not found"), "DOMContentLoaded");
         return;
     }
 
@@ -307,11 +306,9 @@ window.addEventListener("load", async () => {
             sessionStorage.removeItem("tokenExpired"); // Clear cached result
             window.location.href = "/user.html";
         } else {
-            logError(new Error("Token validation failed"), "window load");
             return;
         }
     } else {
-        logError(new Error("No token found"), "window load");
         return;
     }
 });

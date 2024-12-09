@@ -10,10 +10,6 @@ const placeOrder = async () => {
         // fetch the user info from the token to get the user id
         const userInfo = await fetchUserInfo();
 
-        if (!userInfo.user_id) {
-            throw new Error("User not logged in");
-        }
-
         // collect the order data to send to the server
         const orderData = collectOrderData(userInfo);
 
@@ -24,7 +20,7 @@ const placeOrder = async () => {
             },
             // send the order data to the server
             body: JSON.stringify({
-                user_id: orderData.user_id,
+                user_id: userInfo?.user_id || "",
                 customer_name: orderData.customer_name,
                 customer_email: orderData.customer_email,
                 customer_phone: orderData.customer_phone,
@@ -33,9 +29,11 @@ const placeOrder = async () => {
                 general_comment: orderData.general_comment,
                 order_type: orderData.order_type,
                 order_status: orderData.order_status,
-                delivery_address: orderData.delivery_address,
-                city: orderData.city,
-                delivery_instructions: orderData.delivery_instructions,
+                ...(orderData.order_type === "delivery" && {
+                    delivery_address: orderData.delivery_address,
+                    city: orderData.city,
+                    delivery_instructions: orderData.delivery_instructions,
+                }),
             }),
         });
 
@@ -47,19 +45,22 @@ const placeOrder = async () => {
         await response.json();
 
         // show the processing order modal
-        showProcessingModal();
+        if (response.ok) {
+            // show the processing order modal
+            showProcessingModal();
 
-        // show the order placed modal
-        setTimeout(() => {
-            showOrderPlacedModal();
-        }, 5000);
+            // show the order placed modal
+            setTimeout(() => {
+                showOrderPlacedModal();
+            }, 5000);
 
-        // clearing the cart after placing the order
-        localStorage.removeItem("cart");
-        updateCartDisplay();
+            // clearing the cart after placing the order
+            localStorage.removeItem("cart");
+            updateCartDisplay();
 
-        // reset the form fields
-        resetFormFields();
+            // reset the form fields
+            resetFormFields();
+        }
     } catch (error) {
         logError(error, "placeOrder");
     }
@@ -134,6 +135,10 @@ const collectOrderData = (userInfo: any) => {
         logError(new Error("Select a delivery method"), "collectOrderData");
     }
 
+    order_type = isDelivery ? "delivery" : "pickup";
+
+    console.log("order_type", order_type);
+
     // Get delivery address
     const delivery_address = isDelivery
         ? (
@@ -175,22 +180,21 @@ const collectOrderData = (userInfo: any) => {
         : "";
 
     // return the collected data
-    const orderData = {
-        user_id: userInfo.user_id, // user id from the token
+    return {
+        user_id: userInfo?.user_id || null, // user id from the token
         customer_name,
         customer_email,
         customer_phone,
         total_price,
         order_type,
         order_status: "pending",
-        general_comment: additionalComment,
-        delivery_address,
-        city,
-        delivery_instructions: deliveryInstructions,
+        general_comment: additionalComment || null,
+        delivery_address: delivery_address || null, 
+        city: city || null,
+        delivery_instructions: deliveryInstructions || null,
         order_items: cartItems,
     };
 
-    return orderData;
 };
 
 // function to reset the form fields after placing the order
@@ -230,4 +234,3 @@ const resetFormFields = () => {
 };
 
 export { placeOrder };
-

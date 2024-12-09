@@ -20,7 +20,6 @@ const authenticateToken = (req, res, next) => {
 
 // check if the user is admin to access the admin routes
 const isAdmin = (req, res, next) => {
-  console.log('Checking admin rights...');
   if (req.user?.user_level_id === 1) {
     console.log('Admin verified');
     return next();

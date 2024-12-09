@@ -1,6 +1,6 @@
 import express from 'express';
 import { changePassword, getMe } from '../controllers/auth-controller.js';
-import {authenticateToken, isAdmin} from '../middlewares/authentication.js';
+import {authenticateToken} from '../middlewares/authentication.js';
 import { postLogin, isTokenExpired } from '../controllers/auth-controller.js';
 import { postUser } from '../controllers/user-controller.js';
 import { body } from 'express-validator';
@@ -216,10 +216,6 @@ authRouter.route('/change-password').put(
     authenticateToken,
     changePassword
 );
-
-authRouter.route('/admin').get(authenticateToken, isAdmin, (req, res) => {
-    res.json({ message: 'Welcome to the admin dashboard' });
-});
 
 authRouter.route('/me').get(authenticateToken, getMe);
 

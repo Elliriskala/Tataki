@@ -20,7 +20,11 @@ GET http://localhost:3000/api/menus/specials/true
 
 ### getting all users
 
-GET http://localhost:3000/api/users
+GET http://localhost:3000/api/auth/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VyX2xldmVsX2lkIjoxLCJpYXQiOjE3MzM3NDAxNjIsImV4cCI6MTczMzgyNjU2Mn0.4WVuUtIlcRWfzp3YqPRqUPa5Ish-BiyysmVHQdy0UtE
+
+
 
 ### getting all orders 
 

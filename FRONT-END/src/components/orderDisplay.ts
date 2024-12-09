@@ -61,7 +61,7 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
                             <div class="menu-image" style="background-image: url('${menu.menu_image}')"></div>
                             </div>
                             <div class="menu-item-info">
-                            <h3 class="menu-header">${menu.course_name}</h3>
+                            <h2 class="menu-header">${menu.course_name}</h2>
                             <p class="price">${menu.price}€</p>
                             <p class="allergen-info">Allergens: ${allergens}</p>
                             </div>
@@ -100,6 +100,9 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
             const addToCartButton = menuCard.querySelector(
                 ".add-to-order-button",
             );
+
+            addToCartButton?.setAttribute("aria-label", "Add to cart");
+
             if (addToCartButton) {
                 addToCartButton.addEventListener("click", async (event) => {
                     showModal();

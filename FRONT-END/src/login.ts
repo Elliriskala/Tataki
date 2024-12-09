@@ -10,6 +10,7 @@ import { logError } from "./utils/functions";
 
 import { apiBaseUrl } from "./services/apiService";
 import { displayOrderHistory } from "./components/orderManagementDisplay";
+import { initializeOrderManagementPage } from "./order_management";
 
 // DOM elements for login and registration
 const loginSubmit = document.getElementById(
@@ -77,8 +78,8 @@ closePopup.addEventListener("click", () => {
 
 // URL for the login endpoint
 
-const LOGIN_URL = "/auth/login"; 
-const REGISTER_URL = "/auth/register"; 
+const LOGIN_URL = "/auth/login";
+const REGISTER_URL = "/auth/register";
 
 // Function to handle login logic
 const handleLogin = async (event: Event) => {
@@ -232,7 +233,10 @@ const populateUserPage = async () => {
         });
 
         if (!response.ok) {
-            logError(new Error("Failed to fetch user info"), "populateUserPage");
+            logError(
+                new Error("Failed to fetch user info"),
+                "populateUserPage",
+            );
             return;
         }
 
@@ -327,32 +331,82 @@ const populateUserPage = async () => {
     }
 };
 
-const loadUserPage = () => {
+const loadUserPage = async () => {
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
         return;
-    } else {
+    }
+
+    try {
+        // fetch user details to determine their level
+        const response = await fetch(`${apiBaseUrl}/auth/me`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+            },
+        });
+
+        if (
+            !response.headers.get("Content-Type")?.includes("application/json")
+        ) {
+            const responseText = await response.text();
+            console.error("Unexpected response type:", responseText);
+            throw new Error("Received non-JSON response from the server.");
+        }
+
+        if (!response.ok) {
+            console.error(
+                `HTTP Error: ${response.status} ${response.statusText}`,
+            );
+            window.location.href = "/";
+            return;
+        }
+
+        const userInfo = await response.json();
+
+        // Check if the user is an admin
+        const isAdmin = userInfo.user_level_id === 1;
+
         const loginContent = document.getElementById("login-main");
         const userContent = document.getElementById("user-main");
-        if (loginContent && userContent) {
-            loginContent.style.display = "none";
-            userContent.style.display = "flex";
+        const adminContent = document.getElementById("admin-main");
+
+        if (loginContent) loginContent.style.display = "none";
+        if (userContent) userContent.style.display = "flex";
+
+        if (isAdmin && adminContent) {
+            if (loginContent && userContent) {
+                loginContent.style.display = "none";
+                userContent.style.display = "none";
+            }
+            adminContent.style.display = "flex";
+            await initializeOrderManagementPage();
+        } else {
+            populateUserPage();
+            displayOrderHistory();
         }
-        populateUserPage();
-        displayOrderHistory();
+    } catch (error) {
+        console.error("Error in loadUserPage:", error);
+        logError(error, "loadUserPage");
+        window.location.href = "/";
     }
 };
 
 //  Log out functionality
-const logOutButton = document.getElementById("logout-btn") as HTMLButtonElement;
+const logOutButton = document.querySelector(".logout-button") as HTMLButtonElement;
 logOutButton.addEventListener("click", () => {
     clearCart();
     localStorage.removeItem("authToken");
     const loginContent = document.getElementById("login-main");
     const userContent = document.getElementById("user-main");
+    const adminContent = document.getElementById("admin-main");
     if (loginContent && userContent) {
         loginContent.style.display = "block";
         userContent.style.display = "none";
+    }
+    if (loginContent && adminContent) {
+        loginContent.style.display = "block";
+        adminContent.style.display = "none";
     }
 
     if (reservationsList) {
@@ -378,12 +432,11 @@ editProfileBtn.addEventListener("click", () => {
 
 const closeModal = () => {
     modal.style.display = "none";
-}
+};
 
 // Close modal
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
-
 
 // Show tab content
 interface TabButton extends HTMLButtonElement {
@@ -561,10 +614,10 @@ addressSubmit.addEventListener("click", async (e) => {
     e.preventDefault();
 
     const language = getLanguage();
-    
+
     const address = addressInput.value.trim();
     const city = cityInput.value.trim();
-    
+
     if (address === addressInput.textContent) {
         showPopup(translations[language]["address-same"]);
         return;
@@ -692,7 +745,6 @@ const deleteProfileButton = document.getElementById(
 
 openModal.addEventListener("click", () => {
     deleteModal.style.display = "flex";
-
 });
 
 closeDeleteModal.addEventListener("click", () => {

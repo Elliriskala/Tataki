@@ -49,7 +49,7 @@ export const displayMenu = (
             <div class="menu-image" style="background-image: url('${menu.menu_image}')"></div>
             </div>
             <div>
-            <h3 class="menu-header">${menu.course_name}</h3>
+            <h2 class="menu-header">${menu.course_name}</h2>
             <p>${descriptionHTML}</p>
             <p class="price">${menu.price}€</p>
             <p class="allergen-info">Allergens: ${allergens}</p>
@@ -65,6 +65,9 @@ export const displayMenu = (
             const addToCartButton = menuCard.querySelector(
                 ".add-to-order-button",
             );
+
+            addToCartButton?.setAttribute("aria-label", "Add to cart");
+            
             if (addToCartButton) {
                 addToCartButton.addEventListener("click", async (event) => {
                     showModal();

@@ -106,7 +106,7 @@
             </div>
         </div>
         </div>
-        <div id="user-main">
+        <div id="user-main" style="display: none;">
             <div class="user-buttons" id="user-buttons">
                 <button aria-label="logout" class="logout-button" data-translate="logout-button" data-testid="logout" id="logout-btn">Logout</button>
                 <button aria-label="edit-profile" class="modal-trigger" data-translate="edit-profile" id="edit-profile-button">
@@ -131,16 +131,6 @@
                 </div>
             </div>
         </div>
-        <div id="order-history"></div>
-        <div id="profile-modal" class="modal">
-            <div class="modal-content">
-                <h4 data-translate="edit-profile-h4">Edit Profile</h4>
-                <div class="tabs">
-                    <button class="tab-button" data-translate="change-password" data-tab="change-password-tab">Change Password</button>
-                    <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
-                    <button class="tab-button" data-translate="update-address" data-tab="update-address-tab">Update Address</button>
-                </div>
-        
                 <!-- Change Password Tab -->
                 <div id="change-password-tab" class="tab-content">
                     <form id="change-password-form">
@@ -175,14 +165,14 @@
                 <div id="update-address-tab" class="tab-content" style="display: none;">
                     <form id="update-address-form">
                         <label data-translate="address-label" for="address-input">Address</label>
-                        <input type="text" id="address-input" name="address" placeholder="Your address" data-translate="your-address" minlength="4" maxlength="20" required>
+                        <input type="text" id="address-input" name="address" placeholder="Your address" data-translate="your-address" minlength="4" maxlength="30" required>
                         <label for="city-input" data-translate="your-city">City</label>
-                        <input type="text" id="city-input" name="city" placeholder="City" minlength="3" maxlength="15" required>
+                        <input type="text" id="city-input" name="city" placeholder="City" minlength="3" maxlength="20" required>
                         <button class="address-update-button" id="address-submit" type="submit" data-translate="update-address">Update Address</button>
                     </form>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="display: none;">
                 <button data-translate="close-button" id="close-modal-button">Close</button>
             </div>
         </div>
@@ -196,6 +186,68 @@
                 </div>
             </div>
         </div>
+        <div id="admin-main" style="display: none;">
+            <div class="user-buttons" id="user-buttons">
+                <button aria-label="logout" class="logout-button" data-translate="logout-button" data-testid="logout">Logout</button>
+            </div>
+            <div class="order-management-header">
+                <h1>Order management</h1>
+            </div>
+            <div class="order-management">
+                <div class="pending-orders">
+                    <h3>Pending</h3>
+                    <div class="order-list">
+                        <div
+                            class="pending-table"
+                            id="pending-orders-table" aria-label="Table of pending orders"
+                        ></div>
+                    </div>
+                </div>
+                <div class="inprogress-orders">
+                    <h3>In progress</h3>
+                    <div class="order-list">
+                        <div
+                            class="inprogress-table"
+                            id="inprogress-orders-table" aria-label="Table of in-progress orders"
+                        ></div>
+                    </div>
+                </div>
+                <div class="completed-orders">
+                    <h3>Completed</h3>
+                    <div class="order-list">
+                        <div
+                            class="completed-table"
+                            id="completed-orders-table" aria-label="Table of completed orders"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-bottom">
+                <div class="order-details">
+                    <div class="button-div">
+                        <button
+                            class="update-order update-status-button" aria-label="Update order status">Update status
+                        </button>
+                        <button class="close" aria-label="Close order details">Close</button>
+                    </div>
+                    <div id="order-details" class="order-details-section" aria-label="Order details section">
+                        <h2>Order Details</h2>
+                    </div>
+                </div>
+            </div>
+            <dialog class="update-order-dialog" aria-label="Order status update confirmation">
+                <p>Order status set to <span id="updated-status"></span></p>
+            </dialog>
+        </div>
+        <div id="order-history"></div>
+        <div id="profile-modal" class="modal">
+            <div class="modal-content">
+                <h4 data-translate="edit-profile-h4">Edit Profile</h4>
+                <div class="tabs">
+                    <button class="tab-button" data-translate="change-password" data-tab="change-password-tab">Change Password</button>
+                    <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
+                    <button class="tab-button" data-translate="update-address" data-tab="update-address-tab">Update Address</button>
+                </div>
     </main>
     <footer>
         <div class="footer-container">
@@ -210,13 +262,16 @@
             </div>
             <div class="social-medias">
                 <ul>
-                    <li id="facebook"><a href="" aria-label="link-to-facebook"></a></li>
-                    <label for="facebook">
-                      <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-                    <li id="instagram"><a href="" aria-label="link-to-instagram"></a></li>
-                    <label for="instagram">
-                      <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
-                    </label>
+                    <li id="facebook">
+                        <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                            <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li id="instagram">
+                        <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                            <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                        </a>
+                    </li>
                   </ul>
             </div>
         </div>
