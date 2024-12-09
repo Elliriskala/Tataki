@@ -10,8 +10,8 @@
     <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/order.css" />
-    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/order.css">
+    <link rel="stylesheet" href="/nav.css">
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
     <script type="module" src="./src/main.ts"></script>
     <script type="module" src="./src/order.ts"></script>
@@ -54,7 +54,7 @@
       <div class="menus-header">
         <h1 data-translate="order" aria-label="Order page">Order</h1>
       </div>
-      <div class="order-info" aria-label="Order information section">
+      <div class="order-info">
         <div class="your-order">
           <div class="order-content">
             <table class="order-table" aria-label="Your order details table">
@@ -86,29 +86,30 @@
           <div class="right-column">
             <form class="order-user-info" aria-label="User information form">
               <h2 data-translate="your-info">Your information:</h2>
-              <input type="text" data-translate="placeholder-name" placeholder="Name" aria-label="Enter your name" minlength="3" maxlength="25" required/>
-              <input type="email" data-translate="placeholder-email" placeholder="Email" aria-label="Enter your email address" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off"/>
-              <input type="text" data-translate="placeholder-phone" placeholder="Phone number" aria-label="Enter your phone number" minlength="4" maxlength="15"/>
+              <input type="text" data-translate="placeholder-name" placeholder="Name" aria-label="Enter your name" minlength="3" maxlength="25" required>
+              <input type="email" data-translate="placeholder-email" placeholder="Email" aria-label="Enter your email address" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off">
+              <input type="text" data-translate="placeholder-phone" placeholder="Phone number" aria-label="Enter your phone number" minlength="4" maxlength="15">
             </form>
             <div class="use-existing-info">
                 <button id="use-existing-info-button" data-translate="use-existing-info" aria-label="Use saved information">Use saved information</button>
             </div>
-            <div class="delivery-method" aria-label="Delivery method selection">
+            <div class="delivery-method">
               <div>
-                <h2 data-translate="select-delivery">Select delivery method:</h2>
+                <h2 data-translate="select-delivery"  aria-label="Select delivery method">Select delivery method:</h2>
               </div>
-              <checkbox>
-                <input type="checkbox" class="checkbox" id="delivery-checkbox" autocomplete="off" aria-label="Delivery option" />
+              <div>
+                <input type="checkbox" class="checkbox" id="delivery-checkbox" aria-label="Delivery option">
                 <label for="delivery-checkbox" data-translate="delivery">Delivery</label>
-              </checkbox>
-              <checkbox>
-                <input type="checkbox" class="checkbox" id="pickup-checkbox" autocomplete="off"
-                aria-label="Pickup option"/>
+              </div>
+              <div>
+                <input type="checkbox" class="checkbox" id="pickup-checkbox"
+                aria-label="Pickup option">
                 <label for="pickup-checkbox" data-translate="pickup">Pickup</label>
+              </div>
             </div>
             <form class="delivery-address" aria-label="Delivery address form">
-                <input type="text" data-translate="placeholder-address" placeholder="Address" aria-label="Enter delivery address" minlength="4" maxlength="30"/>
-                <input type="text" data-translate="placeholder-city" placeholder="City" aria-label="Enter city" minlength="4" maxlength="20"/>
+                <input type="text" data-translate="placeholder-address" placeholder="Address" aria-label="Enter delivery address" minlength="4" maxlength="30">
+                <input type="text" data-translate="placeholder-city" placeholder="City" aria-label="Enter city" minlength="4" maxlength="20">
             </form>
             <div class="add-instructions">
               <textarea
@@ -150,13 +151,13 @@
       <dialog class="item-added-to-cart" aria-label="Notification: Item added to cart">
         <p data-translate="item-added">Item added to cart</p>
       </dialog>
-      <dialog class="processing-order">
-        <p data-translate="processing-order" aria-label="Notification: Processing your order">Processing your order...</p>
+      <dialog class="processing-order" aria-label="Notification: Processing your order">
+        <p data-translate="processing-order">Processing your order...</p>
         <p data-translate="please-wait">Please wait for confirmation</p>
       </dialog>
-      <dialog class="order-placed">
+      <dialog class="order-placed" aria-label="Order placed successfully">
         <p data-translate="order-placed">Your order has been placed successfully!</p>
-        <p data-translate="order-confirmation" aria-label="Notification: Order placed successfully">The restaurant has received your order and is currently preparing it.</p>
+        <p data-translate="order-confirmation">The restaurant has received your order and is currently preparing it.</p>
         <p data-translate="thank-you">Thank you for choosing Tataki!</p>
         <button id="order-placed-button" data-translate="close-dialog">Close</button>
     </dialog>

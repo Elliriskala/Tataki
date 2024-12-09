@@ -357,7 +357,7 @@ dialog::backdrop {
     border-radius: 1em;
     margin-bottom: 2em;
     border: solid 0.1em var(--sushi-black);
-    box-shadow: 1px 10px 20px var(--sushi-black);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
 }
 
 .your-order {

@@ -35,6 +35,7 @@ body {
     --sushi-red2: #a4161a;
     --sushi-red3: #ba181b;
     --sushi-red4: #e5383b;
+    --sushi-grey4: #787272;
     --sushi-grey1: #b1a7a6;
     --sushi-grey2: #d3d3d3;
     --sushi-grey3: #f5f3f4;
@@ -376,18 +377,18 @@ div.profile-info {
 }
 
 #order-history {
+    margin-top: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 3em;
     box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
     border-radius: 1em;
     font-size: 0.8em;
     border: 0.1em solid var(--sushi-red1);
-    max-width: 800px;
+    max-width: 700px;
     padding: 1em;
-    margin: auto;
+    background-color: var(--sushi-grey2);
 }
 
 #order-history h2 {
@@ -399,17 +400,18 @@ div.profile-info {
 #order-history table {
     margin-bottom: 2em;
     margin: 1em;
+    color: var(--sushi-graphite);
 }
 
 th,
 td {
     padding: 1em;
     text-align: center;
-    border: 1px dashed var(--sushi-graphite);
+    border: 1px dashed var(--sushi-red3);
 }
 
 tr {
-    border: 1px dashed var(--sushi-graphite);
+    border: 1px dashed var(--sushi-red3);
     margin-bottom: 1em;
 }
 
@@ -905,6 +907,22 @@ button.confirm-delete-button {
 
 /* Admin Page Styles */
 
+#admin-logout {
+    padding: 12px 30px;
+    background-color: var(--sushi-red3);
+    color: var(--sushi-white);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#admin-logout:hover {
+    background-color: var(--sushi-red4);
+    transform: translateY(-2px);
+}
+
 #admin-main {
     display: flex;
     justify-content: center;
@@ -959,11 +977,11 @@ dialog::backdrop {
 .pending-orders,
 .inprogress-orders,
 .completed-orders {
-    margin: 0.5em;
+    margin: 1em;
     padding: 1em;
     border-radius: 1em;
-    border: 0.07em dashed var(--sushi-red1);
-    box-shadow: 0.1em 0.1em 0.5em var(--sushi-black);
+    border: 0.09em dashed var(--sushi-red2);
+    box-shadow: 1px 8px 20px var(--sushi-black);
 }
 
 .pending-orders h3,
@@ -1002,7 +1020,6 @@ dialog::backdrop {
 .inprogress-table td,
 .completed-table td {
     padding: 0.5em;
-    border-bottom: dashed 0.1em var(--sushi-black);
 }
 
 .page-bottom {
@@ -1021,7 +1038,7 @@ dialog::backdrop {
     border-radius: 1em;
     padding: 1em;
     margin: auto;
-    box-shadow: 0.2em 0.3em 0.3em var(--sushi-black);
+    box-shadow: 0 6px 9px var(--sushi-black);
 }
 
 .order-details-section {
@@ -1174,11 +1191,11 @@ dialog::backdrop {
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 725px) {
     tr {
         display: flex;
         flex-direction: column;
-        border: 1px dashed var(--sushi-grey1);
+        border: 1px dashed var(--sushi-red2);
         margin-bottom: 1em;
     }
 
@@ -1188,7 +1205,7 @@ dialog::backdrop {
         justify-content: space-between;
         padding: 10px;
         border: none;
-        border-bottom: 1px dashed var(--sushi-grey1);
+        border-bottom: 1px dashed var(--sushi-red2);
     }
 
     td:last-child {
