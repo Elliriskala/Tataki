@@ -13,6 +13,7 @@ import {customError} from '../middlewares/error-handlers.js';
  * @param {Object} res - Response object
  * @param {Function} next - Next function
  * @returns {Promise<void>} - User data and token
+ * @description - Login a user, validate email and password, generate JWT token, remove sensitive data, respond with user data and token
  * 
  * @throws {Error} - Error handling - Email and password are required, Username not found, Password invalid, Internal server error
  */

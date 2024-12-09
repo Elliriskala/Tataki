@@ -1,6 +1,6 @@
 # Tataki Sushi Restaurant Web App
 
-Welcome to the **Tataki** web application! This project is a modern web application designed to provide an intuitive and seamless experience for users to browse menus, make reservations, place orders, and leave reviews.
+Welcome to the **Tataki** web application! This project is a modern web application designed to provide an intuitive and seamless experience for users to browse menus, make reservations, place orders, and leave reviews. The Tataki Sushi REST API is the backend for the Tataki Sushi web application, providing core functionalities like user authentication, user management, menu handling, order processing, table reservations, ratings, and itinerary planning. This API allows communication between the front-end of the restaurant's website and the database, facilitating a seamless experience for users interacting with the restaurant's services.
 
 Feel free to visit the restaurant at: [Tataki]()
 
@@ -9,8 +9,8 @@ Feel free to visit the restaurant at: [Tataki]()
 ## Documentation for developers
 
 ### documentation can be accessed at:
-- ApiDoc documentation at [ApiDoc]() for detailed information about the API-endpoints.
-- JSDoc documentation at [JSDoc]() for detailed information about server side logic.
+- ApiDoc documentation at [ApiDoc](https://users.metropolia.fi/~karripar/js-exercises/tataki-docs/apidocs/) for detailed information about the API-endpoints.
+- JSDoc documentation at [JSDoc](https://users.metropolia.fi/~karripar/js-exercises/tataki-docs/jsdocs/) for detailed information about server side logic.
 
 ---
 
@@ -27,7 +27,7 @@ Feel free to visit the restaurant at: [Tataki]()
 ### For Admins:
 - **Menu Management**: Add, edit, or delete menu items, including allergen information.
 - **Order Management**: View and update order statuses.
-- **Reservation Overview**: Manage reservations to optimize seating arrangements.
+- **Content Management**: For the restaurant content.
 
 ---
 

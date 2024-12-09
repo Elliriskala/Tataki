@@ -1,6 +1,7 @@
 import { Reservation, Times, User } from "./utils/interfaces";
 import { getLanguage } from "./utils/functions";
 import { translations } from "./translations";
+import { apiBaseUrl } from "./services/apiService";
 const guestButtons = document.querySelectorAll(
   ".guest-btn"
 ) as NodeListOf<HTMLButtonElement>;
@@ -30,6 +31,15 @@ const showPopup = (message: string) => {
     popupMessage.textContent = message;
     popup.classList.remove("hidden");
 };
+
+if (phoneInput) {
+    phoneInput.addEventListener("input", (event) => {
+        // Remove any non-numeric characters
+        (event.target as HTMLInputElement).value = (
+            event.target as HTMLInputElement
+        ).value.replace(/\D/g, "");
+    });
+}
 
 // Function to hide the popup
 closePopup.addEventListener("click", () => {
@@ -70,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         try {
             const response = await fetch(
-                `http://localhost:3000/api/reservations/times?date=${date}&guests=${guests}`,
+                `${apiBaseUrl}/reservations/times?date=${date}&guests=${guests}`,
 
                 {
                     method: "GET",
@@ -119,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         try {
             const response = await fetch(
-                `http://localhost:3000/api/users/user`,
+                `${apiBaseUrl}/users/user`,
                 {
                     method: "GET",
                     headers: {
@@ -184,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-      const response = await fetch("http://localhost:3000/api/reservations", {
+      const response = await fetch(`${apiBaseUrl}/reservations`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

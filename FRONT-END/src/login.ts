@@ -1,5 +1,5 @@
 import { formatDate, getLanguage } from "./utils/functions";
-import { UserLoggedIn } from "./utils/interfaces";
+import { User, UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
 import {
     translations,
@@ -234,7 +234,7 @@ const populateUserPage = async () => {
                 return;
             }
 
-            const data = await response.json();
+            const data: User = await response.json();
             if (data) {
                 if (usernameElement)
                     usernameElement.innerHTML = data.username || "Unknown";
@@ -338,20 +338,21 @@ const loadUserPage = async () => {
             },
         });
 
+        if (!response.ok) {
+            // Handle unexpected responses or errors
+            console.error(
+                `HTTP Error: ${response.status} ${response.statusText}`,
+            );
+            window.location.href = "/"; // Redirect to the homepage or login page
+            return;
+        }
+
         if (
             !response.headers.get("Content-Type")?.includes("application/json")
         ) {
             const responseText = await response.text();
             console.error("Unexpected response type:", responseText);
             throw new Error("Received non-JSON response from the server.");
-        }
-
-        if (!response.ok) {
-            console.error(
-                `HTTP Error: ${response.status} ${response.statusText}`,
-            );
-            window.location.href = "/";
-            return;
         }
 
         const userInfo = await response.json();
@@ -368,13 +369,11 @@ const loadUserPage = async () => {
         if (adminContent) adminContent.style.display = "none";
 
         if (isAdmin && adminContent) {
-            if (loginContent && userContent) {
-                loginContent.style.display = "none";
-                userContent.style.display = "none";
-            }
-            adminContent.style.display = "flex";
-            initializeOrderManagementPage();
+            if (userContent) userContent.style.display = "none";
+                adminContent.style.display = "flex";
+                initializeOrderManagementPage();
         } else {
+            if (userContent) userContent.style.display = "flex";
             populateUserPage();
         }
     } catch (error) {
@@ -404,9 +403,7 @@ if (adminLogoutButton) {
 }
 
 //  Log out functionality
-const logOutButton = document.getElementById(
-    "logout-btn",
-) as HTMLButtonElement;
+const logOutButton = document.getElementById("logout-btn") as HTMLButtonElement;
 
 if (logOutButton) {
     logOutButton.addEventListener("click", () => {
@@ -437,7 +434,7 @@ registerSubmit.addEventListener("click", handleRegister);
 
 editProfileBtn.addEventListener("click", () => {
     modal.style.display = "block";
-    // Default to the first tab
+
     showTab(tabButtons[0].getAttribute("data-tab"));
 });
 

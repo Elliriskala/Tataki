@@ -58,8 +58,9 @@ const getUserById = async (req, res, next) => {
  * @param req
  * @param res
  * @param next
+ * @description - Create a new user with the provided data, hash the password and store it in the database with bcrypt
  * @returns user_id of the newly created user
- * @throws Error
+ * @throws Error - Database error (500), Missing required information (400), Email or Username already exists (409)
  * @returns {Promise<void>} - User object or null if not found
  */
 const postUser = async (req, res, next) => {

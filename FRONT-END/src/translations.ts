@@ -223,7 +223,12 @@ const translations: Translation = {
         "confirm-delete-button": "Delete Profile",
         "profile-delete-success": "Profile deleted successfully!",
         "profile-delete-fail": "Profile deletion failed. Please try again.",
-
+        "no-orders": "No orders found",
+        "order-history": "Order History",
+        "order-id": "Order ID:",
+        "time": "Time:",
+        "type": "Type:",
+        "items": "Items:",
 
         // itinerary page translations
         "itinerary_title": "Itinerary",
@@ -463,6 +468,13 @@ const translations: Translation = {
         "delete-profile": "Poista Käyttäjätili",
         "profile-delete-success": "Käyttäjätilin poisto onnistui!",
         "profile-delete-fail": "Käyttäjätilin poisto epäonnistui. Yritä uudelleen.",
+        "no-orders": "Ei tehtyjä tilauksia.",
+        "order-history": "Tilaushistoria",
+        "order-id": "Tilaus ID:",
+        "time": "Aika:",
+        "type": "Tyyppi:",
+        "items": "Tuotteet:",
+        "status": "Tila:",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",

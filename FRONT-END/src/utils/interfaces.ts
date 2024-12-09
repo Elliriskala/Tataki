@@ -46,6 +46,8 @@ interface User {
   phone_number?: string;
   password_hash: string;
   user_level_id: number;
+  customer_address?: string;
+  city?: string;
 }
 
 interface UserLoggedIn {
