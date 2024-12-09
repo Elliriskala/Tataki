@@ -1,7 +1,7 @@
 import { translations } from "./translations";
 import { displayOrderHistory } from "./components/orderManagementDisplay";
 import { clearCart } from "./services/cartService";
-import { apiBaseUrl } from "./services/apiService";
+import { apiBaseUrl } from "./utils/variables";
 import { logError } from "./utils/functions";
 
 const loginButton = document.getElementById("login-btn") as HTMLButtonElement;

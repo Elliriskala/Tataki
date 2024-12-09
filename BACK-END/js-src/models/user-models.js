@@ -117,16 +117,13 @@ const deleteUser = async (user_id) => {
     try {
         const [result] = await promisePool.query(sql, [user_id]);
         if (result.affectedRows > 0) {
-            console.log('deleteUserById', `User with ID ${user_id} was deleted.`);
             return { success: true };
         }
         else {
-            console.log('deleteUserById', `User with ID ${user_id} not found.`);
             return { success: false, error: 'User not found' };
         }
     }
     catch (e) {
-        console.log('deleteUserById', +e.message);
         return { success: false, error: 'Database error: ' + e.message };
     }
 };

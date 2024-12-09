@@ -1,8 +1,8 @@
 import { Menu } from "../utils/interfaces";
 import { Order } from "../utils/interfaces";
 import { logError } from "../utils/functions";
+import { apiBaseUrl } from "../utils/variables";
 
-export const apiBaseUrl = "http://localhost:3000/api";
 
 /**
  * Fetches all menus from the database

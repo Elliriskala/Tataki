@@ -8,9 +8,9 @@ import {
 } from "./translations";
 import { logError } from "./utils/functions";
 
-import { apiBaseUrl } from "./services/apiService";
 import { displayOrderHistory } from "./components/orderManagementDisplay";
 import { initializeOrderManagementPage } from "./order_management";
+import { apiBaseUrl } from "./utils/variables";
 
 // DOM elements for login and registration
 const loginSubmit = document.getElementById(
@@ -343,7 +343,6 @@ const loadUserPage = async () => {
             console.error(
                 `HTTP Error: ${response.status} ${response.statusText}`,
             );
-            window.location.href = "/"; // Redirect to the homepage or login page
             return;
         }
 

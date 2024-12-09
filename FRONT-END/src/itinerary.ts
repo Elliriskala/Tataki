@@ -1,6 +1,7 @@
 import { Itinerary } from "./types";
 import * as L from "leaflet";
 import { getLanguage } from "./utils/functions";
+import { apiBaseUrl } from "./utils/variables";
 
 const getLocationButton = document.getElementById(
   "getLocation"
@@ -164,7 +165,7 @@ itineraryForm?.addEventListener("submit", async (event) => {
   // API-key hidden in the server-side code
   try {
     const response = await fetch(
-      "http://localhost:3000/api/digitransit/itinerary",
+        `${apiBaseUrl}/digitransit/itinerary`,
       {
         method: "POST",
         headers: {

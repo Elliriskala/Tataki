@@ -41,17 +41,14 @@ const deleteRestaurantReview = async (rest_review_id) => {
     const [result] = await promisePool.query(sql, [rest_review_id]);
 
     if (result.affectedRows > 0) {
-      console.log('deleteRating', 'Deleted rating with ID', rest_review_id);
       return result.affectedRows;
 
     } else {
-      console.log('deleteRating', `Rating with ID ${rest_review_id} not found`);
       throw new Error('Rating not found');
 
     }
 
   } catch (e) {
-    console.log('deleteRating Error:' + e.message);
     throw new Error('Database error: ' + e.message);
   }
 };
@@ -82,7 +79,6 @@ const addRestaurantReview = async (newReview) => {
     if (result && result.affectedRows) {
       return result.insertId;
     } else {
-        console.log('addRestaurantReview model', 'RestaurantReview not added');
         throw new Error('AddRestaurantReview, RestaurantReview not added');
     }
   } catch (e) {

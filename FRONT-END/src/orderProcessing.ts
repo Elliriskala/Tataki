@@ -1,8 +1,9 @@
-import { apiBaseUrl, fetchUserInfo } from "./services/apiService";
+import { fetchUserInfo } from "./services/apiService";
 import { updateCartDisplay } from "./components/cart";
 import { getCart } from "./services/cartService";
 import { showProcessingModal, showOrderPlacedModal } from "./components/modal";
 import { logError } from "./utils/functions";
+import { apiBaseUrl } from "./utils/variables"; 
 
 // place the order
 const placeOrder = async () => {

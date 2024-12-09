@@ -51,7 +51,6 @@ const fetchReservationsByUserId = async (user_id) => {
     const sql = 'SELECT * FROM Reservations WHERE user_id = ?';
     const [rows] = await promisePool.query(sql, [user_id]);
     if (rows && rows.length > 0) {
-      console.log(rows[0]);
       return rows;
     } else {
       return null;

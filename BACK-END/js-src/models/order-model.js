@@ -39,7 +39,6 @@ const fetchOrders = async (next) => {
  */
 const fetchOrdersByStatus = async (order_status, next) => {
   try {
-    console.log('Validating order_status:', order_status);
     if (typeof order_status !== 'string') {
       throw new Error('Invalid order_status: Must be a string');
     }

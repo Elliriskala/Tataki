@@ -1,6 +1,6 @@
 import { translations } from "./translations";
 import { getLanguage } from "./utils/functions";
-import { apiBaseUrl } from "./services/apiService";
+import { apiBaseUrl } from "./utils/variables";
 const reviewForm = document.querySelector('.review-form') as HTMLFormElement;
 const nameInput = document.querySelector('#name') as HTMLInputElement;
 const commentInput = document.querySelector('#comments') as HTMLTextAreaElement

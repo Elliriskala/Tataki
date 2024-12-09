@@ -58,7 +58,6 @@ const getReservationsByUserId = async (req, res, next) => {
             return next(customError('Invalid token', 401));
         }
         user_id = decoded.user_id;
-        console.log('user_id in getReservationsByUserID:', user_id);
     }
     if (!user_id) {
         return next(customError('Missing user_id', 400));
@@ -106,13 +105,11 @@ const validateAndAddReservation = async (req, res, next) => {
 
     // Validate required fields
     if (!reservation_date || !reservation_time || !guests || !full_name || !phone_number || !email) {
-        console.log('Missing required fields');
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
     // Validate data types
     if (typeof guests !== 'number' || guests <= 0) {
-        console.log('Invalid number of guests');
         return res.status(400).json({ error: 'Guests must be a positive number' });
     }
 

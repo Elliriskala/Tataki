@@ -82,7 +82,6 @@ const postReview = async (req, res, next) => {
 
   // Check for required fields
   if (!newReview.username || !newReview.star_rating) {
-    console.log('postReview error:', 'Missing required information');
     return res.status(400).json({ message: 'Missing required information' });
   }
 
@@ -91,11 +90,9 @@ const postReview = async (req, res, next) => {
     if (reviewId) {
       res.status(201).json({ message: 'Review added successfully', id: reviewId });
     } else {
-      console.log('postReview error:', 'Review not added');
       res.status(500).json({ message: 'Review not added' });
     }
   } catch (e) {
-    console.log('postReview error:', e.message);
     return next(customError(e.message, 503));
   }
 };
