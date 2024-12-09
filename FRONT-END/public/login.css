@@ -528,7 +528,7 @@ ul#reservation-list li {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--sushi-red4);
+    background-color: var(--sushi-red3);
     color: var(--sushi-white);
     max-width: 90%;
     align-self: center;
