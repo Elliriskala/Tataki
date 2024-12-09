@@ -19,9 +19,9 @@
   <body class="menu-page">
     <header>
       <nav class="navigation">
-        <div class="logo" aria-label="Home Page">
+        <div class="logo">
           <button data-testid="hamburger-button" class="hamburger" data-translate="hamburger">☰</button>
-          <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder" aria-label="Tataki Restaurant Logo"></a>
+          <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
         </div>
         <ul class="nav-list">
           <li><a href="index.html" data-translate="home-link" aria-label="Navigate to Home Page">Home Page</a></li>
@@ -36,18 +36,15 @@
                 🌐
               </button>
               <div class="dropdown-content">
-                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
-                </button>
-                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
+                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
               </div>
             </div>
           
             <!-- Login/User Button -->
-            <button class="login" id="login-register-user" aria-label="Login-and-user">
-                <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
-                  <i class="fa-regular fa-user" aria-label="login and user page icon"></i>
-                </a>
-              </button>
+            <a href="user.html" class="login" id="login-register-user" aria-label="Login-and-user">
+                <i class="fa-regular fa-user"></i>
+            </a>
           </div>
       </nav>
     </header>
@@ -68,7 +65,7 @@
         <div class="carousel">
           <h2 data-translate="chef-recommendation">Chef's resommendations</h2>
           <button id="carousel-left" class="carousel-button" aria-label="Scroll left">❮</button>
-          <div class="menu-carousel" aria-label="Chef Recommendations Carousel">
+          <div class="menu-carousel">
             <div class="menu-track-container">
               <div class= "menu-track"></div>
             </div>
@@ -79,8 +76,8 @@
       <dialog class="item-added-to-cart" aria-label="Item added confirmation">
         <p data-translate="item-added">Item added to cart!</p>
       </dialog>
-      <div class="allergens" aria-label="Allergen Information Section">
-        <h2 class="allergen-header" data-translate="allergen-header">Allergen information</h2>
+      <div class="allergens">
+        <h2 class="allergen-header" aria-label="Allergen Information" data-translate="allergen-header">Allergen information</h2>
         <p data-translate="allergen-info">
           We strive to provide accurate allergen details for our menu:
         </p>
@@ -97,7 +94,7 @@
     <footer>
       <div class="footer-container">
         <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
-            <div class="logo-placeholder" aria-label="Tataki Logo"></div>
+            <div class="logo-placeholder"></div>
         </a>
         <div class="footer-nav">
           <ul>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-    <meta name="description" content="Tataki restaurant home page" />
+    <meta name="description" content="Tataki restaurant home page">
     <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
     <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
     <meta name="theme-color" content="#ffffff">
@@ -35,35 +35,32 @@
                 🌐
               </button>
               <div class="dropdown-content">
-                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
-                </button>
-                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
+                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
               </div>
             </div>
           
             <!-- Login/User Button -->
-            <button class="login" id="login-register-user" aria-label="Login-and-user">
-                <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
-                  <i class="fa-regular fa-user" aria-label="login and user page icon"></i>
-                </a>
-              </button>
-          </div>
+            <a href="user.html" class="login" id="login-register-user" aria-label="Login-and-user">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        </div>
       </nav>
     </header>
     <main>
       <section class="hero-container" aria-label="Hero section with featured content">
-        <div class="hero-image" id="home-page-img" aria-label="Hero image"></div>
+        <div class="hero-image" id="home-page-img"></div>
     </section>
-      <div class="aboutus" aria-label="About Us Section">
+      <div class="aboutus">
         <div class="aboutus-placeholder">
-          <div class="about-us">
+          <div class="about-us" role="region" aria-label="About Us Section">
             <h3 data-translate="this-is-us">This is us</h3>
             <p data-translate="about-us">Welcome to Tataki, where tradition meets innovation in Helsinki’s vibrant city center. Our restaurant blends authentic Japanese techniques with a touch of Nordic flair to offer unforgettable dining experiences.</p>
           </div>
-          <div class="image-placeholder" id="about-image" aria-label="About Us Image 1"></div>
+          <div class="image-placeholder" id="about-image"></div>
         </div>
         <div class="aboutus-placeholder">
-          <div class="image-placeholder" id="about-image2" aria-label="Restaurant Image"></div>
+          <div class="image-placeholder" id="about-image2"></div>
           <div class="about-us">
             <h3 data-translate="restaurant">Restaurant</h3>
             <p data-translate="our-restaurant">
@@ -72,7 +69,7 @@
           </div>
         </div>
         <div class="aboutus-placeholder">
-        <div class="image-placeholder" id="about-image3" aria-label="About us image 2"></div>
+        <div class="image-placeholder" id="about-image3"></div>
         <div class="about-us">
           <h3 data-translate="team">Team</h3>
             <p data-translate="our-team">
@@ -87,14 +84,14 @@
               Founded by a sushi enthusiast, Tataki combines expertise with a passion for fusion. Each dish showcases artistry, sustainability, and the joy of good food. Thank you for being part of our journey — we look forward to sharing more memorable meals with you!
             </p>
           </div>
-          <div class="image-placeholder" id="about-image4" aria-label="Our Story Image"></div>
+          <div class="image-placeholder" id="about-image4"></div>
         </div>
       </div>
     </main>
     <footer>
       <div class="footer-container">
         <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
-            <div class="logo-placeholder" aria-label="Tataki Logo"></div>
+            <div class="logo-placeholder"></div>
         </a>
         <div class="footer-nav">
           <ul>
@@ -102,7 +99,7 @@
             <li><a href="review.html" data-translate="review-link" aria-label="Navigate to Review Page">Review us</a></li>
         </ul>
         </div>
-        <div class="social-medias" aria-label="Social Media Links">
+        <div class="social-medias">
             <ul>
                 <li id="facebook">
                     <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">

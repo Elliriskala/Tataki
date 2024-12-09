@@ -39,17 +39,14 @@
           </button>
           <div class="dropdown-content">
             <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
-            </button>
             <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
           </div>
         </div>
       
         <!-- Login/User Button -->
-        <button class="login" id="login-register-user" aria-label="Login-and-user">
-            <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
-              <i class="fa-regular fa-user" aria-label="login and user page icon"></i>
-            </a>
-          </button>
+        <a href="user.html" class="login" id="login-register-user" aria-label="Login-and-user">
+            <i class="fa-regular fa-user"></i>
+        </a>
       </div>
   </nav>
   <main>
@@ -80,11 +77,11 @@
             <h1 data-translate="itinerary-title">Your itinerary to Tataki</h1>
             <button id="getLocation" data-translate="use-location">Use my location</button>
             <form id="itineraryForm" style="display: none;">
-              <input type="hidden" id="toLat" placeholder="Tataki Latitude" value="60.16366628688539"><br>
-              <input type="hidden" id="toLon" placeholder="Tataki Longitude" value="24.94161492221418"><br>
-              <input type="hidden" id="fromLat" placeholder="Your Latitude" value=""><br>
-              <input type="hidden" id="fromLon" placeholder="Your Longitude" value=""><br>
-              <input type="hidden" id="walkSpeed" value="1.7" step="0.1"><br>
+              <input type="hidden" id="toLat" value="60.16366628688539"><br>
+              <input type="hidden" id="toLon" value="24.94161492221418"><br>
+              <input type="hidden" id="fromLat" value=""><br>
+              <input type="hidden" id="fromLon" value=""><br>
+              <input type="hidden" id="walkSpeed" value="1.7"><br>
               <button type="submit" data-translate="plan-itinerary">Plan Your Itinerary</button>
             </form>
             <div id="itineraryResults">

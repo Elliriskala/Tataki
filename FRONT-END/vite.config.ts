@@ -11,7 +11,6 @@ export default defineConfig({
     rollupOptions: {
         external: [],
       input: {
-        admin: path.resolve(__dirname, "admin.html"),
         contact: path.resolve(__dirname, "contact.html"),
         menu: path.resolve(__dirname, "menu.html"),
         order: path.resolve(__dirname, "order.html"),
@@ -33,13 +32,11 @@ export default defineConfig({
       },
       includeAssets: [
         "about.css",
-        "admin.css",
         "contact.css",
         "homepage.css",
         "login.css",
         "menu.css",
         "nav.css",
-        "order_management.css",
         "order.css",
         "reservation.css",
         "review.css",
