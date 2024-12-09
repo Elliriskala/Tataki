@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("authToken"); // 'Bearer token'
         if (!token) {
             console.error("No token found");
-            alert("Please log in to use this feature");
+            showPopup(translations[language]["login-to-use-info"]);
             return;
         }
         try {

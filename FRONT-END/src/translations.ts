@@ -141,7 +141,7 @@ const translations: Translation = {
         "timeOption11": "8:00 PM",
         "timeOption12": "9:00 PM",
         "timeOptionDefault": "Select Time",
-        "reservationDescription": "For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four. Reservations are binding, excluding reasons beyond the clients reach.",
+        "reservationDescription": "For larger parties we recommend calling the customer service. Reservations are binding, excluding reasons beyond the clients reach.",
         "your-reservations": "Your Reservations",
         "your-date": "Reservation Date",
         "your-time": "Reservation Time",
@@ -154,8 +154,9 @@ const translations: Translation = {
         "max-reservations": "You have reached the maximum number of reservations.",
         "reservation-failed": "Reservation failed. Please try again.",
         "reservation-success": "Reservation successful!",
-        "select-date-and-guests": "Please select a date and number of guests.",
+        "select-date-and-guests": "Please fill in all fields to select a time.",
         "reservation-saved-info": "Use saved information",
+        "login-to-use-info": "Please log in to use saved information.",
 
 
         //Review page translations
@@ -168,7 +169,7 @@ const translations: Translation = {
         "placeholderReviewName": "Enter your name or use a nickname",
         "select-rating": "Please select a rating.",
         "review-submitted": "Review submitted successfully! Thank you for your feedback.",
-        "review-failed": "Failed to submit review. Please try again.",
+        "review-failed": "Failed to submit review. We limit reviews based on IP address to prevent spam. Please try again later.",
         "review-guidelines": "Review Guidelines",
         "review-guidelines-text": "Your review helps other customers. Please be kind and respectful. We do not publish reviews that contain offensive language or personal attacks. Reviews are used to improve our services and products, and we cannot respond to them directly. Thank you for your understanding. By not following the guidelines, you risk losing access to our services.",
 
@@ -367,7 +368,7 @@ const translations: Translation = {
         "placeholderPhone": "Syötä puhelinnumerosi",
         "placeholderDate": "Valitse päivämäärä",
         "detailsSummary": "Ehdot ja säännöt",
-        "detailsContent1": "Napsauttamalla 'Varaa Nyt' -painiketta hyväksyt ehdot ja säännöt.",
+        "detailsContent1": "Klikkaamalla 'Varaa Nyt' -painiketta hyväksyt ehdot ja säännöt.",
         "detailsContent2": "Ravintolassamme on 15 minuutin armonaika. Jos myöhästyt, soita meille ja ilmoita asiasta. Muuten varauksesi perutaan. Kiitämme ymmärrystäsi.",
         "timeSelectLabel": "Valitse Aika",
         "timeOption1": "10:00",
@@ -383,7 +384,7 @@ const translations: Translation = {
         "timeOption11": "20:00",
         "timeOption12": "21:00",
         "timeOptionDefault": "Valitse Aika",
-        "reservationDescription": "Suuremmille seurueille suosittelemme soittamista asiakaspalveluumme. Huomioithan, että emme ota vastaan alle neljän hengen pöytävarauksia. Varaukset ovat sitovia, pois lukien asiakkaan ulottumattomissa olevat syyt.",
+        "reservationDescription": "Suuremmille seurueille suosittelemme soittamista asiakaspalveluumme. Varaukset ovat sitovia, pois lukien asiakkaan ulottumattomissa olevat syyt.",
         "your-reservations": "Pöytävarauksesi",
         "your-date": "Varauspäivämäärä",
         "your-time": "Varausaika",
@@ -396,8 +397,9 @@ const translations: Translation = {
         "max-reservations": "Olet saavuttanut maksimimäärän varauksia.",
         "reservation-failed": "Varaus epäonnistui. Yritä uudelleen.",
         "reservation-success": "Varaus onnistui!",
-        "select-date-and-guests": "Valitse päivämäärä ja vieraiden lukumäärä.",
+        "select-date-and-guests": "Täytä kaikki kentät valitaksesi ajankohdan.",
         "reservation-saved-info": "Käytä tallennettuja tietoja",
+        "login-to-use-info": "Kirjaudu sisään käyttääksesi tallennettuja tietoja.",
 
         //Review page translations
         "your-name": "Nimesi",
@@ -408,7 +410,7 @@ const translations: Translation = {
         "placeholderReviewName": "Kirjoita nimesi tai käytä nimimerkkiä.",
         "select-rating": "Valitse arvosana",
         "review-submitted": "Arvostelu on lähetetty onnistuneesti! Kiitos palautteestasi.",
-        "review-failed": "Arvostelun lähettäminen epäonnistui. Yritä uudelleen.",
+        "review-failed": "Arvostelun lähettäminen epäonnistui. Rajoitamme arvostelujen määrää yhdestä IP-osoitteesta spämmin estämiseksi. Yritä myöhemmin uudelleen.",
         "review-guidelines": "Arvostelun käytännöt",
         "review-guidelines-text": "Arvostelusi auttaa muita asiakkaita. Ole ystävällinen ja kunnioittava. Emme julkaise arvosteluja, jotka sisältävät loukkaavaa kieltä tai henkilökohtaisia hyökkäyksiä. Arvosteluja käytetään parantamaan palveluitamme ja tuotteitamme, emmekä voi vastata niihin suoraan. Kiitos ymmärryksestäsi. Ohjeiden noudattamatta jättäminen voi johtaa palveluidemme käyttöoikeuden menettämiseen.",
 

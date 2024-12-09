@@ -2,6 +2,7 @@ import express from 'express';
 import reservationRouter from './routers/reservation-router.js';
 import path from 'path';
 import cors from 'cors';
+import {rateLimit} from 'express-rate-limit';
 import {fileURLToPath} from 'url';
 import userRouter from './routers/user-router.js';
 import ratingRouter from './routers/rating-router.js';
@@ -15,6 +16,21 @@ import itineraryRouter from './routers/itineray-router.js';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
+
+
+// Rate limit requests to the API
+const limiter2 = rateLimit({
+  windowMs: 120 * 60 * 1000,  // 2 hours
+  max: 2, 
+  message: 'Too many requests from this IP, please try again after two hours',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+
+
+
+
 
 app.use(
   cors({
@@ -54,14 +70,6 @@ app.use('/api/menus', menuRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/digitransit', itineraryRouter);
 
-// render api documentation:
-
-// render jsdoc documentation:
-
-// route for the admin page
-app.get('/admin', authenticateToken, isAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, frontEndPath, 'admin.html'));
-});
 
 // Define routes for known pages
 app.get('/about', (_req, res) => {
@@ -99,3 +107,5 @@ app.use(errorHandler);
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+export {limiter2};
