@@ -180,7 +180,7 @@
                         <label data-translate="address-label" for="address-input">Address</label>
                         <input type="text" id="address-input" name="address" placeholder="Your address" data-translate="your-address" minlength="4" maxlength="30" required>
                         <label for="city-input" data-translate="your-city">City</label>
-                        <input type="text" id="city-input" name="city" placeholder="City" minlength="3" maxlength="20" required>
+                        <input type="text" id="city-input" data-translate="your-city" name="city" placeholder="City" minlength="3" maxlength="20" required>
                         <button class="address-update-button" id="address-submit" type="submit" data-translate="update-address">Update Address</button>
                     </form>
                 </div>
@@ -198,7 +198,8 @@
                 </div>
             </div>
         </div>
-        <div id="admin-main" style="display: none;">
+    </div>
+    <div id="admin-main" style="display: none;">
         <button aria-label="logout" id="admin-logout" class="logout-button" data-translate="logout-button" data-testid="logout">Logout</button>
             <div class="order-management-header">
                 <h1>Order management</h1>
@@ -247,8 +248,7 @@
             </div>
             <dialog class="update-order-dialog" aria-label="Order status update confirmation">
                 <p>Order status set to <span id="updated-status"></span></p>
-            </dialog>
-        </div>
+            </dialog>    
     </main>
     <footer>
         <div class="footer-container">

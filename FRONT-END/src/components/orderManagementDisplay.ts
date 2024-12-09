@@ -1,6 +1,7 @@
 import { Order } from "../utils/interfaces";
 import { fetchOrdersById, fetchOrdersByUserId } from "../services/apiService";
-import { logError } from "../utils/functions";
+import { getLanguage, logError } from "../utils/functions";
+import { translations } from "../translations";
 
 // display orders in the order management page
 export const displayOrders = (elementId: string, orders: Order[]): void => {
@@ -26,8 +27,8 @@ export const displayOrderDetails = (order: Order): void => {
     }
 
     orderDetails.innerHTML = generateOrderDetails(order);
-    
-    // close button and update status button event listeners 
+
+    // close button and update status button event listeners
     const closeButton = document.querySelector(".close") as HTMLButtonElement;
     const updateStatusButton = document.querySelector(
         ".update-order",
@@ -42,7 +43,6 @@ export const displayOrderDetails = (order: Order): void => {
     closeButton.addEventListener("click", () => {
         orderDetails.innerHTML = "";
     });
-
 };
 
 // attach click event to order links
@@ -69,7 +69,10 @@ export const handleOrderClick = async (event: Event): Promise<void> => {
     try {
         const order = await fetchOrdersById(Number(orderId));
         if (!order || !order.order_id) {
-            logError(new Error("Failed to load order details"), "handleOrderClick");
+            logError(
+                new Error("Failed to load order details"),
+                "handleOrderClick",
+            );
             return;
         }
         displayOrderDetails(order);
@@ -81,9 +84,9 @@ export const handleOrderClick = async (event: Event): Promise<void> => {
 // display order history on user page
 export const displayOrderHistory = async (): Promise<void> => {
     const token = localStorage.getItem("authToken");
+    const language = getLanguage();
 
     if (!token) {
-        logError(new Error("No token found in local storage"), "displayOrderHistory");
         return;
     }
 
@@ -97,8 +100,8 @@ export const displayOrderHistory = async (): Promise<void> => {
     }
 
     orderHistory.innerHTML = orders.length
-        ? generateOrderHistoryTable(orders)
-        : "<p>No order history found</p>";
+        ? generateOrderHistoryTable(orders, language, translations)
+        : `<p>${translations[language]["no-orders"]}</p>`;
 };
 
 // generate order table for display on order management page
@@ -124,7 +127,6 @@ const generateOrderTable = (orders: Order[]): string => `
     </table>
 `;
 
-
 // generate order details for display on order management page
 const generateOrderDetails = (order: Order): string => `
     <h2>Order Details</h2>
@@ -147,42 +149,49 @@ const generateOrderDetails = (order: Order): string => `
 `;
 
 // display order history on user page
-const generateOrderHistoryTable = (orders: Order[]): string => {
+const generateOrderHistoryTable = (
+    orders: Order[],
+    language: string,
+    translations: Record<string, Record<string, string>>,
+): string => {
     if (orders.length === 0) {
         return `
-          <h2>Order History</h2>
-          <p>No orders made</p>
+          <h2>${translations[language]["order-history"]}</h2>
+          <p>${translations[language]["no-orders"]}</p>
         `;
     }
     // generate order history table with order details on user page
-    return `
-    <h2>Order History</h2>
-    <table>
-        <thead>
+    const headers = `
             <tr>
-                <th>Order ID</th>
-                <th>Time</th>
-                <th>Type</th>
-                <th>Items</th>
-                <th>Total</th>
-                <th>Status</th>
+                <th>${translations[language]["order-id"]}</th>
+                <th>${translations[language]["time"]}</th>
+                <th>${translations[language]["type"]}</th>
+                <th>${translations[language]["items"]}</th>
+                <th>${translations[language]["total"]}</th>
+                <th>${translations[language]["status"]}</th>
             </tr>
-        </thead>
-        <tbody>
-            ${orders
-                .map(
-                    (order) =>
-                        `<tr>
+    `;
+    const rows = orders
+        .map((order) => {
+            return `<tr>
                             <td>${order.order_id}</td>
                             <td>${new Date(order.created_at).toLocaleString()}</td>
-                            <td>${order.order_type}</td>
+                            <td>${order.order_type}</td> 
                             <td>${order.order_items}</td>
                             <td>${order.total_price}€</td>
                             <td>${order.order_status}</td>
-                        </tr>`,
-                )
-                .join("")}
-        </tbody>
-    </table>
-`;
+                        </tr>
+                    `;
+        })
+        .join("");
+
+    return `
+                <h2>${translations[language]["order-history"]}</h2>
+                <table>
+                    ${headers}
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+            `;
 };

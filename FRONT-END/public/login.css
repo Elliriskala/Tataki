@@ -602,6 +602,7 @@ ul#reservation-list li {
     max-height: 90vh;
     border-radius: 8px;
     overflow-y: auto;
+    border: 4px solid var(--sushi-grey2);
 }
 
 .modal-content {

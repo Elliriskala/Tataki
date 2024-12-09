@@ -1,5 +1,5 @@
 import { formatDate, getLanguage } from "./utils/functions";
-import { Reservation, User, UserLoggedIn } from "./utils/interfaces";
+import { User, UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
 import {
     translations,
@@ -236,7 +236,6 @@ const populateUserPage = async () => {
 
             const data: User = await response.json();
             if (data) {
-                //console.log(data);
                 if (usernameElement)
                     usernameElement.innerHTML = data.username || "Unknown";
                 if (usernameDisplay)
@@ -270,8 +269,7 @@ const populateUserPage = async () => {
                 },
             });
 
-            const data: Reservation = await response.json();
-            //console.log(data);
+            const data = await response.json();
 
             const reservations = Array.isArray(data) ? data : [data];
             const locale = language === "fi" ? "fi-FI" : "en-US";
@@ -340,20 +338,21 @@ const loadUserPage = async () => {
             },
         });
 
+        if (!response.ok) {
+            // Handle unexpected responses or errors
+            console.error(
+                `HTTP Error: ${response.status} ${response.statusText}`,
+            );
+            window.location.href = "/"; // Redirect to the homepage or login page
+            return;
+        }
+
         if (
             !response.headers.get("Content-Type")?.includes("application/json")
         ) {
             const responseText = await response.text();
             console.error("Unexpected response type:", responseText);
             throw new Error("Received non-JSON response from the server.");
-        }
-
-        if (!response.ok) {
-            console.error(
-                `HTTP Error: ${response.status} ${response.statusText}`,
-            );
-            window.location.href = "/";
-            return;
         }
 
         const userInfo = await response.json();
@@ -370,13 +369,11 @@ const loadUserPage = async () => {
         if (adminContent) adminContent.style.display = "none";
 
         if (isAdmin && adminContent) {
-            if (loginContent && userContent) {
-                loginContent.style.display = "none";
-                userContent.style.display = "none";
-            }
-            adminContent.style.display = "flex";
-            initializeOrderManagementPage();
+            if (userContent) userContent.style.display = "none";
+                adminContent.style.display = "flex";
+                initializeOrderManagementPage();
         } else {
+            if (userContent) userContent.style.display = "flex";
             populateUserPage();
         }
     } catch (error) {
@@ -406,9 +403,7 @@ if (adminLogoutButton) {
 }
 
 //  Log out functionality
-const logOutButton = document.getElementById(
-    "logout-btn",
-) as HTMLButtonElement;
+const logOutButton = document.getElementById("logout-btn") as HTMLButtonElement;
 
 if (logOutButton) {
     logOutButton.addEventListener("click", () => {
@@ -439,7 +434,7 @@ registerSubmit.addEventListener("click", handleRegister);
 
 editProfileBtn.addEventListener("click", () => {
     modal.style.display = "block";
-    
+
     showTab(tabButtons[0].getAttribute("data-tab"));
 });
 

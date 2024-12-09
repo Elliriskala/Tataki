@@ -10,7 +10,6 @@ const authenticateToken = (req, res, next) => {
   }
   try {
     req.user = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("User from token:", req.user);
 
     next();
   } catch {
@@ -21,7 +20,6 @@ const authenticateToken = (req, res, next) => {
 // check if the user is admin to access the admin routes
 const isAdmin = (req, res, next) => {
   if (req.user?.user_level_id === 1) {
-    console.log('Admin verified');
     return next();
   }
   console.error('Access denied: not an admin');

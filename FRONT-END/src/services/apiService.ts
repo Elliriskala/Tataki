@@ -118,7 +118,7 @@ export const fetchUserInfo = async () => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
         });
 
@@ -151,7 +151,7 @@ export const fetchOrders = async (): Promise<Order[]> => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
         });
 
@@ -180,10 +180,6 @@ export const fetchOrdersById = async (orderId: number): Promise<Order> => {
         const token = localStorage.getItem("authToken"); // Get token from localStorage
 
         if (!token) {
-            logError(
-                new Error("No token found in local storage"),
-                "fetchOrdersById",
-            );
             return {} as Order;
         }
 
@@ -191,15 +187,11 @@ export const fetchOrdersById = async (orderId: number): Promise<Order> => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
         });
 
         if (!response.ok) {
-            logError(
-                new Error(`Failed to fetch order. Status: ${response.status}`),
-                "fetchOrdersById",
-            );
             return {} as Order;
         }
 
@@ -208,16 +200,11 @@ export const fetchOrdersById = async (orderId: number): Promise<Order> => {
 
         // If order is empty or invalid, return a default object or handle the error
         if (!order || !order.order_id) {
-            logError(
-                new Error("Invalid order data received"),
-                "fetchOrdersById",
-            );
             return {} as Order;
         }
 
         return order;
     } catch (error) {
-        logError(error, "fetchOrdersById");
         return {} as Order;
     }
 };
@@ -231,10 +218,6 @@ export const fetchOrdersByUserId = async (): Promise<Order[]> => {
     const token = localStorage.getItem("authToken"); // Get token from localStorage
 
     if (!token) {
-        logError(
-            new Error("No token found in local storage"),
-            "fetchOrdersByUserId",
-        );
         return [];
     }
 
@@ -243,53 +226,17 @@ export const fetchOrdersByUserId = async (): Promise<Order[]> => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
         });
 
         if (!response.ok) {
-            logError(
-                new Error("Failed to fetch orders"),
-                "fetchOrdersByUserId",
-            );
+            return [];
         }
 
         const orders: Order[] = await response.json();
         return orders;
     } catch (error) {
-        logError(error, "fetchOrdersByUserId");
-        return [];
-    }
-};
-
-/**
- * fetch orders by customer name
- * @param {string} customerName - customer name
- * @returns {Order[]} - orders
- * @throws Error if fetching fails or response is not ok
- */
-export const fetchOrdersByCustomerName = async (
-    customerName: string,
-): Promise<Order[]> => {
-    try {
-        const response = await fetch(
-            `${apiBaseUrl}/orders/customer/${customerName}`,
-            {
-                headers: { "Content-Type": "application/json" },
-            },
-        );
-
-        if (!response.ok) {
-            logError(
-                new Error("Failed to fetch orders"),
-                "fetchOrdersByCustomerName",
-            );
-        }
-
-        const orderItems: Order[] = await response.json();
-        return orderItems;
-    } catch (error) {
-        logError(error, "fetchOrdersByCustomerName");
         return [];
     }
 };
@@ -307,9 +254,12 @@ export const setNewOrderStatus = async (
     status: string,
 ): Promise<Order> => {
     const token = localStorage.getItem("authToken"); // Get token from localStorage
-    
+
     if (!token) {
-        logError(new Error("No token found in local storage"), "setNewOrderStatus");
+        logError(
+            new Error("No token found in local storage"),
+            "setNewOrderStatus",
+        );
         return {} as Order;
     }
 
@@ -318,7 +268,7 @@ export const setNewOrderStatus = async (
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({ order_status: status }),
         });

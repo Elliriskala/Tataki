@@ -31,6 +31,15 @@ const showPopup = (message: string) => {
     popup.classList.remove("hidden");
 };
 
+if (phoneInput) {
+    phoneInput.addEventListener("input", (event) => {
+        // Remove any non-numeric characters
+        (event.target as HTMLInputElement).value = (
+            event.target as HTMLInputElement
+        ).value.replace(/\D/g, "");
+    });
+}
+
 // Function to hide the popup
 closePopup.addEventListener("click", () => {
     popup.classList.add("hidden");

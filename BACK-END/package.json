@@ -14,7 +14,7 @@
   "apidocs": {
     "name": "Tataki Sushi REST API",
     "version": "1.0.0",
-    "Description": "REST API backend endpoints for Tataki Sushi",
+    "description": "REST API backend endpoints for Tataki Sushi",
     "title": "Tataki Sushi ApiDoc",
     "url": "http://localhost:3000",
     "order": [
