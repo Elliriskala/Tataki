@@ -179,10 +179,11 @@ main {
     display: block; /* Makes the <a> fill the container */
     width: 100%; /* Fills the width of the .login container */
     height: 100%;
-    padding: 1em 1.5em;
+    padding: 0.8em 1.3em;
     visibility: visible;
     background-color: var(--sushi-red2);
     border-radius: 8px;
+    color: white;
   }
   
   .language {
