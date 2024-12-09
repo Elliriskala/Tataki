@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(() => {
       loginForm.classList.remove("no-animate");
       registerForm.classList.remove("no-animate");
-    }, 300); // Adjust timing to match CSS animation duration
+    }, 300); // match CSS animation duration
   };
 
   // Function to add `interacted` class on input focus or change
@@ -160,8 +160,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Set minimum date for date input
   if (dateInput) {
-    const today = new Date().toISOString().split("T")[0];
-    dateInput.setAttribute("min", today);
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1); // Add one day to today
+    const minDate = tomorrow.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+    dateInput.setAttribute("min", minDate);
   }
 
   // Handle navigation toggle for mobile

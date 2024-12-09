@@ -1,7 +1,11 @@
 import { formatDate, getLanguage } from "./utils/functions";
 import { UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
-import {translations, loginErrorMessages, registerErrorMessages } from "./translations";
+import {
+    translations,
+    loginErrorMessages,
+    registerErrorMessages,
+} from "./translations";
 import { apiBaseUrl } from "./services/apiService";
 
 const loginSubmit = document.getElementById(
@@ -67,11 +71,10 @@ closePopup.addEventListener("click", () => {
     popup.classList.add("hidden");
 });
 
-
 // URL for the login endpoint
 
-const LOGIN_URL = "/auth/login"; 
-const REGISTER_URL = "/auth/register"; 
+const LOGIN_URL = "/auth/login";
+const REGISTER_URL = "/auth/register";
 
 // Function to handle login logic
 const handleLogin = async (event: Event) => {
@@ -94,7 +97,6 @@ const handleLogin = async (event: Event) => {
         // Clear old state before logging in
         clearCart();
         localStorage.removeItem("authToken");
-        localStorage.removeItem("user_id");
         if (reservationsList) {
             reservationsList.innerHTML = "";
         }
@@ -123,7 +125,6 @@ const handleLogin = async (event: Event) => {
 
         // Store the token in local storage or a cookie
         localStorage.setItem("authToken", data.token);
-        localStorage.setItem("user_id", data.user_id.toString());
         console.log(data);
 
         loadUserPage();
@@ -191,141 +192,120 @@ const handleRegister = async (event: Event) => {
 };
 
 const populateUserPage = async () => {
-    const usernameElement = document.getElementById(
-        "username-info",
-    ) as HTMLSpanElement;
-    const usernameDisplay = document.getElementById(
-        "username-display",
-    ) as HTMLSpanElement;
-    const emailElement = document.getElementById(
-        "email-info",
-    ) as HTMLSpanElement;
-    const phoneElement = document.getElementById(
-        "phone-info",
-    ) as HTMLSpanElement;
-    const addressElement = document.getElementById(
-        "address-info",
-    ) as HTMLSpanElement;
+    const usernameElement = document.getElementById("username-info") as HTMLSpanElement;
+    const usernameDisplay = document.getElementById("username-display") as HTMLSpanElement;
+    const emailElement = document.getElementById("email-info") as HTMLSpanElement;
+    const phoneElement = document.getElementById("phone-info") as HTMLSpanElement;
+    const addressElement = document.getElementById("address-info") as HTMLSpanElement;
     const cityElement = document.getElementById("city-info") as HTMLSpanElement;
 
     const language = getLanguage();
 
     const token = localStorage.getItem("authToken");
-    if (!token) {
-        console.error("No token found");
-        return;
-    }
 
+    // Clear reservations list if it exists
     if (reservationsList) {
         reservationsList.innerHTML = "";
     }
 
-    try {
-        const response = await fetch(`${apiBaseUrl}/users/user`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-            },
-        });
+    // Fetch user info only if logged in
+    if (token) {
+        try {
+            const response = await fetch(`${apiBaseUrl}/users/user`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
-        if (!response.ok) {
-            console.error("Failed to get user info:", response.statusText);
-            return;
-        }
+            if (!response.ok) {
+                console.error("Failed to get user info:", response.statusText);
+                return;
+            }
 
-        const data = await response.json();
-        if (data) {
-            console.log(data);
-            // Safely update elements if they exist in the DOM
-            if (usernameElement) {
-                usernameElement.innerHTML = data.username || "Unknown";
+            const data = await response.json();
+            if (data) {
+                console.log(data);
+                if (usernameElement) usernameElement.innerHTML = data.username || "Unknown";
+                if (usernameDisplay) usernameDisplay.textContent = `${data.username || "Unknown"}!`;
+                if (emailElement) emailElement.innerHTML = data.email || "No email provided";
+                if (phoneElement) phoneElement.innerHTML = data.phone_number || "N/A";
+                if (addressElement) addressElement.innerHTML = data.customer_address || "N/A";
+                if (cityElement) cityElement.innerHTML = data.city || "N/A";
+            } else {
+                console.error("No data found for the user");
             }
-            if (usernameDisplay) {
-                usernameDisplay.textContent = `${data.username || "Unknown"}!`;
-            }
-            if (emailElement) {
-                emailElement.innerHTML = data.email || "No email provided";
-            }
-            if (phoneElement) {
-                phoneElement.innerHTML = data.phone_number || "N/A";
-            }
-            if (addressElement) {
-                addressElement.innerHTML = data.customer_address || "N/A";
-            }
-            if (cityElement) {
-                cityElement.innerHTML = data.city || "N/A";
-            }
-        } else {
-            console.error("No data found for the user");
+        } catch (error) {
+            console.error("Error while fetching user info:", error);
         }
-    } catch (error) {
-        console.error("Error while fetching user info:", error);
+    } else {
+        console.log("No token found, user not logged in");
+        // Optionally show guest-specific messages here
     }
 
-    try {
-        const response = await fetch(`${apiBaseUrl}/reservations/user`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        const data = await response.json();
-        console.log(data);
-
-        // Wrap data in an array if it's not already an array
-        const reservations = Array.isArray(data) ? data : [data];
-        const locale = language === "fi" ? "fi-FI" : "en-US";
-        // Check if there are any reservations
-        if (response.ok && reservations.length > 0) {
-            reservations.forEach((reservation) => {
-                const reservationGroup = document.createElement("ul");
-
-                reservationGroup.classList.add("reservation-group");
-
-                // Format the reservation date
-                const formattedDate = formatDate(
-                    new Date(reservation.reservation_date),
-                    locale,
-                );
-
-                // Create <li> elements for each property
-                const reservationDateItem = document.createElement("li");
-                reservationDateItem.textContent = `${translations[language]["your-date"]}: ${formattedDate}`;
-                reservationGroup.appendChild(reservationDateItem);
-
-                const reservationTimeItem = document.createElement("li");
-                reservationTimeItem.textContent = `${translations[language]["your-time"]}: ${reservation.reservation_time}`;
-                reservationGroup.appendChild(reservationTimeItem);
-
-                const fullNameItem = document.createElement("li");
-                fullNameItem.textContent = `${translations[language]["your-full-name"]}: ${reservation.full_name}`;
-                reservationGroup.appendChild(fullNameItem);
-
-                const guestsItem = document.createElement("li");
-                guestsItem.textContent = `${translations[language]["your-guests"]}: ${reservation.guests}`;
-                reservationGroup.appendChild(guestsItem);
-
-                const reservationIdItem = document.createElement("li");
-                reservationIdItem.textContent = `${translations[language]["your-reservation-id"]}: ${reservation.reservation_id}`;
-                reservationGroup.appendChild(reservationIdItem);
-
-                // Append the reservation group to the main list
-                reservationsList.appendChild(reservationGroup);
+    // Fetch reservations only if logged in
+    if (token) {
+        try {
+            const response = await fetch(`${apiBaseUrl}/reservations/user`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
             });
-        } else {
-            // If no reservations, show a "No reservations found" message
-            const noReservations = document.createElement("li");
-            noReservations.textContent =
-                translations[language]["no-reservations"];
-            reservationsList.appendChild(noReservations);
+
+            const data = await response.json();
+            console.log(data);
+
+            const reservations = Array.isArray(data) ? data : [data];
+            const locale = language === "fi" ? "fi-FI" : "en-US";
+
+            if (response.ok && reservations.length > 0) {
+                reservations.forEach((reservation) => {
+                    const reservationGroup = document.createElement("ul");
+                    reservationGroup.classList.add("reservation-group");
+
+                    const formattedDate = formatDate(
+                        new Date(reservation.reservation_date),
+                        locale,
+                    );
+
+                    const reservationDateItem = document.createElement("li");
+                    reservationDateItem.textContent = `${translations[language]["your-date"]}: ${formattedDate}`;
+                    reservationGroup.appendChild(reservationDateItem);
+
+                    const reservationTimeItem = document.createElement("li");
+                    reservationTimeItem.textContent = `${translations[language]["your-time"]}: ${reservation.reservation_time}`;
+                    reservationGroup.appendChild(reservationTimeItem);
+
+                    const fullNameItem = document.createElement("li");
+                    fullNameItem.textContent = `${translations[language]["your-full-name"]}: ${reservation.full_name}`;
+                    reservationGroup.appendChild(fullNameItem);
+
+                    const guestsItem = document.createElement("li");
+                    guestsItem.textContent = `${translations[language]["your-guests"]}: ${reservation.guests}`;
+                    reservationGroup.appendChild(guestsItem);
+
+                    const reservationIdItem = document.createElement("li");
+                    reservationIdItem.textContent = `${translations[language]["your-reservation-id"]}: ${reservation.reservation_id}`;
+                    reservationGroup.appendChild(reservationIdItem);
+
+                    reservationsList.appendChild(reservationGroup);
+                });
+            } else {
+                const noReservations = document.createElement("li");
+                noReservations.textContent = translations[language]["no-reservations"];
+                reservationsList.appendChild(noReservations);
+            }
+        } catch (error) {
+            console.error("Failed to get reservations", error);
         }
-    } catch (error) {
-        console.error("Failed to get reservations", error);
+    } else {
+        console.log("No token found, skipping reservations fetch");
     }
 };
+
 
 const loadUserPage = () => {
     const authToken = localStorage.getItem("authToken");
@@ -376,12 +356,11 @@ editProfileBtn.addEventListener("click", () => {
 
 const closeModal = () => {
     modal.style.display = "none";
-}
+};
 
 // Close modal
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
-
 
 // Show tab content
 interface TabButton extends HTMLButtonElement {
@@ -560,10 +539,10 @@ addressSubmit.addEventListener("click", async (e) => {
     e.preventDefault();
 
     const language = getLanguage();
-    
+
     const address = addressInput.value.trim();
     const city = cityInput.value.trim();
-    
+
     if (address === addressInput.textContent) {
         showPopup(translations[language]["address-same"]);
         return;
@@ -696,7 +675,6 @@ const deleteProfileButton = document.getElementById(
 
 openModal.addEventListener("click", () => {
     deleteModal.style.display = "flex";
-
 });
 
 closeDeleteModal.addEventListener("click", () => {
@@ -729,7 +707,6 @@ deleteProfileButton.addEventListener("click", async () => {
 
         if (response.ok) {
             localStorage.removeItem("authToken");
-            localStorage.removeItem("user_id");
             deleteModal.style.display = "none";
             overlay.style.display = "none";
             const loginContent = document.getElementById("login-main");
