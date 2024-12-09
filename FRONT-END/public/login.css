@@ -378,6 +378,7 @@ div.profile-info {
     font-size: 0.8em;
     border: 0.1em solid var(--sushi-red1);
     max-width: 800px;
+    padding: 1em;
 }
 
 #order-history h2 {
@@ -395,7 +396,12 @@ th,
 td {
     padding: 1em;
     text-align: center;
-    border: 1px dashed var(--sushi-grey2);
+    border: 1px dashed rgb(117, 116, 116);
+}
+
+tr {
+    border: 1px dashed var(--sushi-grey1);
+    margin-bottom: 1em;
 }
 
 td {

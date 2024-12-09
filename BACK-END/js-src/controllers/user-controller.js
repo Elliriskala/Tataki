@@ -42,8 +42,7 @@ const getUserById = async (req, res, next) => {
             return next(customError('Invalid token', 401));
         }
         user_id = decoded.user_id;
-        console.log('user_id in getUserById:', user_id);
-    }
+        }
     try {
         const user = await fetchUserById(user_id);
         res.json(user);
@@ -88,7 +87,6 @@ const postUser = async (req, res, next) => {
         // Generate salt and hash password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newUser.password_hash, salt);
-        console.log('hash,' + hashedPassword);
         newUser.password_hash = hashedPassword;
 
         // Register the new user

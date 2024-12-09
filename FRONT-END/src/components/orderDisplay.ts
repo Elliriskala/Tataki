@@ -1,6 +1,7 @@
 import { Menu } from "../utils/interfaces";
 import { showModal } from "./modal";
 import { addToCart } from "./cart";
+import { logError } from "../utils/functions";
 
 // display order page menus
 const displayOrderMenu = (menus: Menu[], lang: string): void => {
@@ -9,13 +10,13 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
     ) as HTMLDivElement | null;
 
     if (!menuContainer) {
-        console.log("Menu container not found");
         return;
     }
 
     // Hide the menu container for smoother transition
     menuContainer.classList.add("hidden");
 
+    // Wait for the transition to finish
     setTimeout(() => {
         menuContainer.innerHTML = "";
 
@@ -37,10 +38,7 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
             try {
                 descriptions = JSON.parse(menu.course_description);
             } catch (error) {
-                console.error(
-                    "Error parsing course_description for menu:",
-                    error,
-                );
+                logError(error, "displayOrderMenu");
                 descriptions = {};
             }
             const description = descriptions[lang] || descriptions["en"];
@@ -78,7 +76,6 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
                         `;
 
             // add event listener to show the description when the menu item is clicked
-
             menuCard.addEventListener("click", () => {
                 // Collapse all other descriptions
                 const allCards = document.querySelectorAll(".menu-card");
@@ -90,9 +87,10 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
                         }
                     }
                 });
-            
+
                 // Toggle the current card's description
-                const descriptionDiv = menuCard.querySelector(".menu-description");
+                const descriptionDiv =
+                    menuCard.querySelector(".menu-description");
                 if (descriptionDiv) {
                     descriptionDiv.classList.toggle("visible");
                 }
@@ -104,7 +102,6 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
             );
             if (addToCartButton) {
                 addToCartButton.addEventListener("click", async (event) => {
-                    console.log("Button clicked");
                     showModal();
 
                     // Get the item ID from the button's value attribute
@@ -112,8 +109,7 @@ const displayOrderMenu = (menus: Menu[], lang: string): void => {
                     const itemId = button.value;
 
                     // Add item to cart
-                    const itemToAdd = addToCart(Number(itemId));
-                    console.log(`Item added to cart with ID: ${itemToAdd}`);
+                    addToCart(Number(itemId));
                 });
             }
             menuContainer.appendChild(menuCard);

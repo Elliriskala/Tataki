@@ -1,9 +1,9 @@
 import { fetchMenuItemsByCategory } from "./services/apiService";
 import { displayMenu } from "./components/menuDisplay";
 import { initializeCarousel } from "./components/carousel";
+import { logError } from "./utils/functions";
 
 // get the language
-
 const getLanguage = (): string => {
     const language = localStorage.getItem("language") || "en";
     return language;
@@ -17,6 +17,7 @@ const initializeCategoryButtons = async (
     const categoryButtons = document.querySelectorAll(
         ".select-category-button",
     );
+    // add event listener to each category button to display the menu items
     categoryButtons.forEach((button) => {
         button.addEventListener("click", async () => {
             const category = button.getAttribute("data-translate") || "";
@@ -39,11 +40,13 @@ const initializeMenuPage = async (): Promise<void> => {
 
     const language = getLanguage();
 
+    // fetch the initial menus to display
     const initialMenus = await fetchMenuItemsByCategory("lunch");
     if (menuContainer) {
         displayMenu(initialMenus, menuContainer, language);
     }
 
+    // initialize the carousel to display the special menus
     if (menuTracker && menuContainer) {
         await initializeCarousel(menuTracker, language);
         await initializeCategoryButtons(menuContainer);
@@ -52,6 +55,6 @@ const initializeMenuPage = async (): Promise<void> => {
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeMenuPage().catch((error) => {
-        console.error("Failed to initialize menu page", error);
+        logError(error, "initializeMenuPage");    
     });
 });

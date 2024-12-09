@@ -1,20 +1,28 @@
-import { apiBaseUrl } from "./services/apiService";
+import { apiBaseUrl, fetchUserInfo } from "./services/apiService";
 import { updateCartDisplay } from "./components/cart";
 import { getCart } from "./services/cartService";
 import { showProcessingModal, showOrderPlacedModal } from "./components/modal";
+import { logError } from "./utils/functions";
 
 // place the order
 const placeOrder = async () => {
     try {
-        // check the delivery method
-        const orderData = collectOrderData();
-        console.log("Order data:", orderData);
+        // fetch the user info from the token to get the user id
+        const userInfo = await fetchUserInfo();
+
+        if (!userInfo.user_id) {
+            throw new Error("User not logged in");
+        }
+
+        // collect the order data to send to the server
+        const orderData = collectOrderData(userInfo);
 
         const response = await fetch(`${apiBaseUrl}/orders`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            // send the order data to the server
             body: JSON.stringify({
                 user_id: orderData.user_id,
                 customer_name: orderData.customer_name,
@@ -31,12 +39,12 @@ const placeOrder = async () => {
             }),
         });
 
+        // check if the response is ok
         if (!response.ok) {
-            throw new Error(`Error placing order: ${response.statusText}`);
+            logError(new Error("Failed to place order"), "placeOrder");
         }
 
-        const result = await response.json();
-        console.log("Order placed successfully!", result);
+        await response.json();
 
         // show the processing order modal
         showProcessingModal();
@@ -53,13 +61,12 @@ const placeOrder = async () => {
         // reset the form fields
         resetFormFields();
     } catch (error) {
-        console.error("Error placing order:", error);
-        console.log("There was an issue placing your order. Please try again.");
+        logError(error, "placeOrder");
     }
 };
 
 // collect the order details
-const collectOrderData = () => {
+const collectOrderData = (userInfo: any) => {
     // Get cart items
     const cartItems = getCart().map((item: any) => ({
         menu_id: item.menu_id,
@@ -68,10 +75,11 @@ const collectOrderData = () => {
         item_quantity: item.quantity,
     }));
 
-    // if user logged in get user id
-    const user_id = localStorage.getItem("user_id");
-
-    console.log("User ID:", user_id);
+    // Check if the user has selected items to order
+    const order_items = cartItems;
+    if (order_items.length === 0) {
+        logError(new Error("No items in the cart"), "collectOrderData");
+    }
 
     // Get customer information
     const customer_name =
@@ -82,10 +90,10 @@ const collectOrderData = () => {
         )?.value.trim() || "";
 
     if (!customer_name) {
-        throw new Error("Customer name is required.");
+        logError(new Error("Customer name is required"), "collectOrderData");
     }
 
-    // optionals email and phone number
+    // optional phone number
     const customer_email =
         (
             document.querySelector(
@@ -116,15 +124,17 @@ const collectOrderData = () => {
     ) as HTMLInputElement | null;
     const isPickup = pickupCheckbox ? pickupCheckbox.checked : false;
 
+    // Check if the user has selected a delivery method
     let order_type = "";
     if (isDelivery && !isPickup) {
         order_type = "delivery";
     } else if (!isDelivery && isPickup) {
         order_type = "pickup";
     } else {
-        throw new Error("Please select either Delivery or Pickup");
+        logError(new Error("Select a delivery method"), "collectOrderData");
     }
 
+    // Get delivery address
     const delivery_address = isDelivery
         ? (
               document.querySelector(
@@ -142,10 +152,13 @@ const collectOrderData = () => {
 
     if (order_type === "delivery") {
         if (!delivery_address || !delivery_address.trim()) {
-            throw new Error("Delivery address is required.");
+            logError(
+                new Error("Delivery address is required"),
+                "collectOrderData",
+            );
         }
         if (!city || !city.trim()) {
-            throw new Error("City is required.");
+            logError(new Error("City is required"), "collectOrderData");
         }
     }
 
@@ -155,16 +168,15 @@ const collectOrderData = () => {
         ? (additionalCommentElement as HTMLTextAreaElement).value.trim()
         : "";
 
-    console.log("Additional Comment:", additionalComment);
-
+    // Get delivery instructions
     const deliveryInstructionsElement = document.getElementById("instructions");
     const deliveryInstructions = deliveryInstructionsElement
         ? (deliveryInstructionsElement as HTMLTextAreaElement).value.trim()
         : "";
 
     // return the collected data
-    return {
-        user_id,
+    const orderData = {
+        user_id: userInfo.user_id, // user id from the token
         customer_name,
         customer_email,
         customer_phone,
@@ -177,6 +189,8 @@ const collectOrderData = () => {
         delivery_instructions: deliveryInstructions,
         order_items: cartItems,
     };
+
+    return orderData;
 };
 
 // function to reset the form fields after placing the order
@@ -191,6 +205,7 @@ const resetFormFields = () => {
         "#instructions",
     ];
 
+    // Reset input fields and textareas
     formFields.forEach((field) => {
         const element = document.querySelector(field) as
             | HTMLInputElement
@@ -202,10 +217,7 @@ const resetFormFields = () => {
     });
 
     // Reset checkboxes
-    const checkboxes = [
-        "#delivery-checkbox",
-        "#pickup-checkbox",
-    ];
+    const checkboxes = ["#delivery-checkbox", "#pickup-checkbox"];
 
     checkboxes.forEach((checkbox) => {
         const element = document.querySelector(
@@ -218,3 +230,4 @@ const resetFormFields = () => {
 };
 
 export { placeOrder };
+

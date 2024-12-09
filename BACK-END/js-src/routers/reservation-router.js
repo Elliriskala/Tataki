@@ -1,6 +1,6 @@
 import express from 'express';
 import { getReservations, getReservationById, getReservationsByUserId, validateAndAddReservation, deleteReservationById, modifyReservationById } from '../controllers/reservation-controllers.js';
-import authenticateToken from '../middlewares/authentication.js';
+import {authenticateToken} from '../middlewares/authentication.js';
 import { validateAvailability } from '../controllers/reservation-controllers.js';
 import { body } from 'express-validator';
 import { validationErrorHandler } from '../middlewares/error-handlers.js';

@@ -1,5 +1,6 @@
 import { Menu } from "../utils/interfaces";
 import { Order } from "../utils/interfaces";
+import { logError } from "../utils/functions";
 
 export const apiBaseUrl = "http://localhost:3000/api";
 
@@ -18,8 +19,8 @@ export const fetchMenuItems = async (): Promise<Menu[]> => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         return await response.json();
     } catch (error) {
-        console.error("Error fetching menu items:", error);
-        throw error;
+        logError(error, "fetchMenuItems");
+        return [];
     }
 };
 
@@ -44,8 +45,8 @@ export const fetchMenuItemsByCategory = async (
             throw new Error(`HTTP error! Status: ${response.status}`);
         return await response.json();
     } catch (error) {
-        console.error("Error fetching menu items by category:", error);
-        throw error;
+        logError(error, "fetchMenuItemsByCategory");
+        return [];
     }
 };
 
@@ -64,8 +65,8 @@ export const fetchSpecialMenus = async (): Promise<Menu[]> => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         return await response.json();
     } catch (error) {
-        console.error("Error fetching special menus:", error);
-        throw error;
+        logError(error, "fetchSpecialMenus");
+        return [];
     }
 };
 
@@ -80,7 +81,6 @@ export const fetchItemDetails = async (itemId: number) => {
         const response = await fetch(`${apiBaseUrl}/menus/${itemId}`);
 
         const rawResponse = await response.text();
-        console.log("Raw response:", rawResponse);
 
         if (!response.ok) {
             throw new Error(
@@ -91,15 +91,14 @@ export const fetchItemDetails = async (itemId: number) => {
         const itemArray = JSON.parse(rawResponse);
 
         if (!itemArray || itemArray.length === 0) {
-            console.error("Item not found");
-            return null;
+            return {} as Order;
         }
 
         const item = itemArray[0];
         return item;
     } catch (error) {
-        console.error("fetchItemDetails error:", error);
-        throw new Error("Failed to fetch item details");
+        logError(error, "fetchItemDetails");
+        return {} as Order;
     }
 };
 
@@ -111,8 +110,7 @@ export const fetchItemDetails = async (itemId: number) => {
 export const fetchUserInfo = async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-        console.log("No auth token found. User not logged in");
-        return null;
+        return {};
     }
 
     try {
@@ -120,7 +118,7 @@ export const fetchUserInfo = async () => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
+                "Authorization": `Bearer ${token}`,
             },
         });
 
@@ -131,8 +129,8 @@ export const fetchUserInfo = async () => {
         const userInfo = await response.json();
         return userInfo;
     } catch (error) {
-        console.error("fetchUserInfo error:", error);
-        throw new Error("Failed to fetch user info");
+        logError(error, "fetchUserInfo");
+        return {};
     }
 };
 
@@ -141,21 +139,33 @@ export const fetchUserInfo = async () => {
  * @returns {Order[]} - orders
  */
 export const fetchOrders = async (): Promise<Order[]> => {
+    const token = localStorage.getItem("authToken"); // Get token from localStorage
+
+    if (!token) {
+        logError(new Error("No token found in local storage"), "fetchOrders");
+        return [];
+    }
+
     try {
         const response = await fetch(`${apiBaseUrl}/orders`, {
-            headers: { "Content-Type": "application/json" },
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
         });
 
         if (!response.ok) {
-            console.error(`Failed to fetch orders`, response.statusText);
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            logError(new Error("Failed to fetch orders"), "fetchOrders");
         }
 
-        const orders: Order[] = await response.json();
+        const rawResponse = await response.text();
+
+        const orders: Order[] = JSON.parse(rawResponse);
         return orders;
     } catch (error) {
-        console.error("fetchOrders error:", error);
-        throw new Error("Failed to fetch orders");
+        logError(error, "fetchOrders");
+        return [];
     }
 };
 
@@ -167,51 +177,88 @@ export const fetchOrders = async (): Promise<Order[]> => {
  */
 export const fetchOrdersById = async (orderId: number): Promise<Order> => {
     try {
+        const token = localStorage.getItem("authToken"); // Get token from localStorage
+
+        if (!token) {
+            logError(
+                new Error("No token found in local storage"),
+                "fetchOrdersById",
+            );
+            return {} as Order;
+        }
+
         const response = await fetch(`${apiBaseUrl}/orders/${orderId}`, {
-            headers: { "Content-Type": "application/json" },
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
         });
 
         if (!response.ok) {
-            console.error(
-                `Failed to fetch order with id: ${orderId},`,
-                response.statusText,
+            logError(
+                new Error(`Failed to fetch order. Status: ${response.status}`),
+                "fetchOrdersById",
             );
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            return {} as Order;
         }
 
+        // Check if the response is valid JSON
         const order: Order = await response.json();
+
+        // If order is empty or invalid, return a default object or handle the error
+        if (!order || !order.order_id) {
+            logError(
+                new Error("Invalid order data received"),
+                "fetchOrdersById",
+            );
+            return {} as Order;
+        }
+
         return order;
     } catch (error) {
-        console.error("fetchOrdersById error:", error);
-        throw new Error("Failed to fetch order by id");
+        logError(error, "fetchOrdersById");
+        return {} as Order;
     }
 };
 
 /**
  * fetch orders by user id
- * @param {number} userId - user id
  * @returns {Order[]} - orders
  * @throws Error if fetching fails or response is not ok
  */
-export const fetchOrdersByUserId = async (userId: number): Promise<Order[]> => {
+export const fetchOrdersByUserId = async (): Promise<Order[]> => {
+    const token = localStorage.getItem("authToken"); // Get token from localStorage
+
+    if (!token) {
+        logError(
+            new Error("No token found in local storage"),
+            "fetchOrdersByUserId",
+        );
+        return [];
+    }
+
     try {
-        const response = await fetch(`${apiBaseUrl}/orders/user/${userId}`, {
-            headers: { "Content-Type": "application/json" },
+        const response = await fetch(`${apiBaseUrl}/orders/user`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
         });
 
         if (!response.ok) {
-            console.error(
-                `Failed to fetch order items made by user: ${userId},`,
-                response.statusText,
+            logError(
+                new Error("Failed to fetch orders"),
+                "fetchOrdersByUserId",
             );
-            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const orderItems: Order[] = await response.json();
-        return orderItems;
+        const orders: Order[] = await response.json();
+        return orders;
     } catch (error) {
-        console.error("fetchOrderItemsByUserId error:", error);
-        throw new Error("Failed to fetch order items by user id");
+        logError(error, "fetchOrdersByUserId");
+        return [];
     }
 };
 
@@ -233,18 +280,17 @@ export const fetchOrdersByCustomerName = async (
         );
 
         if (!response.ok) {
-            console.error(
-                `Failed to fetch order items made by customer: ${customerName},`,
-                response.statusText,
+            logError(
+                new Error("Failed to fetch orders"),
+                "fetchOrdersByCustomerName",
             );
-            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const orderItems: Order[] = await response.json();
         return orderItems;
     } catch (error) {
-        console.error("fetchOrderItemsByCustomerName error:", error);
-        throw new Error("Failed to fetch order items by customer name");
+        logError(error, "fetchOrdersByCustomerName");
+        return [];
     }
 };
 
@@ -260,11 +306,19 @@ export const setNewOrderStatus = async (
     orderId: number,
     status: string,
 ): Promise<Order> => {
+    const token = localStorage.getItem("authToken"); // Get token from localStorage
+    
+    if (!token) {
+        logError(new Error("No token found in local storage"), "setNewOrderStatus");
+        return {} as Order;
+    }
+
     try {
         const response = await fetch(`${apiBaseUrl}/orders/${orderId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({ order_status: status }),
         });
@@ -276,10 +330,9 @@ export const setNewOrderStatus = async (
         }
 
         const updatedOrder = await response.json();
-        console.log("API response for updated order:", updatedOrder);
         return updatedOrder;
     } catch (error) {
-        console.error("updateOrderStatus error:", error);
-        throw new Error("Failed to update order status");
+        logError(error, "setNewOrderStatus");
+        return {} as Order;
     }
 };

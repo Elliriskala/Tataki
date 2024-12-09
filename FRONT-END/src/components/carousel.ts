@@ -1,5 +1,6 @@
 import { displayMenu } from "../components/menuDisplay";
 import { fetchSpecialMenus } from "../services/apiService";
+import { logError } from "../utils/functions";
 
 // update the carousel display position based on the current menu position
 const updateCarouselposition = (
@@ -117,25 +118,34 @@ export const initializeCarousel = async (
     lang: string,
 ): Promise<void> => {
     try {
+        
+        // fetch the special menus
         const specialMenus = await fetchSpecialMenus();
+        if (!specialMenus || specialMenus.length === 0) {
+            logError("No special menus found.", "initializeCarousel");
+        }
+
+        // display the special menus in the carousel
         displayMenu(specialMenus, menuTracker, lang);
 
         const menuTrack = document.querySelector(
             ".menu-track",
         ) as HTMLDivElement;
         if (!menuTrack) {
-            console.error("Menu track container not found");
+            logError("Menu track not found.", "initializeCarousel");
             return;
         }
-        setTimeout(() => {
+
+        const initializeCarouselLogic = () => {
             const menuItems = menuTrack.querySelectorAll(".menu-card");
             if (menuItems.length === 0) {
-                console.error("Menu cards not found or not rendered");
+                logError("No menu items found.", "initializeCarousel");
                 return;
             }
 
             const menuWidth = menuItems[0]?.clientWidth || 0;
 
+            // function to update the carousel display
             const updateCarousel = (menuPosition: number) => {
                 updateCarouselposition(
                     menuTracker,
@@ -159,16 +169,31 @@ export const initializeCarousel = async (
                     specialMenus,
                     updateCarousel,
                 );
+            } else {
+                logError("Carousel arrows not found.", "initializeCarousel");
             }
 
             // initialize the carousel to display the first menu item
             updateCarousel(0);
 
             // swipe functionality for mobile devices
-            menuTrack.addEventListener("touchstart", (event) => handleMobileSwipe(event, menuTracker, menuItems, specialMenus)
-        );
-    }, 600);
+            menuTrack.addEventListener("touchstart", (event) =>
+                handleMobileSwipe(event, menuTracker, menuItems, specialMenus),
+            );
+        };
+
+        // check if the menu items are loaded before initializing the carousel
+        const observer = new MutationObserver(() => {
+            const menuItems = menuTrack.querySelectorAll(".menu-card");
+            if (menuItems.length > 0) {
+                observer.disconnect();
+                initializeCarouselLogic();
+            }
+        });
+
+        observer.observe(menuTrack, { childList: true });
     } catch (error) {
-        console.error("Error initializing carousel:", error);
+        logError(error, "initializeCarousel");
+        return;
     }
 };

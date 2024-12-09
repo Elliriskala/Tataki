@@ -37,7 +37,7 @@ body {
     overflow-x: hidden;
     height: 100%;
     width: 100%;
-    background-color: var(--soy-sauce);
+    background-color: var(--sushi-graphite);
 }
 
 :root {
@@ -74,22 +74,21 @@ body:has(dialog[open]) {
 .item-added-to-cart, .processing-order, .order-placed {
     position: fixed;
     top: 30%;
-    background-color: var(--sushi-red1);
-    color: var(--sushi-grey3);
+    background: white;
     padding: 2em;
-    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
     z-index: 999;
     border-radius: 1em;
-    border: none;
     display: none;
     text-align: center;
     max-width: 300px;
+    animation: fadeIn 0.3s ease-out;
+    border: 0.1em solid #61b764;
 }
 
-.item-added-to-cart {
-    background-color: var(--sushi-red2);
+.processing-order p , .order-placed p, .item-added-to-cart p {
+    color: var(--sushi-graphite);
 }
-
 
 dialog::backdrop {
     background-color: var(--sushi-graphite);
@@ -99,7 +98,7 @@ dialog::backdrop {
 #order-placed-button {
     padding: 0.5em;
     font-size: 0.8em;
-    background-color: var(--sushi-red2);
+    background-color: var(--sushi-graphite);
     color: var(--sushi-grey3);
     border: none;
     border-radius: 0.5em;
@@ -114,7 +113,7 @@ dialog::backdrop {
 }
 
 #order-placed-button:hover {
-    background-color: var(--sushi-red3);
+    background-color: var(--sushi-red1);
     cursor: pointer;
     transform: scale(1.1);
 }
@@ -356,9 +355,9 @@ dialog::backdrop {
     padding: 1em;
     margin-top: 0.5em;
     border-radius: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     border: solid 0.1em var(--sushi-black);
-    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    box-shadow: 1px 10px 20px var(--sushi-black);
 }
 
 .your-order {

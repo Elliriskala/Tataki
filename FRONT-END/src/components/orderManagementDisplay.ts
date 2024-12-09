@@ -1,11 +1,11 @@
 import { Order } from "../utils/interfaces";
 import { fetchOrdersById, fetchOrdersByUserId } from "../services/apiService";
+import { logError } from "../utils/functions";
 
 // display orders in the order management page
 export const displayOrders = (elementId: string, orders: Order[]): void => {
     const container = document.getElementById(elementId) as HTMLElement;
     if (!container) {
-        console.log(`Element with id ${elementId} not found`);
         return;
     }
 
@@ -22,12 +22,12 @@ export const displayOrderDetails = (order: Order): void => {
         "order-details",
     ) as HTMLElement;
     if (!orderDetails) {
-        console.log("Element with id order-details not found");
         return;
     }
 
     orderDetails.innerHTML = generateOrderDetails(order);
-
+    
+    // close button and update status button event listeners 
     const closeButton = document.querySelector(".close") as HTMLButtonElement;
     const updateStatusButton = document.querySelector(
         ".update-order",
@@ -39,16 +39,10 @@ export const displayOrderDetails = (order: Order): void => {
         order.order_status || "unknown",
     );
 
-    console.log("Button attributes:", {
-        id: updateStatusButton.getAttribute("data-id"),
-        status: updateStatusButton.getAttribute("data-status"),
-    });
-
     closeButton.addEventListener("click", () => {
         orderDetails.innerHTML = "";
     });
 
-    console.log("Order details HTML:", orderDetails.innerHTML);
 };
 
 // attach click event to order links
@@ -68,26 +62,37 @@ export const handleOrderClick = async (event: Event): Promise<void> => {
     const orderId = target.getAttribute("data-id");
 
     if (!orderId) {
-        console.error("Order ID not found");
+        logError(new Error("Order ID not found"), "handleOrderClick");
         return;
     }
 
     try {
         const order = await fetchOrdersById(Number(orderId));
+        if (!order || !order.order_id) {
+            logError(new Error("Failed to load order details"), "handleOrderClick");
+            return;
+        }
         displayOrderDetails(order);
     } catch (error) {
-        console.error("Failed to fetch order details", error);
+        logError(error, "handleOrderClick");
     }
 };
 
-export const displayOrderHistory = async (user_id: string): Promise<void> => {
-    const orders = await fetchOrdersByUserId(Number(user_id));
+// display order history on user page
+export const displayOrderHistory = async (): Promise<void> => {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        logError(new Error("No token found in local storage"), "displayOrderHistory");
+        return;
+    }
+
+    const orders = await fetchOrdersByUserId();
 
     const orderHistory = document.getElementById(
         "order-history",
     ) as HTMLElement;
     if (!orderHistory) {
-        console.log("Element with id order-history not found");
         return;
     }
 
@@ -96,6 +101,7 @@ export const displayOrderHistory = async (user_id: string): Promise<void> => {
         : "<p>No order history found</p>";
 };
 
+// generate order table for display on order management page
 const generateOrderTable = (orders: Order[]): string => `
     <table>
         <thead>
@@ -118,6 +124,8 @@ const generateOrderTable = (orders: Order[]): string => `
     </table>
 `;
 
+
+// generate order details for display on order management page
 const generateOrderDetails = (order: Order): string => `
     <h2>Order Details</h2>
     <p><strong>Order time:</strong> ${new Date(order.created_at).toLocaleString()}</p>
@@ -127,8 +135,9 @@ const generateOrderDetails = (order: Order): string => `
     <p><strong>Items:</strong> ${order.order_items || "No items"}</p>
     <p><strong>Comments:</strong> ${order.general_comment || "No comments"}</p>
     <p><strong>Total Price:</strong> ${order.total_price}</p>
-    <p><strong>Status:</strong> ${order.order_status}</p>
+    <p><strong>Order type: </strong>${order.order_type}</p>
     ${
+        // display delivery address if order is delivery
         order.is_delivery
             ? `<p><strong>Address:</strong> ${order.delivery_address}</p>
             <p><strong>City:</strong> ${order.city}</p>
@@ -145,6 +154,7 @@ const generateOrderHistoryTable = (orders: Order[]): string => {
           <p>No orders made</p>
         `;
     }
+    // generate order history table with order details on user page
     return `
     <h2>Order History</h2>
     <table>

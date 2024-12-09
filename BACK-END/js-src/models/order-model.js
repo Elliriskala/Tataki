@@ -271,19 +271,6 @@ const createOrder = async (
          VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
-    console.log({
-      user_id,
-      customer_name,
-      total_price,
-      order_type,
-      order_status_id,
-      is_delivery: order_type.toLowerCase() === 'delivery',
-      general_comment: general_comment || null,
-      delivery_address: delivery_address,
-      city: city,
-      delivery_instructions: delivery_instructions || null,
-    });
-
     const [orderResult] = await promisePool.query(orderSql, [
       user_id || null,
       customer_name || 'Anonymous',

@@ -11,11 +11,9 @@ export default defineConfig({
     rollupOptions: {
         external: [],
       input: {
-        main: path.resolve(__dirname, "index.html"), 
         admin: path.resolve(__dirname, "admin.html"),
         contact: path.resolve(__dirname, "contact.html"),
         menu: path.resolve(__dirname, "menu.html"),
-        order_management: path.resolve(__dirname, "order_management.html"),
         order: path.resolve(__dirname, "order.html"),
         review: path.resolve(__dirname, "review.html"),
         reservation: path.resolve(__dirname, "reservation.html"),

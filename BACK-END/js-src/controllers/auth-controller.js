@@ -39,7 +39,7 @@ const postLogin = async (req, res, next) => {
     }
 
     // Generate JWT token with expiry time
-    const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ user_id: user.user_id, user_level_id: user.user_level_id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN || '1h',  // Default expiry set to 1 hour
     });
 
@@ -153,7 +153,6 @@ const changePassword = async (req, res, next) => {
   }
   const {currentPassword, newPassword} = req.body;
   if (!currentPassword || !newPassword) {
-    console.log('Missing required fields');
     return next(customError('Missing required fields', 400));
   }
   try {

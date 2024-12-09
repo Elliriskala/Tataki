@@ -1,26 +1,38 @@
 import { getCart, saveToCart } from "../services/cartService";
 import { fetchItemDetails, fetchUserInfo } from "../services/apiService";
+import { logError } from "../utils/functions";
 
+// update the cart display with the current cart items
 export const updateCartDisplay = (): void => {
-    const cart = getCart();
-    console.log("Cart:", cart);
-    const cartContainer = document.getElementById("cart-items");
-    const totalPriceElement = document.getElementById(
-        "total-price",
-    ) as HTMLSpanElement;
+    // get the cart items and update the display
+    try {
+        const cart = getCart();
+        const cartContainer = document.getElementById("cart-items");
+        const totalPriceElement = document.getElementById(
+            "total-price",
+        ) as HTMLSpanElement;
 
-    if (!cartContainer || !totalPriceElement) return;
+        if (!cartContainer || !totalPriceElement) {
+            logError(
+                new Error("Cart container or total price element not found"),
+                "updateCartDisplay",
+            );
+            return;
+        }
 
-    cartContainer.innerHTML = ""; // Clear the cart
+        cartContainer.innerHTML = ""; // Clear the cart
 
-    // Create a row for each item in the cart
-    cart.forEach((item, index) => {
-        const row = createCartItemRow(item, index);
-        cartContainer.appendChild(row);
-    });
+        // Create a row for each item in the cart
+        cart.forEach((item, index) => {
+            const row = createCartItemRow(item, index);
+            cartContainer.appendChild(row);
+        });
 
-    // Update the total price
-    updateTotalPrice(cart, totalPriceElement);
+        // Update the total price
+        updateTotalPrice(cart, totalPriceElement);
+    } catch (error) {
+        logError(error, "updateCartDisplay");
+    }
 };
 
 // create a row for a cart item
@@ -39,12 +51,16 @@ const createCartItemRow = (item: any, index: number): HTMLTableRowElement => {
     `;
 
     // add event listeners for quantity change
-    row
-        .querySelector(".decrease")
-        ?.addEventListener("click", () => decreaseQuantity(index));
-    row
-        .querySelector(".increase")
-        ?.addEventListener("click", () => increaseQuantity(index));
+    try {
+        row
+            .querySelector(".decrease")
+            ?.addEventListener("click", () => decreaseQuantity(index));
+        row
+            .querySelector(".increase")
+            ?.addEventListener("click", () => increaseQuantity(index));
+    } catch (error) {
+        logError(error, "createCartItemRow");
+    }
 
     return row;
 };
@@ -56,7 +72,7 @@ export const existingInfoButton = (): void => {
     ) as HTMLButtonElement;
 
     if (!useExistingInfoButton) {
-        console.error("Button with ID 'use-existing-info-button' not found!");
+        return;
     }
 
     useExistingInfoButton.addEventListener("click", async () => {
@@ -64,15 +80,9 @@ export const existingInfoButton = (): void => {
             const userInfo = await fetchUserInfo();
             if (userInfo) {
                 populateUserInfo(userInfo);
-                console.log("User information loaded successfully", userInfo);
-            } else {
-                console.log(
-                    "No saved information found. Please fill in your details manually.",
-                );
             }
         } catch (error) {
-            console.error("Error fetching user info:", error);
-            console.log("Failed to load saved information.");
+            logError(error, "existingInfoButton");
         }
     });
 };
@@ -97,12 +107,18 @@ const populateUserInfo = (userInfo: any): void => {
         'input[data-translate="placeholder-city"]',
     ) as HTMLInputElement;
 
-    if (nameInput && emailInput && phoneInput) {
-        nameInput.value = userInfo.username || "";
-        emailInput.value = userInfo.email || "";
-        phoneInput.value = userInfo.phone_number || "";
-        addressInput.value = userInfo.customer_address || "";
-        cityInput.value = userInfo.city || "";
+    try {
+        if (nameInput && emailInput && phoneInput) {
+            nameInput.value = userInfo.username || "";
+            emailInput.value = userInfo.email || "";
+            phoneInput.value = userInfo.phone_number || "";
+            addressInput.value = userInfo.customer_address || "";
+            cityInput.value = userInfo.city || "";
+        } else {
+            logError(new Error("Input fields not found"), "populateUserInfo");
+        }
+    } catch (error) {
+        logError(error, "populateUserInfo");
     }
 };
 
@@ -120,32 +136,36 @@ const updateTotalPrice = (
 };
 
 // add an item to cart
-export const addToCart = (menu_id: number): void => {
-    const cart = getCart();
-    const existingItem = cart.find((item) => item.menu_id === menu_id);
+export const addToCart = async (menu_id: number): Promise<void> => {
+    try {
+        const cart = getCart();
+        const existingItem = cart.find((item) => item.menu_id === menu_id);
 
-    if (existingItem) {
-        existingItem.quantity += 1;
-        saveToCart(cart);
-        updateCartDisplay();
-    } else {
-        // fetch item details
-        fetchItemDetails(menu_id).then((itemDetails) => {
-            if (itemDetails) {
-                cart.push({
-                    menu_id: itemDetails.menu_id,
-                    course_name: itemDetails.course_name,
-                    price: itemDetails.price,
-                    quantity: 1,
-                    course_description: itemDetails.course_description,
-                    menu_image: itemDetails.menu_image,
-                    category: itemDetails.category,
-                });
+        if (existingItem) {
+            existingItem.quantity += 1;
+            saveToCart(cart);
+            updateCartDisplay();
+        } else {
+            // fetch item details
+            await fetchItemDetails(menu_id).then((itemDetails) => {
+                if (itemDetails) {
+                    cart.push({
+                        menu_id: itemDetails.menu_id,
+                        course_name: itemDetails.course_name,
+                        price: itemDetails.price,
+                        quantity: 1,
+                        course_description: itemDetails.course_description,
+                        menu_image: itemDetails.menu_image,
+                        category: itemDetails.category,
+                    });
 
-                saveToCart(cart);
-                updateCartDisplay();
-            }
-        });
+                    saveToCart(cart);
+                    updateCartDisplay();
+                }
+            });
+        }
+    } catch (error) {
+        logError(error, "addToCart");
     }
 };
 

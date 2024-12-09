@@ -2,12 +2,8 @@ import { fetchMenuItemsByCategory } from "./services/apiService";
 import { displayOrderMenu } from "./components/orderDisplay";
 import { updateCartDisplay, checkDeliveryMethod, existingInfoButton } from "./components/cart";
 import { placeOrder } from "./orderProcessing";
-
-// set the default language
-const getLanguage = (): string => {
-    // Default to 'en' if no language is set
-    return localStorage.getItem('language') || 'en';
-};
+import { getLanguage } from "./utils/functions";
+import { logError } from "./utils/functions";
 
 // initialize category buttons
 const initializeCategoryButtons = async (): Promise<void> => {
@@ -50,13 +46,13 @@ const initializeOrderPage = async (): Promise<void> => {
             await initializeCategoryButtons();
         }
     } catch (error) {
-        console.error("Failed to initialize order page", error);
+        throw new Error("Failed to initialize order page");
     }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeOrderPage().catch((error) => {
-        console.error("Failed to initialize order page", error);
+        logError(error, "initializeOrderPage");
     });
 
     const placeOrderButton = document.getElementById("place-order-button");

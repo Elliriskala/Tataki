@@ -6,8 +6,12 @@ import {
     loginErrorMessages,
     registerErrorMessages,
 } from "./translations";
-import { apiBaseUrl } from "./services/apiService";
+import { logError } from "./utils/functions";
 
+import { apiBaseUrl } from "./services/apiService";
+import { displayOrderHistory } from "./components/orderManagementDisplay";
+
+// DOM elements for login and registration
 const loginSubmit = document.getElementById(
     "submit-button-login",
 ) as HTMLButtonElement;
@@ -125,11 +129,9 @@ const handleLogin = async (event: Event) => {
 
         // Store the token in local storage or a cookie
         localStorage.setItem("authToken", data.token);
-        console.log(data);
 
         loadUserPage();
     } catch (error) {
-        console.error("Login error:", error);
         messageTarget.textContent = "An error occurred. Please try again.";
         messageTarget.style.color = "red";
     } finally {
@@ -138,12 +140,10 @@ const handleLogin = async (event: Event) => {
 };
 
 // Function to handle registration logic
-// Function to handle registration logic
 const handleRegister = async (event: Event) => {
     event.preventDefault();
 
     const language = getLanguage();
-    console.log(language);
     const email = registerEmail.value.trim();
     const password = registerPassword.value.trim();
     const username = registerUsername.value.trim();
@@ -183,7 +183,6 @@ const handleRegister = async (event: Event) => {
             return;
         }
     } catch (error) {
-        console.error("Registration error:", error);
         messageTarget.textContent = "An error occurred. Please try again.";
         messageTarget.style.color = "red";
     } finally {
@@ -319,12 +318,14 @@ const loadUserPage = () => {
             userContent.style.display = "flex";
         }
         populateUserPage();
+        displayOrderHistory();
     }
 };
 
 //  Log out functionality
 const logOutButton = document.getElementById("logout-btn") as HTMLButtonElement;
 logOutButton.addEventListener("click", () => {
+    clearCart();
     localStorage.removeItem("authToken");
     const loginContent = document.getElementById("login-main");
     const userContent = document.getElementById("user-main");
@@ -498,8 +499,7 @@ phoneSubmit?.addEventListener("click", async (e) => {
     // Check if token exists
     const token = localStorage.getItem("authToken");
     if (!token) {
-        console.error("No token found");
-        return;
+        logError(new Error("No token found"), "phoneSubmit");
     }
 
     try {
@@ -555,12 +555,11 @@ addressSubmit.addEventListener("click", async (e) => {
 
     const token = localStorage.getItem("authToken");
     if (!token) {
-        console.error("No token found.");
-        return;
+        logError(new Error("No token found"), "addressSubmit");
     }
 
     try {
-        const response = await fetch(`${apiBaseUrl}/api/users/user`, {
+        const response = await fetch(`${apiBaseUrl}/users/user`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -570,7 +569,6 @@ addressSubmit.addEventListener("click", async (e) => {
         });
 
         if (response.ok) {
-            console.log("Address updated successfully.");
             modal.style.display = "none";
             overlay.style.display = "none";
             showPopup(translations[language]["address-update-success"]);
@@ -581,7 +579,7 @@ addressSubmit.addEventListener("click", async (e) => {
             showPopup(translations[language]["address-update-fail"]);
         }
     } catch (error) {
-        console.error("Error updating address:", error);
+        logError(error, "addressSubmit");
     }
 });
 
@@ -609,7 +607,6 @@ changePasswordForm?.addEventListener("submit", async (e) => {
 
     // Check if any field is empty
     if (!currentPasswordValue || !newPasswordValue || !confirmPasswordValue) {
-        console.log("Please fill in all fields");
         return;
     }
 
@@ -628,7 +625,6 @@ changePasswordForm?.addEventListener("submit", async (e) => {
     const token = localStorage.getItem("authToken");
 
     if (!token) {
-        console.error("No token found");
         return;
     }
 
@@ -651,7 +647,6 @@ changePasswordForm?.addEventListener("submit", async (e) => {
             currentPassword.value = "";
             newPassword.value = "";
             confirmPassword.value = "";
-            console.log("Password changed successfully");
         } else {
             showPopup(translations[language]["password-change-fail"]);
         }
@@ -692,7 +687,6 @@ deleteProfileButton.addEventListener("click", async () => {
     const token = localStorage.getItem("authToken");
 
     if (!token) {
-        console.error("No token found");
         return;
     }
 

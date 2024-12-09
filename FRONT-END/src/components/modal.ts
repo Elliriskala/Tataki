@@ -22,7 +22,7 @@ export const showProcessingModal = (): void => {
             processingElement.style.display = "none";
         }, 5000);
     } else {
-        console.error("Processing modal element not found!");
+        return;
     }
 };
 
@@ -40,7 +40,7 @@ export const showOrderPlacedModal = (): void => {
     if (orderPlacedElement) {
         orderPlacedElement.style.display = "block";
     } else {
-        console.error("Order placed modal element not found!");
+        return;
     }
 
     if (orderConfirmationClose) {
@@ -50,31 +50,25 @@ export const showOrderPlacedModal = (): void => {
             }
         });
     } else {
-        console.error("Order placed modal close button not found!");
+        return;
     }
 };
 
-/**
- * Show the modal with the updated order status.
- * @param {string} updatedStatus - The updated order status to display.
- * @returns {void}
- * @throws {Error} - If the modal element is not found.
- */
-
+//Show the modal with the updated order status.
 export const showOrderUpdatedModal = (updatedStatus: string): void => {
     const orderUpdatedElement = document.querySelector(
         ".update-order-dialog",
     ) as HTMLElement | null;
 
     if (!orderUpdatedElement) {
-        console.error("Order updated modal element not found!");
         return;
     }
 
-    const statusElement = document.querySelector("#updated-status") as HTMLElement | null;
-    
+    const statusElement = document.querySelector(
+        "#updated-status",
+    ) as HTMLElement | null;
+
     if (!statusElement) {
-        console.error("Status span element not found!");
         return;
     }
 
@@ -88,7 +82,7 @@ export const showOrderUpdatedModal = (updatedStatus: string): void => {
         if (orderUpdatedElement) {
             orderUpdatedElement.style.display = "none";
         } else {
-            console.error("Order updated modal element not found!");
-        }
+            return;
+        }   
     }, 2000);
 };

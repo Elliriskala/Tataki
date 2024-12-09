@@ -152,7 +152,7 @@ main {
     top: 100%;
     left: 0;
     background-color: var(--sushi-red1);
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 4px;
     padding: 10px 3px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);

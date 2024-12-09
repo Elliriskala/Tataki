@@ -1,6 +1,7 @@
 import { setNewOrderStatus, fetchOrders } from "./services/apiService";
 import { displayOrders } from "./components/orderManagementDisplay";
 import { showOrderUpdatedModal } from "./components/modal";
+import { logError } from "./utils/functions";
 
 // fetch orders and display them in the order management page
 const fetchAndDisplayOrders = async (): Promise<void> => {
@@ -8,10 +9,11 @@ const fetchAndDisplayOrders = async (): Promise<void> => {
         const orders = await fetchOrders();
 
         if (!orders || orders.length === 0) {
-            console.log("No orders found");
+            logError("No orders found", "fetchAndDisplayOrders");
             return;
         }
 
+        // display orders in the order management page
         displayOrders(
             "pending-orders-table",
             orders.filter((o) => o.order_status === "Pending"),
@@ -25,7 +27,7 @@ const fetchAndDisplayOrders = async (): Promise<void> => {
             orders.filter((o) => o.order_status === "Completed"),
         );
     } catch (error) {
-        console.error("Failed to fetch and display orders", error);
+        throw new Error("Failed to fetch orders");
     }
 };
 
@@ -37,12 +39,10 @@ document.addEventListener("click", async (event) => {
         const orderId = target.getAttribute("data-id");
         const status = target.getAttribute("data-status");
 
-        console.log("Clicked button details:", { orderId, status });
-
         if (!orderId && !status) {
-            console.error("Order ID or status missing");
             return;
         }
+        // update the order status to "Inprogress" or "Completed"
         try {
             let newStatus: string;
             if (status === "Pending") {
@@ -50,24 +50,19 @@ document.addEventListener("click", async (event) => {
             } else if (status === "Inprogress") {
                 newStatus = "Completed";
             } else {
-                console.log("Invalid status: ", status);
                 return;
             }
-            console.log(`Updating order ID ${orderId} to new status: ${newStatus}`);
 
             const updatedOrder = await setNewOrderStatus(
                 Number(orderId),
                 newStatus,
             );
-            console.log(
-                `Order ${updatedOrder.order_id} status updated to ${updatedOrder.order_status}`,
-            );
 
             showOrderUpdatedModal(updatedOrder.order_status || "");
 
+            // fetch and display the updated orders
             await fetchAndDisplayOrders();
         } catch (error) {
-            console.error("updateOrderStatus error:", error);
             throw new Error("Failed to update order status");
         }
     }
@@ -75,5 +70,36 @@ document.addEventListener("click", async (event) => {
 
 // Load the order management page
 document.addEventListener("DOMContentLoaded", async () => {
-    await fetchAndDisplayOrders();
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        console.error("No token found in localStorage");
+        // Redirect if not authorized to access the page
+        window.location.href = "/"; 
+        return;
+    }
+
+    // Check if the user is an admin
+    const response = await fetch("/admin", {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
+    });
+
+    // Redirect if not an admin
+    if (response.status === 403) {
+        console.error('Forbidden: Not an admin');
+        window.location.href = "/";
+        return;
+    }
+
+    // Load the admin page if authorized
+    if (response.ok) {
+        console.log("Admin page loaded");
+        await fetchAndDisplayOrders(); 
+    } else {
+        console.error('Failed to load the admin page. Status:', response.status);
+        window.location.href = "/"; 
+    }
 });
