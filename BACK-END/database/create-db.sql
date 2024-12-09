@@ -129,15 +129,12 @@ STARTS CURRENT_TIMESTAMP
 DO DELETE FROM Reservations WHERE reservation_date < CURRENT_DATE;
 
 
+
 -- Insert user levels
 INSERT INTO UserLevels (level_name) VALUES ('Admin'), ('User');
 
 INSERT INTO TimeSlots (reservation_time, max_guests) VALUES
 ('10:00:00', 40), ('11:00:00', 40), ('12:00:00', 40), ('13:00:00', 40), ('14:00:00', 40), ('15:00:00', 40), ('16:00:00', 40), ('17:00:00', 40), ('18:00:00', 40), ('19:00:00', 40), ('20:00:00', 40), ('21:00:00', 40);
-
-
-
-INSERT INTO Users (username, password_hash, email, phone_number, user_level_id, customer_address) VALUES ( 'admin', '$2y$10$3', 'karriparrtannijd', '012345567889', 1, 'admin_address');
 
 
 -- Insert menus

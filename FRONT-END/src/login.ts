@@ -102,7 +102,6 @@ const handleLogin = async (event: Event) => {
         // Clear old state before logging in
         clearCart();
         localStorage.removeItem("authToken");
-        localStorage.removeItem("user_id");
         if (reservationsList) {
             reservationsList.innerHTML = "";
         }
@@ -193,7 +192,6 @@ const handleRegister = async (event: Event) => {
 };
 
 const populateUserPage = async () => {
-    // Get the elements to update with user info
     const usernameElement = document.getElementById(
         "username-info",
     ) as HTMLSpanElement;
@@ -214,120 +212,116 @@ const populateUserPage = async () => {
     const language = getLanguage();
 
     const token = localStorage.getItem("authToken");
-    if (!token) {
-        logError(new Error("No token found"), "populateUserPage");
-        return;
-    }
 
+    // Clear reservations list if it exists
     if (reservationsList) {
         reservationsList.innerHTML = "";
     }
 
-    try {
-        const response = await fetch(`${apiBaseUrl}/users/user`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-            },
-        });
+    // Fetch user info only if logged in
+    if (token) {
+        try {
+            const response = await fetch(`${apiBaseUrl}/users/user`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
-        if (!response.ok) {
-            logError(
-                new Error("Failed to fetch user info"),
-                "populateUserPage",
-            );
-            return;
-        }
+            if (!response.ok) {
+                console.error("Failed to get user info:", response.statusText);
+                return;
+            }
 
-        const data = await response.json();
-        if (data) {
-            // Safely update elements if they exist in the DOM
-            if (usernameElement) {
-                usernameElement.innerHTML = data.username || "Unknown";
+            const data = await response.json();
+            if (data) {
+                console.log(data);
+                if (usernameElement)
+                    usernameElement.innerHTML = data.username || "Unknown";
+                if (usernameDisplay)
+                    usernameDisplay.textContent = `${data.username || "Unknown"}!`;
+                if (emailElement)
+                    emailElement.innerHTML = data.email || "No email provided";
+                if (phoneElement)
+                    phoneElement.innerHTML = data.phone_number || "N/A";
+                if (addressElement)
+                    addressElement.innerHTML = data.customer_address || "N/A";
+                if (cityElement) cityElement.innerHTML = data.city || "N/A";
+            } else {
+                console.error("No data found for the user");
             }
-            if (usernameDisplay) {
-                usernameDisplay.textContent = `${data.username || "Unknown"}!`;
-            }
-            if (emailElement) {
-                emailElement.innerHTML = data.email || "No email provided";
-            }
-            if (phoneElement) {
-                phoneElement.innerHTML = data.phone_number || "N/A";
-            }
-            if (addressElement) {
-                addressElement.innerHTML = data.customer_address || "N/A";
-            }
-            if (cityElement) {
-                cityElement.innerHTML = data.city || "N/A";
-            }
-        } else {
-            logError(new Error("No user data found"), "populateUserPage");
+        } catch (error) {
+            console.error("Error while fetching user info:", error);
         }
-    } catch (error) {
-        logError(error, "populateUserPage");
+    } else {
+        console.log("No token found, user not logged in");
+        // Optionally show guest-specific messages here
     }
 
-    try {
-        const response = await fetch(`${apiBaseUrl}/reservations/user`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        const data = await response.json();
-
-        // Wrap data in an array if it's not already an array
-        const reservations = Array.isArray(data) ? data : [data];
-        const locale = language === "fi" ? "fi-FI" : "en-US";
-        // Check if there are any reservations
-        if (response.ok && reservations.length > 0) {
-            reservations.forEach((reservation) => {
-                const reservationGroup = document.createElement("ul");
-
-                reservationGroup.classList.add("reservation-group");
-
-                // Format the reservation date
-                const formattedDate = formatDate(
-                    new Date(reservation.reservation_date),
-                    locale,
-                );
-
-                // Create <li> elements for each property
-                const reservationDateItem = document.createElement("li");
-                reservationDateItem.textContent = `${translations[language]["your-date"]}: ${formattedDate}`;
-                reservationGroup.appendChild(reservationDateItem);
-
-                const reservationTimeItem = document.createElement("li");
-                reservationTimeItem.textContent = `${translations[language]["your-time"]}: ${reservation.reservation_time}`;
-                reservationGroup.appendChild(reservationTimeItem);
-
-                const fullNameItem = document.createElement("li");
-                fullNameItem.textContent = `${translations[language]["your-full-name"]}: ${reservation.full_name}`;
-                reservationGroup.appendChild(fullNameItem);
-
-                const guestsItem = document.createElement("li");
-                guestsItem.textContent = `${translations[language]["your-guests"]}: ${reservation.guests}`;
-                reservationGroup.appendChild(guestsItem);
-
-                const reservationIdItem = document.createElement("li");
-                reservationIdItem.textContent = `${translations[language]["your-reservation-id"]}: ${reservation.reservation_id}`;
-                reservationGroup.appendChild(reservationIdItem);
-
-                // Append the reservation group to the main list
-                reservationsList.appendChild(reservationGroup);
+    // Fetch reservations only if logged in
+    if (token) {
+        try {
+            const response = await fetch(`${apiBaseUrl}/reservations/user`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
             });
-        } else {
-            // If no reservations, show a "No reservations found" message
-            const noReservations = document.createElement("li");
-            noReservations.textContent =
-                translations[language]["no-reservations"];
-            reservationsList.appendChild(noReservations);
+
+            const data = await response.json();
+            console.log(data);
+
+            const reservations = Array.isArray(data) ? data : [data];
+            const locale = language === "fi" ? "fi-FI" : "en-US";
+
+            if (response.ok && reservations.length > 0) {
+                reservations.forEach((reservation) => {
+                    const reservationGroup = document.createElement("ul");
+                    reservationGroup.classList.add("reservation-group");
+
+                    const formattedDate = formatDate(
+                        new Date(reservation.reservation_date),
+                        locale,
+                    );
+
+                    const reservationDateItem = document.createElement("li");
+                    reservationDateItem.textContent = `${translations[language]["your-date"]}: ${formattedDate}`;
+                    reservationGroup.appendChild(reservationDateItem);
+
+                    const reservationTimeItem = document.createElement("li");
+                    reservationTimeItem.textContent = `${translations[language]["your-time"]}: ${reservation.reservation_time}`;
+                    reservationGroup.appendChild(reservationTimeItem);
+
+                    const fullNameItem = document.createElement("li");
+                    fullNameItem.textContent = `${translations[language]["your-full-name"]}: ${reservation.full_name}`;
+                    reservationGroup.appendChild(fullNameItem);
+
+                    const guestsItem = document.createElement("li");
+                    guestsItem.textContent = `${translations[language]["your-guests"]}: ${reservation.guests}`;
+                    reservationGroup.appendChild(guestsItem);
+
+                    const reservationIdItem = document.createElement("li");
+                    reservationIdItem.textContent = `${translations[language]["your-reservation-id"]}: ${reservation.reservation_id}`;
+                    reservationGroup.appendChild(reservationIdItem);
+
+                    reservationsList.appendChild(reservationGroup);
+                });
+            } else {
+                const noReservations = document.createElement("li");
+                noReservations.textContent =
+                    translations[language]["no-reservations"];
+                reservationsList.appendChild(noReservations);
+            }
+
+            // Display the order history on the user page
+            displayOrderHistory();
+        } catch (error) {
+            console.error("Failed to get reservations", error);
         }
-    } catch (error) {
-        console.error("Failed to get reservations", error);
+    } else {
+        console.log("No token found, skipping reservations fetch");
     }
 };
 
@@ -373,6 +367,7 @@ const loadUserPage = async () => {
 
         if (loginContent) loginContent.style.display = "none";
         if (userContent) userContent.style.display = "flex";
+        if (adminContent) adminContent.style.display = "none";
 
         if (isAdmin && adminContent) {
             if (loginContent && userContent) {
@@ -380,10 +375,9 @@ const loadUserPage = async () => {
                 userContent.style.display = "none";
             }
             adminContent.style.display = "flex";
-            await initializeOrderManagementPage();
+            initializeOrderManagementPage();
         } else {
             populateUserPage();
-            displayOrderHistory();
         }
     } catch (error) {
         console.error("Error in loadUserPage:", error);
@@ -392,27 +386,46 @@ const loadUserPage = async () => {
     }
 };
 
-//  Log out functionality
-const logOutButton = document.querySelector(".logout-button") as HTMLButtonElement;
-logOutButton.addEventListener("click", () => {
-    clearCart();
-    localStorage.removeItem("authToken");
-    const loginContent = document.getElementById("login-main");
-    const userContent = document.getElementById("user-main");
-    const adminContent = document.getElementById("admin-main");
-    if (loginContent && userContent) {
-        loginContent.style.display = "block";
-        userContent.style.display = "none";
-    }
-    if (loginContent && adminContent) {
-        loginContent.style.display = "block";
-        adminContent.style.display = "none";
-    }
+// Admin log out functionality
+const adminLogoutButton = document.getElementById(
+    "admin-logout",
+) as HTMLButtonElement;
 
-    if (reservationsList) {
-        reservationsList.innerHTML = "";
-    }
-});
+if (adminLogoutButton) {
+    adminLogoutButton.addEventListener("click", () => {
+        clearCart();
+        localStorage.removeItem("authToken");
+        const loginContent = document.getElementById("login-main");
+        const adminContent = document.getElementById("admin-main");
+
+        if (loginContent && adminContent) {
+            loginContent.style.display = "block";
+            adminContent.style.display = "none";
+        }
+    });
+}
+
+//  Log out functionality
+const logOutButton = document.getElementById(
+    "logout-btn",
+) as HTMLButtonElement;
+
+if (logOutButton) {
+    logOutButton.addEventListener("click", () => {
+        clearCart();
+        localStorage.removeItem("authToken");
+        const loginContent = document.getElementById("login-main");
+        const userContent = document.getElementById("user-main");
+        if (loginContent && userContent) {
+            loginContent.style.display = "block";
+            userContent.style.display = "none";
+        }
+
+        if (reservationsList) {
+            reservationsList.innerHTML = "";
+        }
+    });
+}
 
 window.onload = loadUserPage;
 
@@ -776,7 +789,6 @@ deleteProfileButton.addEventListener("click", async () => {
 
         if (response.ok) {
             localStorage.removeItem("authToken");
-            localStorage.removeItem("user_id");
             deleteModal.style.display = "none";
             overlay.style.display = "none";
             const loginContent = document.getElementById("login-main");

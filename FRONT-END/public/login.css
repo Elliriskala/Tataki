@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "roboto bold";
+    src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
 html {
     height: 100%;
     width: 100%;
@@ -379,12 +386,13 @@ div.profile-info {
     border: 0.1em solid var(--sushi-red1);
     max-width: 800px;
     padding: 1em;
+    margin: auto;
 }
 
 #order-history h2 {
     font-size: 1.3em;
     margin-bottom: 1rem;
-    color: var(--sushi-red2);
+    color: var(--sushi-grey3);
 }
 
 #order-history table {
@@ -396,16 +404,12 @@ th,
 td {
     padding: 1em;
     text-align: center;
-    border: 1px dashed rgb(117, 116, 116);
+    border: 1px dashed var(--sushi-graphite);
 }
 
 tr {
-    border: 1px dashed var(--sushi-grey1);
+    border: 1px dashed var(--sushi-graphite);
     margin-bottom: 1em;
-}
-
-td {
-    background-color: var(--soy-sauce);
 }
 
 th {
@@ -898,6 +902,17 @@ button.confirm-delete-button {
     transition: background 0.3s ease;
 }
 
+/* Admin Page Styles */
+
+#admin-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    font-family: "roboto", sans-serif;
+    animation: fade-in 0.5s ease-in-out;
+}
 
 body:has(dialog[open]) {
     overflow-y: hidden;
@@ -945,7 +960,6 @@ dialog::backdrop {
 .completed-orders {
     margin: 0.5em;
     padding: 1em;
-    background-color: var(--sushi-graphite);
     border-radius: 1em;
     border: 0.07em dashed var(--sushi-red1);
     box-shadow: 0.1em 0.1em 0.5em var(--sushi-black);
@@ -1003,7 +1017,6 @@ dialog::backdrop {
 .order-details {
     width: 90%;
     text-align: center;
-    background-color: var(--sushi-graphite);
     border-radius: 1em;
     padding: 1em;
     margin: auto;
@@ -1155,7 +1168,7 @@ dialog::backdrop {
     }
 
     .order-management {
-        width: 80%;
+        width: 100%;
     }
 }
 

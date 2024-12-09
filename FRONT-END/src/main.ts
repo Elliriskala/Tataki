@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (loginForm) {
         loginForm.classList.add("active");
     } else {
-        return;
+        console.log("Login form not found");
     }
 
     // Toggle between login and register forms with animation control
@@ -81,12 +81,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         resetForm(isLogin ? registerForm : loginForm);
         messageTarget.innerHTML = ""; // Clear any previous messages
 
-        // Remove 'no-animate' class after a short delay
-        setTimeout(() => {
-            loginForm.classList.remove("no-animate");
-            registerForm.classList.remove("no-animate");
-        }, 300); // Adjust timing to match CSS animation duration
-    };
+    // Remove 'no-animate' class after a short delay
+    setTimeout(() => {
+      loginForm.classList.remove("no-animate");
+      registerForm.classList.remove("no-animate");
+    }, 300); // match CSS animation duration
+  };
 
     // Function to add `interacted` class on input focus or change
     const addInteractionListeners = (form: HTMLFormElement) => {
@@ -157,11 +157,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     };
 
-    // Set minimum date for date input
-    if (dateInput) {
-        const today = new Date().toISOString().split("T")[0];
-        dateInput.setAttribute("min", today);
-    }
+  // Set minimum date for date input
+  if (dateInput) {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1); // Add one day to today
+    const minDate = tomorrow.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+    dateInput.setAttribute("min", minDate);
+  }
 
     // Handle navigation toggle for mobile
     hamburgerMenu.addEventListener("click", (event) => {
@@ -293,6 +296,31 @@ const isTokenExpired = async (token: string) => {
     }
 };
 
+
+const showSessionExpiredPopup = () => {
+    const expiredPopup = document.createElement("div");
+    expiredPopup.className = "session-expired-popup";
+    expiredPopup.innerHTML = `
+        <p>${translations[savedLang]["session-expired-p"]}</p>
+        <button id="close-popup">OK</button>
+    `;
+    document.body.appendChild(expiredPopup);
+
+    const closePopup = document.getElementById("close-popup") as HTMLButtonElement;
+    if (closePopup) {
+    closePopup.addEventListener("click", () => {
+        clearCart();
+        localStorage.removeItem("authToken");
+        sessionStorage.removeItem("tokenExpired"); // Clear cached result
+        window.location.href = "/user.html";
+        document.body.removeChild(expiredPopup);
+    });
+    } else {
+        logError(new Error("Close button not found"), "showSessionExpiredPopup");
+    }
+};
+
+
 window.addEventListener("load", async () => {
     const token = localStorage.getItem("authToken");
 
@@ -300,11 +328,7 @@ window.addEventListener("load", async () => {
     if (token) {
         const expired = await isTokenExpired(token);
         if (expired) {
-            alert("Your session has expired. Please log in again.");
-            clearCart();
-            localStorage.removeItem("authToken");
-            sessionStorage.removeItem("tokenExpired"); // Clear cached result
-            window.location.href = "/user.html";
+            showSessionExpiredPopup();
         } else {
             return;
         }
@@ -312,3 +336,4 @@ window.addEventListener("load", async () => {
         return;
     }
 });
+

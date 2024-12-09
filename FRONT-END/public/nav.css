@@ -135,6 +135,12 @@ main {
     gap: 15px;
   }
   
+  .control-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
   .dropdown {
     position: relative;
   }
@@ -159,15 +165,6 @@ main {
     z-index: 30;
   }
   
-  .dropdown-content button {
-    background: none;
-    border: none;
-    padding: 3px 7px;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-  }
-  
   
   .dropdown:hover .dropdown-content {
     display: block;
@@ -175,22 +172,42 @@ main {
   
 
 
+
+  
   .login a {
     text-decoration: none;
-    padding: 0.5em;
+    display: block; /* Makes the <a> fill the container */
+    width: 100%; /* Fills the width of the .login container */
+    height: 100%;
+    padding: 1em 1.5em;
+    visibility: visible;
+    background-color: var(--sushi-red2);
+    border-radius: 8px;
   }
   
-  .language,
-  .login {
+  .language {
     margin-right: 1em;
     background-color: var(--soy-sauce);
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 1em 1.5em;
+    padding: 0.5em;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
+    display: flex;
+    align-items: center;
+  }
+
+  .login {
+    background-color: var(--sushi-red-transparent);
+    color: var(--lotus-flower);
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: none;
+    border-radius: 8px;
+    visibility: hidden;
+  }
 
 #flag-en {
     background-image: url(./img/gb-flag.svg);
@@ -198,6 +215,8 @@ main {
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 0.5em;
+    padding: 1em;
+    margin: auto;
 }
 
 #flag-fi {
@@ -205,11 +224,18 @@ main {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    padding: 1em;
+    margin: auto;
+
 }
 
 button.login {
     background-color: var(--sushi-red-transparent);
     color: var(--lotus-flower);
+    border: none;
+    display: flex;
+    align-items: center;
+    
 }
 
 button.login a {
@@ -354,6 +380,49 @@ button.login:hover {
   }
   
   /*#endregion footer*/
+
+  .session-expired-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem; /* Adjusted padding */
+    background-color: var(--sushi-red1);
+    z-index: 1000;
+}
+
+.session-expired-popup p {
+    color: var(--lotus-flower);
+    padding: 1em;
+    border-radius: 1em;
+    text-align: center; /* Ensure text is centered */
+    max-width: 90%; /* Prevent overly narrow popup */
+    margin: 0 auto; /* Center the paragraph */
+}
+
+.session-expired-popup button {
+    background-color: var(--sushi-red2);
+    color: var(--lotus-flower);
+    border: none;
+    border-radius: 1em;
+    padding: 1em 2em;
+    margin-top: 1em;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add button shadow */
+
+}
+
+.session-expired-popup button:hover {
+    background-color: var(--sushi-red4);
+}
   
   
   /*#region Responsive design */
@@ -410,7 +479,7 @@ button.login:hover {
         width: 100%;
         gap: 1em;
         background-color: var(--grey);
-        transition: height 0.3s ease;
+        transition: height 0.2s ease;
         position: absolute;
         top: 100%;
         left: 0;
