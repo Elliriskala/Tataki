@@ -9,7 +9,6 @@ import authRouter from './routers/auth-router.js';
 import menuRouter from './routers/menu-router.js';
 import orderRouter from './routers/order-router.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
-import {authenticateToken, isAdmin} from './middlewares/authentication.js';
 import itineraryRouter from './routers/itineray-router.js';
 
 const hostname = '127.0.0.1';
@@ -33,16 +32,6 @@ const __dirname = path.dirname(__filename);
 // Define the path to the front-end static files
 const frontEndPath = '../../FRONT-END/dist';
 
-// Middleware to restrict access to admin files
-const restrictAdminFiles = (req, res, next) => {
-  if (req.path === '/admin') {
-    return authenticateToken(req, res, () => isAdmin(req, res, next));
-  }
-  next();
-};
-
-app.use(restrictAdminFiles);
-
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, frontEndPath)));
 
@@ -57,11 +46,6 @@ app.use('/api/digitransit', itineraryRouter);
 // render api documentation:
 
 // render jsdoc documentation:
-
-// route for the admin page
-app.get('/admin', authenticateToken, isAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, frontEndPath, 'admin.html'));
-});
 
 // Define routes for known pages
 app.get('/about', (_req, res) => {

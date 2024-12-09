@@ -83,7 +83,6 @@ export const displayOrderHistory = async (): Promise<void> => {
     const token = localStorage.getItem("authToken");
 
     if (!token) {
-        logError(new Error("No token found in local storage"), "displayOrderHistory");
         return;
     }
 

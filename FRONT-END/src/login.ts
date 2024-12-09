@@ -236,7 +236,6 @@ const populateUserPage = async () => {
 
             const data = await response.json();
             if (data) {
-                console.log(data);
                 if (usernameElement)
                     usernameElement.innerHTML = data.username || "Unknown";
                 if (usernameDisplay)
@@ -271,7 +270,6 @@ const populateUserPage = async () => {
             });
 
             const data = await response.json();
-            console.log(data);
 
             const reservations = Array.isArray(data) ? data : [data];
             const locale = language === "fi" ? "fi-FI" : "en-US";
@@ -340,20 +338,21 @@ const loadUserPage = async () => {
             },
         });
 
+        if (!response.ok) {
+            // Handle unexpected responses or errors
+            console.error(
+                `HTTP Error: ${response.status} ${response.statusText}`,
+            );
+            window.location.href = "/"; // Redirect to the homepage or login page
+            return;
+        }
+
         if (
             !response.headers.get("Content-Type")?.includes("application/json")
         ) {
             const responseText = await response.text();
             console.error("Unexpected response type:", responseText);
             throw new Error("Received non-JSON response from the server.");
-        }
-
-        if (!response.ok) {
-            console.error(
-                `HTTP Error: ${response.status} ${response.statusText}`,
-            );
-            window.location.href = "/";
-            return;
         }
 
         const userInfo = await response.json();
@@ -369,14 +368,13 @@ const loadUserPage = async () => {
         if (userContent) userContent.style.display = "flex";
         if (adminContent) adminContent.style.display = "none";
 
-        if (isAdmin && adminContent) {
-            if (loginContent && userContent) {
-                loginContent.style.display = "none";
-                userContent.style.display = "none";
+        if (isAdmin) {
+            if (adminContent) {
+                adminContent.style.display = "flex";
+                initializeOrderManagementPage();
             }
-            adminContent.style.display = "flex";
-            initializeOrderManagementPage();
         } else {
+            if (userContent) userContent.style.display = "flex";
             populateUserPage();
         }
     } catch (error) {
@@ -406,9 +404,7 @@ if (adminLogoutButton) {
 }
 
 //  Log out functionality
-const logOutButton = document.getElementById(
-    "logout-btn",
-) as HTMLButtonElement;
+const logOutButton = document.getElementById("logout-btn") as HTMLButtonElement;
 
 if (logOutButton) {
     logOutButton.addEventListener("click", () => {
