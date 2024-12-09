@@ -1,6 +1,7 @@
 import { Order } from "../utils/interfaces";
 import { fetchOrdersById, fetchOrdersByUserId } from "../services/apiService";
-import { logError } from "../utils/functions";
+import { getLanguage, logError } from "../utils/functions";
+import { translations } from "../translations";
 
 // display orders in the order management page
 export const displayOrders = (elementId: string, orders: Order[]): void => {
@@ -81,6 +82,7 @@ export const handleOrderClick = async (event: Event): Promise<void> => {
 // display order history on user page
 export const displayOrderHistory = async (): Promise<void> => {
     const token = localStorage.getItem("authToken");
+    const language = getLanguage();
 
     if (!token) {
         logError(new Error("No token found in local storage"), "displayOrderHistory");
@@ -98,7 +100,7 @@ export const displayOrderHistory = async (): Promise<void> => {
 
     orderHistory.innerHTML = orders.length
         ? generateOrderHistoryTable(orders)
-        : "<p>No order history found</p>";
+        : `<p>${translations[language]["no-orders"]}</p>`;
 };
 
 // generate order table for display on order management page
