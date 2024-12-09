@@ -12,6 +12,8 @@ import {
   validatePositiveNumber,
 } from '../middlewares/validation.js';
 import {customError} from '../middlewares/error-handlers.js';
+import { decodeToken } from './auth-controller.js';
+
 
 /**
  * Fetch all orders
@@ -94,7 +96,20 @@ const getOrdersByCustomerName = async (req, res, next) => {
  */
 
 const getOrdersByUserId = async (req, res, next) => {
-  const userId = req.params.user_id;
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) {
+    return next(customError('No token provided', 401)); // Unauthorized
+  }
+
+  const decoded = decodeToken(token);
+
+  if (!decoded || !decoded.user_id) {
+    return next(customError('Invalid token', 401)); // Return an error if the token is invalid
+  }
+
+  const userId = decoded.user_id;
+
   try {
     // Fetch orders by user id
     const orders = await fetchOrdersByUserId(userId, next);
@@ -144,9 +159,7 @@ const getOrdersByStatus = async (req, res, next) => {
 
 const postOrder = async (req, res) => {
   try {
-    console.log('Incoming payload:', req.body);
-
-    const {user_id, customer_name, total_price, order_items, order_type, order_status, general_comment, delivery_address, postal_code, delivery_instructions} =
+    const {user_id, customer_name, total_price, order_items, order_type, order_status, general_comment, delivery_address, city, delivery_instructions} =
       req.body;
 
     validateString(customer_name, 'customer_name');
@@ -172,7 +185,7 @@ const postOrder = async (req, res) => {
       order_items,
       general_comment,
       delivery_address,
-      postal_code,
+      city,
       delivery_instructions
     );
 
@@ -194,7 +207,6 @@ const postOrder = async (req, res) => {
  * @param res
  * @returns updated order status
  * @throws Error
- * @returns - Order status or null if not found
  */
 
 const putOrderStatus = async (req, res, next) => {
@@ -203,13 +215,12 @@ const putOrderStatus = async (req, res, next) => {
     const orderStatus = req.body.order_status;
 
     // Update order status
-    const updatedOrderStatus = await updateOrderStatus(
+    const updatedOrder = await updateOrderStatus(
       orderId,
       orderStatus,
-      next,
     );
 
-    if (!updatedOrderStatus) {
+    if (!updatedOrder) {
       return next(customError('Order status not updated', 404));
     }
 

@@ -8,7 +8,7 @@ import { promisePool } from "../database.js";
  */
 const fetchMenuItems = async () => {
     try {
-        const sql = 'SELECT * FROM menus';
+        const sql = 'SELECT * FROM Menus';
         const [rows] = await promisePool.query(sql);
         if (rows && rows.length > 0) {
             return rows;
@@ -30,7 +30,7 @@ const fetchMenuItems = async () => {
 
 const fetchMenuItemsById = async (id) => {
     try {
-        const sql = 'SELECT * FROM menus WHERE menu_id = ?';
+        const sql = 'SELECT * FROM Menus WHERE menu_id = ?';
         const [rows] = await promisePool.query(sql, [id]);
         if (rows && rows.length > 0) {
             return rows;
@@ -46,12 +46,12 @@ const fetchMenuItemsById = async (id) => {
 /**
  *
  * @returns all menu items from the database based on the category
- * @throws Error
+ * @throws Error - Database error
  * @returns {Promise<Menu[]>} - Array of menu items
  */
 const fetchMenuItemsByCategory = async (category) => {
     try {
-        const sql = 'SELECT * FROM menus WHERE category = ?';
+        const sql = 'SELECT * FROM Menus WHERE category = ?';
         const [rows] = await promisePool.query(sql, [category]);
         if (rows && rows.length > 0) {
             return rows;
@@ -66,7 +66,7 @@ const fetchMenuItemsByCategory = async (category) => {
 // fetch special menu items; 
 const fetchSpecialMenus = async () => {
     try {
-        const sql = 'SELECT * FROM menus WHERE is_special = true';
+        const sql = 'SELECT * FROM Menus WHERE is_special = true';
         const [rows] = await promisePool.query(sql);
         if (rows && rows.length > 0) {
             return rows;
@@ -81,7 +81,7 @@ const fetchSpecialMenus = async () => {
 // fetch menu allergens 
 const fetchMenuAllergens = async (menu_id) => {
     try {
-        const sql = 'SELECT allergen_description FROM allergens WHERE menu_id = ?';
+        const sql = 'SELECT allergen_description FROM Allergens WHERE menu_id = ?';
         const [rows] = await promisePool.query(sql, [menu_id]);
         if (rows && rows.length > 0) {
             return rows.map((row) => row.allergen_description);

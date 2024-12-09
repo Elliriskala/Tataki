@@ -88,7 +88,7 @@ main {
 .reservation-form label {
   font-size: 1rem;
   margin-bottom: 8px;
-  color: var(--sushi-red4);
+  color: var(--dust-pink);
 }
 
 .reservation-form select {
@@ -134,7 +134,7 @@ main {
 .reservation-form button {
   width: 100%;
   padding: 14px;
-  background-color: var(--sushi-red4);
+  background-color: var(--sushi-red3);
   color: var(--sushi-white);
   border: none;
   border-radius: 8px;
@@ -144,6 +144,10 @@ main {
   transition:
     background-color 0.3s,
     transform 0.3s;
+}
+
+span.guests {
+  color: var(--sushi-grey1);
 }
 
 .reservation-form button:hover {
@@ -220,7 +224,7 @@ div.reservation-message {
 
 button#use-user-info {
   padding: 14px;
-  background-color: var(--sushi-red4);
+  background-color: var(--sushi-red3);
   color: var(--sushi-white);
   border: none;
   border-radius: 8px;

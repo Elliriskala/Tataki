@@ -3,8 +3,7 @@ import {
   fetchRestaurantReviews,
   fetchRestaurantReviewsByUserId,
   deleteRestaurantReview,
-  addRestaurantReview,
-  checkRatingExists,
+  addRestaurantReview
 } from '../models/rating-models.js';
 
 /**
@@ -65,41 +64,42 @@ const deleteReview = async (req, res) => {
   }
 };
 
+/**
+ * Post a new restaurant review
+ * @param req
+ * @param res
+ * @param next
+ * @returns restaurant review_id of the newly created restaurant review
+ * @throws Error - Database error or missing required information
+ * @returns {Promise<void>} - RestaurantReview object
+ */
 const postReview = async (req, res, next) => {
   const newReview = {
-    user_id: req.body.user_id || null,
     username: req.body.username,
     star_rating: req.body.star_rating,
     review: req.body.review || null,
   };
 
+  // Check for required fields
   if (!newReview.username || !newReview.star_rating) {
     console.log('postReview error:', 'Missing required information');
-    return res.status(400).json({message: 'Missing required information'});
+    return res.status(400).json({ message: 'Missing required information' });
   }
 
   try {
-    if (req.body.user_id) {
-      const existingReview = await checkRatingExists(newReview.user_id);
-      if (existingReview) {
-        return res.status(409).json({message: 'Review already exists'});
-      }
-    }
-
     const reviewId = await addRestaurantReview(newReview);
     if (reviewId) {
-      res
-        .status(201)
-        .json({message: 'Review added successfully', id: reviewId});
+      res.status(201).json({ message: 'Review added successfully', id: reviewId });
     } else {
-        console.log('postReview error:', 'Review not added');
-      res.status(500).json({message: 'Review not added'});
+      console.log('postReview error:', 'Review not added');
+      res.status(500).json({ message: 'Review not added' });
     }
   } catch (e) {
     console.log('postReview error:', e.message);
     return next(customError(e.message, 503));
   }
 };
+
 
 export {
   getRestaurantReviews,

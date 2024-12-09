@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-    <link rel="stylesheet" href="/homepage.css" />
-    <link rel="stylesheet" href="/nav.css" />
+    <meta name="description" content="Tataki restaurant home page">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/homepage.css">
+    <link rel="stylesheet" href="/nav.css">
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
     <script type="module" src="./src/main.ts"></script>
   </head>
@@ -15,28 +20,42 @@
       <nav class="navigation">
         <div class="logo">
           <button data-testid="hamburger-button" class="hamburger">☰</button>
-          <div class="logo-placeholder"></div>
+          <a href="index.html" class="logo-placeholder" aria-label="Tataki Restaurant Logo"></a>
         </div>
         <ul class="nav-list">
-          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
-          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
-          <li><a href="order.html" data-translate="order-link">Order</a></li>
-          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
-        </ul>
+            <li><a href="index.html" data-translate="home-link" aria-label="Navigate to Home Page">Home Page</a></li>
+            <li><a href="menu.html" data-translate="menu-link" aria-label="Navigate to Menu Page">Menu</a></li>
+            <li><a href="order.html" data-translate="order-link" aria-label="Navigate to Order Page">Order</a></li>
+            <li><a href="reservation.html" data-translate="reservation-link" aria-label="Navigate to Reservation Page">Reserve a table</a></li>
+          </ul>
         <div class="control-buttons">
-          <button class="language" id="flag-en">🇬🇧</button>
-          <button class="language" id="flag-fi">🇫🇮</button>
-          <button class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
-        </div>
+            <!-- Language Dropdown -->
+            <div class="dropdown">
+              <button class="dropdown-button" aria-label="Select language">
+                🌐
+              </button>
+              <div class="dropdown-content">
+                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
+              </div>
+            </div>
+          
+            <!-- Login/User Button -->
+            <div class="login" id="login-register-user">
+                <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+                  <i class="fa-regular fa-user"></i>
+                </a>
+            </div>
+          </div>
       </nav>
     </header>
     <main>
-      <section class="hero-container">
+      <section class="hero-container" aria-label="Hero section with featured content">
         <div class="hero-image" id="home-page-img"></div>
-      </section>
+    </section>
       <div class="aboutus">
         <div class="aboutus-placeholder">
-          <div class="about-us">
+          <div class="about-us" role="region" aria-label="About Us Section">
             <h3 data-translate="this-is-us">This is us</h3>
             <p data-translate="about-us">Welcome to Tataki, where tradition meets innovation in Helsinki’s vibrant city center. Our restaurant blends authentic Japanese techniques with a touch of Nordic flair to offer unforgettable dining experiences.</p>
           </div>
@@ -73,25 +92,28 @@
     </main>
     <footer>
       <div class="footer-container">
-        <div class="footer-logo">
-          <p data-translate="restaurant-name">Tataki</p>
-        </div>
+        <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+            <div class="logo-placeholder"></div>
+        </a>
         <div class="footer-nav">
           <ul>
-            <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
-            <li><a href="review.html" data-translate="review-link">Review us</a></li>
+            <li><a href="contact.html" data-translate="contact-link" aria-label="Navigate to Contact Us Page">Contact us</a></li>
+            <li><a href="review.html" data-translate="review-link" aria-label="Navigate to Review Page">Review us</a></li>
         </ul>
         </div>
         <div class="social-medias">
-          <ul>
-            <li id="facebook"><a href=""></a></li>
-            <label for="facebook">
-              <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-            <li id="instagram"><a href=""></a></li>
-            <label for="instagram">
-              <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
-            </label>
-          </ul>
+            <ul>
+                <li id="facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                        <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li id="instagram">
+                    <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                        <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
         </div>
       </div>
     </footer>

@@ -86,7 +86,23 @@ const getReservationsByUserId = async (req, res, next) => {
  * @returns {Promise<void>} - reservation_id of the newly created reservation
  */
 const validateAndAddReservation = async (req, res, next) => {
-    const { user_id, reservation_date, email, reservation_time, full_name, phone_number, guests } = req.body;
+    // decode user id if token is provide
+    let { user_id, reservation_date, email, reservation_time, full_name, phone_number, guests } = req.body;
+    let decoded = null;
+
+// Decode user_id if a token is provided
+    if (req.headers.authorization) {
+        try {
+            const token = req.headers.authorization.split(' ')[1]; // Assuming "Bearer <token>" format
+            decoded = decodeToken(token); // Replace decodeToken with your JWT decoding function
+            if (decoded && decoded.user_id) {
+                user_id = decoded.user_id;
+            }
+        } catch (error) {
+            console.error('Error decoding token:', error.message);
+            return next(customError('Invalid token', 401));
+        }
+    }
 
     // Validate required fields
     if (!reservation_date || !reservation_time || !guests || !full_name || !phone_number || !email) {

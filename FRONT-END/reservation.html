@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Table Reservation</title>
+    <meta name="description" content="Tataki restaurant table reservation">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="/reservation.css">
     <link rel="stylesheet" href="/nav.css">
     <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
@@ -14,7 +19,7 @@
   <nav class="navigation">
     <div class="logo">
         <button data-testid="hamburger-button" class="hamburger">☰</button>
-        <p>Tataki</p>
+        <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
     </div>
     <ul class="nav-list">
         <li><a data-translate="home-link" href="index.html">Home Page</a></li>
@@ -23,10 +28,24 @@
         <li><a data-translate="reservation-link" href="reservation.html">Reserve a table</a></li>
     </ul>
     <div class="control-buttons">
-        <button class="language" id="flag-en">🇬🇧</button>
-          <button class="language" id="flag-fi">🇫🇮</button>
-        <button class="login"><a href="./user.html"><i class="fa-regular fa-user"></i></a></button>
-    </div>
+        <!-- Language Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-button" aria-label="Select language">
+            🌐
+          </button>
+          <div class="dropdown-content">
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
+          </div>
+        </div>
+      
+        <!-- Login/User Button -->
+        <div class="login" id="login-register-user">
+            <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+              <i class="fa-regular fa-user"></i>
+            </a>
+        </div>
+      </div>
   </nav>
 
     <main>
@@ -39,7 +58,7 @@
         <div class="reservation-form">
             <h1 data-translate="reservationTitle">Table Reservation</h1>
             <p id="reservation-description" data-translate="reservationDescription">For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four. Reservations are binding, excluding reasons beyond the clients reach.</p>
-            <button id="use-user-info" data-testid="use-userinfo" data-translate="useUserInfoButton">Use saved information</button>
+            <button id="use-user-info" data-testid="use-userinfo" data-translate="reservation-saved-info">Use saved information</button>
             <form id="reservationForm">
                 <label data-translate="reservationName" for="name">Full Name</label>
                 <input type="text" id="name" data-translate="placeholderName" name="name" autocomplete="name" placeholder="Enter your name" required>
@@ -51,15 +70,17 @@
                 <input type="tel" id="phone" name="phone" autocomplete="tel" data-translate="placeholderPhone" placeholder="Enter your phone number" required>
 
                 <div class="guest-selection">
-                  <label data-translate="numberOfGuests" for="guest-btn">Number of Guests</label>
+                  <span class="guests" data-translate="numberOfGuests">Number of Guests</span>
                     <div class="guest-buttons" id="guests">
-                      <button type="button" class="guest-btn" id="guest-btn" data-value="4">4</button>
-                      <button type="button" class="guest-btn" id="guest-btn" data-value="5">5</button>
-                      <button type="button" class="guest-btn" id="guest-btn" data-value="6">6</button>
-                      <button type="button" class="guest-btn" id="guest-btn" data-value="7">7</button>
-                      <button type="button" class="guest-btn" id="guest-btn" data-value="8">8</button>
+                        <button type="button" class="guest-btn" data-value="2">2</button>
+                        <button type="button" class="guest-btn" data-value="3">3</button>
+                        <button type="button" class="guest-btn" data-value="4">4</button>
+                        <button type="button" class="guest-btn" data-value="5">5</button>
+                        <button type="button" class="guest-btn" data-value="6">6</button>
+                        <button type="button" class="guest-btn" data-value="7">7</button>
+                        <button type="button" class="guest-btn" data-value="8">8</button>
                     </div>
-                    <input type="hidden" name="guests" id="guests-input" required>
+                    <input type="hidden" name="guests" id="guests-input">
                   </div>
 
                 <label for="date" data-translate="reservationDate">Reservation Date</label>
@@ -86,9 +107,9 @@
     </main>
     <footer>
         <div class="footer-container">
-          <div class="footer-logo">
-            <p>Tataki</p>
-          </div>
+          <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+            <div class="logo-placeholder"></div>
+          </a>
           <div class="footer-nav">
               <ul>
                   <li><a data-translate="footerContact" href="contact.html">Contact us</a></li>
@@ -97,14 +118,17 @@
           </div>
           <div class="social-medias">
             <ul>
-              <li id="facebook"><a href=""></a></li>
-              <label for="facebook">
-                <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-              <li id="instagram"><a href=""></a></li>
-              <label for="instagram">
-                <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
-              </label>
-            </ul>
+                <li id="facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                        <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li id="instagram">
+                    <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                        <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
           </div>
         </div>
       </footer>

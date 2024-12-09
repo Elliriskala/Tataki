@@ -1,291 +1,449 @@
 @font-face {
-  font-family: "roboto";
-  src: url("/fonts/RobotoMono-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "roboto";
+    src: url("/fonts/RobotoMono-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "roboto bold";
+    src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
 }
 
 body {
-  font-family: "roboto", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--sushi-black);
-  color: var(--sushi-grey2);
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
+    font-family: "roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey2);
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 html {
-  height: 100%;
-  width: 100%;
-  font-family: "roboto", sans-serif;
-  overflow: hidden;
+    height: 100%;
+    width: 100%;
+    font-family: "roboto", sans-serif;
+    overflow: hidden;
 }
 
 :root {
-  --sushi-black: #0b090a;
-  --sushi-graphite: #161a1d;
-  --wine-red: rgb(38, 2, 2);
-  --sushi-red1: #420506;
-  --sushi-red2: #a4161a;
-  --sushi-red3: #ba181b;
-  --sushi-red4: #e5383b;
-  --sushi-grey1: #b1a7a6;
-  --sushi-grey2: #d3d3d3;
-  --sushi-grey3: #f5f3f4;
-  --sushi-white: #ffffff;
-  --dust-pink: #c8a9a9; /* Softer pink */
-  --grey: #252525;
-  --soy-sauce: #191919;
-  --brown-grey: rgba(44, 33, 33, 0.9);
-  --intense-red: #bf4d4d;
-  --wine-red: #390d0d;
-  --forest-green: rgba(3, 32, 3, 0.8);
-  --grey-green: rgba(54, 71, 63, 0.9);
-  --lotus-flower: rgba(245, 245, 245, 0.9);
+    --sushi-black: #0b090a;
+    --sushi-graphite: #161a1d;
+    --wine-red: rgb(38, 2, 2);
+    --sushi-red1: #420506;
+    --sushi-red2: #a4161a;
+    --sushi-red3: #ba181b;
+    --sushi-red4: #e5383b;
+    --sushi-grey1: #b1a7a6;
+    --sushi-grey2: #d3d3d3;
+    --sushi-grey3: #f5f3f4;
+    --sushi-white: #ffffff;
+    --dust-pink: #c8a9a9; /* Softer pink */
+    --grey: #252525;
+    --soy-sauce: #191919;
+    --brown-grey: rgba(44, 33, 33, 0.9);
+    --intense-red: #bf4d4d;
+    --wine-red: #390d0d;
+    --forest-green: rgba(3, 32, 3, 0.8);
+    --grey-green: rgba(54, 71, 63, 0.9);
+    --lotus-flower: rgba(245, 245, 245, 0.9);
 }
 
 main {
-  
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.aboutus-placeholder {
+    display: flex;
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey3);
+    flex-direction: row;
+    width: 90%;
+    margin: auto;
+    margin-top: 2em;
+    border-radius: 1em;
+    justify-content: space-between;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+
+}
+
+.aboutus-placeholder h1 {
+    color: var(--sushi-red4);
+    font-family: "roboto bold";
+    font-size: 2em;
+}
+
+.contact-section {
+    width: 40%;
+    margin: 0 1em 0.5em 2em;
 }
 
 .contact-section ul {
-  list-style-type: none;
-  padding: 0;
+    line-height: 1.7em;
+    list-style-type: none;
+    padding: 0;
 }
 
 .contact-section a {
-  color: var(--sushi-red4);
-  text-decoration: none;
+    color: var(--sushi-red4);
+    text-decoration: none;
 }
 
 .contact-section a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+}
+
+.map-section {
+    width: 55%;
+}
+
+.map-section h1 {
+    margin-left: 0.3em;
 }
 
 .map {
-  height: 300px;
-  background-color: var(--sushi-graphite);
-  border-radius: 12px;
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 350px;
+    background-color: var(--sushi-graphite);
+    border-radius: 12px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    margin: 1em;
 }
 
 .map h2 {
-  color: var(--sushi-grey2);
+    color: var(--sushi-grey2);
 }
 
 .itinerary-section {
-  background-color: var(--sushi-graphite);
-  color: var(--sushi-grey2);
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 800px;
-  margin: 2rem auto;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey2);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 850px;
+    margin: 2rem auto;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
 }
 
 .itinerary-section h1 {
-  font-size: 2rem;
-  color: var(--sushi-red4);
-  border-bottom: 2px solid var(--sushi-red4);
-  padding-bottom: 10px;
-  margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: var(--sushi-red4);
+    border-bottom: 2px solid var(--sushi-red4);
+    font-family: "roboto bold";
+    padding-bottom: 10px;
+    margin-bottom: 1.5rem;
 }
 
 .itinerary-section button {
-  background-color: var(--sushi-red4);
-  color: var(--sushi-white);
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+    background-color: var(--sushi-red4);
+    color: var(--sushi-white);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
 }
 
 .itinerary-section button:hover {
-  background-color: var(--wine-red);
+    background-color: var(--wine-red);
 }
 
 #itineraryForm {
-  display: none;
-  margin-top: 2rem;
+    display: none;
+    margin-top: 2rem;
 }
 
 #itineraryForm label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
 #itineraryForm input[type="text"],
 #itineraryForm input[type="number"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--sushi-grey1);
-  background-color: var(--sushi-grey3);
-  color: var(--sushi-graphite);
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--sushi-grey1);
+    background-color: var(--sushi-grey3);
+    color: var(--sushi-graphite);
 }
 
 #itineraryForm button {
-  background-color: var(--sushi-red4);
-  color: var(--sushi-white);
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+    background-color: var(--sushi-red4);
+    color: var(--sushi-white);
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
 }
 
 #itineraryForm button:hover {
-  background-color: var(--wine-red);
+    background-color: var(--wine-red);
 }
 
 /* Itinerary Results Section */
 #itineraryResults {
-  margin-top: 2rem;
-  display: none;
+    margin-top: 2rem;
+    display: none;
 }
 
 #itineraryResults ul {
-  padding-left: 0;
-  list-style-type: none;
+    padding-left: 0;
+    list-style-type: none;
 }
 
 #itineraryResults ul li {
-  background-color: var(--sushi-graphite);
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background-color: var(--sushi-graphite);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 #itineraryResults ul li h3 {
-  color: var(--sushi-red4);
-  margin-bottom: 1rem;
+    color: var(--sushi-red4);
+    margin-bottom: 1rem;
 }
 
 #itineraryResults ul li p {
-  color: var(--sushi-grey2);
+    color: var(--sushi-grey2);
 }
 
 #itineraryResults ul li ul {
-  padding-left: 20px;
-  margin-top: 1rem;
+    padding-left: 20px;
+    margin-top: 1rem;
 }
 
 #itineraryResults ul li ul li {
-  font-size: 0.9rem;
-  color: var(--sushi-grey2);
-  margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--sushi-grey2);
+    margin-bottom: 0.5rem;
 }
 
 #itineraryResults ul li ul li strong {
-  color: var(--sushi-red4);
+    color: var(--sushi-red4);
+}
+
+/* General Popup Card Styles */
+.popup-card {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 150px;
+    overflow: hidden;
+}
+
+/* Header Styling */
+div.popup-header {
+    background-color: #ff4b4b; /* Sushi red */
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-header h1 {
+    color: white;
+    margin: auto;
+    display: flex;
+    align-self: center;
+    padding: 0;
+    text-align: center;
+}
+
+.popup-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+/* Address Styling */
+.popup-address {
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+/* Opening Hours Section */
+.popup-hours {
+    padding: 10px;
+}
+
+.popup-hours h4 {
+    margin: 5px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.popup-hours ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.popup-hours ul li {
+    margin: 5px 0;
+}
+
+/* Hover Effect (Optional) */
+.popup-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.02);
+    transition: 0.3s ease;
+}
+
+/* Google Maps Link */
+.popup-link {
+    margin-top: 10px;
+}
+
+.popup-link a {
+    color: #007bff; /* Bootstrap blue for links */
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.popup-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .aboutus-placeholder {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .contact-section {
+        width: 85%;
+        margin-left: 2em;
+    }
+
+    .map-section {
+        width: 100%;
+    }
+
+    .map-section h1 {
+        padding-left: 1em;
+        margin: 0;
+    }
+
+    .map {
+        height: 300px;
+    }
 }
 
 @media (max-width: 768px) {
-  .reservation-form {
-    padding: 1.5rem;
-  }
+    .reservation-form {
+        padding: 1.5rem;
+    }
 
-  .reservation-form h1 {
-    font-size: 1.6rem;
-  }
+    .reservation-form h1 {
+        font-size: 1.6rem;
+    }
 
-  .reservation-form input,
-  .reservation-form select {
-    font-size: 0.9rem;
-  }
+    .reservation-form input,
+    .reservation-form select {
+        font-size: 0.9rem;
+    }
 
-  .reservation-form button {
-    font-size: 1rem;
-  }
+    .reservation-form button {
+        font-size: 1rem;
+    }
 
-  .itinerary-section {
-    padding: 1.5rem;
-  }
+    .itinerary-section {
+        padding: 1.5rem;
+    }
 
-  .itinerary-section h1 {
-    font-size: 1.8rem;
-  }
+    .itinerary-section h1 {
+        font-size: 1.8rem;
+    }
 
-  .itinerary-section button {
-    font-size: 1rem;
-  }
+    .itinerary-section button {
+        font-size: 1rem;
+    }
 
-  #itineraryForm input[type="text"],
-  #itineraryForm input[type="number"] {
-    font-size: 1rem;
-  }
+    #itineraryForm input[type="text"],
+    #itineraryForm input[type="number"] {
+        font-size: 1rem;
+    }
 
-  #itineraryForm button {
-    font-size: 1rem;
-  }
+    #itineraryForm button {
+        font-size: 1rem;
+    }
 
-  #itineraryResults ul li {
-    padding: 0.8rem;
-  }
+    #itineraryResults ul li {
+        padding: 0.8rem;
+    }
 
-  #itineraryResults ul li h3 {
-    font-size: 1.4rem;
-  }
+    #itineraryResults ul li h3 {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width: 500px) {
-  .reservation-form {
-    padding: 1rem;
-  }
+    .reservation-form {
+        padding: 1rem;
+    }
 
-  .reservation-form h1 {
-    font-size: 1.4rem;
-  }
+    .reservation-form h1 {
+        font-size: 1.4rem;
+    }
 
-  .reservation-form input,
-  .reservation-form select {
-    font-size: 0.8rem;
-  }
+    .reservation-form input,
+    .reservation-form select {
+        font-size: 0.8rem;
+    }
 
-  .reservation-form button {
-    font-size: 0.9rem;
-  }
+    .reservation-form button {
+        font-size: 0.9rem;
+    }
 
-  .itinerary-section {
-    padding: 1rem;
-  }
+    .itinerary-section {
+        padding: 1rem;
+    }
 
-  .itinerary-section h1 {
-    font-size: 1.6rem;
-  }
+    .itinerary-section h1 {
+        font-size: 1.6rem;
+    }
 
-  .itinerary-section button {
-    font-size: 0.9rem;
-  }
+    .itinerary-section button {
+        font-size: 0.9rem;
+    }
 
-  #itineraryForm input[type="text"],
-  #itineraryForm input[type="number"] {
-    font-size: 0.9rem;
-  }
+    #itineraryForm input[type="text"],
+    #itineraryForm input[type="number"] {
+        font-size: 0.9rem;
+    }
 
-  #itineraryForm button {
-    font-size: 0.9rem;
-  }
+    #itineraryForm button {
+        font-size: 0.9rem;
+    }
 
-  #itineraryResults ul li {
-    padding: 0.6rem;
-  }
+    #itineraryResults ul li {
+        padding: 0.6rem;
+    }
 
-  #itineraryResults ul li h3 {
-    font-size: 1.3rem;
-  }
+    #itineraryResults ul li h3 {
+        font-size: 1.3rem;
+    }
 }

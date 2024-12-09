@@ -4,6 +4,7 @@
     --wine-red: #390d0d;
     --sushi-red1: #420506;
     --sushi-red2: #a4161a;
+    --sushi-red-transparent:rgba(234, 48, 34, 0.7);
     --sushi-red3: #ba181b;
     --sushi-red4: #e5383b;
     --sushi-grey1: #b1a7a6;
@@ -45,7 +46,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1em;
+    padding: 0.5em;
     background: linear-gradient(
         135deg,
         var(--grey) 0%,
@@ -57,12 +58,16 @@ main {
     max-width: 100%;
 }
 
+.navigation a {
+    text-decoration: none;
+}
+
 .logo-placeholder {
-    background-image: url("./img/logo5.png");
+    background-image: url("./img/logo.png");
     background-size: cover;
     background-position: center;
-    width: 60px;
-    height: 40px;
+    width: 80px;
+    height: 55px;
     border-radius: 1em;
 }
 
@@ -72,13 +77,8 @@ main {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.3em;
-    width: 60px;
-    height: 40px;
-}
-
-.logo p {
-    margin: 0;
-    padding-left: 0.5em;
+    width: 80px;
+    height: 55px;
 }
 
 .nav-list {
@@ -87,6 +87,8 @@ main {
     gap: 2em;
     margin: 0;
     padding: 0;
+    padding-left: 5em;
+    padding-right: 1em;
 }
 
 .nav-list li {
@@ -123,29 +125,120 @@ main {
 .nav-list li a:hover {
     color: var(--dust-pink);
     transform: translateY(-2px);
-}
+  }
+  
+  /* Language and Login buttons */
 
-/* Language and Login buttons */
+  .control-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .control-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
 
-.login a {
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    background-color: var(--sushi-red2);
+    border: none;
+    border-radius: 4px;
+    padding: 10px 3px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 30;
+  }
+  
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  
+  .login a {
     text-decoration: none;
-}
-
-.language,
-.login {
+    display: block; /* Makes the <a> fill the container */
+    width: 100%; /* Fills the width of the .login container */
+    height: 100%;
+    padding: 0.8em 1.3em;
+    visibility: visible;
+    border-radius: 8px;
+    color: white;
+    margin-top: 1em;
+  }
+  
+  .language {
     margin-right: 1em;
     background-color: var(--soy-sauce);
     color: var(--lotus-flower);
     border: none;
     border-radius: 1em;
-    padding: 0.8em 1.5em;
+    padding: 0.5em;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+  }
+
+  .login {
+    background-color: var(--sushi-red2);
+    color: var(--lotus-flower);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 8px;
+    width: 3em;
+    height: 2.5em;
+    margin: auto;
+    margin-right: 1em;
+  }
+
+
+#flag-en {
+    background-image: url(./img/gb-flag.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 0.5em;
+    padding: 1em;
+    margin: auto;
+}
+
+#flag-fi {
+    background-image: url(./img/fin-flag.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 1em;
+    margin: auto;
+
 }
 
 button.login {
-    background-color: var(--sushi-red1);
+    background-color: var(--sushi-red-transparent);
     color: var(--lotus-flower);
+    border: none;
+    display: flex;
+    align-items: center;
+    
 }
 
 button.login a {
@@ -159,7 +252,6 @@ button.login:hover {
 
 .language:hover,
 .login:hover {
-    background-color: var(--sushi-red3);
     transform: scale(1.05);
     cursor: pointer;
 }
@@ -189,6 +281,7 @@ button.login:hover {
 }
 
 .footer-container {
+    box-shadow: 4px 6px 30px rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -207,12 +300,10 @@ button.login:hover {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.3em;
-    padding-left: 0.5em;
 }
 
 .footer-nav ul {
     padding: 0;
-    padding-right: 7em;
 }
 
 .footer-nav li {
@@ -290,13 +381,57 @@ button.login:hover {
     transition: all 0.5s;
     transform: scale(1.2);
     cursor: pointer;
+  }
+  
+  /*#endregion footer*/
+
+  .session-expired-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem; /* Adjusted padding */
+    background-color: var(--sushi-red1);
+    z-index: 1000;
 }
 
-/*#endregion footer*/
+.session-expired-popup p {
+    color: var(--lotus-flower);
+    padding: 1em;
+    border-radius: 1em;
+    text-align: center; /* Ensure text is centered */
+    max-width: 90%; /* Prevent overly narrow popup */
+    margin: 0 auto; /* Center the paragraph */
+}
 
-/*#region Responsive design */
+.session-expired-popup button {
+    background-color: var(--sushi-red2);
+    color: var(--lotus-flower);
+    border: none;
+    border-radius: 1em;
+    padding: 1em 2em;
+    margin-top: 1em;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add button shadow */
 
-@media (max-width: 950px) {
+}
+
+.session-expired-popup button:hover {
+    background-color: var(--sushi-red4);
+}
+  
+  
+  /*#region Responsive design */
+  
+  @media (max-width:1000px) {
     nav ul {
         flex-direction: column;
         align-items: center;
@@ -304,6 +439,13 @@ button.login:hover {
 
     nav ul li {
         margin: 10px 0;
+    }
+
+    .logo {
+        width: 180px;
+        display: flex;
+        height: 40px;
+        padding: 0.5em;
     }
 
     .footer-container {
@@ -319,15 +461,8 @@ button.login:hover {
     .navigation {
         flex-direction: column;
         align-items: flex-start;
-        padding: 20px 20px;
         position: relative;
         border-radius: 0;
-    }
-
-    .logo {
-        width: 20%;
-        display: flex;
-        justify-content: space-between;
     }
 
     .hamburger {
@@ -348,7 +483,7 @@ button.login:hover {
         width: 100%;
         gap: 1em;
         background-color: var(--grey);
-        transition: height 0.3s ease;
+        transition: height 0.2s ease;
         position: absolute;
         top: 100%;
         left: 0;
@@ -424,9 +559,8 @@ button.login:hover {
     }
 
     .logo {
-        width: 20%;
         display: flex;
-        justify-content: space-between;
+        padding: 0;
     }
 
     .hamburger {
@@ -435,7 +569,7 @@ button.login:hover {
 
     .control-buttons {
         position: absolute;
-        top: 1em;
+        top: 1.2em;
         right: 1em;
     }
 
@@ -477,11 +611,13 @@ button.login:hover {
     .nav-list li a {
         color: var(--lotus-flower);
     }
-}
-
-@media (max-width: 500px) {
-    .logo p {
-        display: none;
+  }
+  
+  @media (max-width: 595px) {
+    .logo {
+        padding: 0;
+        width: 120px;
+        height: 40px;
     }
 
     .footer-nav ul li {
@@ -503,7 +639,7 @@ button.login:hover {
 
     .social-medias ul {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.4em;
         justify-content: center;
         padding: 0;

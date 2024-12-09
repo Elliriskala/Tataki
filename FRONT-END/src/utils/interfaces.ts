@@ -46,6 +46,8 @@ interface User {
   phone_number?: string;
   password_hash: string;
   user_level_id: number;
+  customer_address?: string;
+  city?: string;
 }
 
 interface UserLoggedIn {
@@ -92,7 +94,7 @@ interface Order {
   customer_name: string;
   total_price: number;
   delivery_address?: string;
-  postal_code?: string;
+  city?: string;
   delivery_instructions?: string;
   order_type: string;
   status_id: number;
@@ -113,10 +115,13 @@ interface OrderItem {
 
 interface Reservation {
   reservation_id?: number;
-  user_id: number;
+  user_id: number | null;
   reservation_date: string;
+  email: string;
+  phone_number: string;
+  full_name: string;
   reservation_time: string;
-  guests: string;
+  guests: string | number;
   created_at?: Date;
 }
 

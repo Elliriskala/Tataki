@@ -37,12 +37,12 @@ body {
     overflow-x: hidden;
     height: 100%;
     width: 100%;
-    background-color: var(--soy-sauce);
+    background-color: var(--sushi-graphite);
 }
 
 :root {
     --sushi-black: #0b090a;
-    --sushi-graphite: #161a1d;
+    --sushi-graphite: #22282c;
     --wine-red: #390d0d;
     --sushi-red1: #420506;
     --sushi-red2: #a4161a;
@@ -82,19 +82,23 @@ dialog::backdrop {
 .item-added-to-cart {
     position: fixed;
     top: 30%;
-    transform: ease-in-out 2s translateY(-50%);
-    background-color: var(--sushi-red2);
+    transform: translateY(-50%);
+    transition: transform 2s ease-in-out;
+    background-color: white;
     color: var(--sushi-grey3);
     padding: 2em;
     box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
     z-index: 999;
     border-radius: 1em;
-    border: none;
+    border: 0.1em solid #61b764;
+}
+
+.item-added-to-cart p {
+    color: var(--sushi-graphite);
 }
 
 .menu-page-body,
 .menus {
-    background-color: var(--soy-sauce);
     color: var(--sushi-grey3);
     padding-bottom: 0.5em;
 }
@@ -115,14 +119,14 @@ dialog::backdrop {
 
 a.shopping-cart {
     position: fixed;
-    top: 7em;
+    top: 7.5em;
     right: 2em;
     background-color: var(--sushi-red1);
     color: var(--sushi-grey1);
     padding: 1em;
     border-radius: 50%;
     box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-    z-index: 999;
+    z-index: 20;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -165,9 +169,9 @@ a.shopping-cart:hover .tooltip2 {
 .carousel h2 {
     margin: auto;
     padding: 1em;
-    border-bottom: 0.1em solid var(--sushi-red2);
+    border-bottom: 0.1em solid var(--sushi-red3);
     border-bottom-style: groove;
-    width: 60%;
+    width: 45%;
     color: var(--sushi-red2);
     text-shadow: #0b090a 0.1em 0.1em 0.1em;
 }
@@ -176,17 +180,27 @@ a.shopping-cart:hover .tooltip2 {
     position: relative;
     margin: auto;
     overflow: hidden;
+    width: 50%;
+    height: 700px;
+    padding-top: 1em;
+}
+
+.menu-carousel h2 {
     width: 70%;
 }
 
 .menu-track-container {
-    margin: 1em;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .menu-track {
     display: flex;
-    gap: 0.5em;
-    transition: 0.5s ease-in-out;
+    margin-left: 2em;
+    transition: transform 0.6s ease-in-out;
 }
 
 .carousel-button {
@@ -196,7 +210,7 @@ a.shopping-cart:hover .tooltip2 {
     font-size: 2em;
     color: var(--sushi-grey3);
     transition: 0.2s;
-    padding: 1em;
+    padding: 0.5em;
     margin: 0.5em;
     transform: translateX(0.2em);
     position: absolute;
@@ -205,11 +219,11 @@ a.shopping-cart:hover .tooltip2 {
 }
 
 #carousel-left {
-    left: 5%;
+    left: 15%;
 }
 
 #carousel-right {
-    right: 5%;
+    right: 15%;
 }
 
 #carousel-left:hover,
@@ -219,8 +233,25 @@ a.shopping-cart:hover .tooltip2 {
 }
 
 .menu-track > .menu-card {
-    flex: 0 0 250px;
-    max-width: 250px;
+    flex: 0 0 350px;
+    max-width: 350px;
+    width: 80%;
+    height: 90%;
+    margin: 0.3em;
+    opacity: 0.5;
+    transition:
+        transform 0.8s ease-in-out,
+        opacity 0.6s ease-in-out;
+}
+
+.menu-track > .menu-card.active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.menu-track > .menu-card:not(.active) {
+    opacity: 0.3;
+    transform: scale(0.9);
 }
 
 .menu-list {
@@ -254,6 +285,16 @@ a.shopping-cart:hover .tooltip2 {
     grid-template-columns: repeat(auto-fit, minmax(20em, 2fr));
     gap: 1em;
     margin-bottom: 2em;
+    opacity: 1;
+    transform: translateX(10px);
+    transition:
+        opacity 0.5s ease-in-out,
+        transform 0.5s ease-in-out;
+}
+
+.menu-container.hidden {
+    opacity: 0;
+    transform: translateX(2em);
 }
 
 .menu-card {
@@ -264,15 +305,33 @@ a.shopping-cart:hover .tooltip2 {
     box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
     text-align: center;
     color: var(--sushi-grey3);
-    letter-spacing: -0.6px;
     position: relative;
+    z-index: 10;
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+        opacity 0.4s ease-out,
+        transform 0.4s ease-out;
+}
+
+.menu-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.menu-card p {
+    font-family: "urbanist";
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 
 .menu-header {
     font-family: "roboto bold";
     font-size: 1.5em;
     letter-spacing: 0.1em;
-    color: var(--sushi-red2);
+    color: var(--sushi-red4);
     margin-bottom: 1em;
 }
 
@@ -292,19 +351,19 @@ a.shopping-cart:hover .tooltip2 {
 .price,
 .allergen-info {
     font-family: "roboto bold";
-    font-size: 1.3em;
-    padding: 0.5em;
+    font-size: 1.4em;
     margin: 0.3em;
+    padding: 0.5em;
 }
 
 .price {
-    color: var(--sushi-red2);
+    color: var(--sushi-red4);
 }
 
 .allergen-info {
     font-size: 1em;
     color: var(--sushi-red4);
-    margin-bottom: 2em;
+    margin-bottom: 3em;
 }
 
 .add-to-order-button {
@@ -340,11 +399,11 @@ a.shopping-cart:hover .tooltip2 {
     padding: 0.4em;
     position: absolute;
     bottom: 0;
-    right: -300%;
+    left: -120%;
     transform: translateX(20%);
     white-space: nowrap;
     font-size: 0.7em;
-    z-index: 999;
+    z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
@@ -353,6 +412,8 @@ a.shopping-cart:hover .tooltip2 {
     visibility: visible;
     opacity: 1;
     transform: translateX(-50%) translateY(-1em);
+    position: absolute;
+    z-index: 999;
 }
 
 .fa-cart-plus {
@@ -372,7 +433,7 @@ a.shopping-cart:hover .tooltip2 {
     flex-direction: column;
     padding: 1em;
     color: var(--sushi-grey3);
-    text-align: center;
+    text-align: center;   
 }
 
 .allergen-header {
@@ -395,6 +456,26 @@ a.shopping-cart:hover .tooltip2 {
     color: var(--sushi-red4);
 }
 
+@media screen and (max-width: 1100px) {
+    .menu-carousel {
+        width: 70%;
+        height: 700px;
+    }
+
+    .menu-track > .menu-card {
+        flex: 0 0 300px;
+        max-width: 300px;
+    }
+
+    #carousel-left {
+        left: 5%;
+    }
+
+    #carousel-right {
+        right: 5%;
+    }
+}
+
 @media screen and (max-width: 950px) {
     .menu-container {
         grid-template-columns: repeat(auto-fit, minmax(15em, 2fr));
@@ -409,8 +490,10 @@ a.shopping-cart:hover .tooltip2 {
     #carousel-right {
         right: 0;
     }
+
     .menu-container {
         width: 90%;
+        margin-left: 1em;
     }
 
     .menu-card {
@@ -430,24 +513,45 @@ a.shopping-cart:hover .tooltip2 {
     a.shopping-cart {
         padding: 0.5em;
     }
+
+    .menu-carousel {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .menu-carousel {
+        width: 80%;
+        height: 700px;
+    }
+
+    .menu-track-container {
+        align-items: center;
+    }
+
+    .menu-track > .menu-card {
+        flex: 0 0 270px;
+        max-width: 270px;
+    }
+
+    #carousel-left {
+        left: -0.5em;
+    }
+
+    #carousel-right {
+        right: -0.5em;
+    }
 }
 
 @media screen and (max-width: 550px) {
     .menu-carousel {
-        width: 80%;
+        width: 85%;
     }
 
     .menu-track > .menu-card {
-        flex: 0 0 230px;
-        max-width: 230px;
-    }
-
-    #carousel-left {
-        left: -1em;
-    }
-
-    #carousel-right {
-        right: -1em;
+        flex: 0 0 260px;
+        max-width: 260px;
+        margin-left: 0;
     }
 
     .menu-list {
@@ -487,6 +591,13 @@ a.shopping-cart:hover .tooltip2 {
     .carousel-button {
         font-size: 1.5em;
     }
+
+    /*
+    #carousel-left,
+    #carousel-right {
+        display: none;
+    }
+    */
 }
 
 @media screen and (max-width: 380px) {

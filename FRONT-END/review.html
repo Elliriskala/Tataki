@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Review page for Tataki restaurant">
   <title>Review Us</title>
+  <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="/review.css">
   <link rel="stylesheet" href="/nav.css">
   <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
@@ -15,7 +19,7 @@
     <nav class="navigation">
       <div class="logo">
           <button class="hamburger">☰</button>
-          <p data-translate="restaurant-name">Tataki</p>
+          <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
       </div>
       <ul class="nav-list">
           <li><a href="index.html" data-translate="home-link">Home Page</a></li>
@@ -24,10 +28,24 @@
           <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
       </ul>
       <div class="control-buttons">
-          <button class="language" id="flag-en">🇬🇧</button>
-          <button class="language" id="flag-fi">🇫🇮</button>
-        <button class="login"><a href="user.html"><i class="fa-regular fa-user"></i></a></button>
-    </div>
+        <!-- Language Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-button" aria-label="Select language">
+            🌐
+          </button>
+          <div class="dropdown-content">
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag">English</button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag">Finnish</button>
+          </div>
+        </div>
+      
+        <!-- Login/User Button -->
+        <div class="login" id="login-register-user">
+            <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+              <i class="fa-regular fa-user"></i>
+            </a>
+        </div>
+      </div>
     </nav>
     <main>
         <div id="success-popup" class="popup hidden">
@@ -56,14 +74,18 @@
               <textarea id="comments" name="comments" maxlength="200" rows="4" data-translate="placeHolderComments" placeholder="Write your review here. Maximum of 200 characters. Or leave it blank."></textarea>
   
               <button type="submit" data-translate="submit-review">Submit Review</button>
+              <details class="review-details">
+                    <summary data-translate="review-guidelines">Review Guidelines</summary>
+                    <p data-translate="review-guidelines-text"></p>
+              </details>
           </form>
       </div>
     </main>
     <footer class="main-footer">
       <div class="footer-container">
-          <div class="footer-logo">
-              <p data-translate="restaurant-name">Tataki</p>
-          </div>
+          <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+            <div class="logo-placeholder"></div>
+          </a>
           <div class="footer-nav">
               <ul>
                   <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
@@ -71,15 +93,17 @@
               </ul>
           </div>
           <div class="social-medias">
-              <ul>
-                  <li id="facebook"><a href=""></a></li>
-                  <label for="facebook">
-                      <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-                  </label>
-                  <li id="instagram"><a href=""></a></li>
-                  <label for="instagram">
-                      <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
-                  </label>
+            <ul>
+                <li id="facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                        <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li id="instagram">
+                    <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                        <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
               </ul>
           </div>
       </div>

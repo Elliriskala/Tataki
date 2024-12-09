@@ -1,10 +1,13 @@
 import { fetchMenuItemsByCategory } from "./services/apiService";
 import { displayOrderMenu } from "./components/orderDisplay";
-import { updateCartDisplay } from "./components/cart";
+import { updateCartDisplay, checkDeliveryMethod, existingInfoButton } from "./components/cart";
 import { placeOrder } from "./orderProcessing";
+import { getLanguage } from "./utils/functions";
+import { logError } from "./utils/functions";
 
 // initialize category buttons
 const initializeCategoryButtons = async (): Promise<void> => {
+    const lang = getLanguage();
     const categoryButtons = document.querySelectorAll(
         ".select-category-button",
     );
@@ -13,7 +16,7 @@ const initializeCategoryButtons = async (): Promise<void> => {
             const category = button.getAttribute("data-translate") || "";
             if (category) {
                 const menus = await fetchMenuItemsByCategory(category);
-                displayOrderMenu(menus);
+                displayOrderMenu(menus, lang);
             }
         });
     });
@@ -22,8 +25,15 @@ const initializeCategoryButtons = async (): Promise<void> => {
 // initialize order page
 const initializeOrderPage = async (): Promise<void> => {
     try {
+        const lang = getLanguage();
         // update cart display
         updateCartDisplay();
+
+        // check if delivery method is set
+        checkDeliveryMethod()
+
+        // check if existing info button is clicked
+        existingInfoButton();
 
         const menuContainer = document.querySelector(
             ".menu-container",
@@ -32,17 +42,17 @@ const initializeOrderPage = async (): Promise<void> => {
         // fetch initial menus and display them
         const initialMenus = await fetchMenuItemsByCategory("lunch");
         if (menuContainer) {
-            displayOrderMenu(initialMenus);
+            displayOrderMenu(initialMenus, lang);
             await initializeCategoryButtons();
         }
     } catch (error) {
-        console.error("Failed to initialize order page", error);
+        throw new Error("Failed to initialize order page");
     }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeOrderPage().catch((error) => {
-        console.error("Failed to initialize order page", error);
+        logError(error, "initializeOrderPage");
     });
 
     const placeOrderButton = document.getElementById("place-order-button");

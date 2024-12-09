@@ -37,13 +37,14 @@ body {
     overflow-x: hidden;
     height: 100%;
     width: 100%;
-    background-color: var(--soy-sauce);
+    background-color: var(--sushi-graphite);
 }
 
 :root {
     --sushi-black: #0b090a;
     --sushi-graphite: #161a1d;
     --wine-red: #390d0d;
+
     --sushi-red1: #420506;
     --sushi-red2: #a4161a;
     --sushi-red3: #ba181b;
@@ -57,12 +58,10 @@ body {
     --soy-sauce: #191919;
     --brown-grey: rgba(44, 33, 33, 0.9);
     --intense-red: #bf4d4d;
-    --forest-green: rgb(74, 188, 74);
+    --forest-green: rgb(75, 202, 75);
     --grey-green: rgba(54, 71, 63, 0.9);
     --lotus-flower: rgba(245, 245, 245, 0.9);
 }
-
-/* order.html tyylittely */
 
 /* item added to cart modal */
 
@@ -70,26 +69,56 @@ body:has(dialog[open]) {
     overflow-y: hidden;
 }
 
-dialog:not([open]) {
+/* processing order modal & order confirmation modal */
+
+.item-added-to-cart, .processing-order, .order-placed {
+    position: fixed;
+    top: 30%;
+    background: white;
+    padding: 2em;
+    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    border-radius: 1em;
     display: none;
+    text-align: center;
+    max-width: 300px;
+    animation: fadeIn 0.3s ease-out;
+    border: 0.1em solid #61b764;
+}
+
+.processing-order p , .order-placed p, .item-added-to-cart p {
+    color: var(--sushi-graphite);
 }
 
 dialog::backdrop {
-    background-color: var(--grey);
+    background-color: var(--sushi-graphite);
     opacity: 0.75;
 }
 
-.item-added-to-cart {
-    position: fixed;
-    top: 30%;
-    background-color: var(--sushi-red2);
+#order-placed-button {
+    padding: 0.5em;
+    font-size: 0.8em;
+    background-color: var(--sushi-graphite);
     color: var(--sushi-grey3);
-    padding: 2em;
-    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-    z-index: 999;
-    border-radius: 1em;
     border: none;
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    max-width: 13em;
+    text-align: center;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
 }
+
+#order-placed-button:hover {
+    background-color: var(--sushi-red1);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/* order.html tyylittely */
 
 .menu-page {
     flex-grow: 1;
@@ -105,7 +134,7 @@ dialog::backdrop {
 
 .menus-header h1 {
     margin-top: 1em;
-    color: var(--sushi-red3);
+    color: var(--sushi-red4);
 }
 
 .menu-list {
@@ -137,11 +166,20 @@ dialog::backdrop {
     width: 80%;
     margin: auto;
     grid-template-columns: repeat(auto-fit, minmax(25em, 3fr));
-    gap: 1em;
+    gap: 1.5em;
     margin-bottom: 3em;
+    opacity: 1;
+    transition:
+        opacity 0.5s ease-in-out,
+        transform 0.5s ease-in-out;
 }
 
-.menu-placeholder {
+.menu-container.hidden {
+    opacity: 0;
+    transform: translateX(2em);
+}
+
+.menu-card {
     background-color: var(--sushi-graphite);
     border-radius: 1em;
     border: solid 0.1em var(--sushi-black);
@@ -150,13 +188,29 @@ dialog::backdrop {
     text-align: center;
     color: var(--sushi-grey3);
     cursor: pointer;
-    transition: 0.3s scale(1.1);
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+        opacity 0.4s ease-out,
+        transform 0.4s ease-out;
 }
 
-.menu-placeholder p {
+.menu-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.menu-card:hover {
+    transform: scale(1.04);
+    transition: 0.4s;
+}
+
+.content {
     font-family: "urbanist";
+    font-size: 1.1em;
     padding: 0.5em;
-    letter-spacing: 0.1em;
 }
 
 .menu-item {
@@ -179,7 +233,7 @@ dialog::backdrop {
     font-family: "roboto bold";
     font-size: 1.5em;
     letter-spacing: 0.1em;
-    color: var(--sushi-red2);
+    color: var(--sushi-red4);
     margin: 0.2em;
 }
 
@@ -201,23 +255,44 @@ dialog::backdrop {
 .allergen-info {
     font-family: "roboto bold";
     font-size: 1.2em;
-    padding: 0;
+    padding: 0.5em;
     margin: 0.2em;
-}
-
-.price {
-    color: var(--sushi-red2);
+    color: var(--sushi-grey2);
 }
 
 .allergen-info {
     font-size: 1em;
-    color: var(--sushi-red4);
 }
 
 .menu-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: scaleY(0);
+    transition:
+        opacity 0.5s ease-in-out,
+        transform 0.5s ease-in-out,
+        max-height 0.5s ease-in-out;
+}
+
+.menu-description.visible {
+    max-height: 500px; 
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.menu-description p {
     font-size: 0.9em;
-    padding: 0.5em;
-    margin: 1em;
+    width: 80%;
+    line-height: 1.1em;
+    letter-spacing: 0.1em;
+    font-family: "urbanist";
+    margin: 0.3em;
 }
 
 .add-to-order-button {
@@ -276,30 +351,30 @@ dialog::backdrop {
     margin: auto;
     background-color: var(--sushi-graphite);
     color: var(--lotus-flower);
-    width: 80%;
+    width: 70%;
     padding: 1em;
     margin-top: 0.5em;
     border-radius: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     border: solid 0.1em var(--sushi-black);
-    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
 }
 
 .your-order {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .order-content {
     display: flex;
     flex-direction: column;
     padding: 1em;
-    background-color: var(--sushi-black);
+    background-color: var(--sushi-graphite);
     border-radius: 1em;
-    border: solid 0.1em var(--sushi-red1);
-    min-width: 40%;
-    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
-
+    border: solid 0.2em var(--sushi-red1);
+    min-width: 45%;
+    box-shadow: 0.3em 0.3em 0.3em var(--sushi-black);
 }
 
 .order-table th {
@@ -312,7 +387,8 @@ dialog::backdrop {
 
 .order-table td {
     padding: 0.4em;
-    border-bottom: dashed 0.1em var(--sushi-red1);
+    margin-left: 0.5em;
+    border-top: dashed 0.1em var(--sushi-red1);
 }
 
 #quantity {
@@ -328,7 +404,7 @@ dialog::backdrop {
 
 .decrease,
 .increase {
-    background-color: var(--sushi-black);
+    background-color: var(--sushi-graphite);
     color: var(--sushi-red2);
     border: none;
     border-radius: 0.5em;
@@ -348,9 +424,24 @@ dialog::backdrop {
     color: var(--sushi-red4);
 }
 
+.total {
+    font-family: "roboto bold";
+    font-size: 1.2em;
+    color: var(--sushi-red4);
+}
+
+#total-price {
+    padding-left: 0.5em;
+    font-size: 1.4em;
+}
+
 .order-total {
-    text-align: right;
     padding-right: 0.5em;
+    border-top: dashed 0.1em var(--sushi-red1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
 }
 
 .order-total h4 {
@@ -367,6 +458,10 @@ dialog::backdrop {
     padding-top: 1em;
 }
 
+.additional-comment textarea:focus, .add-instructions textarea:focus {
+    outline: none;
+}
+
 #leave-comment {
     color: var(--sushi-black);
     background-color: var(--sushi-grey2);
@@ -376,14 +471,21 @@ dialog::backdrop {
     font-size: 0.8em;
 }
 
+.right-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 45%;
+    margin-left: 2em;
+}
+
 .order-user-info {
     display: flex;
     flex-direction: column;
     padding: 0 1em 0 1em;
 }
 
-.order-user-info h3 {
-    font-size: 1em;
+.order-user-info h2 {
+    font-size: 1.2em;
     font-family: "roboto bold";
     text-align: center;
     margin: 0;
@@ -399,25 +501,29 @@ dialog::backdrop {
 }
 
 input {
-    border: 2px solid var(--sushi-grey2);
-    background-color: var(--sushi-grey3);
-    transition:
-        border-color 0.3s ease,
+    transition: border-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 
 input:focus {
+    border-color:rgb(133, 188, 133);
     outline: none;
 }
 
-input:valid {
-    border-color: var(--forest-green);
-    transition:
-        opacity 0.2s ease-in-out,
-        transform 0.5s ease-in-out,
+input.invalid {
+    border: 2px solid var(--sushi-red2);
 }
 
-input:invalid {
-    border-color: var(--sushi-red3);
+input:valid {
+    border-color:rgb(126, 172, 126);
+    transform: scale(1.02);
+}
+
+input:required:invalid {
+    border: 2px solid var(--sushi-red2);
+}
+
+input:not(.invalid) {
+    border: 2px solid  rgb(63, 129, 63);
 }
 
 #use-existing-info-button {
@@ -443,32 +549,68 @@ input:invalid {
     transform: scale(1.1);
 }
 
+.delivery-method h2 {
+    font-size: 1em;
+
+}
+
+checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    margin-right: 1em;
+}
+
 input[type="checkbox"] {
-    width: 1.2em;
-    height: 1.2em;
+    width: 1.5em;
+    height: 1.5em;
     cursor: pointer;
 }
 
 input[type="checkbox"]:checked {
-    accent-color: var(--forest-green);
-}
-
-.right-column {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
+    accent-color:  rgb(67, 152, 67);
 }
 
 .delivery-method {
     display: flex;
     flex-direction: column;
-    padding: 0.5em 0 1em 0;
     font-size: 0.9em;
+    margin-top: 1em;
+    justify-content: center;
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+.delivery-method h4 {
+    margin-left: 1em;
+}
+
+.checkbox:hover {
+    transform: scale(1.2);
+    transition: all 0.3s ease-in-out;
 }
 
 .delivery-method h4 {
     margin: 0;
     padding-bottom: 1em;
+}
+
+.delivery-address {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0 0.5em 0;
+    width: 95%;
+    margin: auto;
+}
+
+.delivery-address input {
+    padding: 0.5em;
+    margin: 0.5em;
+    color: var(--sushi-black);
+    background-color: var(--sushi-grey2);
+    border-radius: 0.5em;
 }
 
 #delivery-tooltip {
@@ -482,6 +624,7 @@ input[type="checkbox"]:checked {
     display: flex;
     flex-direction: column;
     padding: 0.5em 0 1em 0;
+    margin-left: 1em;
 }
 
 #instructions {
@@ -497,15 +640,11 @@ input[type="checkbox"]:checked {
     display: flex;
     flex-direction: column;
     font-size: 0.8em;
+    margin-left: 2em;
 }
 
 .content {
     padding: 0.5em;
-}
-
-#terms-checkbox {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
 }
 
 .order-button {
@@ -536,7 +675,7 @@ input[type="checkbox"]:checked {
     cursor: pointer;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
     .your-order {
         flex-direction: column;
     }
@@ -546,6 +685,7 @@ input[type="checkbox"]:checked {
     }
     .right-column {
         width: 100%;
+        margin: 0;
     }
 }
 
@@ -574,12 +714,12 @@ input[type="checkbox"]:checked {
     }
 
     .menu-container {
-        width: 100%;
+        width: 90%;
     }
 
-    .menu-placeholder {
+    .menu-card {
         margin: auto;
-        width: 80%;
+        width: 90%;
     }
 
     .menu-header {
