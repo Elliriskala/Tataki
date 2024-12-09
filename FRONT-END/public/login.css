@@ -358,6 +358,7 @@ div.profile-info {
     justify-content: center;
     margin: auto;
     max-width: 100%;
+    gap: 1em;
 }
 
 #user-main .profile-container h2 {
@@ -1020,7 +1021,7 @@ dialog::backdrop {
     border-radius: 1em;
     padding: 1em;
     margin: auto;
-    box-shadow: 0.2em 0.3em 0.3em solid var(--sushi-black);
+    box-shadow: 0.2em 0.3em 0.3em var(--sushi-black);
 }
 
 .order-details-section {
