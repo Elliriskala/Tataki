@@ -230,6 +230,7 @@ const translations: Translation = {
         "time": "Time:",
         "type": "Type:",
         "items": "Items:",
+        "status": "Status:",
 
         // itinerary page translations
         "itinerary_title": "Itinerary",

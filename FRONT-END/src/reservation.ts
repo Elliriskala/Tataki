@@ -1,12 +1,8 @@
 import { Reservation, Times, User } from "./utils/interfaces";
 import { getLanguage } from "./utils/functions";
 import { translations } from "./translations";
-<<<<<<< HEAD
 import { apiBaseUrl } from "./utils/variables";
 
-=======
-import { apiBaseUrl } from "./services/apiService";
->>>>>>> d0af5a4adf88fbca912cbf4f7e545b3ebc3815da
 const guestButtons = document.querySelectorAll(
     ".guest-btn",
 ) as NodeListOf<HTMLButtonElement>;
@@ -200,13 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-<<<<<<< HEAD
             const response = await fetch(
                 `${apiBaseUrl}/reservations`,
                 {
-=======
-      const response = await fetch(`${apiBaseUrl}/reservations`, {
->>>>>>> d0af5a4adf88fbca912cbf4f7e545b3ebc3815da
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
