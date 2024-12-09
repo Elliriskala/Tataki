@@ -134,7 +134,7 @@ dialog::backdrop {
 
 .menus-header h1 {
     margin-top: 1em;
-    color: var(--sushi-red3);
+    color: var(--sushi-red4);
 }
 
 .menu-list {
@@ -427,7 +427,7 @@ dialog::backdrop {
 .total {
     font-family: "roboto bold";
     font-size: 1.2em;
-    color: var(--sushi-red2);
+    color: var(--sushi-red4);
 }
 
 #total-price {

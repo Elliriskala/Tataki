@@ -249,15 +249,27 @@ main {
 }
 
 /* Header Styling */
-.popup-header {
+div.popup-header {
     background-color: #ff4b4b; /* Sushi red */
     color: white;
     padding: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.popup-header h3 {
+.popup-header h1 {
+    color: white;
+    margin: auto;
+    display: flex;
+    align-self: center;
+    padding: 0;
+    text-align: center;
+}
+
+.popup-header h2 {
     margin: 0;
     font-size: 1.5em;
 }
