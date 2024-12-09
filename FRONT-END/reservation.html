@@ -35,7 +35,6 @@
           </button>
           <div class="dropdown-content">
             <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
-            </button>
             <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
           </div>
         </div>
@@ -43,7 +42,7 @@
         <!-- Login/User Button -->
         <button class="login" id="login-register-user" aria-label="Login-and-user">
           <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
-            <i class="fa-regular fa-user" aria-label="login and user page icon"></i>
+            <i class="fa-regular fa-user"></i>
           </a>
         </button>
       </div>
@@ -71,17 +70,17 @@
                 <input type="tel" id="phone" name="phone" autocomplete="tel" data-translate="placeholderPhone" placeholder="Enter your phone number" required>
 
                 <div class="guest-selection">
-                  <label data-translate="numberOfGuests" for="guest-btn">Number of Guests</label>
+                  <span class="guests" data-translate="numberOfGuests">Number of Guests</span>
                     <div class="guest-buttons" id="guests">
-                        <button type="button" class="guest-btn" id="guest-btn" data-value="2">2</button>
-                        <button type="button" class="guest-btn" id="guest-btn" data-value="3">3</button>
-                        <button type="button" class="guest-btn" id="guest-btn" data-value="4">4</button>
-                        <button type="button" class="guest-btn" id="guest-btn" data-value="5">5</button>
-                        <button type="button" class="guest-btn" id="guest-btn" data-value="6">6</button>
-                        <button type="button" class="guest-btn" id="guest-btn" data-value="7">7</button>
-                        <button type="button" class="guest-btn" id="guest-btn" data-value="8">8</button>
+                        <button type="button" class="guest-btn" data-value="2">2</button>
+                        <button type="button" class="guest-btn" data-value="3">3</button>
+                        <button type="button" class="guest-btn" data-value="4">4</button>
+                        <button type="button" class="guest-btn" data-value="5">5</button>
+                        <button type="button" class="guest-btn" data-value="6">6</button>
+                        <button type="button" class="guest-btn" data-value="7">7</button>
+                        <button type="button" class="guest-btn" data-value="8">8</button>
                     </div>
-                    <input type="hidden" name="guests" id="guests-input" required>
+                    <input type="hidden" name="guests" id="guests-input">
                   </div>
 
                 <label for="date" data-translate="reservationDate">Reservation Date</label>

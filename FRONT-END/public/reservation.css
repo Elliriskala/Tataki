@@ -146,6 +146,10 @@ main {
     transform 0.3s;
 }
 
+span.guests {
+  color: var(--sushi-grey1);
+}
+
 .reservation-form button:hover {
   background-color: var(--sushi-grey3);
   color: var(--sushi-red3);
