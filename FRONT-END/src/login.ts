@@ -1,5 +1,5 @@
 import { formatDate, getLanguage } from "./utils/functions";
-import { UserLoggedIn } from "./utils/interfaces";
+import { Reservation, User, UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
 import {
     translations,
@@ -234,9 +234,9 @@ const populateUserPage = async () => {
                 return;
             }
 
-            const data = await response.json();
+            const data: User = await response.json();
             if (data) {
-                console.log(data);
+                //console.log(data);
                 if (usernameElement)
                     usernameElement.innerHTML = data.username || "Unknown";
                 if (usernameDisplay)
@@ -270,8 +270,8 @@ const populateUserPage = async () => {
                 },
             });
 
-            const data = await response.json();
-            console.log(data);
+            const data: Reservation = await response.json();
+            //console.log(data);
 
             const reservations = Array.isArray(data) ? data : [data];
             const locale = language === "fi" ? "fi-FI" : "en-US";
@@ -439,7 +439,7 @@ registerSubmit.addEventListener("click", handleRegister);
 
 editProfileBtn.addEventListener("click", () => {
     modal.style.display = "block";
-    // Default to the first tab
+    
     showTab(tabButtons[0].getAttribute("data-tab"));
 });
 
