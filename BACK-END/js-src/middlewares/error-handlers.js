@@ -39,7 +39,6 @@ const validationErrorHandler = (req, res, next) => {
     const errors = validationResult(req, {strictParams: ['body']});
     // check if any validation errors
     if (!errors.isEmpty()) {
-      // console.log('validation errors', errors.array({onlyFirstError: true}));
       // extract field names & messages from error array (only one error per field)
       const validationErrors = errors.array({onlyFirstError: true}).map((error) => {
         return {field: error.path, msg: error.msg};

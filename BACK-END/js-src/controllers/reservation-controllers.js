@@ -58,7 +58,6 @@ const getReservationsByUserId = async (req, res, next) => {
             return next(customError('Invalid token', 401));
         }
         user_id = decoded.user_id;
-        console.log('user_id in getReservationsByUserID:', user_id);
     }
     if (!user_id) {
         return next(customError('Missing user_id', 400));
