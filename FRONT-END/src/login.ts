@@ -1,5 +1,5 @@
 import { formatDate, getLanguage } from "./utils/functions";
-import { UserLoggedIn } from "./utils/interfaces";
+import { User, UserLoggedIn } from "./utils/interfaces";
 import { clearCart } from "./services/cartService";
 import {
     translations,
@@ -234,7 +234,7 @@ const populateUserPage = async () => {
                 return;
             }
 
-            const data = await response.json();
+            const data: User = await response.json();
             if (data) {
                 if (usernameElement)
                     usernameElement.innerHTML = data.username || "Unknown";
@@ -368,11 +368,10 @@ const loadUserPage = async () => {
         if (userContent) userContent.style.display = "flex";
         if (adminContent) adminContent.style.display = "none";
 
-        if (isAdmin) {
-            if (adminContent) {
+        if (isAdmin && adminContent) {
+            if (userContent) userContent.style.display = "none";
                 adminContent.style.display = "flex";
                 initializeOrderManagementPage();
-            }
         } else {
             if (userContent) userContent.style.display = "flex";
             populateUserPage();
@@ -435,7 +434,7 @@ registerSubmit.addEventListener("click", handleRegister);
 
 editProfileBtn.addEventListener("click", () => {
     modal.style.display = "block";
-    // Default to the first tab
+
     showTab(tabButtons[0].getAttribute("data-tab"));
 });
 

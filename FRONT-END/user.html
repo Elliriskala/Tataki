@@ -135,6 +135,15 @@
                 <div id="order-history"></div>
             </div>
         </div>
+        <div id="profile-modal" class="modal">
+            <div class="modal-content">
+                <h4 data-translate="edit-profile-h4">Edit Profile</h4>
+                <div class="tabs">
+                    <button class="tab-button" data-translate="change-password" data-tab="change-password-tab">Change Password</button>
+                    <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
+                    <button class="tab-button" data-translate="update-address" data-tab="update-address-tab">Update Address</button>
+                </div>
+            </div>
                 <!-- Change Password Tab -->
                 <div id="change-password-tab" class="tab-content">
                     <form id="change-password-form">
@@ -171,14 +180,14 @@
                         <label data-translate="address-label" for="address-input">Address</label>
                         <input type="text" id="address-input" name="address" placeholder="Your address" data-translate="your-address" minlength="4" maxlength="30" required>
                         <label for="city-input" data-translate="your-city">City</label>
-                        <input type="text" id="city-input" name="city" placeholder="City" minlength="3" maxlength="20" required>
+                        <input type="text" id="city-input" data-translate="your-city" name="city" placeholder="City" minlength="3" maxlength="20" required>
                         <button class="address-update-button" id="address-submit" type="submit" data-translate="update-address">Update Address</button>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer" style="display: none;">
+            <div class="modal-footer">
                 <button data-translate="close-button" id="close-modal-button">Close</button>
             </div>
+        </div>
         <div id="delete-profile-modal" class="modal-delete">
             <div class="modal-delete-content">
                 <h4 data-translate="delete-profile-h4">Delete Profile</h4>
@@ -189,7 +198,8 @@
                 </div>
             </div>
         </div>
-        <div id="admin-main" style="display: none;">
+    </div>
+    <div id="admin-main" style="display: none;">
         <button aria-label="logout" id="admin-logout" class="logout-button" data-translate="logout-button" data-testid="logout">Logout</button>
             <div class="order-management-header">
                 <h1>Order management</h1>
@@ -238,18 +248,7 @@
             </div>
             <dialog class="update-order-dialog" aria-label="Order status update confirmation">
                 <p>Order status set to <span id="updated-status"></span></p>
-            </dialog>
-        </div>
-        <div id="profile-modal" class="modal">
-            <div class="modal-content">
-                <h4 data-translate="edit-profile-h4">Edit Profile</h4>
-                <div class="tabs">
-                    <button class="tab-button" data-translate="change-password" data-tab="change-password-tab">Change Password</button>
-                    <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
-                    <button class="tab-button" data-translate="update-address" data-tab="update-address-tab">Update Address</button>
-                </div>
-            </div>
-        </div>
+            </dialog>    
     </main>
     <footer>
         <div class="footer-container">

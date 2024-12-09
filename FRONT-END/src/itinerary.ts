@@ -35,11 +35,11 @@ const language = getLanguage();
 const popupContent = `
   <div class="popup-card">
     <div class="popup-header">
-      <h3>Tataki Sushi</h3>
+      <h1>Tataki Sushi</h1>
     </div>
     <p class="popup-address">Annankatu 18, 00120 Helsinki</p>
     <div class="popup-hours">
-      <h4>${language === "en" ? "Open" : "Aukioloajat"}</h4>
+      <h2>${language === "en" ? "Open" : "Aukioloajat"}</h2>
       <ul>
         <li>${language === "en" ? "Mon-Sat: 10:00-21:00" : "Ma-La: 10:00-21:00"}</li>
         <li>${language === "en" ? "Sun: Closed" : "Su: Suljettu"}</li>
