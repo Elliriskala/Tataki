@@ -1,28 +1,29 @@
 import { Reservation, Times, User } from "./utils/interfaces";
 import { getLanguage } from "./utils/functions";
 import { translations } from "./translations";
-import { apiBaseUrl } from "./services/apiService";
+import { apiBaseUrl } from "./utils/variables";
+
 const guestButtons = document.querySelectorAll(
-  ".guest-btn"
+    ".guest-btn",
 ) as NodeListOf<HTMLButtonElement>;
 const dateInput = document.getElementById("date") as HTMLInputElement;
 const nameInput = document.getElementById("name") as HTMLInputElement;
 const timeSelect = document.getElementById("time") as HTMLSelectElement;
 const reservationSubmit = document.getElementById(
-  "reservation-submit"
+    "reservation-submit",
 ) as HTMLButtonElement;
 const messageBox = document.getElementById(
-  "reservation-message"
+    "reservation-message",
 ) as HTMLDivElement;
 const useMyInfoButton = document.getElementById(
-  "use-user-info"
+    "use-user-info",
 ) as HTMLButtonElement;
 const emailInput = document.getElementById("email") as HTMLInputElement;
 const phoneInput = document.getElementById("phone") as HTMLInputElement;
 const guestsInput = document.getElementById("guests-input") as HTMLInputElement;
 const popup = document.getElementById("success-popup") as HTMLDivElement;
 const popupMessage = document.getElementById(
-  "popup-message"
+    "popup-message",
 ) as HTMLParagraphElement;
 const closePopup = document.getElementById("close-popup") as HTMLButtonElement;
 
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const guests = target.getAttribute("data-value");
 
                 const guestsInput = document.getElementById(
-          "guests-input"
+                    "guests-input",
                 ) as HTMLInputElement;
                 if (guestsInput) {
                     guestsInput.value = guests ?? "";
@@ -75,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // application/json
         if (!date || !guests || !name) {
             timeSelect.disabled = true;
-      messageBox.textContent = translations[language]["select-date-and-guests"];
+            messageBox.textContent =
+                translations[language]["select-date-and-guests"];
             return;
         }
         try {
@@ -87,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     headers: {
                         "Content-Type": "application/json", // Ensure the content is in JSON format
                     },
-                }
+                },
             );
 
             if (!response.ok) {
@@ -136,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
-                }
+                },
             );
 
             if (!response.ok) {
@@ -194,27 +196,35 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-      const response = await fetch(`${apiBaseUrl}/reservations`, {
+            const response = await fetch(
+                `${apiBaseUrl}/reservations`,
+                {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
                     body: JSON.stringify(requestBody),
-      });
+                },
+            );
 
             const responseData = await response.json();
 
             if (!response.ok) {
                 // Handle specific error for reservation limit
-        if (responseData.details === "Maximum reservation limit (5) reached for this user.") {
-          messageBox.textContent = translations[language]["max-reservations"];
+                if (
+                    responseData.details ===
+                    "Maximum reservation limit (5) reached for this user."
+                ) {
+                    messageBox.textContent =
+                        translations[language]["max-reservations"];
                     messageBox.style.color = "red";
                     return;
                 }
 
                 // Handle other errors
-        messageBox.textContent = translations[language]["reservation-failed"];
+                messageBox.textContent =
+                    translations[language]["reservation-failed"];
                 messageBox.style.color = "red";
                 return;
             }
@@ -230,7 +240,8 @@ document.addEventListener("DOMContentLoaded", () => {
             emailInput.value = "";
         } catch (error) {
             console.error("Failed to make reservation", error);
-      messageBox.textContent = translations[language]["reservation-failed"];
+            messageBox.textContent =
+                translations[language]["reservation-failed"];
             messageBox.style.color = "red";
         }
     });
