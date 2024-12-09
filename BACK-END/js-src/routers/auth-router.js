@@ -227,7 +227,57 @@ authRouter.route('/change-password').put(
     changePassword
 );
 
-authRouter.route('/me').get(authenticateToken, getMe);
+authRouter.route('/me').get(
+    /**
+ * @api {get} /me Get current user details
+ * @apiName GetMe
+ * @apiGroup Authentication
+ * @apiDescription Get the details of the currently authenticated user.
+ * @apiPermission token
+ * 
+ * @apiSuccess {String} username User's username
+ * @apiSuccess {String} email User's email
+ * @apiSuccess {String} id User's unique ID
+ * @apiSuccess {String} role User's role (e.g., "user", "admin")
+ * @apiSuccess {String} customer_address User's address
+ * @apiSuccess {String} phone_number User's phone number
+ * @apiSuccess {String} city User's city of residence
+ * 
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "username": "john_doe",
+ *   "email": "john.doe@example.com",
+ *   "id": "12345",
+ *   "role": "user",
+ *  "customer_address": "123 Main St.",
+ * "phone_number": "1234567890",
+ * "city": "City"
+ * }
+ * 
+ * @apiUse UnauthorizedError
+ * 
+ * @apiError (Error 401) Unauthorized The user is not authenticated or the token is invalid.
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 401 Unauthorized
+ * {
+ *   "error": {
+ *     "message": "Unauthorized",
+ *     "status": 401
+ *   }
+ * }
+ * 
+ * @apiError (Error 500) InternalServerError Internal server error
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 500 Internal Server Error
+ * {
+ *   "error": {
+ *     "message": "Internal server error",
+ *     "status": 500
+ *   }
+ * }
+ */
+    authenticateToken, getMe);
 
 
 export default authRouter;
