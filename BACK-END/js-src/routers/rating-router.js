@@ -3,7 +3,19 @@ import { getRestaurantReviews, deleteReview, postReview} from "../controllers/ra
 import {authenticateToken} from "../middlewares/authentication.js";
 import { body } from "express-validator";
 import { validationErrorHandler } from "../middlewares/error-handlers.js";
+import { rateLimit } from "express-rate-limit";
 const ratingRouter = express.Router();
+
+const limiter2 = rateLimit({
+    windowMs: 120 * 60 * 1000,
+    max: 2,
+    message: 'Too many requests from this IP, please try again after two hours',
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res) => {
+        res.status(429).json({error: 'Too many requests from this IP, please try again after two hours'});
+    },
+});
 
 ratingRouter.get(
     /**
@@ -121,9 +133,11 @@ ratingRouter.post('/restaurant/',
    *   }
    * }
    */
+    body('username').isString().isLength({min: 3, max: 30}),
     body('star_rating').isNumeric(),
     body('review').isString() || body('review').isEmpty(),
     validationErrorHandler,
+    limiter2,
     postReview);    
 
 export default ratingRouter;
