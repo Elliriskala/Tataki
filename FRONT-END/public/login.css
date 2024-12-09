@@ -384,7 +384,7 @@ div.profile-info {
 #order-history h2 {
     font-size: 1.3em;
     margin-bottom: 1rem;
-    color: var(--sushi-red2);
+    color: var(--sushi-grey3);
 }
 
 #order-history table {

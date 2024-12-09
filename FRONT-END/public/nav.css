@@ -180,6 +180,9 @@ main {
     width: 100%; /* Fills the width of the .login container */
     height: 100%;
     padding: 1em 1.5em;
+    visibility: visible;
+    background-color: var(--sushi-red2);
+    border-radius: 8px;
   }
   
   .language {
@@ -203,6 +206,7 @@ main {
     align-items: center;
     padding: none;
     border-radius: 8px;
+    visibility: hidden;
   }
 
 #flag-en {

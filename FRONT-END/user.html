@@ -34,9 +34,9 @@
                 🌐
               </button>
               <div class="dropdown-content">
-                <button class="language" id="flag-en" aria-label="English">English</button>
+                <button class="language" id="flag-en" aria-label="English"></button>
                 </button>
-                <button class="language" id="flag-fi" aria-label="Finnish">Finnish</button>
+                <button class="language" id="flag-fi" aria-label="Finnish"></button>
               </div>
             </div>
           
@@ -149,13 +149,13 @@
                 <div id="change-password-tab" class="tab-content">
                     <form id="change-password-form">
                         <label data-translate="current-password" for="current-password">Current Password</label>
-                        <input type="password" id="current-password" name="currentPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+                        <input type="password" id="current-password" name="currentPassword" autocomplete="current-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
         
                         <label data-translate="new-password" for="new-password">New Password</label>
-                        <input type="password" id="new-password" name="newPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" title="Password must include at least one uppercase letter, one numeral and one special character." required>
+                        <input type="password" id="new-password" name="newPassword" autocomplete="new-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" title="Password must include at least one uppercase letter, one numeral and one special character." required>
         
                         <label data-translate="confirm-password" for="confirm-password">Confirm Password</label>
-                        <input type="password" id="confirm-password" name="confirmPassword" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+                        <input type="password" id="confirm-password" name="confirmPassword" autocomplete="new-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
         
                         <div class="show-password">
                             <input type="checkbox" id="show-password" name="showPassword">
