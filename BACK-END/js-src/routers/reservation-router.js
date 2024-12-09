@@ -11,7 +11,7 @@ reservationRouter
         /**
          * @api {get} /reservation Get all reservations
          * @apiName GetReservations
-         * @apiGroup all
+         * @apiGroup token
          * @apiDescription Retrieve a list of all reservations in the system.
          * @apiPermission none
          *  
@@ -60,6 +60,7 @@ reservationRouter
          *   }
          * }
          */
+        authenticateToken,
          getReservations)
     .get('/times',
         /**
@@ -128,7 +129,7 @@ reservationRouter
          * @apiParam {String} restaurant_id ID of the restaurant.
          * @apiParam {String} reservation_date Date of the reservation in YYYY-MM-DD format.
          * @apiParam {String} reservation_time Time of the reservation (HH:MM).
-         * @apiParam {Number} guests Number of guests for the reservation (1 to 10).
+         * @apiParam {Number} guests Number of guests for the reservation (2 to 8).
          * @apiParam {String} email Email address of the user making the reservation.
          * @apiParam {String} full_name Full name of the user.
          * @apiParam {String} phone_number Phone number of the user.

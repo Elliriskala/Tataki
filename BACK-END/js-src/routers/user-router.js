@@ -40,7 +40,7 @@ userRouter.get(
      *   }
      * }
      */
-    '/user', getUserById);
+    '/user', authenticateToken, getUserById);
 
 //userRouter.delete('/user', authenticateToken, deleteUserById);
 

@@ -17,7 +17,7 @@ orderRouter.get(
   /**
    * @api {get} /order Get all orders
    * @apiName GetOrders
-   * @apiGroup all
+   * @apiGroup token
    * @apiDescription Get all orders for the authenticated user. Requires an active token for authentication.
    * @apiPermission token
    *
@@ -90,7 +90,7 @@ orderRouter.get(
    /**
    * @api {get} /order/status/:order_status Get orders by status
    * @apiName GetOrdersByStatus
-   * @apiGroup all
+   * @apiGroup token
    * @apiDescription Get orders by status for the authenticated user. Requires an active token for authentication.
    * @apiPermission token
    *
@@ -165,7 +165,7 @@ orderRouter.get(
   /**
    * @api {get} /orders/user Get orders by user
    * @apiName GetOrdersByUser
-   * @apiGroup all
+   * @apiGroup token
    * @apiDescription Get orders placed by the authenticated user. Requires a valid token to retrieve user-specific order data.
    * @apiPermission token
    *
@@ -228,7 +228,7 @@ orderRouter.get(
   /**
    * @api {get} /order/:order_id Get order by ID
    * @apiName GetOrderById
-   * @apiGroup all
+   * @apiGroup token
    * @apiDescription Get an order by its ID. Requires authentication via token.
    * @apiPermission token
    *
@@ -353,7 +353,7 @@ orderRouter.put(
   /**
    * @api {put} /order/:order_id Update order status
    * @apiName PutOrderStatus
-   * @apiGroup all
+   * @apiGroup token
    * @apiDescription Update the status of an order. Requires authentication and admin privileges.
    * @apiPermission token
    *

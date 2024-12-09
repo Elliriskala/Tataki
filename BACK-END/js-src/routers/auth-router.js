@@ -18,6 +18,7 @@ const authRouter = express.Router();
  * Token must be included in the request header as 'Authorization: Bearer <token>'
  */
 
+
 /**
  * @apiDefine UnauthorizedError
  * @apiError (Error 401) Unauthorized The user is not authorized to access the endpoint.
@@ -75,7 +76,7 @@ authRouter.route('/login').post(
      *   }
      */
     body('email').isEmail(),
-    body('password').isLength({ min: 8 }),
+    body('password').isLength({ min: 8, max: 30 }),
     validationErrorHandler,
     postLogin);
 
