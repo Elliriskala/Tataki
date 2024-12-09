@@ -11,6 +11,7 @@ export default defineConfig({
     rollupOptions: {
         external: [],
       input: {
+        home: path.resolve(__dirname, "index.html"),
         contact: path.resolve(__dirname, "contact.html"),
         menu: path.resolve(__dirname, "menu.html"),
         order: path.resolve(__dirname, "order.html"),
@@ -42,6 +43,8 @@ export default defineConfig({
         "review.css",
         "404.css",
         "app-icon.png",
+        "fin-flag.svg",
+        "gb-flag.svg",
         "app-icon.svg",
         "RobotoMono-Bold.ttf",
         "RobotoMono-Regular.ttf"

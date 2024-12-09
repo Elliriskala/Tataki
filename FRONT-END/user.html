@@ -17,7 +17,7 @@
 </head>
 <body>
     <nav class="navigation">
-        <div class="logo" aria-label="Home Page">
+        <div class="logo">
             <button data-testid="hamburger-button" class="hamburger" data-translate="hamburger">☰</button>
             <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
         </div>
@@ -35,15 +35,16 @@
               </button>
               <div class="dropdown-content">
                 <button class="language" id="flag-en" aria-label="English"></button>
-                </button>
                 <button class="language" id="flag-fi" aria-label="Finnish"></button>
               </div>
             </div>
           
             <!-- Login/User Button -->
-            <a href="user.html" class="login" id="login-register-user" aria-label="Login-and-user">
-                <i class="fa-regular fa-user"></i>
-            </a>
+            <div class="login" id="login-register-user">
+                <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+                  <i class="fa-regular fa-user"></i>
+                </a>
+            </div>
           </div>
     </nav>
     <main>
@@ -122,7 +123,7 @@
                 <div class="profile-info">
                     <h2 data-translate="your-information">Your Information</h2>
                     <p><span class="info-label" data-translate="username-label">Username</span>: <span id="username-info"></span></p>
-                    <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info">
+                    <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info"></span></p>
                     <p><span class="info-label" data-translate="phone-label">Phone</span>: <span id="phone-info"></span></p>
                     <p><span class="info-label" data-translate="address-label">Address</span>: <span id="address-info"></span></p>
                     <p><span class="info-label" data-translate="city-label">City</span>: <span id="city-info"></span></p>
@@ -158,7 +159,7 @@
                 <!-- Update Phone Tab -->
                 <div id="update-phone-tab" class="tab-content" style="display: none;">
                     <form id="update-phone-form">
-                        <label data-translate="phone-label" for="phone-number">Phone Number</label>
+                        <label data-translate="phone-label" for="phone-number-input">Phone Number</label>
                         <input placeholder="04012345678" type="tel" id="phone-number-input" name="phoneNumber" pattern="^[0-9]{10,11}$" minlength="5" maxlength="15" required>
                         <button class="phone-update-button" id="phone-submit" type="submit" data-translate="update-phone">Update Phone</button>
                     </form>
@@ -178,7 +179,6 @@
             <div class="modal-footer" style="display: none;">
                 <button data-translate="close-button" id="close-modal-button">Close</button>
             </div>
-        </div>
         <div id="delete-profile-modal" class="modal-delete">
             <div class="modal-delete-content">
                 <h4 data-translate="delete-profile-h4">Delete Profile</h4>
@@ -200,7 +200,7 @@
                     <div class="order-list">
                         <div
                             class="pending-table"
-                            id="pending-orders-table" aria-label="Table of pending orders"
+                            id="pending-orders-table"
                         ></div>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                     <div class="order-list">
                         <div
                             class="inprogress-table"
-                            id="inprogress-orders-table" aria-label="Table of in-progress orders"
+                            id="inprogress-orders-table"
                         ></div>
                     </div>
                 </div>
@@ -218,7 +218,7 @@
                     <div class="order-list">
                         <div
                             class="completed-table"
-                            id="completed-orders-table" aria-label="Table of completed orders"
+                            id="completed-orders-table"
                         ></div>
                     </div>
                 </div>
@@ -231,7 +231,7 @@
                         </button>
                         <button class="close" aria-label="Close order details">Close</button>
                     </div>
-                    <div id="order-details" class="order-details-section" aria-label="Order details section">
+                    <div id="order-details" class="order-details-section">
                         <h2>Order Details</h2>
                     </div>
                 </div>
@@ -248,6 +248,8 @@
                     <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
                     <button class="tab-button" data-translate="update-address" data-tab="update-address-tab">Update Address</button>
                 </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="footer-container">

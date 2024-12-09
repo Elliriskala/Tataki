@@ -176,9 +176,11 @@ main {
     display: block; /* Makes the <a> fill the container */
     width: 100%; /* Fills the width of the .login container */
     height: 100%;
-    padding: 1em 1.5em;
+    padding: 0.8em 1.3em;
     visibility: visible;
     border-radius: 8px;
+    color: white;
+    margin-top: 1em;
   }
   
   .language {
@@ -199,7 +201,9 @@ main {
     color: var(--lotus-flower);
     border: none;
     display: flex;
-    padding: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     border-radius: 8px;
     width: 3em;
     height: 2.5em;
@@ -207,9 +211,6 @@ main {
     margin-right: 1em;
   }
 
-.fa-regular {
-    margin: auto;
-}
 
 #flag-en {
     background-image: url(./img/gb-flag.svg);
@@ -568,7 +569,7 @@ button.login:hover {
 
     .control-buttons {
         position: absolute;
-        top: 1em;
+        top: 1.2em;
         right: 1em;
     }
 
@@ -638,7 +639,7 @@ button.login:hover {
 
     .social-medias ul {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.4em;
         justify-content: center;
         padding: 0;

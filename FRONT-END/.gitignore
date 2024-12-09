@@ -11,3 +11,4 @@ img/*.mp4
 .vscode
 dist/
 dev-dist/
+validation/

@@ -1,4 +1,4 @@
-﻿# Tataki Sushi Restaurant Web App
+# Tataki Sushi Restaurant Web App
 
 Welcome to the **Tataki** web application! This project is a modern web application designed to provide an intuitive and seamless experience for users to browse menus, make reservations, place orders, and leave reviews.
 
