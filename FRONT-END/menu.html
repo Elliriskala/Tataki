@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu page</title>
     <meta name="description" content="Tataki restaurant menu page">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="/menu.css">
     <link rel="stylesheet" href="/nav.css">
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
@@ -17,7 +21,7 @@
       <nav class="navigation">
         <div class="logo" aria-label="Home Page">
           <button data-testid="hamburger-button" class="hamburger" data-translate="hamburger">☰</button>
-          <a href="index.html" class="logo-placeholder" aria-label="Tataki Restaurant Logo"></a>
+          <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder" aria-label="Tataki Restaurant Logo"></a>
         </div>
         <ul class="nav-list">
           <li><a href="index.html" data-translate="home-link" aria-label="Navigate to Home Page">Home Page</a></li>
@@ -92,7 +96,7 @@
     </main>
     <footer>
       <div class="footer-container">
-        <a href="index.html" class="footer-logo">
+        <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
             <div class="logo-placeholder" aria-label="Tataki Logo"></div>
         </a>
         <div class="footer-nav">

@@ -60,8 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (loginForm) {
         loginForm.classList.add("active");
     } else {
-        logError(new Error("Login form not found"), "DOMContentLoaded");
-        return;
+        console.log("Login form not found");
     }
 
     // Toggle between login and register forms with animation control
@@ -297,6 +296,31 @@ const isTokenExpired = async (token: string) => {
     }
 };
 
+
+const showSessionExpiredPopup = () => {
+    const expiredPopup = document.createElement("div");
+    expiredPopup.className = "session-expired-popup";
+    expiredPopup.innerHTML = `
+        <p>${translations[savedLang]["session-expired-p"]}</p>
+        <button id="close-popup">OK</button>
+    `;
+    document.body.appendChild(expiredPopup);
+
+    const closePopup = document.getElementById("close-popup") as HTMLButtonElement;
+    if (closePopup) {
+    closePopup.addEventListener("click", () => {
+        clearCart();
+        localStorage.removeItem("authToken");
+        sessionStorage.removeItem("tokenExpired"); // Clear cached result
+        window.location.href = "/user.html";
+        document.body.removeChild(expiredPopup);
+    });
+    } else {
+        logError(new Error("Close button not found"), "showSessionExpiredPopup");
+    }
+};
+
+
 window.addEventListener("load", async () => {
     const token = localStorage.getItem("authToken");
 
@@ -304,11 +328,7 @@ window.addEventListener("load", async () => {
     if (token) {
         const expired = await isTokenExpired(token);
         if (expired) {
-            alert("Your session has expired. Please log in again.");
-            clearCart();
-            localStorage.removeItem("authToken");
-            sessionStorage.removeItem("tokenExpired"); // Clear cached result
-            window.location.href = "/user.html";
+            showSessionExpiredPopup();
         } else {
             logError(new Error("Token validation failed"), "window load");
             return;
@@ -318,3 +338,4 @@ window.addEventListener("load", async () => {
         return;
     }
 });
+

@@ -234,7 +234,9 @@ const translations: Translation = {
         "to_label": "To",
         "start_time_label": "Start Time",
         "end_time_label": "End Time",
-        "distance_label": "Distance"
+        "distance_label": "Distance",
+
+        "session-expired-p": "Your session has expired. Please log in again."
 
 
 
@@ -470,7 +472,9 @@ const translations: Translation = {
         "to_label": "Mihin",
         "start_time_label": "Lähtöaika",
         "end_time_label": "Saapumisaika",
-        "distance_label": "Etäisyys"
+        "distance_label": "Etäisyys",
+
+        "session-expired-p": "Istuntosi on vanhentunut. Kirjaudu sisään uudelleen."
 
     }
 };

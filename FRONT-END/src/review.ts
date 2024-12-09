@@ -40,7 +40,7 @@ reviewForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    // create the body of the request, if user is not logged in, user_id is null
+    // create the body of the request, if user is not logged in
     const ratingBody = {
         review: comment,
         username: name,
