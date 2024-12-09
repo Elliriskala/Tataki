@@ -17,7 +17,7 @@
 </head>
 <body>
     <nav class="navigation">
-        <div class="logo" aria-label="Home Page">
+        <div class="logo">
             <button data-testid="hamburger-button" class="hamburger" data-translate="hamburger">☰</button>
             <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
         </div>
@@ -35,7 +35,6 @@
               </button>
               <div class="dropdown-content">
                 <button class="language" id="flag-en" aria-label="English"></button>
-                </button>
                 <button class="language" id="flag-fi" aria-label="Finnish"></button>
               </div>
             </div>
@@ -43,7 +42,7 @@
             <!-- Login/User Button -->
             <button class="login" id="login-register-user" aria-label="Login-and-user">
                 <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
-                  <i class="fa-regular fa-user" aria-label="login and user page icon"></i>
+                  <i class="fa-regular fa-user"></i>
                 </a>
               </button>
           </div>
@@ -124,7 +123,7 @@
                 <div class="profile-info">
                     <h2 data-translate="your-information">Your Information</h2>
                     <p><span class="info-label" data-translate="username-label">Username</span>: <span id="username-info"></span></p>
-                    <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info">
+                    <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info"></span></p>
                     <p><span class="info-label" data-translate="phone-label">Phone</span>: <span id="phone-info"></span></p>
                     <p><span class="info-label" data-translate="address-label">Address</span>: <span id="address-info"></span></p>
                     <p><span class="info-label" data-translate="city-label">City</span>: <span id="city-info"></span></p>
@@ -169,7 +168,7 @@
                 <!-- Update Phone Tab -->
                 <div id="update-phone-tab" class="tab-content" style="display: none;">
                     <form id="update-phone-form">
-                        <label data-translate="phone-label" for="phone-number">Phone Number</label>
+                        <label data-translate="phone-label" for="phone-number-input">Phone Number</label>
                         <input placeholder="04012345678" type="tel" id="phone-number-input" name="phoneNumber" pattern="^[0-9]{10,11}$" minlength="5" maxlength="15" required>
                         <button class="phone-update-button" id="phone-submit" type="submit" data-translate="update-phone">Update Phone</button>
                     </form>
@@ -200,6 +199,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </main>
     <footer>
         <div class="footer-container">
