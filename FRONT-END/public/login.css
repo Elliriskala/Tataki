@@ -632,6 +632,7 @@ div.tabs {
     justify-content: center;
     gap: 1em;
 }
+
 .tab-button {
     margin: 5px;
     padding: 10px 20px;

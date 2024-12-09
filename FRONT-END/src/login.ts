@@ -236,7 +236,6 @@ const populateUserPage = async () => {
 
             const data = await response.json();
             if (data) {
-                console.log(data);
                 if (usernameElement)
                     usernameElement.innerHTML = data.username || "Unknown";
                 if (usernameDisplay)
@@ -271,7 +270,6 @@ const populateUserPage = async () => {
             });
 
             const data = await response.json();
-            console.log(data);
 
             const reservations = Array.isArray(data) ? data : [data];
             const locale = language === "fi" ? "fi-FI" : "en-US";
