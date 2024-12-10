@@ -14,12 +14,18 @@ Feel free to visit the restaurant at: [Tataki]()
 3. Run the sql-scipt in your MySQL-terminal.
 4. Set the required environment variables in your .env file:
 
-DT_KEY=Acquire your own DigiTransit API-key, see the link in acknowledgments down below
-DB_HOST=localhost
-DB_USER=your user (in many cases "root")
-DB_PASS=your database password
-DB_NAME=tataki
-JWT_SECRET= your very secret jwt crypting key (Just smash your keyboard for example)
+DT_KEY=Acquire your own DigiTransit API-key, see the link in acknowledgments down below  
+
+DB_HOST=localhost  
+
+DB_USER=your user (in many cases "root")  
+
+DB_PASS=your database password  
+
+DB_NAME=tataki  
+
+JWT_SECRET= your very secret jwt crypting key (Just smash your keyboard for example)  
+
 JWT_EXPIRES_IN= place your desired expiration time here
 ---
 
