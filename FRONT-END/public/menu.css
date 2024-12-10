@@ -592,6 +592,11 @@ a.shopping-cart:hover .tooltip2 {
         font-size: 1.5em;
     }
 
+    .menu-track > .menu-card {
+        flex: 0 0 200px;
+        max-width: 200px;
+    }
+
     /*
     #carousel-left,
     #carousel-right {

@@ -117,54 +117,6 @@ const fetchOrderById = async (order_id, next) => {
 };
 
 /**
- * fetch orders by customer name
- * @param customer_name - customer name
- * @returns all orders from the database
- * @returns - Array of orders
- */
-const fetchOrderByCustomerName = async (customer_name, next) => {
-  try {
-    const sql = `
-    SELECT 
-        Orders.*,
-        GROUP_CONCAT(
-            CONCAT(Menus.course_name, ' (x', OrderItems.item_quantity, ')') 
-            SEPARATOR ', '
-        ) AS order_items,
-        OrderStatus.status_name AS order_status,
-        DeliveryDetails.delivery_address,
-        DeliveryDetails.city,
-        DeliveryDetails.delivery_instructions
-    FROM 
-        Orders
-    LEFT JOIN 
-        OrderItems ON Orders.order_id = OrderItems.order_id
-    LEFT JOIN 
-        Menus ON OrderItems.menu_id = Menus.menu_id
-    LEFT JOIN 
-        OrderStatus ON Orders.status_id = OrderStatus.status_id
-    LEFT JOIN 
-        DeliveryDetails ON Orders.order_id = DeliveryDetails.order_id
-    WHERE 
-        Orders.order_id = ?
-    GROUP BY 
-        Orders.order_id
-    ORDER BY Orders.created_at DESC;
-    `;
-
-    const [rows] = await promisePool.query(sql, [customer_name]);
-    if (rows && rows.length > 0) {
-      return rows;
-    }
-    return null;
-  } catch (e) {
-    console.error('fetchOrderByCustomerName error:', e.message);
-    next(customError('Database error: ' + e.message));
-    return null;
-  }
-};
-
-/**
  * fetch orders by user id
  * @param user_id - user id
  * @returns all orders from the database associated with the user
@@ -438,7 +390,6 @@ export {
   fetchOrderById,
   fetchOrders,
   createOrder,
-  fetchOrderByCustomerName,
   fetchOrdersByUserId,
   fetchOrdersByStatus,
   updateOrderStatus,

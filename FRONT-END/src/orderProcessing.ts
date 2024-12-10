@@ -116,6 +116,11 @@ const collectOrderData = (userInfo: any) => {
         0,
     );
 
+    if (total_price <= 0) {
+        logError(new Error("Total price is required"), "collectOrderData");
+    }
+
+
     // delivery method
     const deliveryCheckbox = document.getElementById(
         "delivery-checkbox",

@@ -43,6 +43,10 @@ const __dirname = path.dirname(__filename);
 // Define the path to the front-end static files
 const frontEndPath = '../../FRONT-END/dist';
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> bad6f482ae4161d088019419e193feba95ed244d
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, frontEndPath)));
 
@@ -55,6 +59,10 @@ app.use('/api/orders', orderRouter);
 app.use('/api/digitransit', itineraryRouter);
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> bad6f482ae4161d088019419e193feba95ed244d
 // Define routes for known pages
 app.get('/about', (_req, res) => {
   res.sendFile(path.join(__dirname, frontEndPath, 'about.html'));
