@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+build/
+apidocs/
+jsdocs/
+package-lock.json

@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.7"
+  },
+  "scripts": {
+    "start": "node BACK-END/js-src/app.js",
+    "dev": "nodemon BACK-END/js-src/app.js",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.1"
+  }
+}

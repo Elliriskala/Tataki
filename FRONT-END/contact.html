@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Sushi Restaurant</title>
+    <meta name="description" content="Tataki restaurant contact page">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/contact.css">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <script src="./src/main.ts" type="module"></script>
+    <script src="./src/itinerary.ts" type="module"></script>
+</head>
+<body>
+  <nav class="navigation">
+      <div class="logo">
+          <button class="hamburger" data-translate="hamburger">☰</button>
+          <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
+      </div>
+      <ul class="nav-list">
+          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
+      </ul>
+      <div class="control-buttons">
+        <!-- Language Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-button" aria-label="Select language">
+            🌐
+          </button>
+          <div class="dropdown-content">
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
+          </div>
+        </div>
+      
+        <!-- Login/User Button -->
+        <div class="login" id="login-register-user">
+            <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+              <i class="fa-regular fa-user"></i>
+            </a>
+        </div>
+      </div>
+  </nav>
+  <main>
+      <div class="about-sections">
+        <div class="aboutus-placeholder">
+          <section class="contact-section">
+              <h1 data-translate="contact-title">Contact Us</h1>
+              <ul>
+                  <li data-translate="address">Annankatu 18, 00120 Helsinki, Finland</li>
+                  <li data-translate="phone">Phone: 12345678910</li>
+                  <li data-translate="email">Email: <a href="mailto:ravintolatataki@gmail.com">ravintolatataki@gmail.com</a></li>
+                  <li>
+                        <h2 data-translate="opening-hours" style="color:rgb(249, 51, 51)">Opening Hours:</h2>
+                        <ul>
+                            <li data-translate="open">Monday - Saturday</li>
+                            <li>10:00 - 21:00</li>
+                            <li data-translate="cloed">Closed on Sundays</li>
+                        </ul>
+                  </li>
+              </ul>
+          </section>
+          <section class="map-section">
+              <h1 data-translate="find-us">Find Us</h1>
+              <div id="map" class="map"></div>
+          </section>
+        </div>
+          <section class="itinerary-section">
+            <h1 data-translate="itinerary-title">Your itinerary to Tataki</h1>
+            <button id="getLocation" data-translate="use-location">Use my location</button>
+            <form id="itineraryForm" style="display: none;">
+              <input type="hidden" id="toLat" value="60.16366628688539"><br>
+              <input type="hidden" id="toLon" value="24.94161492221418"><br>
+              <input type="hidden" id="fromLat" value=""><br>
+              <input type="hidden" id="fromLon" value=""><br>
+              <input type="hidden" id="walkSpeed" value="1.7"><br>
+              <button type="submit" data-translate="plan-itinerary">Plan Your Itinerary</button>
+            </form>
+            <div id="itineraryResults">
+              <h2 data-translate="itinerary-results">Itinerary Results</h2>
+              <ul id="itineraryList"></ul>
+            </div>
+          </section>
+      </div>
+  </main>
+  <footer>
+      <div class="footer-container">
+        <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+            <div class="logo-placeholder"></div>
+        </a>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+                <li><a href="review.html" data-translate="review-link">Review us</a></li>
+            </ul>
+        </div>
+        <div class="social-medias">
+          <ul>
+            <li id="facebook">
+                <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                    <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li id="instagram">
+                <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                    <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </footer>
+</body>
+</html>

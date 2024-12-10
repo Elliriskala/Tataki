@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1">
+  <meta name="description" content="Review page for Tataki restaurant">
+  <title>Review Us</title>
+  <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="/review.css">
+  <link rel="stylesheet" href="/nav.css">
+  <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+  <script src="./src/main.ts" type="module"></script>
+  <script src="./src/review.ts" type="module"></script>
+</head>
+<body>
+    <nav class="navigation">
+      <div class="logo">
+          <button class="hamburger">☰</button>
+          <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
+      </div>
+      <ul class="nav-list">
+          <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
+      </ul>
+      <div class="control-buttons">
+        <!-- Language Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-button" aria-label="Select language">
+            🌐
+          </button>
+          <div class="dropdown-content">
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
+          </div>
+        </div>
+      
+        <!-- Login/User Button -->
+        <div class="login" id="login-register-user">
+            <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+              <i class="fa-regular fa-user"></i>
+            </a>
+        </div>
+      </div>
+    </nav>
+    <main>
+        <div id="success-popup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popup-message"></p>
+                <button id="close-popup">OK</button>
+            </div>
+        </div>
+      <div class="review-container">
+          <h1 data-translate="leave-review">Leave a Review</h1>
+          <form class="review-form">
+              <label for="name" data-translate="your-name">Your Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" 
+              data-translate="placeholderReviewName" title="minimum of 3 characters, maximum of 30" minlength="3" maxlength="30" placeholder="Enter your name or use a nickname" required>
+  
+              <label data-translate="rate-us">Rate Us</label>
+              <div class="star-rating">
+                  <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                  <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                  <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                  <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                  <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+              </div>
+  
+              <label for="comments" data-translate="comments">Comments</label>
+              <textarea id="comments" name="comments" maxlength="200" rows="4" data-translate="placeHolderComments" placeholder="Write your review here. Maximum of 200 characters. Or leave it blank."></textarea>
+  
+              <button type="submit" data-translate="submit-review">Submit Review</button>
+              <details class="review-details">
+                    <summary data-translate="review-guidelines">Review Guidelines</summary>
+                    <p data-translate="review-guidelines-text"></p>
+              </details>
+          </form>
+      </div>
+    </main>
+    <footer class="main-footer">
+      <div class="footer-container">
+          <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+            <div class="logo-placeholder"></div>
+          </a>
+          <div class="footer-nav">
+              <ul>
+                  <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+                  <li><a href="review.html" data-translate="review-link">Review us</a></li>
+              </ul>
+          </div>
+          <div class="social-medias">
+            <ul>
+                <li id="facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                        <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li id="instagram">
+                    <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                        <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
+          </div>
+      </div>
+    </footer>
+  </body>
+</html>

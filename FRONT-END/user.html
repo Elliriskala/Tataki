@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1">
+    <title>Users page</title>
+    <meta name="description" content="Tataki restaurant login and user page">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="/nav.css">
+    <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+    <script src="./src/main.ts" type="module"></script>
+    <script src="./src/login.ts" type="module"></script>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="logo">
+            <button data-testid="hamburger-button" class="hamburger" data-translate="hamburger">☰</button>
+            <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html" data-translate="home-link">Home Page</a></li>
+            <li><a href="menu.html" data-translate="menu-link">Menu</a></li>
+            <li><a href="order.html" data-translate="order-link">Order</a></li>
+            <li><a href="reservation.html" data-translate="reservation-link">Reserve a table</a></li>
+        </ul>
+        <div class="control-buttons">
+            <!-- Language Dropdown -->
+            <div class="dropdown">
+              <button class="dropdown-button" aria-label="Select language">
+                🌐
+              </button>
+              <div class="dropdown-content">
+                <button class="language" id="flag-en" aria-label="English"></button>
+                <button class="language" id="flag-fi" aria-label="Finnish"></button>
+              </div>
+            </div>
+          
+            <!-- Login/User Button -->
+            <div class="login" id="login-register-user">
+                <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+                  <i class="fa-regular fa-user"></i>
+                </a>
+            </div>
+          </div>
+    </nav>
+    <main>
+        <div id="success-popup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popup-message"></p>
+                <button id="close-popup">OK</button>
+            </div>
+        </div>
+        <div id="login-main">
+        <div class="form-toggle">
+            <div id="toggle-slider" class="toggle-slider"></div>
+            <button id="login-btn" class="toggle-btn active" data-translate="login-button">Login</button>
+            <button id="register-btn" data-testid="register-button" class="toggle-btn" data-translate="register-button">Register</button>
+        </div>
+        <div class="login-background">
+            <div class="form-image-container"></div>
+            <div class="login-container">
+
+                <!-- Login Form -->
+                <form class="login-form form-content active" id="login-form">
+                    <h2 data-translate="login-form-title">Login</h2>
+                    <div class="input-container">
+                        <label for="login-email" data-translate="email-label">Email</label>
+                        <input type="email" id="login-email" name="login-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="login-password" data-translate="password-label">Password</label>
+                        <input type="password" id="login-password" name="login-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." minlength="8" maxlength="30" required>
+                        <span class="toggle-password" data-target="login-password"><i data-target="login-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="form-buttons">
+                        <button id="submit-button-login" class="submit-button" type="submit" data-translate="login-submit-button">Submit</button>
+                        <button id="reset-button-login" class="reset-button" type="reset" data-translate="reset-button">Reset</button>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form class="register-form form-content" id="register-form">
+                    <h2 data-translate="register-form-title">Register</h2>
+                    <div class="input-container">
+                        <label for="register-username" data-translate="username-label">Username</label>
+                        <input type="text" id="register-username" name="register-username" autocomplete="off" minlength="5" maxlength="15" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-email" data-translate="email-label">Email</label>
+                        <input type="email" id="register-email" minlength="5" name="register-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-password" data-translate="password-label">Password</label>
+                        <input type="password" id="register-password" name="register-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" autocomplete="new-password" title="Password must include at least one uppercase letter and one numeral." minlength="8" maxlength="30" required>
+                        <span class="toggle-password" data-target="register-password"><i data-target="register-password" class="fa-regular fa-eye-slash" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="form-buttons">
+                        <button id="submit-button-register" class="submit-button" type="submit" data-testid="register-submit" data-translate="register-submit-button">Submit</button>
+                        <button id="reset-button-register" class="reset-button" type="reset" data-translate="reset-button">Reset</button>
+                    </div>
+                </form>
+                <div class="form-message">
+                    <span id="message-target" data-testid="message-box"></span>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div id="user-main" style="display: none;">
+            <div class="user-buttons" id="user-buttons">
+                <button aria-label="logout" class="logout-button" data-translate="logout-button" data-testid="logout" id="logout-btn">Logout</button>
+                <button aria-label="edit-profile" class="modal-trigger" data-translate="edit-profile" id="edit-profile-button">
+                    Edit Profile</button>
+                <button aria-label="delete-profile" class="delete-profile-button" id="delete-profile-button" data-translate="delete-profile">Delete Profile</button>
+            </div>
+            <h1 data-translate="welcome-header">Welcome to Your Profile</h1>
+            <p data-translate="heres-your-profile" class="welcome-message">Hi, <span id="username-display"></span>Here’s your user information.</p>
+            
+            <div class="profile-container">
+                <div class="profile-info">
+                    <h2 data-translate="your-information">Your Information</h2>
+                    <p><span class="info-label" data-translate="username-label">Username</span>: <span id="username-info"></span></p>
+                    <p><span class="info-label" data-translate="email-label">Email</span>: <span id="email-info"></span></p>
+                    <p><span class="info-label" data-translate="phone-label">Phone</span>: <span id="phone-info"></span></p>
+                    <p><span class="info-label" data-translate="address-label">Address</span>: <span id="address-info"></span></p>
+                    <p><span class="info-label" data-translate="city-label">City</span>: <span id="city-info"></span></p>
+                    <div class="user-reservations" id="user-reservations">
+                        <h2 data-translate="your-reservations">Your Reservations</h2>
+                        <ul id="reservation-list">
+                        </ul>
+                </div>
+                <div id="order-history"></div>
+            </div>
+        </div>
+        <div id="profile-modal" class="modal">
+            <div class="modal-content">
+                <h4 data-translate="edit-profile-h4">Edit Profile</h4>
+                <div class="tabs">
+                    <button class="tab-button" data-translate="change-password" data-tab="change-password-tab">Change Password</button>
+                    <button class="tab-button" data-translate="update-phone" data-tab="update-phone-tab">Update Phone</button>
+                    <button class="tab-button" data-translate="update-address" data-tab="update-address-tab">Update Address</button>
+                </div>
+            </div>
+                <!-- Change Password Tab -->
+                <div id="change-password-tab" class="tab-content">
+                    <form id="change-password-form">
+                        <label data-translate="current-password" for="current-password">Current Password</label>
+                        <input type="password" id="current-password" name="currentPassword" autocomplete="current-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+        
+                        <label data-translate="new-password" for="new-password">New Password</label>
+                        <input type="password" id="new-password" name="newPassword" autocomplete="new-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" title="Password must include at least one uppercase letter, one numeral and one special character." required>
+        
+                        <label data-translate="confirm-password" for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" autocomplete="new-password" pattern="(?=.*\d)(?=.*[A-ZÄÖÅ]).+" minlength="8" maxlength="30" required>
+        
+                        <div class="show-password">
+                            <input type="checkbox" id="show-password" name="showPassword">
+                            <label for="show-password" data-translate="show-password">Show Password</label>
+                        </div>
+        
+                        <button class="password-change-button" data-translate="change-password" type="submit">Change Password</button>
+                    </form>
+                </div>
+        
+                <!-- Update Phone Tab -->
+                <div id="update-phone-tab" class="tab-content" style="display: none;">
+                    <form id="update-phone-form">
+                        <label data-translate="phone-label" for="phone-number-input">Phone Number</label>
+                        <input placeholder="04012345678" type="tel" id="phone-number-input" name="phoneNumber" pattern="^[0-9]{10,11}$" minlength="5" maxlength="15" required>
+                        <button class="phone-update-button" id="phone-submit" type="submit" data-translate="update-phone">Update Phone</button>
+                    </form>
+                </div>
+
+                <!-- Update Address Tab -->
+                <div id="update-address-tab" class="tab-content" style="display: none;">
+                    <form id="update-address-form">
+                        <label data-translate="address-label" for="address-input">Address</label>
+                        <input type="text" id="address-input" name="address" placeholder="Your address" data-translate="your-address" minlength="4" maxlength="30" required>
+                        <label for="city-input" data-translate="your-city">City</label>
+                        <input type="text" id="city-input" data-translate="your-city" name="city" placeholder="City" minlength="3" maxlength="20" required>
+                        <button class="address-update-button" id="address-submit" type="submit" data-translate="update-address">Update Address</button>
+                    </form>
+                </div>
+            <div class="modal-footer">
+                <button data-translate="close-button" id="close-modal-button">Close</button>
+            </div>
+        </div>
+        <div id="delete-profile-modal" class="modal-delete">
+            <div class="modal-delete-content">
+                <h4 data-translate="delete-profile-h4">Delete Profile</h4>
+                <p data-translate="delete-profile-p">Are you sure you want to delete your profile? This will result in the deletion of all your user information and reservations. This action cannot be undone.</p>
+                <button class="confirm-delete-button" data-translate="confirm-delete-button" id="confirm-delete-button">Delete Profile</button>
+                <div class="modal-delete-footer">
+                    <button data-translate="close-button" id="close-delete-modal-button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="admin-main" style="display: none;">
+        <button aria-label="logout" id="admin-logout" class="logout-button" data-translate="logout-button" data-testid="logout">Logout</button>
+            <div class="order-management-header">
+                <h1>Order management</h1>
+            </div>
+            <div class="order-management">
+                <div class="pending-orders">
+                    <h3>Pending</h3>
+                    <div class="order-list">
+                        <div
+                            class="pending-table"
+                            id="pending-orders-table"
+                        ></div>
+                    </div>
+                </div>
+                <div class="inprogress-orders">
+                    <h3>In progress</h3>
+                    <div class="order-list">
+                        <div
+                            class="inprogress-table"
+                            id="inprogress-orders-table"
+                        ></div>
+                    </div>
+                </div>
+                <div class="completed-orders">
+                    <h3>Completed</h3>
+                    <div class="order-list">
+                        <div
+                            class="completed-table"
+                            id="completed-orders-table"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-bottom">
+                <div class="order-details">
+                    <div class="button-div">
+                        <button
+                            class="update-order update-status-button" aria-label="Update order status">Update status
+                        </button>
+                        <button class="close" aria-label="Close order details">Close</button>
+                    </div>
+                    <div id="order-details" class="order-details-section">
+                        <h2>Order Details</h2>
+                    </div>
+                </div>
+            </div>
+            <dialog class="update-order-dialog" aria-label="Order status update confirmation">
+                <p>Order status set to <span id="updated-status"></span></p>
+            </dialog>    
+    </main>
+    <footer>
+        <div class="footer-container">
+            <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+                <div class="logo-placeholder"></div>
+            </a>
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="contact.html" data-translate="contact-link">Contact us</a></li>
+                    <li><a href="review.html" data-translate="review-link">Review us</a></li>
+                </ul>
+            </div>
+            <div class="social-medias">
+                <ul>
+                    <li id="facebook">
+                        <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                            <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li id="instagram">
+                        <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                            <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

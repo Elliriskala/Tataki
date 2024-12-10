@@ -1,0 +1,209 @@
+@font-face {
+    font-family: "roboto";
+    src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "roboto bold";
+    src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "urbanist";
+    src: url("./fonts/Urbanist-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: "roboto", sans-serif;
+    font-style: normal;
+    color: var(--sushi-grey2);
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    background-color: var(--sushi-graphite);
+}
+
+:root {
+    --sushi-black: #0b090a;
+    --sushi-graphite: #161a1d;
+    --wine-red: #390d0d;
+    --sushi-red1: #420506;
+    --sushi-red2: #871316;
+    --sushi-red3: #ba181b;
+    --sushi-red4: #e5383b;
+    --sushi-grey1: #b1a7a6;
+    --sushi-grey2: #d3d3d3;
+    --sushi-grey3: #f5f3f4;
+    --sushi-white: #ffffff;
+    --dust-pink: #c8a9a9;
+    --grey: #252525;
+    --soy-sauce: #191919;
+    --brown-grey: rgba(44, 33, 33, 0.9);
+    --intense-red: #bf4d4d;
+    --forest-green: rgba(3, 32, 3, 0.8);
+    --grey-green: rgba(54, 71, 63, 0.9);
+    --lotus-flower: rgba(245, 245, 245, 0.9);
+}
+
+.hero-container {
+    margin: 0;
+    padding: 0;
+    height: 70vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    background-image: url(./img/hero-image2.jpg);
+    background-size: cover;
+    background-position: center -120px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0 auto;
+}
+
+main {
+    background-color: var(--sushi-graphite);
+}
+
+.aboutus {
+    color: var(--sushi-grey2);
+    background-color: var(--sushi-graphite);
+    width: 70%;
+    margin: auto;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    padding: 1em 0;
+    border-radius: 1em;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
+}
+
+.aboutus-placeholder h3 {
+    color: var(--sushi-red4);
+    font-family: "roboto bold";
+    margin: 0;
+    font-size: 1.4em;
+}
+
+.aboutus-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80%;
+    margin: auto;
+}
+
+.about-us {
+    width: 45%;
+    padding: 0.5em;
+    letter-spacing: 0.1em;
+}
+
+.about-us p {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-family: "urbanist";
+    line-height: 1.3em;
+    letter-spacing: 0.1em;
+}
+
+.image-placeholder {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1em;
+    width: 44%;
+    height: 30vh;
+    margin: auto;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    margin-left: 1em;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#about-image {
+    background-image: url(./img/about-image.jpg);
+}
+
+#about-image2 {
+    background-image: url(./img/some_more_drinks.jpg);
+}
+
+#about-image3 {
+    background-image: url(./img/some_sushi.jpg);
+}
+
+#about-image4 {
+    background-image: url(./img/sashimi.jpg);
+}
+
+#home-page-img1 {
+    background-image: url(./img/sushi_background6.jpg);
+}
+
+#home-page-img2 {
+    background-image: url(./img/drinks.jpg);
+}
+
+@media screen and (max-width: 950px) {
+    .hero-container {
+        height: 60vh;
+    }
+    .aboutus-placeholder {
+        flex-direction: column;
+        font-size: 0.9em;
+    }
+
+    .about-us {
+        width: 90%;
+    }
+
+    .image-placeholder {
+        width: 90%;
+        height: 30vh;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .hero-container {
+        height: 50vh;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .aboutus {
+        width: 90%;
+    }
+    .hero-container {
+        height: 40vh;
+    }
+    .hero-image {
+        background-position: -300px -150px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .aboutus-placeholder {
+        font-size: 0.8em;
+    }
+
+    .hero-image {
+        background-attachment: scroll;
+        background-position: center;
+    }
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1">
+    <title>Table Reservation</title>
+    <meta name="description" content="Tataki restaurant table reservation">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/reservation.css">
+    <link rel="stylesheet" href="/nav.css">
+    <script src="https://kit.fontawesome.com/028aeaa763.js" crossorigin="anonymous"></script>
+    <script src="./src/main.ts" type="module"></script>
+    <script src="./src/reservation.ts" type="module"></script>
+</head>
+<body>
+  <nav class="navigation">
+    <div class="logo">
+        <button data-testid="hamburger-button" class="hamburger">☰</button>
+        <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
+    </div>
+    <ul class="nav-list">
+        <li><a data-translate="home-link" href="index.html">Home Page</a></li>
+        <li><a data-translate="menu-link" href="menu.html">Menu</a></li>
+        <li><a data-translate="order-link" href="order.html">Order</a></li>
+        <li><a data-translate="reservation-link" href="reservation.html">Reserve a table</a></li>
+    </ul>
+    <div class="control-buttons">
+        <!-- Language Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-button" aria-label="Select language">
+            🌐
+          </button>
+          <div class="dropdown-content">
+            <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+            <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
+          </div>
+        </div>
+      
+        <!-- Login/User Button -->
+        <div class="login" id="login-register-user">
+            <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+              <i class="fa-regular fa-user"></i>
+            </a>
+        </div>
+      </div>
+  </nav>
+
+    <main>
+      <div id="success-popup" class="popup hidden">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button id="close-popup">OK</button>
+        </div>
+    </div>
+        <div class="reservation-form">
+            <h1 data-translate="reservationTitle">Table Reservation</h1>
+            <p id="reservation-description" data-translate="reservationDescription">For larger parties we recommend calling the customer service. Please do notice that we do not take reservations for parties smaller than four. Reservations are binding, excluding reasons beyond the clients reach.</p>
+            <button id="use-user-info" data-testid="use-userinfo" data-translate="reservation-saved-info">Use saved information</button>
+            <form id="reservationForm">
+                <label data-translate="reservationName" for="name">Full Name</label>
+                <input type="text" id="name" data-translate="placeholderName" name="name" autocomplete="name" placeholder="Enter your name" minlength="3" max-length="50" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" data-translate="placeholderEmail" placeholder="Enter your email" data-testid="reservation-email-input" minlength="5" maxlength="50" required>
+
+                <label data-translate="reservationPhone" for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" data-translate="placeholderPhone" placeholder="Enter your phone number" minlength="5" maxlength="20" required>
+
+                <div class="guest-selection">
+                  <span class="guests" data-translate="numberOfGuests">Number of Guests</span>
+                    <div class="guest-buttons" id="guests">
+                        <button type="button" class="guest-btn" data-value="2">2</button>
+                        <button type="button" class="guest-btn" data-value="3">3</button>
+                        <button type="button" class="guest-btn" data-value="4">4</button>
+                        <button type="button" class="guest-btn" data-value="5">5</button>
+                        <button type="button" class="guest-btn" data-value="6">6</button>
+                        <button type="button" class="guest-btn" data-value="7">7</button>
+                        <button type="button" class="guest-btn" data-value="8">8</button>
+                    </div>
+                    <input type="hidden" name="guests" id="guests-input">
+                  </div>
+
+                <label for="date" data-translate="reservationDate">Reservation Date</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time" data-translate="reservationTime">Reservation Time</label>
+                <select id="time" name="time" required>
+                    <option data-translate="timeOptionDefault" value="">Select Time</option>
+                </select>
+                <details>
+                    <summary data-translate="detailsSummary">Terms & Conditions</summary>
+                    <div class="content">
+                    <p data-translate="detailsContent1">By clicking the "Reserve Now" button, you agree to our Terms & Conditions.</p>
+                    <p data-translate="detailsContent2">Our restaurant has a 15-minute grace period. If you are running late, please call us to let us know. Otherwise, your reservation will be canceled. We appreciate your understanding.</p>
+                    </div>
+                </details>
+
+                <button data-translate="reserveNowButton" id="reservation-submit" type="submit">Reserve Now</button>
+                <div id="reservation-message" class="reservation-message">
+                  <span id="res-message-field"></span>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+          <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+            <div class="logo-placeholder"></div>
+          </a>
+          <div class="footer-nav">
+              <ul>
+                  <li><a data-translate="footerContact" href="contact.html">Contact us</a></li>
+                  <li><a data-translate="footerReview" href="review.html">Review us</a></li>
+              </ul>
+          </div>
+          <div class="social-medias">
+            <ul>
+                <li id="facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                        <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li id="instagram">
+                    <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                        <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

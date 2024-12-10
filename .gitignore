@@ -1,0 +1,16 @@
+FRONT-END/node_modules/
+BACK-END/node_modules/
+BACK-END/build/
+BACK-END/.env
+BACK-END/public/
+.history
+img/*.mp4
+.env
+/blob-report/
+/playwright/.cache/
+.vscode
+dist/
+node_modules
+dist/
+dev-dist/
+package-lock.json

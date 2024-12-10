@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu page</title>
+    <meta name="description" content="Tataki restaurant menu page">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
+    <link rel="apple-touch-icon" href="public/icons/icon-192x192.png" sizes="192x192">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/menu.css">
+    <link rel="stylesheet" href="/nav.css">
+    <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
+    <script type="module" src="./src/main.ts"></script>
+    <script type="module" src="./src/menu.ts"></script>
+  </head>
+  <body class="menu-page">
+    <header>
+      <nav class="navigation">
+        <div class="logo">
+          <button data-testid="hamburger-button" class="hamburger" data-translate="hamburger">☰</button>
+          <a href="index.html" aria-label="restaurant logo and link to main page" class="logo-placeholder"></a>
+        </div>
+        <ul class="nav-list">
+          <li><a href="index.html" data-translate="home-link" aria-label="Navigate to Home Page">Home Page</a></li>
+          <li><a href="menu.html" data-translate="menu-link" aria-label="Navigate to Menu">Menu</a></li>
+          <li><a href="order.html" data-translate="order-link" aria-label="Navigate to Order Page">Order</a></li>
+          <li><a href="reservation.html" data-translate="reservation-link" aria-label="Navigate to Reservation Page">Reserve a table</a><li>
+        </ul>
+        <div class="control-buttons">
+            <!-- Language Dropdown -->
+            <div class="dropdown">
+              <button class="dropdown-button" aria-label="Select language">
+                🌐
+              </button>
+              <div class="dropdown-content">
+                <button class="language" id="flag-en" aria-label="English" data-translate="english-flag"></button>
+                <button class="language" id="flag-fi" aria-label="Finnish" data-translate="finnish-flag"></button>
+              </div>
+            </div>
+          
+            <!-- Login/User Button -->
+            <div class="login" id="login-register-user">
+                <a href="user.html" aria-label="link to login and user page" data-translate="login-link">
+                  <i class="fa-regular fa-user"></i>
+                </a>
+            </div>
+          </div>
+      </nav>
+    </header>
+    <main class="menu-page">
+      <div class="menus">
+        <div class="menus-header">
+          <h1 data-translate="our-menus">Menus</h1>
+          <a href="order.html" class="shopping-cart" aria-label="Shopping cart"><i class="fa-solid fa-shopping-cart"></i><span class="tooltip2" data-translate="gotocart">Go to cart</span></a>
+        </div>
+        <div class="menu-list">
+            <button class="select-category-button lunch-button" data-translate="lunch" aria-label="View Lunch menu">Lunch</button>
+            <button class="select-category-button dinner-button" data-translate="dinner" aria-label="View Dinner menu">Dinner</button>
+            <button class="select-category-button sides-button" data-translate="sides" aria-label="View Sides menu">Sides</button>
+            <button class="select-category-button drinks-button" data-translate="drinks" aria-label="View Drinks menu">Drinks</button>
+            <button class="select-category-button desserts-button" data-translate="desserts" aria-label="View Desserts menu">Desserts</button>
+          </div>
+        <div class="menu-container"></div>
+        <div class="carousel">
+          <h2 data-translate="chef-recommendation">Chef's resommendations</h2>
+          <button id="carousel-left" class="carousel-button" aria-label="Scroll left">❮</button>
+          <div class="menu-carousel">
+            <div class="menu-track-container">
+              <div class= "menu-track"></div>
+            </div>
+          </div>
+          <button id="carousel-right" class="carousel-button" aria-label="Scroll right">❯</button>
+        </div>
+      </div>
+      <dialog class="item-added-to-cart" aria-label="Item added confirmation">
+        <p data-translate="item-added">Item added to cart!</p>
+      </dialog>
+      <div class="allergens">
+        <h2 class="allergen-header" aria-label="Allergen Information" data-translate="allergen-header">Allergen information</h2>
+        <p data-translate="allergen-info">
+          We strive to provide accurate allergen details for our menu:
+        </p>
+        <ul class="allergen-list" aria-label="List of allergen information">
+          <li data-translate="egg">E = contains egg</li>
+          <li data-translate="fish">F = contains fish</li>
+          <li data-translate="gluten">G = contains gluten</li>
+          <li data-translate="milk">M = contains milk</li>
+          <li data-translate="soy">S = contains soy</li>
+        </ul>
+        <p data-translate="allergen-info2">Our kitchen uses shared spaces, so cross-contamination may occur. Please inform our staff of any allergies before ordering—we’re happy to help you choose safely. Your safety is our priority; feel free to ask for more information.</p>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <a href="index.html" aria-label="logo and link to main page" class="footer-logo">
+            <div class="logo-placeholder"></div>
+        </a>
+        <div class="footer-nav">
+          <ul>
+            <li><a href="contact.html" data-translate="contact-link" aria-label="Navigate to Contact Page">Contact us</a></li>
+            <li><a href="review.html" data-translate="review-link" aria-label="Navigate to Review Page">Review us</a></li>
+        </ul>
+        </div>
+        <div class="social-medias">
+            <ul>
+                <li id="facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61568572853532" aria-label="link-to-facebook">
+                        <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li id="instagram">
+                    <a href="https://www.instagram.com/ravintolatataki/" aria-label="link-to-instagram">
+                        <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

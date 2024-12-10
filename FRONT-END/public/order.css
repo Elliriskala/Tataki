@@ -1,0 +1,744 @@
+@font-face {
+    font-family: "roboto";
+    src: url("./fonts/RobotoMono-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "roboto bold";
+    src: url("./fonts/RobotoMono-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "urbanist";
+    src: url("./fonts/Urbanist-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "urbanist bold";
+    src: url("./fonts/Urbanist-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
+    font-family: "roboto", sans-serif;
+    font-style: normal;
+    color: var(--sushi-grey2);
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    background-color: var(--sushi-graphite);
+}
+
+:root {
+    --sushi-black: #0b090a;
+    --sushi-graphite: #161a1d;
+    --wine-red: #390d0d;
+
+    --sushi-red1: #420506;
+    --sushi-red2: #a4161a;
+    --sushi-red3: #ba181b;
+    --sushi-red4: #e5383b;
+    --sushi-grey1: #b1a7a6;
+    --sushi-grey2: #d3d3d3;
+    --sushi-grey3: #f5f3f4;
+    --sushi-white: #ffffff;
+    --dust-pink: #c8a9a9;
+    --grey: #252525;
+    --soy-sauce: #191919;
+    --brown-grey: rgba(44, 33, 33, 0.9);
+    --intense-red: #bf4d4d;
+    --forest-green: rgb(75, 202, 75);
+    --grey-green: rgba(54, 71, 63, 0.9);
+    --lotus-flower: rgba(245, 245, 245, 0.9);
+}
+
+/* item added to cart modal */
+
+body:has(dialog[open]) {
+    overflow-y: hidden;
+}
+
+/* processing order modal & order confirmation modal */
+
+.item-added-to-cart, .processing-order, .order-placed {
+    position: fixed;
+    top: 30%;
+    background: white;
+    padding: 2em;
+    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    border-radius: 1em;
+    display: none;
+    text-align: center;
+    max-width: 300px;
+    animation: fadeIn 0.3s ease-out;
+    border: 0.1em solid #61b764;
+}
+
+.processing-order p , .order-placed p, .item-added-to-cart p {
+    color: var(--sushi-graphite);
+}
+
+dialog::backdrop {
+    background-color: var(--sushi-graphite);
+    opacity: 0.75;
+}
+
+#order-placed-button {
+    padding: 0.5em;
+    font-size: 0.8em;
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey3);
+    border: none;
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    max-width: 13em;
+    text-align: center;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+#order-placed-button:hover {
+    background-color: var(--sushi-red1);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/* order.html tyylittely */
+
+.menu-page {
+    flex-grow: 1;
+    padding-bottom: 1em;
+}
+
+.menus-header {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: "roboto bold";
+}
+
+.menus-header h1 {
+    margin-top: 1em;
+    color: var(--sushi-red4);
+}
+
+.menu-list {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
+.select-category-button {
+    padding: 1em;
+    margin: 0.5em;
+    border: 0.1em solid var(--sushi-black);
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey3);
+    border-radius: 0.5em;
+    transition: 0.3s;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    cursor: pointer;
+}
+
+.select-category-button:hover {
+    background-color: var(--soy-sauce);
+    transform: scale(1.15);
+    color: var(--sushi-red4);
+}
+
+.menu-container {
+    display: grid;
+    width: 80%;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(25em, 3fr));
+    gap: 1.5em;
+    margin-bottom: 3em;
+    opacity: 1;
+    transition:
+        opacity 0.5s ease-in-out,
+        transform 0.5s ease-in-out;
+}
+
+.menu-container.hidden {
+    opacity: 0;
+    transform: translateX(2em);
+}
+
+.menu-card {
+    background-color: var(--sushi-graphite);
+    border-radius: 1em;
+    border: solid 0.1em var(--sushi-black);
+    padding: 1em;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    text-align: center;
+    color: var(--sushi-grey3);
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+        opacity 0.4s ease-out,
+        transform 0.4s ease-out;
+}
+
+.menu-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.menu-card:hover {
+    transform: scale(1.04);
+    transition: 0.4s;
+}
+
+.content {
+    font-family: "urbanist";
+    font-size: 1.1em;
+    padding: 0.5em;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu-item-info {
+    padding: 0 1em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+}
+
+.menu-header {
+    font-family: "roboto bold";
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    color: var(--sushi-red4);
+    margin: 0.2em;
+}
+
+.image-placeholder {
+    height: 12em;
+    width: 50%;
+}
+
+.menu-image {
+    border: 0.1em solid var(--sushi-black);
+    border-radius: 1em;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.price,
+.allergen-info {
+    font-family: "roboto bold";
+    font-size: 1.2em;
+    padding: 0.5em;
+    margin: 0.2em;
+    color: var(--sushi-grey2);
+}
+
+.allergen-info {
+    font-size: 1em;
+}
+
+.menu-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: scaleY(0);
+    transition:
+        opacity 0.5s ease-in-out,
+        transform 0.5s ease-in-out,
+        max-height 0.5s ease-in-out;
+}
+
+.menu-description.visible {
+    max-height: 500px; 
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.menu-description p {
+    font-size: 0.9em;
+    width: 80%;
+    line-height: 1.1em;
+    letter-spacing: 0.1em;
+    font-family: "urbanist";
+    margin: 0.3em;
+}
+
+.add-to-order-button {
+    padding: 0.5em;
+    border: 0.1em solid var(--sushi-black);
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-grey3);
+    border-radius: 0.5em;
+    transition: 0.2s;
+    box-shadow: 0.1em 0.2em 0.2em var(--sushi-black);
+    cursor: pointer;
+    height: 3em;
+    width: 3em;
+}
+
+.add-to-order-button:hover {
+    background-color: var(--sushi-red3);
+    transform: scale(1.1);
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: var(--sushi-red2);
+    color: var(--sushi-grey3);
+    text-align: center;
+    border-radius: 0.5em;
+    border: solid 0.1em var(--sushi-black);
+    padding: 0.4em;
+    position: absolute;
+    bottom: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 0.7em;
+    z-index: 999;
+    opacity: 0;
+    transition:
+        opacity 0.2s ease-in-out,
+        transform 0.5s ease-in-out;
+}
+
+.add-to-order-button:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-1em);
+}
+
+.fa-cart-plus {
+    color: var(--sushi-grey3);
+    font-size: 1.1em;
+    padding: 0.3em;
+    transition: all 0.3s;
+}
+
+.order-info {
+    margin: auto;
+    background-color: var(--sushi-graphite);
+    color: var(--lotus-flower);
+    width: 70%;
+    padding: 1em;
+    margin-top: 0.5em;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    border: solid 0.1em var(--sushi-black);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
+}
+
+.your-order {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.order-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    background-color: var(--sushi-graphite);
+    border-radius: 1em;
+    border: solid 0.2em var(--sushi-red1);
+    min-width: 45%;
+    box-shadow: 0.3em 0.3em 0.3em var(--sushi-black);
+}
+
+.order-table th {
+    font-size: 1.2em;
+    font-family: "roboto bold";
+    text-align: left;
+    padding: 0.3em;
+    padding-bottom: 0.5em;
+}
+
+.order-table td {
+    padding: 0.4em;
+    margin-left: 0.5em;
+    border-top: dashed 0.1em var(--sushi-red1);
+}
+
+#quantity {
+    text-align: center;
+}
+
+.quantity {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.decrease,
+.increase {
+    background-color: var(--sushi-graphite);
+    color: var(--sushi-red2);
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.4em;
+    font-size: 0.8em;
+    margin: 0.2em;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 0.5em;
+    font-family: "roboto bold";
+}
+
+.decrease:hover,
+.increase:hover {
+    transform: scale(1.4);
+    cursor: pointer;
+    color: var(--sushi-red4);
+}
+
+.total {
+    font-family: "roboto bold";
+    font-size: 1.2em;
+    color: var(--sushi-red4);
+}
+
+#total-price {
+    padding-left: 0.5em;
+    font-size: 1.4em;
+}
+
+.order-total {
+    padding-right: 0.5em;
+    border-top: dashed 0.1em var(--sushi-red1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+}
+
+.order-total h4 {
+    margin-top: 0.8em;
+    font-size: 1.2em;
+    font-family: "roboto bold";
+    margin-bottom: 0;
+}
+
+.additional-comment {
+    display: flex;
+    flex-direction: column;
+    margin: 0.2em;
+    padding-top: 1em;
+}
+
+.additional-comment textarea:focus, .add-instructions textarea:focus {
+    outline: none;
+}
+
+#leave-comment {
+    color: var(--sushi-black);
+    background-color: var(--sushi-grey2);
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 0.8em;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 45%;
+    margin-left: 2em;
+}
+
+.order-user-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1em 0 1em;
+}
+
+.order-user-info h2 {
+    font-size: 1.2em;
+    font-family: "roboto bold";
+    text-align: center;
+    margin: 0;
+    padding: 0.5em;
+}
+
+.order-user-info input {
+    padding: 0.5em;
+    margin: 0.5em;
+    color: var(--sushi-black);
+    background-color: var(--sushi-grey2);
+    border-radius: 0.5em;
+}
+
+input {
+    transition: border-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+input:focus {
+    border-color:rgb(133, 188, 133);
+    outline: none;
+}
+
+input.invalid {
+    border: 2px solid var(--sushi-red2);
+}
+
+input:valid {
+    border-color:rgb(126, 172, 126);
+    transform: scale(1.02);
+}
+
+input:required:invalid {
+    border: 2px solid var(--sushi-red2);
+}
+
+input:not(.invalid) {
+    border: 2px solid  rgb(63, 129, 63);
+}
+
+#use-existing-info-button {
+    padding: 0.5em;
+    font-size: 0.8em;
+    background-color: var(--sushi-red1);
+    color: var(--sushi-grey3);
+    border: none;
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    max-width: 13em;
+    text-align: center;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#use-existing-info-button:hover {
+    background-color: var(--sushi-red3);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.delivery-method h2 {
+    font-size: 1em;
+
+}
+
+checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    margin-right: 1em;
+}
+
+input[type="checkbox"] {
+    width: 1.5em;
+    height: 1.5em;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    accent-color:  rgb(67, 152, 67);
+}
+
+.delivery-method {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9em;
+    margin-top: 1em;
+    justify-content: center;
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+.delivery-method h4 {
+    margin-left: 1em;
+}
+
+.checkbox:hover {
+    transform: scale(1.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.delivery-method h4 {
+    margin: 0;
+    padding-bottom: 1em;
+}
+
+.delivery-address {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0 0.5em 0;
+    width: 95%;
+    margin: auto;
+}
+
+.delivery-address input {
+    padding: 0.5em;
+    margin: 0.5em;
+    color: var(--sushi-black);
+    background-color: var(--sushi-grey2);
+    border-radius: 0.5em;
+}
+
+#delivery-tooltip {
+    position: relative;
+    color: var(--intense-red);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.add-instructions {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0 1em 0;
+    margin-left: 1em;
+}
+
+#instructions {
+    color: var(--sushi-black);
+    background-color: var(--sushi-grey2);
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 0.8em;
+}
+
+.terms-and-conditions-placeholder {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8em;
+    margin-left: 2em;
+}
+
+.content {
+    padding: 0.5em;
+}
+
+.order-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+    padding: 0;
+}
+
+.order-button button {
+    text-decoration: none;
+    padding: 1.5em;
+    border-radius: 1em;
+    border: solid 0.1em var(--sushi-black);
+    background-color: var(--sushi-red1);
+    color: var(--sushi-grey3);
+    font-size: 0.9em;
+    transition: all 0.5s;
+    font-family: "roboto bold";
+    letter-spacing: 0.3em;
+}
+
+.order-button button:hover {
+    background-color: var(--sushi-red3);
+    transition: all 0.5s;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .your-order {
+        flex-direction: column;
+    }
+    .order-content {
+        padding: 1em;
+        margin: 1em;
+    }
+    .right-column {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .menu-page-placeholder {
+        grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .menu-list {
+        flex-direction: column;
+        width: 50%;
+        margin: auto;
+        margin-bottom: 1em;
+        padding-top: 0.5em;
+    }
+
+    .select-category-button {
+        padding: 0.5em;
+        font-size: 0.8em;
+    }
+    .select-category-button:hover {
+        transition: all 0.3s ease;
+        transform: scale(1.1);
+    }
+
+    .menu-container {
+        width: 90%;
+    }
+
+    .menu-card {
+        margin: auto;
+        width: 90%;
+    }
+
+    .menu-header {
+        font-size: 1.2em;
+    }
+
+    .price,
+    .allergen-info {
+        font-size: 1em;
+    }
+
+    .allergen-info {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .order-info {
+        font-size: 0.85em;
+        width: 90%;
+    }
+}
