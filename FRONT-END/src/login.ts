@@ -115,6 +115,13 @@ const handleLogin = async (event: Event) => {
 
         // Check for specific status codes
         if (!response.ok) {
+            if (response.status === 429) {
+                showPopup(translations[language]["login-too-many-attempts"]);
+                loginEmail.value = "";
+                loginPassword.value = "";
+                return;
+
+            } else {
             const errorData = await response.json();
             let errorMessage =
                 loginErrorMessages[language][errorData.status] ||
@@ -123,6 +130,7 @@ const handleLogin = async (event: Event) => {
             messageTarget.textContent = errorMessage;
             messageTarget.style.color = "red";
             return;
+            }
         }
 
         const data: UserLoggedIn = await response.json();

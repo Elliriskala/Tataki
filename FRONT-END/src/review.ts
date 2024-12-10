@@ -14,21 +14,23 @@ const language = getLanguage();
 // Function to show the popup
 const showPopup = (message: string) => {
     popupMessage.textContent = message;
-    popup.classList.remove('hidden');
+    popup.classList.remove("hidden");
 };
 
 // Function to hide the popup
-closePopup.addEventListener('click', () => {
-    popup.classList.add('hidden');
+closePopup.addEventListener("click", () => {
+    popup.classList.add("hidden");
 });
 
-reviewForm.addEventListener('submit', async (e) => {
+reviewForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
+
     // get the rating value
-    const rating = document.querySelector('input[name="rating"]:checked') as HTMLInputElement;
+    const rating = document.querySelector(
+        'input[name="rating"]:checked',
+    ) as HTMLInputElement;
     if (!rating) {
-        showPopup(translations[language]['select-rating']);
+        showPopup(translations[language]["select-rating"]);
         return;
     }
 
@@ -44,30 +46,36 @@ reviewForm.addEventListener('submit', async (e) => {
     const ratingBody = {
         review: comment,
         username: name,
-        star_rating: ratingValue
-    }
+        star_rating: ratingValue,
+    };
 
     console.log(ratingBody);
 
-    const response = await fetch(apiBaseUrl + '/reviews/restaurant', {
-        method: 'POST',
+    const response = await fetch(apiBaseUrl + "/reviews/restaurant", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(ratingBody)
+        body: JSON.stringify(ratingBody),
     });
 
     // show the popup message based on the response
     if (response.ok) {
-        console.log('Review submitted');
-        popupMessage.style.color = 'green';
-        showPopup(translations[language]['review-submitted']);
-        nameInput.value = '';
-        commentInput.value = '';
+        console.log("Review submitted");
+        popupMessage.style.color = "green";
+        showPopup(translations[language]["review-submitted"]);
+        nameInput.value = "";
+        commentInput.value = "";
         rating.checked = false;
     } else {
-        console.log('Review failed');
-        popupMessage.style.color = 'red';
-        showPopup(translations[language]['review-failed']);
+        if (response.status === 429) {
+            console.log("Review failed");
+            popupMessage.style.color = "orange";
+            showPopup(translations[language]["review-spam-warning"]);
+        } else {
+            console.log("Review failed");
+            popupMessage.style.color = "red";
+            showPopup(translations[language]["review-failed"]);
+        }
     }
 });
