@@ -232,6 +232,7 @@ const translations: Translation = {
         "time": "Time:",
         "type": "Type:",
         "items": "Items:",
+        "login-too-many-attempts": "Too many login attempts. Please try again later.",
 
         // itinerary page translations
         "itinerary_title": "Itinerary",
@@ -481,6 +482,7 @@ const translations: Translation = {
         "type": "Tyyppi:",
         "items": "Tuotteet:",
         "status": "Tila:",
+        "login-too-many-attempts": "Liian monta kirjautumisyritystä. Yritä myöhemmin uudelleen.",
 
         // itinerary page translations
         "itinerary_title": "Reittiohje",

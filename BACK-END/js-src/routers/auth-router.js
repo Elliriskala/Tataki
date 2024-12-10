@@ -5,7 +5,18 @@ import { postLogin, isTokenExpired } from '../controllers/auth-controller.js';
 import { postUser } from '../controllers/user-controller.js';
 import { body } from 'express-validator';
 import { validationErrorHandler } from '../middlewares/error-handlers.js';
+import {rateLimit} from 'express-rate-limit';
 
+const limiter3 = rateLimit({
+    windowMs: 60 * 60 * 1000,  // 1 hour
+    max: 5,
+    message: 'Too many requests from this IP, please try again after an hour',
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res) => {
+        res.status(429).json({error: 'Too many requests from this IP, please try again after an hour'});
+    }
+})
 
 const authRouter = express.Router();
 
@@ -78,6 +89,7 @@ authRouter.route('/login').post(
     body('email').isEmail(),
     body('password').isLength({ min: 8, max: 30 }),
     validationErrorHandler,
+    limiter3,
     postLogin);
 
 authRouter
