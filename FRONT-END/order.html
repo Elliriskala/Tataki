@@ -15,6 +15,7 @@
     <script src="https://kit.fontawesome.com/ce58f4085c.js" crossorigin="anonymous"></script>
     <script type="module" src="./src/main.ts"></script>
     <script type="module" src="./src/order.ts"></script>
+    <script type="module" src="./src/orderProcessing.ts"></script>
   </head>
   <body class="order-page">
     <header>
@@ -51,6 +52,12 @@
       </nav>
     </header>
     <main class="menu-page">
+        <div id="success-popup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popup-message"></p>
+                <button id="close-popup">OK</button>
+            </div>
+        </div>
       <div class="menus-header">
         <h1 data-translate="order" aria-label="Order page">Order</h1>
       </div>

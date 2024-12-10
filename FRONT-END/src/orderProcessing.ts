@@ -4,6 +4,29 @@ import { getCart } from "./services/cartService";
 import { showProcessingModal, showOrderPlacedModal } from "./components/modal";
 import { logError } from "./utils/functions";
 import { apiBaseUrl } from "./utils/variables"; 
+import { translations } from "./translations";
+import { getLanguage } from "./utils/functions";
+
+
+
+const popup = document.getElementById("success-popup") as HTMLDivElement;
+const popupMessage = document.getElementById(
+    "popup-message",
+) as HTMLParagraphElement;
+const closePopup = document.getElementById("close-popup") as HTMLButtonElement;
+
+// Function to show the popup
+const showPopup = (message: string) => {
+    popupMessage.textContent = message;
+    popup.classList.remove("hidden");
+};
+
+// Function to hide the popup
+closePopup.addEventListener("click", () => {
+    popup.classList.add("hidden");
+});
+
+
 
 // place the order
 const placeOrder = async () => {
@@ -22,18 +45,18 @@ const placeOrder = async () => {
             // send the order data to the server
             body: JSON.stringify({
                 user_id: userInfo?.user_id || "",
-                customer_name: orderData.customer_name,
-                customer_email: orderData.customer_email,
-                customer_phone: orderData.customer_phone,
-                total_price: orderData.total_price,
-                order_items: orderData.order_items,
-                general_comment: orderData.general_comment,
-                order_type: orderData.order_type,
-                order_status: orderData.order_status,
-                ...(orderData.order_type === "delivery" && {
-                    delivery_address: orderData.delivery_address,
-                    city: orderData.city,
-                    delivery_instructions: orderData.delivery_instructions,
+                customer_name: orderData?.customer_name,
+                customer_email: orderData?.customer_email,
+                customer_phone: orderData?.customer_phone,
+                total_price: orderData?.total_price,
+                order_items: orderData?.order_items,
+                general_comment: orderData?.general_comment,
+                order_type: orderData?.order_type,
+                order_status: orderData?.order_status,
+                ...(orderData?.order_type === "delivery" && {
+                    delivery_address: orderData?.delivery_address,
+                    city: orderData?.city,
+                    delivery_instructions: orderData?.delivery_instructions,
                 }),
             }),
         });
@@ -69,6 +92,7 @@ const placeOrder = async () => {
 
 // collect the order details
 const collectOrderData = (userInfo: any) => {
+    const language = getLanguage();
     // Get cart items
     const cartItems = getCart().map((item: any) => ({
         menu_id: item.menu_id,
@@ -116,6 +140,11 @@ const collectOrderData = (userInfo: any) => {
         0,
     );
 
+    if (total_price <= 0) {
+        showPopup(translations[language]["empty-cart"]);
+        return;
+    }
+    
     // delivery method
     const deliveryCheckbox = document.getElementById(
         "delivery-checkbox",
