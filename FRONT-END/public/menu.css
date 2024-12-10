@@ -171,7 +171,7 @@ a.shopping-cart:hover .tooltip2 {
     padding: 1em;
     border-bottom: 0.1em solid var(--sushi-red3);
     border-bottom-style: groove;
-    width: 45%;
+    width: 55%;
     color: var(--sushi-red2);
     text-shadow: #0b090a 0.1em 0.1em 0.1em;
 }
