@@ -26,7 +26,8 @@ DB_NAME=tataki
 
 JWT_SECRET= your very secret jwt crypting key (Just smash your keyboard for example)  
 
-JWT_EXPIRES_IN= place your desired expiration time here
+JWT_EXPIRES_IN= place your desired expiration time here  
+
 ---
 
 ### documentation can be accessed at:
