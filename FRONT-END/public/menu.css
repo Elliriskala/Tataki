@@ -101,6 +101,7 @@ dialog::backdrop {
 .menus {
     color: var(--sushi-grey3);
     padding-bottom: 0.5em;
+    overflow-x: hidden;
 }
 
 .menus-header {
@@ -366,6 +367,10 @@ a.shopping-cart:hover .tooltip2 {
     margin-bottom: 3em;
 }
 
+.menu-card > .allergen-info {
+    margin-bottom: 2em;
+}
+
 .add-to-order-button {
     padding: 0.5em;
     border: 0.1em solid var(--sushi-black);
@@ -493,7 +498,7 @@ a.shopping-cart:hover .tooltip2 {
 
     .menu-container {
         width: 90%;
-        margin-left: 1em;
+        margin-left: 0.7em;
     }
 
     .menu-card {
@@ -522,7 +527,6 @@ a.shopping-cart:hover .tooltip2 {
 @media screen and (max-width: 650px) {
     .menu-carousel {
         width: 80%;
-        height: 700px;
     }
 
     .menu-track-container {
@@ -546,6 +550,7 @@ a.shopping-cart:hover .tooltip2 {
 @media screen and (max-width: 550px) {
     .menu-carousel {
         width: 85%;
+        height: 650px;
     }
 
     .menu-track > .menu-card {
@@ -595,23 +600,12 @@ a.shopping-cart:hover .tooltip2 {
     .menu-track > .menu-card {
         flex: 0 0 200px;
         max-width: 200px;
+        font-size: 0.8em;
     }
-
-    /*
-    #carousel-left,
-    #carousel-right {
-        display: none;
-    }
-    */
 }
 
 @media screen and (max-width: 380px) {
     .menu-card {
         font-size: 0.8em;
-    }
-
-    .menu-track > .menu-card {
-        flex: 0 0 225px;
-        max-width: 225px;
     }
 }

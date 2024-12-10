@@ -12,8 +12,8 @@ import orderRouter from './routers/order-router.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
 import itineraryRouter from './routers/itineray-router.js';
 
-const hostname = '0.0.0.0';
-const port = process.env.PORT || 443;
+const hostname = 'localhost';
+const port = 3000;
 const app = express();
 
 
@@ -43,11 +43,8 @@ const __dirname = path.dirname(__filename);
 // Define the path to the front-end static files
 const frontEndPath = '../../FRONT-END/dist';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> bad6f482ae4161d088019419e193feba95ed244d
 // Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, frontEndPath)));
 
 app.use('/api/users', userRouter);
 app.use('/api/reviews', ratingRouter);
@@ -57,12 +54,7 @@ app.use('/api/menus', menuRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/digitransit', itineraryRouter);
 
-app.use(express.static(frontEndPath));
 
-<<<<<<< HEAD
-
-=======
->>>>>>> bad6f482ae4161d088019419e193feba95ed244d
 // Define routes for known pages
 app.get('/about', (_req, res) => {
   res.sendFile(path.join(__dirname, frontEndPath, 'about.html'));
