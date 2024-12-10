@@ -27,6 +27,7 @@ const popupMessage = document.getElementById(
 ) as HTMLParagraphElement;
 const closePopup = document.getElementById("close-popup") as HTMLButtonElement;
 
+
 // Function to show the popup
 const showPopup = (message: string) => {
     popupMessage.textContent = message;
@@ -47,21 +48,23 @@ closePopup.addEventListener("click", () => {
     popup.classList.add("hidden");
 });
 
+
 document.addEventListener("DOMContentLoaded", () => {
     dateInput.disabled = true;
     timeSelect.disabled = true;
     const language = getLanguage();
+    
 
     guestButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
             const target = e.target as HTMLElement;
-            if (target) {
+            if (target) { // Get the number of guests from the button's data-value attribute
                 const guests = target.getAttribute("data-value");
 
                 const guestsInput = document.getElementById(
                     "guests-input",
                 ) as HTMLInputElement;
-                if (guestsInput) {
+                if (guestsInput) { // Set the number of guests in the input field
                     guestsInput.value = guests ?? "";
                 }
             }
@@ -73,6 +76,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const guests = guestsInput?.value;
         const date = dateInput?.value;
         const name = nameInput?.value;
+
+        if (date) {
+            const selectedDate = new Date(date);
+            const dayOfWeek = selectedDate.getDay();
+
+            if (dayOfWeek === 0) {
+                showPopup(translations[language]["closed-on-sunday"]);
+                dateInput.value = "";
+                timeSelect.value = "";
+                timeSelect.disabled = true;
+                return;
+            }
+        }
+        
+
         // application/json
         if (!date || !guests || !name) {
             timeSelect.disabled = true;

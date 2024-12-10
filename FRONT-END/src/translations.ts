@@ -153,10 +153,11 @@ const translations: Translation = {
         "invalid-phone": "Please provide a valid phone number.",
         "max-reservations": "You have reached the maximum number of reservations.",
         "reservation-failed": "Reservation failed. Please try again.",
-        "reservation-success": "Reservation successful!",
+        "reservation-success": "Reservation successful! Thank you for your reservation. Please check your email for confirmation.",
         "select-date-and-guests": "Please fill in all fields to select a time.",
         "reservation-saved-info": "Use saved information",
         "login-to-use-info": "Please log in to use saved information.",
+        "closed-on-sunday": "Tataki is unfortunately closed on Sundays.",
 
 
         //Review page translations
@@ -169,7 +170,8 @@ const translations: Translation = {
         "placeholderReviewName": "Enter your name or use a nickname",
         "select-rating": "Please select a rating.",
         "review-submitted": "Review submitted successfully! Thank you for your feedback.",
-        "review-failed": "Failed to submit review. We limit reviews based on IP address to prevent spam. Please try again later.",
+        "review-failed": "Failed to submit review. Please try again later.",
+        "review-spam-warning": "Failed to submit review. We limit reviews based on IP address to prevent spam. Please try again later.",
         "review-guidelines": "Review Guidelines",
         "review-guidelines-text": "Your review helps other customers. Please be kind and respectful. We do not publish reviews that contain offensive language or personal attacks. Reviews are used to improve our services and products, and we cannot respond to them directly. Thank you for your understanding. By not following the guidelines, you risk losing access to our services.",
 
@@ -243,7 +245,7 @@ const translations: Translation = {
         "end_time_label": "End Time",
         "distance_label": "Distance",
 
-        "session-expired-p": "Your session has expired. Please log in again."
+        "session-expired-p": "Your session has expired. Please log in again"
 
 
 
@@ -400,10 +402,11 @@ const translations: Translation = {
         "invalid-phone": "Puhelinnumero ei ole vaaditussa muodossa.",
         "max-reservations": "Olet saavuttanut maksimimäärän varauksia.",
         "reservation-failed": "Varaus epäonnistui. Yritä uudelleen.",
-        "reservation-success": "Varaus onnistui!",
+        "reservation-success": "Varaus onnistui! Kiitos varauksestasi. Tarkistathan sähköpostisi vahvistusta varten.",
         "select-date-and-guests": "Täytä kaikki kentät valitaksesi ajankohdan.",
         "reservation-saved-info": "Käytä tallennettuja tietoja",
         "login-to-use-info": "Kirjaudu sisään käyttääksesi tallennettuja tietoja.",
+        "closed-on-sunday": "Tataki on valitettavasti suljettu sunnuntaisin.",
 
         //Review page translations
         "your-name": "Nimesi",
@@ -414,7 +417,8 @@ const translations: Translation = {
         "placeholderReviewName": "Kirjoita nimesi tai käytä nimimerkkiä.",
         "select-rating": "Valitse arvosana",
         "review-submitted": "Arvostelu on lähetetty onnistuneesti! Kiitos palautteestasi.",
-        "review-failed": "Arvostelun lähettäminen epäonnistui. Rajoitamme arvostelujen määrää yhdestä IP-osoitteesta spämmin estämiseksi. Yritä myöhemmin uudelleen.",
+        "review-failed": "Arvostelun lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
+        "review-spam-warning": "Arvostelun lähettäminen epäonnistui. Rajoitamme arvostelujen määrää yhdestä IP-osoitteesta spämmin estämiseksi. Yritä myöhemmin uudelleen.",
         "review-guidelines": "Arvostelun käytännöt",
         "review-guidelines-text": "Arvostelusi auttaa muita asiakkaita. Ole ystävällinen ja kunnioittava. Emme julkaise arvosteluja, jotka sisältävät loukkaavaa kieltä tai henkilökohtaisia hyökkäyksiä. Arvosteluja käytetään parantamaan palveluitamme ja tuotteitamme, emmekä voi vastata niihin suoraan. Kiitos ymmärryksestäsi. Ohjeiden noudattamatta jättäminen voi johtaa palveluidemme käyttöoikeuden menettämiseen.",
 
