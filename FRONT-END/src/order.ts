@@ -5,6 +5,12 @@ import { placeOrder } from "./orderProcessing";
 import { getLanguage } from "./utils/functions";
 import { logError } from "./utils/functions";
 
+const popup = document.getElementById("success-popup") as HTMLDivElement;
+const popupMessage = document.getElementById(
+    "popup-message",
+) as HTMLParagraphElement;
+const closePopup = document.getElementById("close-popup") as HTMLButtonElement;
+
 // initialize category buttons
 const initializeCategoryButtons = async (): Promise<void> => {
     const lang = getLanguage();
