@@ -123,6 +123,7 @@ dialog::backdrop {
 .menu-page {
     flex-grow: 1;
     padding-bottom: 1em;
+    overflow-x: hidden;
 }
 
 .menus-header {
@@ -738,7 +739,9 @@ input[type="checkbox"]:checked {
 
 @media screen and (max-width: 820px) {
     .menu-page-placeholder {
-        grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+        display: flex;
+        flex-direction: column;
+        margin: 0;
     }
 }
 
@@ -765,8 +768,7 @@ input[type="checkbox"]:checked {
     }
 
     .menu-card {
-        margin: auto;
-        width: 90%;
+        width: 80%;
     }
 
     .menu-header {

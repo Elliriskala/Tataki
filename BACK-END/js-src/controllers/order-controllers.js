@@ -1,7 +1,6 @@
 import {
   fetchOrders,
   fetchOrderById,
-  fetchOrderByCustomerName,
   fetchOrdersByUserId,
   fetchOrdersByStatus,
   createOrder,
@@ -59,30 +58,6 @@ const getOrderById = async (req, res, next) => {
   } catch (e) {
     console.error('getOrderById error:', e.message);
     return next(customError('getOrderById error: ' + e.message));
-  }
-};
-
-/**
- * Fetch orders by customer name
- * @param req
- * @param res
- * @returns orders by customer name
- * @throws Error
- * @returns - Orders or null if not found
- */
-const getOrdersByCustomerName = async (req, res, next) => {
-  const customerName = req.params.customer_name;
-  try {
-    // Fetch orders by user id
-    const orders = await fetchOrderByCustomerName(customerName, next);
-    if (!orders) {
-      return next(customError('Orders not found', 404));
-    }
-    // the orders
-    res.status(200).json(orders);
-  } catch (e) {
-    console.error('getOrdersByCustomerName error:', e.message);
-    return next(customError('getOrdersByCustomerName error: ' + e.message));
   }
 };
 
@@ -235,7 +210,6 @@ const putOrderStatus = async (req, res, next) => {
 export {
   getAllOrders,
   getOrderById,
-  getOrdersByCustomerName,
   getOrdersByUserId,
   getOrdersByStatus,
   postOrder,
