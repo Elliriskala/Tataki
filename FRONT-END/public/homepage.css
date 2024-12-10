@@ -201,4 +201,9 @@ main {
     .aboutus-placeholder {
         font-size: 0.8em;
     }
+
+    .hero-image {
+        background-attachment: scroll;
+        background-position: center;
+    }
 }

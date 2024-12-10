@@ -12,4 +12,4 @@ img/*.mp4
 dist/
 dev-dist/
 validation/
-src/utils/variables.ts
+package-lock.json

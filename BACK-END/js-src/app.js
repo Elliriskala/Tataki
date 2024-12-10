@@ -26,11 +26,6 @@ const limiter2 = rateLimit({
   legacyHeaders: false,
 });
 
-
-
-
-
-
 app.use(
   cors({
     origin: '*', // Allow any origin
