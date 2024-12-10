@@ -100,7 +100,7 @@ const translations: Translation = {
         "order-confirmation": "The restaurant has received your order and is currently preparing it.",
         "thank-you": "Thank you for choosing Tataki!",
         "order-placed-button": "Close",
-
+        "empty-cart": "Your cart is empty. Please add items to your cart before placing an order.",
 
         // reservation page translations
         "navHome": "Home Page",
@@ -351,6 +351,7 @@ const translations: Translation = {
         "order-confirmation": "Ravintola on vastaanottanut tilauksesi ja valmistelee sitä tällä hetkellä.",
         "thank-you": "Kiitos, että valitsit Tatakin!",
         "order-placed-button": "Sulje",
+        "empty-cart": "Ostoskorisi on tyhjä.",
         
         // reservation page translations
         "navHome": "Etusivu",

@@ -11,6 +11,8 @@ const popupMessage = document.getElementById(
 ) as HTMLParagraphElement;
 const closePopup = document.getElementById("close-popup") as HTMLButtonElement;
 
+
+
 // initialize category buttons
 const initializeCategoryButtons = async (): Promise<void> => {
     const lang = getLanguage();
@@ -66,3 +68,5 @@ document.addEventListener("DOMContentLoaded", () => {
         placeOrderButton.addEventListener("click", placeOrder);
     }
 });
+
+export { popup, popupMessage, closePopup };
