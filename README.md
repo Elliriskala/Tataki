@@ -94,7 +94,7 @@ We would like to extend our gratitude to the following:
 - Fixed case sensitive queries in the `order-model.js`. The tables in a query mistakenly started with a lowercase letter resulting in a crash.
 
 ### Frontend:
-- Fixed a bug where the user could send an empty order resulting in the backend crashing. Added a check to `OrderProcessing.ts` (line) for whether the cart is empty and presented a modal to the user informing of it and return to the state before clicking "place order". Essentially blocking the request with an empty cart.
+- Fixed a bug where the user could send an empty order resulting in the backend crashing. Added a check to `OrderProcessing.ts` (line 143) for whether the cart is empty and presented a modal to the user informing of it and return to the state before clicking "place order". Essentially blocking the request with an empty cart.
 - Added a missing translation for closing the "Order completed" modal, which was missing from the `translations.ts`.
 
 Thank you for helping make this project a reality!
