@@ -87,6 +87,7 @@ We would like to extend our gratitude to the following:
 - **Open-Source Contributors**: To all the developers who contribute to the libraries and tools that make this project possible.
 - **Development Team**: For their dedication, creativity, and hard work in building the **Tataki Sushi Restaurant Web App**.
 
+Thank you for helping make this project a reality!
 
 ## Changes after the deadline
 
@@ -97,4 +98,3 @@ We would like to extend our gratitude to the following:
 - Fixed a bug where the user could send an empty order resulting in the backend crashing. Added a check to `OrderProcessing.ts` (line) for whether the cart is empty and presented a modal to the user informing of it and return to the state before clicking "place order". Essentially blocking the request with an empty cart.
 - Added a missing translation for closing the "Order completed" modal, which was missing from the `translations.ts`.
 
-Thank you for helping make this project a reality!
