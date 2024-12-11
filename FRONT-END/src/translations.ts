@@ -101,6 +101,8 @@ const translations: Translation = {
         "thank-you": "Thank you for choosing Tataki!",
         "order-placed-button": "Close",
         "empty-cart": "Your cart is empty. Please add items to your cart before placing an order.",
+        "close-dialog": "Close",
+        "select-delivery-method": "Please select a delivery method.",
 
         // reservation page translations
         "navHome": "Home Page",
@@ -352,6 +354,8 @@ const translations: Translation = {
         "thank-you": "Kiitos, että valitsit Tatakin!",
         "order-placed-button": "Sulje",
         "empty-cart": "Ostoskorisi on tyhjä.",
+        "close-dialog": "Sulje",
+        "select-delivery-method": "Valitse toimitustapa.",
         
         // reservation page translations
         "navHome": "Etusivu",

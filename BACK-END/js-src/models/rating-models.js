@@ -19,25 +19,11 @@ const fetchRestaurantReviews = async () => {
 };
 
 
-const fetchRestaurantReviewsByUserId = async (user_id) => {
-  try {
-    const sql = 'SELECT * FROM RestReview WHERE user_id = ?';
-    const [rows] = await promisePool.query(sql, [user_id]);
-    if (rows && rows.length > 0) {
-      return rows[0];
-    } else {
-      throw new Error('FetchRestaurantReviewById, RestaurantReview not found');
-    }
-  } catch (e) {
-    console.error('fetchRestaurantReviewById error:', e.message);
-    throw new Error('Database error: ' + e.message);
-  }
-};
 
 
 const deleteRestaurantReview = async (rest_review_id) => {
   try {
-    const sql = 'DELETE FROM restreview WHERE review_id = ?';
+    const sql = 'DELETE FROM RestaurantReview WHERE review_id = ?';
     const [result] = await promisePool.query(sql, [rest_review_id]);
 
     if (result.affectedRows > 0) {
@@ -107,7 +93,6 @@ const checkRatingExists = async (user_id) => {
 
 export {
   fetchRestaurantReviews,
-  fetchRestaurantReviewsByUserId,
   deleteRestaurantReview,
   addRestaurantReview,
   checkRatingExists,
