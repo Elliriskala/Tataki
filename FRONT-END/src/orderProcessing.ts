@@ -162,7 +162,8 @@ const collectOrderData = (userInfo: any) => {
     } else if (!isDelivery && isPickup) {
         order_type = "pickup";
     } else {
-        logError(new Error("Select a delivery method"), "collectOrderData");
+        showPopup(translations[language]["select-delivery-method"]);
+        return;
     }
 
     order_type = isDelivery ? "delivery" : "pickup";

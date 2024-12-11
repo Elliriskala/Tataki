@@ -2,7 +2,7 @@
 
 Welcome to the **Tataki** web application! This project is a modern web application designed to provide an intuitive and seamless experience for users to browse menus, make reservations, place orders, and leave reviews. The Tataki Sushi REST API is the backend for the Tataki Sushi web application, providing core functionalities like user authentication, user management, menu handling, order processing, table reservations, ratings, and itinerary planning. This API allows communication between the front-end of the restaurant's website and the database, facilitating a seamless experience for users interacting with the restaurant's services.
 
-Feel free to visit the restaurant at: [Tataki](https://ucad-server-https.northeurope.cloudapp.azure.com/)
+Feel free to visit the restaurant at: [Tataki]()
 
 ---
 
@@ -86,5 +86,15 @@ We would like to extend our gratitude to the following:
 - **[Vite](https://vite-pwa-org.netlify.app/)**: For their fast and modern frontend build tool, which significantly streamlined our development process.
 - **Open-Source Contributors**: To all the developers who contribute to the libraries and tools that make this project possible.
 - **Development Team**: For their dedication, creativity, and hard work in building the **Tataki Sushi Restaurant Web App**.
+
+
+## Changes after the deadline
+
+### Backend:
+- Fixed case sensitive queries in the `order-model.js`. The tables in a query mistakenly started with a lowercase letter resulting in a crash.
+
+### Frontend:
+- Fixed a bug where the user could send an empty order resulting in the backend crashing. Added a check to `OrderProcessing.ts` (line) for whether the cart is empty and presented a modal to the user informing of it and return to the state before clicking "place order". Essentially blocking the request with an empty cart.
+- Added a missing translation for closing the "Order completed" modal, which was missing from the `translations.ts`.
 
 Thank you for helping make this project a reality!

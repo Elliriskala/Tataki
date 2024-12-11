@@ -80,7 +80,7 @@ export const existingInfoButton = (): void => {
             const userInfo = await fetchUserInfo();
             if (userInfo) {
                 populateUserInfo(userInfo);
-            }
+            } 
         } catch (error) {
             logError(error, "existingInfoButton");
         }

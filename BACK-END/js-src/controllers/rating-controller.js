@@ -1,7 +1,6 @@
 import {customError} from '../middlewares/error-handlers.js';
 import {
   fetchRestaurantReviews,
-  fetchRestaurantReviewsByUserId,
   deleteRestaurantReview,
   addRestaurantReview
 } from '../models/rating-models.js';
@@ -21,24 +20,7 @@ const getRestaurantReviews = async (_req, res) => {
     throw new Error('getRestaurantReviews error: ' + e.message);
   }
 };
-/**
- *
- * @param req
- * @param res
- * @returns restaurant reviews with the given user_id
- * @throws Error
- * @returns {Promise<void>} - RestaurantReview object or null if not found
- */
-const getRestaurantReviewsByUserId = async (req, res) => {
-  const user_id = Number(req.params.user_id);
-  try {
-    const restaurantReviews = await fetchRestaurantReviewsByUserId(user_id);
-    res.json(restaurantReviews);
-  } catch (e) {
-    console.error('getRestaurantReviewsByUserId error:', e.message);
-    throw new Error('getRestaurantReviewsByUserId error: ' + e.message);
-  }
-};
+
 /**
  *
  * @param req
@@ -100,7 +82,6 @@ const postReview = async (req, res, next) => {
 
 export {
   getRestaurantReviews,
-  getRestaurantReviewsByUserId,
   deleteReview,
   postReview,
 };
