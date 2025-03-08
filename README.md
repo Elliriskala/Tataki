@@ -2,7 +2,7 @@
 
 Welcome to the **Tataki** web application! This project is a modern web application designed to provide an intuitive and seamless experience for users to browse menus, make reservations, place orders, and leave reviews. The Tataki Sushi REST API is the backend for the Tataki Sushi web application, providing core functionalities like user authentication, user management, menu handling, order processing, table reservations, ratings, and itinerary planning. This API allows communication between the front-end of the restaurant's website and the database, facilitating a seamless experience for users interacting with the restaurant's services.
 
-Feel free to visit the restaurant at: 
+Feel free to visit the restaurant at: <br>
 [Tataki - Elli's Server](https://ucad-server-https.northeurope.cloudapp.azure.com/) <br>
 [Tataki - Karri's Server](https://ucad-server-ktp.northeurope.cloudapp.azure.com/)
 
